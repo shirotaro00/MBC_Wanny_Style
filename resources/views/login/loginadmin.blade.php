@@ -9,7 +9,8 @@
 <body>
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#">
+		<form action="{{ route('create.log') }}" method="post">
+            @csrf
 			<h1>Créer compte</h1>
 
 			<input type="text" name="nom" id="nom" placeholder="Nom" required/>

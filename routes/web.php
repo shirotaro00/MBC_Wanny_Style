@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('login/loginadmin');
+});
+Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
+Route::get('/connexion', function () {
     return view('login/loginadmin');
 });
