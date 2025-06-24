@@ -1,3 +1,9 @@
+@extends("partials/clients.App");
+@section("style")
+@endsection
+@section("body")
+@include("partials/clients.navbar")
+
 <!-- Banner Section Begin -->
 <section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">
     <div class="container">
@@ -606,3 +612,6 @@
     </div>
 </div>
 <!-- Instagram End -->
+@endsection
+@section("script")
+@endsection
