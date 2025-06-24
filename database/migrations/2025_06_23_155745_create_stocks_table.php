@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_articles', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->integer('quantite');
+            $table->unsignedBigInteger("DetailArticle_id")->nullable();
+            $table->foreign("DetailArticle_id")->references("id")->on("DetailArticles")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_articles');
+        Schema::dropIfExists('stocks');
     }
 };
