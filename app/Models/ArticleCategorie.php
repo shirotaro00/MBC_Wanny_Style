@@ -9,7 +9,15 @@ class ArticleCategorie extends Model
 {
     use HasFactory;
         protected $fillable = [
-        'Article_id',
-        'TypeArticle_id'
+        'article_id',
+        'type_article_id'
     ];
+    public function Article() {
+    return $this->belongsTo(Article::class, 'article_id');
+    }
+
+    public function Categorie() {
+    return $this->belongsTo(Categorie::class, 'type_article_id');
+    }
+
 }

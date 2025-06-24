@@ -12,6 +12,18 @@ class Article extends Model
         'nom',
         'prix',
         'photo',
-        'TypeArticle_id'
+        'type_article_id'
     ];
+    public function TypeArticle() {
+    return $this->belongsTo(TypeArticle::class, 'type_article_id');
+    }
+
+    public function ArticleCategorie() {
+    return $this->hasMany(ArticleCategorie::class, 'article_id');
+    }
+
+    public function DetailArticle() {
+    return $this->hasMany(DetailArticle::class, 'article_id');
+    }
+
 }

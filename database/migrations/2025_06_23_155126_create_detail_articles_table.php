@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->enum('taille',['L','M','XL']);
             $table->enum('couleur',['rouge','vert','bleu','blanc','gris']);
-            $table->unsignedBigInteger("Article_id")->nullable();
-            $table->foreign("Article_id")->references("id")->on("Articles")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("article_id")->nullable();
+            $table->foreign("article_id")->references("id")->on("articles")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

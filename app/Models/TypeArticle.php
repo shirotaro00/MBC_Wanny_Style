@@ -11,4 +11,8 @@ class TypeArticle extends Model
       protected $fillable = [
         'nom'
     ];
+    public function Article() {
+    return $this->hasMany(Article::class, 'type_article_id');
+    }
+
 }

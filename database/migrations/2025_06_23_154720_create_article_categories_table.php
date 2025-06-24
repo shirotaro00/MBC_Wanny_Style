@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('article_categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("Article_id")->nullable();
-            $table->foreign("Article_id")->references("id")->on("Articles")->onDelete("cascade")->onUpdate("cascade");
-            $table->unsignedBigInteger("TypeArticle_id")->nullable();
-            $table->foreign("TypeArticle_id")->references("id")->on("TypeArticles")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("article_id")->nullable();
+            $table->foreign("article_id")->references("id")->on("articles")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("type_article_id")->nullable();
+            $table->foreign("type_article_id")->references("id")->on("type_articles")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

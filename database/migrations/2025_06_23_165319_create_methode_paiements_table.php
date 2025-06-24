@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('telephone');
             $table->boolean('efface');
-            $table->unsignedBigInteger("TypePaiement_id")->nullable();
-            $table->foreign("TypePaiement_id")->references("id")->on("TypePaiements")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("type_paiement_id")->nullable();
+            $table->foreign("type_paiement_id")->references("id")->on("type_paiements")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

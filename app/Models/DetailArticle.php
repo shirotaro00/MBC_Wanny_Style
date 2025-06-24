@@ -11,6 +11,14 @@ class DetailArticle extends Model
         protected $fillable = [
         'taille',
         'couleur',
-        'Article_id'
+        'article_id'
     ];
+    public function Article() {
+    return $this->belongsTo(Article::class, 'article_id');
+    }
+
+    public function Stock() {
+        return $this->hasOne(Stock::class, 'detail_article_id');
+    }
+
 }
