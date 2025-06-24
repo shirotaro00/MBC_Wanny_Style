@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function index(){
-
+    public function LoginForm(){
+    return view("pageadmin.login.loginadmin");
     }
 
     public function registerAdmin(Request $request)
@@ -34,7 +34,7 @@ class AdminController extends Controller
         'role' => '0',
     ]);
 
-    // return redirect()->route('')->with('success', 'Compte client créé');
+    return redirect()->route('login')->with('success', 'Compte client créé');
 }
 
 }
