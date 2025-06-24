@@ -3,6 +3,7 @@
 @endsection
 @section("body")
 @include("partials/clients.navbar")
+@include("partials.clients.modal.inscription")
 
 <!-- Banner Section Begin -->
 <section class="banner set-bg" data-setbg="img/banner/banner-1.jpg">

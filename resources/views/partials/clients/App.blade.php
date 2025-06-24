@@ -15,6 +15,8 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href=" {{asset('assets/css/bootstrap.min.css')}} " type="text/css">
     <link rel="stylesheet" href=" {{asset('assets/css/font-awesome.min.css')}} " type="text/css">
     <link rel="stylesheet" href=" {{asset('assets/css/elegant-icons.css')}} " type="text/css">
@@ -111,6 +113,8 @@
 <!-- Search End -->
 
 <!-- Js Plugins -->
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src=" {{asset('assets/js/jquery-3.3.1.min.js')}} "></script>
 <script src=" {{asset('assets/js/bootstrap.min.js')}} "></script>
 <script src=" {{asset('assets/js/jquery.magnific-popup.min.js')}} "></script>
