@@ -24,3 +24,5 @@ Route::get('/connexion', function () {
 });
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
+Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
+

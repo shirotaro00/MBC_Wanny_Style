@@ -38,6 +38,11 @@
 				<h1>Bienvenue !</h1>
 				<p>Pour rester connecté, veuillez vous connecter avec vos informations personnelles.</p>
 				<button class="ghost" id="signIn">Se connecter</button>
+            <script>
+                document.getElementById('signIn').addEventListener('click', function () {
+                    window.location.href = "{{ route('login') }}";
+                });
+            </script>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Bonjour !</h1>
