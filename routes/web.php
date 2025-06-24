@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pageclients/Acceuil');
 });
-Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
+
+// route pour admin
 Route::get('/connexion', function () {
     return view('pageadmin/login/loginadmin');
 });
+// authentification admin
+Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
