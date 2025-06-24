@@ -65,7 +65,7 @@
                                 data-bs-target="#forminscription">
                                 Inscription
                             </a>
-                            <a href="#"  data-bs-toggle="modal"
+                            <a href="{{ route('client.connecte') }}"  data-bs-toggle="modal"
                                 data-bs-target="#formModal">
                                 connexion
                             </a>

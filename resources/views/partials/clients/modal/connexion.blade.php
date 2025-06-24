@@ -7,10 +7,9 @@
      <center> <h5 class="modal-title" id="formModalLabel" style="color: black">Connexion</h5></center>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
-
       <div class="modal-body">
-
-        <form id="contactForm">
+        <form id="contactForm" action="" method="POST">
+            @csrf
           <div class="mb-3">
             <label for="Email" class="form-label">Email</label>
             <input type="email" class="form-control" id="nom" name="email" required>
@@ -24,7 +23,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" form="contactForm">Se connecter</button>
+        <button type="submit" id="sign_in" class="btn btn-primary" form="contactForm">Se connecter</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
       </div>
 

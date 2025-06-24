@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,6 @@ Route::get('/connexion', function () {
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
 Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
-
+// authentification clients
+Route::post('/inscription', [ClientController::class, 'registerClients'])->name('client.register');
+Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');

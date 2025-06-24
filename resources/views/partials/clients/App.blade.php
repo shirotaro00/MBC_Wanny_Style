@@ -125,6 +125,15 @@
 <script src=" {{asset('assets/js/owl.carousel.min.js')}}  "></script>
 <script src=" {{asset('assets/js/jquery.nicescroll.min.js')}} "></script>
 <script src=" {{asset('assets/js/main.js')}} "></script>
+@if(session('showLoginModal'))
+    <script>
+        // Si tu utilises des IDs pour tes boutons de modale :
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('sign_in')?.click();
+        });
+    </script>
+@endif
+
 @yield("script")
 </body>
 
