@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/loginadmin.css')}}">
     <title>Admin|Login</title>
 </head>
 <body>
@@ -50,5 +50,5 @@
 
 
 </body>
-<script src="{{ asset('assets/js/script.js')}}"></script>
+<script src="{{ asset('assets/js/loginadmin.js')}}"></script>
 </html>
