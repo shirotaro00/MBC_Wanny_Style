@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
 Route::get('/connexion', function () {
-    return view('login/loginadmin');
+    return view('pageadmin/login/loginadmin');
 });
