@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nom');
             $table->double('prix');
             $table->string('photo');
-            $table->unsignedBigInteger("TypeArticle_id")->nullable();
-            $table->foreign("TypeArticle_id")->references("id")->on("TypeArticles")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("type_article_id")->nullable();
+            $table->foreign("type_article_id")->references("id")->on("type_articles")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

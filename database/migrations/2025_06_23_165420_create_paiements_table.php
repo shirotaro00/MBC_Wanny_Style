@@ -16,8 +16,10 @@ return new class extends Migration
             $table->double('montant');
             $table->string('Ref_paiement');
             $table->date('date_paiement');
-            $table->unsignedBigInteger("MethodPaiement_id")->nullable();
-            $table->foreign("MethodePaiement_id")->references("id")->on("MethodePaiements")->onDelete("cascade")->onUpdate("cascade");
+             $table->unsignedBigInteger("user_id")->nullable();
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("methode_paiement_id")->nullable();
+            $table->foreign("methode_paiement_id")->references("id")->on("methode_paiements")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

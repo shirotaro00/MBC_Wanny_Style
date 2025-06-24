@@ -13,4 +13,8 @@ class DetailCommande extends Model
         'prix_unitaire',
         'commande_id'
     ];
+    public function Commande() {
+    return $this->belongsTo(Commande::class, 'commande_id');
+}
+
 }

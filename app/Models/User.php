@@ -26,6 +26,14 @@ class User extends Authenticatable
         'telephone',
         'role'
     ];
+    public function Commande() {
+    return $this->hasMany(Commande::class, 'user_id');
+    }
+
+    public function Paiement() {
+    return $this->hasMany(Paiement::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

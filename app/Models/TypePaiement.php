@@ -12,4 +12,8 @@ class TypePaiement extends Model
         'type',
         'photo'
     ];
+    public function MethodePaiement() {
+    return $this->hasMany(MethodePaiement::class, 'type_paiement_id');
+    }
+
 }

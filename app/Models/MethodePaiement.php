@@ -11,6 +11,14 @@ class MethodePaiement extends Model
     protected $fillable = [
         'telephone',
         'efface',
-        'TypePaiement_id'
+        'type_paiement_id'
     ];
+    public function TypePaiement() {
+    return $this->belongsTo(TypePaiement::class, 'type_paiement_id');
+    }
+
+    public function Paiement() {
+        return $this->hasMany(Paiement::class, 'methode_paiement_id');
+    }
+
 }
