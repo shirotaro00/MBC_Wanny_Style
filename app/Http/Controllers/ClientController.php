@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
+    public function accueil(){
+        return view('pageclients.Acceuil');
+    }
+
     public function connecter(){
-        return view('partials.clients.modal.connexion');
+        return view('pageclients.Acceuil');
     }
 
     public function registerClients(Request $request)
@@ -35,4 +40,27 @@ class ClientController extends Controller
 
     return redirect()->route('client.connecte')->with('showLoginModal', true);
 }
-}
+
+    public function login(Request $request){
+
+        $credentials = $request->validate([
+            "email"=>["required","email"],
+            "password"=>["required"]
+
+        ]);
+
+            if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            if (Auth::user()->role == 1) {
+                 return redirect()->route('page.accueil');
+            } else {
+            return redirect()->route('client.connecte');
+            }
+            }
+            else {
+                return redirect()->back()->with("error", "email ou mot de passe incorrect");
+            }
+     }
+
+    }
+

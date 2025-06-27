@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
 class AdminController extends Controller
 {
+    public function admin(){
+        return view('pageadmin.login.loginadmin');
+    }
+
+    public function accueil(){
+        return view('pageadmin.AccueilAdmin');
+    }
+
     public function LoginForm(){
     return view("pageadmin.login.loginadmin");
     }
@@ -36,5 +45,24 @@ class AdminController extends Controller
 
     return redirect()->route('login')->with('success', 'Compte client créé');
 }
+
+    public function login(Request $request){
+
+        $credentials = $request->validate([
+            "email"=>["required","email"],
+            "password"=>["required"]
+
+        ]);
+
+            if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            if (Auth::user()->role == 0) {
+                 return redirect()->route('admin.accueil');
+            }
+            }
+            else {
+                return redirect()->back()->with("error", "email ou mot de passe incorrect");
+            }
+     }
 
 }

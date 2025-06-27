@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pageclients/Acceuil');
-});
+Route::get('/',[ClientController::class, 'accueil'])->name('page.accueil');
+
 
 // route pour admin
-Route::get('/connexion', function () {
-    return view('pageadmin/login/loginadmin');
-});
+Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
+Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
 Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
+Route::post('/administration',[AdminController::class, 'login'])->name('admin.auth');
 // authentification clients
 Route::post('/inscription', [ClientController::class, 'registerClients'])->name('client.register');
 Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');
+Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');

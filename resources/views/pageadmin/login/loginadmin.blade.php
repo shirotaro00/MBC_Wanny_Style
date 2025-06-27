@@ -23,13 +23,14 @@
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#">
+		<form action="{{ route('admin.auth') }}" method="POST">
+            @csrf
 			<h1>Connexion</h1>
 
-			<input type="email" name="email" id="email" placeholder="Email" />
-			<input type="password" name="password" id="password" placeholder="Mot de passe" />
+			<input type="email" name="email" id="email" placeholder="Email" required/>
+			<input type="password" name="password" id="password" placeholder="Mot de passe" required />
 
-			<button><i class="fa-solid fa-arrow-right-to-bracket"></i>Se connecter</button>
+			<button type="submit">Se connecter</button>
 		</form>
 	</div>
 	<div class="overlay-container">
