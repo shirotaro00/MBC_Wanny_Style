@@ -23,7 +23,7 @@ class ClientController extends Controller
         'nom' => 'required|string',
         'prenom' => 'required|string',
         'email' => 'required|email|unique:users',
-        'password' => 'required|min:6',
+        'password' => 'required|min:6|confirmed',
         'adresse' => 'required|string',
         'telephone' => 'required|string',
     ]);
@@ -37,6 +37,7 @@ class ClientController extends Controller
         'telephone' => $request->telephone,
         'role' => '1',
     ]);
+    toastify()->success('Votre compte été créer avec succès ✔');
 
     return redirect()->route('page.accueil')->with('showLoginModal', true);
 }
