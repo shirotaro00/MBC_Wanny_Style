@@ -1,11 +1,11 @@
-@extends("admin.admin")
+@extends("pageadmin.dashbord.admin")
 
 @section('body')
 <div class="wrapper">
-    @include('partials.sidebar')
+    @include('partials.admin.sidebar')
 
     <div class="main-panel">
-        @include('partials.header')
+        @include('partials.admin.header')
 
         <div class="container">
           <div class="page-inner">

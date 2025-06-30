@@ -15,7 +15,7 @@ class AdminController extends Controller
     }
 
     public function accueil(){
-        return view('pageadmin.AccueilAdmin');
+        return view('pageadmin.dashbord.dashboard');
     }
 
     public function LoginForm(){
