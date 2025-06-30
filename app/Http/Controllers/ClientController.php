@@ -38,7 +38,7 @@ class ClientController extends Controller
         'role' => '1',
     ]);
 
-    return redirect()->route('client.connecte')->with('showLoginModal', true);
+    return redirect()->route('page.accueil')->with('showLoginModal', true);
 }
 
     public function login(Request $request){
@@ -53,8 +53,6 @@ class ClientController extends Controller
             $request->session()->regenerate();
             if (Auth::user()->role == 1) {
                  return redirect()->route('page.accueil');
-            } else {
-            return redirect()->route('client.connecte');
             }
             }
             else {

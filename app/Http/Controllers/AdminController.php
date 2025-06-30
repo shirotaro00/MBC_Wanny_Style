@@ -32,7 +32,7 @@ class AdminController extends Controller
         'nom' => 'required|string',
         'prenom' => 'required|string',
         'email' => 'required|email|unique:users',
-        'password' => 'required|min:6',
+        'password' => 'required|min:6|confirmed',
         'adresse' => 'required|string',
         'telephone' => 'required|string',
     ]);
@@ -46,8 +46,10 @@ class AdminController extends Controller
         'telephone' => $request->telephone,
         'role' => '0',
     ]);
+    toastify()->success('Votre compte été créer avec succès ✔');
 
-    return redirect()->route('login')->with('success', 'Compte client créé');
+    return redirect()->route('admin.accueil')->with('success', 'Compte client créé');
+
 }
 
     public function login(Request $request){
