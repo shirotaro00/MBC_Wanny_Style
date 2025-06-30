@@ -6,30 +6,30 @@
 @include("partials.clients.modal.inscription")
 
 <!-- Banner Section Begin -->
-<section class="banner set-bg" data-setbg=" {{asset('assets/img/banner/banner-1.jpg')}} ">
+<section class="banner set-bg" data-setbg="  ">
     <div class="container">
         <div class="row">
             <div class="col-xl-7 col-lg-8 m-auto">
                 <div class="banner__slider owl-carousel">
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
-                            <a href="#">Shop now</a>
+                            <span>Wanny-style</span>
+                            <h1></h1>
+                            <a href="#"></a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
-                            <a href="#">Shop now</a>
+                            <span>Wanny-style</span>
+                            <h1></h1>
+                            <a href="#"></a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
-                            <a href="#">Shop now</a>
+                            <span>Wanny-style</span>
+                            <h1></h1>
+                            <a href="#"></a>
                         </div>
                     </div>
                 </div>
