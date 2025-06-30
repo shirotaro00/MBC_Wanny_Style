@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/plugins.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/kaiadmin.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/demo.css')}}">
+    @toastifyCss
     @yield('style')
     <title>admin Wanny-style</title>
 </head>
@@ -94,6 +95,7 @@
         fillColor: "rgba(255, 165, 52, .14)",
       });
     </script>
+    @toastifyJs
     @yield('script')
 </body>
 </html>

@@ -25,6 +25,7 @@
     <link rel="stylesheet" href=" {{asset('assets/css/owl.carousel.min.css')}} " type="text/css">
     <link rel="stylesheet" href=" {{asset('assets/css/slicknav.min.css')}} " type="text/css">
     <link rel="stylesheet" href=" {{asset('assets/css/style.css')}} " type="text/css">
+    @toastifyCss
 </head>
 @yield("style")
 <body>
@@ -125,6 +126,7 @@
 <script src=" {{asset('assets/js/owl.carousel.min.js')}}  "></script>
 <script src=" {{asset('assets/js/jquery.nicescroll.min.js')}} "></script>
 <script src=" {{asset('assets/js/main.js')}} "></script>
+@toastifyJs
 @if(session('showLoginModal'))
     <script>
         // Si tu utilises des IDs pour tes boutons de modale :
