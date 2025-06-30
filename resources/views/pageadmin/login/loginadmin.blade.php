@@ -21,7 +21,7 @@
 			<input type="password" name="password" id="password" placeholder="Mot de passe"  required/>
             @error('password')
             <small class="text-danger">{{ $message }}</small>
-        @enderror
+            @enderror
             <input type="password" name="password_confirmation" id="password" placeholder=" confirme le mot de passe"  required/>
 			<button type="submit">Créer le compte</button>
 		</form>
