@@ -43,7 +43,7 @@
                         <ul>
                             <li class="active"><a href="./index.html">Accueil</a></li>
                             <li><a href="#">Article</a></li>
-                            <li><a href="#">Men’s</a></li>
+                            {{-- <li><a href="#">Men’s</a></li>
                             <li><a href="./shop.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
@@ -53,7 +53,7 @@
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./blog.html">Blog</a></li> --}}
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
