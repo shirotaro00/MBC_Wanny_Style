@@ -88,7 +88,7 @@
                         class="avatar-img rounded-circle"
 
                       />
-                      {{-- <i class="fas fa-user-check avatar-img rounded-circle"></i> --}}
+
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Salut,</span>

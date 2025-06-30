@@ -22,6 +22,10 @@ class AdminController extends Controller
     return view("pageadmin.login.loginadmin");
     }
 
+    public function dashbordadmin() {
+      return view("pageadmin.dashbord.dashboard");
+    }
+
     public function registerAdmin(Request $request)
     {
     $request->validate([

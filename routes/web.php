@@ -21,6 +21,7 @@ Route::get('/',[ClientController::class, 'accueil'])->name('page.accueil');
 // route pour admin
 Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
+
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
 Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
