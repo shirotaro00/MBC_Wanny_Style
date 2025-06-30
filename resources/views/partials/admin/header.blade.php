@@ -82,29 +82,17 @@
                     aria-expanded="false"
                   >
                     <div class="avatar-sm">
-                      <img
-                        src="assets/img/profile.jpg"
-                        alt="..."
-                        class="avatar-img rounded-circle"
-
-                      />
+                  <i class="fas fa-user" style="font-size:30px"></i>
 
                     </div>
-                    <span class="profile-username">
-                      <span class="op-7">Salut,</span>
-                      <span class="fw-bold">Admin</span>
-                    </span>
+
                   </a>
                   <ul class="dropdown-menu dropdown-user animated fadeIn">
                     <div class="dropdown-user-scroll scrollbar-outer">
                       <li>
                         <div class="user-box">
                           <div class="avatar-lg">
-                            <img
-                              src="assets/img/profile.jpg"
-                              alt="image profile"
-                              class="avatar-img rounded"
-                            />
+                            <i class="fas fa-user" style="font-size:30px"></i>
                           </div>
                           <div class="u-text">
                             <h4>Admin</h4>

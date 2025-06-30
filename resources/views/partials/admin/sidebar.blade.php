@@ -1,15 +1,16 @@
-<div class="sidebar" data-background-color="dark">
+<div class="sidebar" data-background-color="white">
         <div class="sidebar-logo">
           <!-- Logo Header -->
-          <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
+          <div class="logo-header" data-background-color="white">
+            <center>  <a href="index.html" class="logo">
               <img
-                src=""
+                src="{{ asset('assets/img/logo.jpg') }}"
                 alt="navbar brand"
                 class="navbar-brand"
-                height="20"
+                height="40"
               />
-            </a>
+            </a></center>
+
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
                 <i class="gg-menu-right"></i>
@@ -34,7 +35,7 @@
                   class="collapsed"
                   aria-expanded="false"
                 >
-                  <i class="fas fa-home"></i>
+                   <i class="far fa-chart-bar"></i>
                   <p>Tableau de bord</p>
                 </a>
               </li>
@@ -47,7 +48,7 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#forms">
                   <i class="fas fa-pen-square"></i>
-                  <p>Forms</p>
+                  <p>Article</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="forms">
@@ -63,7 +64,7 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#tables">
                   <i class="fas fa-table"></i>
-                  <p>Tables</p>
+                  <p>Commande</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="tables">
@@ -79,7 +80,7 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#charts">
                   <i class="far fa-chart-bar"></i>
-                   <p>Charts</p>
+                   <p>Stocks</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="charts">
@@ -92,13 +93,24 @@
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
-                <a href="widgets.html">
-                  <i class="fas fa-desktop"></i>
-                  <p>Widgets</p>
-                  <span class="badge badge-success">4</span>
+
+                  <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#charts">
+                  <i class="far fa-chart-bar"></i>
+                   <p>Liste clients</p>
+                  <span class="caret"></span>
                 </a>
+                <div class="collapse" id="charts">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="charts/charts.html">
+                        <span class="sub-item">Chart Js</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
+
             </ul>
           </div>
         </div>
