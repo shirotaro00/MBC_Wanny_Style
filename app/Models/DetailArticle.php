@@ -11,6 +11,7 @@ class DetailArticle extends Model
         protected $fillable = [
         'taille',
         'couleur',
+        'description',
         'article_id'
     ];
     public function Article() {
