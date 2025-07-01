@@ -47,7 +47,7 @@
               </li>
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#forms">
-                  <i class="fas fa-pen-square"></i>
+                  <i class="fas fa-tags"></i>
                   <p>Article</p>
                   <span class="caret"></span>
                 </a>
@@ -63,7 +63,7 @@
               </li>
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#tables">
-                  <i class="fas fa-table"></i>
+                  <i class="fas fa-receipt"></i>
                   <p>Commande</p>
                   <span class="caret"></span>
                 </a>
@@ -79,7 +79,7 @@
               </li>
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#charts">
-                  <i class="far fa-chart-bar"></i>
+                  <i class="fas fa-warehouse"></i>
                    <p>Stocks</p>
                   <span class="caret"></span>
                 </a>
@@ -96,7 +96,7 @@
 
                   <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#charts">
-                  <i class="far fa-chart-bar"></i>
+                  <i class="fas fa-users"></i>
                    <p>Liste clients</p>
                   <span class="caret"></span>
                 </a>
