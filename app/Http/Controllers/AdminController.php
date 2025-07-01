@@ -84,5 +84,11 @@ class AdminController extends Controller
             'password.confirmed'=>'le mot de passe ne correspondent pas',
         ];
      }
-
+//deconnexion
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('page.admin');
+    }
 }

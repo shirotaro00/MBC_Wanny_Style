@@ -109,7 +109,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">My Profile</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Deconnexion</a>
+                        <a class="dropdown-item" href="{{ route('deconexion') }}">Deconnexion</a>
                       </li>
                     </div>
                   </ul>

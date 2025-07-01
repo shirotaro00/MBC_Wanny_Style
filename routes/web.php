@@ -27,6 +27,7 @@ Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.ad
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
 Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
 Route::post('/administration',[AdminController::class, 'login'])->name('admin.auth');
+Route::get('/deconnexion',[AdminController::class, 'logout'])->name("deconexion");
 // authentification clients
 Route::post('/inscription', [ClientController::class, 'registerClients'])->name('client.register');
 Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');
