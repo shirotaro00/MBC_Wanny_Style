@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    //page login admin
     public function admin(){
         return view('pageadmin.login.loginadmin');
     }
-
+//accueil dashboard
     public function accueil(){
         return view('pageadmin.dashbord.dashboard');
     }
-
+//creation login & register
     public function LoginForm(){
     return view("pageadmin.login.loginadmin");
     }
@@ -25,12 +26,12 @@ class AdminController extends Controller
     public function dashbordadmin() {
       return view("pageadmin.dashbord.dashboard");
     }
-
+//page ajout article
      public function addarticle() {
       return view("pageadmin.dashbord.Addarticle");
     }
 
-
+//inscription admin
     public function registerAdmin(Request $request)
     {
     $request->validate([
@@ -56,7 +57,7 @@ class AdminController extends Controller
     return redirect()->route('admin.accueil')->with('success', 'Compte client créé');
 
 }
-
+//connexion admin
     public function login(Request $request){
 
         $credentials = $request->validate([
@@ -75,7 +76,7 @@ class AdminController extends Controller
                 return redirect()->back()->with("error", "email ou mot de passe incorrect");
             }
      }
-
+//message d'erreur password
     public function messages(){
         return [
             'password.required'=>'le mot de passe est obligatoire',

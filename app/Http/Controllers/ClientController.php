@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
+    //page d'accueil clients
     public function accueil(){
         return view('pageclients.Acceuil');
     }
-
+//page clients deja connecte
     public function connecter(){
         return view('pageclients.Acceuil');
     }
-
+//inscription clients
     public function registerClients(Request $request)
     {
     $request->validate([
@@ -41,7 +42,7 @@ class ClientController extends Controller
 
     return redirect()->route('page.accueil')->with('showLoginModal', true);
 }
-
+//connexion clients
     public function login(Request $request){
 
         $credentials = $request->validate([
