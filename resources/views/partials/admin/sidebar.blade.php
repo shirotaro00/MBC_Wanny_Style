@@ -53,6 +53,11 @@
                         <span class="sub-item">Ajoute article </span>
                       </a>
                     </li>
+                    <li>
+                      <a href="#">
+                        <span class="sub-item">Liste article </span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -65,8 +70,13 @@
                 <div class="collapse" id="tables">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="tables/datatables.html">
-                        <span class="sub-item">Datatables</span>
+                      <a href="#">
+                        <span class="sub-item">Commande a valide</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span class="sub-item">Commande valide</span>
                       </a>
                     </li>
                   </ul>
@@ -78,22 +88,13 @@
             <p>Stocks</p>
             </a>
             </li>
-                  <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#charts">
-                  <i class="fas fa-users"></i>
-                   <p>Liste clients</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="charts">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="charts/charts.html">
-                        <span class="sub-item">Chart Js</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
+
+            <li class="nav-item active">
+            <a href="#">
+            <i class="fas fa-users"></i>
+            <p>Liste clients</p>
+            </a>
+            </li>
 
             </ul>
           </div>
