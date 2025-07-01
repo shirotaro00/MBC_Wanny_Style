@@ -101,7 +101,7 @@
   </div>
 </div>
                   <div class="card-action">
-                    <button class="btn btn-success">Submit</button>
+                    <button class="btn btn-success">Enregistre</button>
                     <button class="btn btn-danger">Cancel</button>
                   </div>
                 </div>
