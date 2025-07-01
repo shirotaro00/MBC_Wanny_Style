@@ -11,7 +11,6 @@
 	<div class="form-container sign-up-container">
 		<form action="{{ route('create.log') }}" method="post">
             @csrf
-			<h1>Créer compte</h1>
 
 			<input type="text" name="nom" id="nom" placeholder="Nom" required/>
             <input type="text" name="prenom" id="prenom" placeholder="Prenom" required/>
@@ -19,10 +18,10 @@
             <input type="text" name="adresse" id="adresse" placeholder="Adresse" required />
 			<input type="email" name="email" id="email" placeholder="Email" required />
 			<input type="password" name="password" id="password" placeholder="Mot de passe"  required/>
-            @error('password')
-            <small class="text-danger">{{ $message }}</small>
-            @enderror
             <input type="password" name="password_confirmation" id="password" placeholder=" confirme le mot de passe"  required/>
+             @error('password')
+            <small class="text-danger" style="color: red">{{ $message }}</small>
+            @enderror
 			<button type="submit">Créer le compte</button>
 		</form>
 	</div>
@@ -40,14 +39,14 @@
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
-				<h1>Bienvenue !</h1>
+				<h1>Creer compte !</h1>
 				<p>Pour rester connecté, veuillez vous connecter avec vos informations personnelles.</p>
 				<button class="ghost" id="signIn">Se connecter</button>
-            <script>
+            {{-- <script>
                 document.getElementById('signIn').addEventListener('click', function () {
                     window.location.href = "{{ route('login') }}";
                 });
-            </script>
+            </script> --}}
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Bonjour !</h1>
@@ -61,4 +60,11 @@
 
 </body>
 <script src="{{ asset('assets/js/loginadmin.js')}}"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        @if ($errors->any() || old('nom'))
+            document.getElementById('container').classList.add('right-panel-active');
+        @endif
+    });
+</script>
 </html>
