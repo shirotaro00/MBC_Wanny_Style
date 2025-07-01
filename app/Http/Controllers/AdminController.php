@@ -40,7 +40,7 @@ class AdminController extends Controller
         'password' => 'required|min:6|confirmed',
         'adresse' => 'required|string',
         'telephone' => 'required|string',
-    ]);
+    ], $this->messages());
 
     User::create([
         'nom' => $request->nom,
@@ -74,6 +74,14 @@ class AdminController extends Controller
             else {
                 return redirect()->back()->with("error", "email ou mot de passe incorrect");
             }
+     }
+
+    public function messages(){
+        return [
+            'password.required'=>'le mot de passe est obligatoire',
+            'password.min'=>'le mot de passe doit contenir au moins 6 caracteres',
+            'password.confirmed'=>'le mot de passe ne correspondent pas',
+        ];
      }
 
 }
