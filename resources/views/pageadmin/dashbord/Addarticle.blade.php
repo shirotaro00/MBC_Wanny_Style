@@ -39,8 +39,8 @@
                                 <div class="container mt-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
-                                            {{-- <h3 class="text-center mb-4">Formulaire en deux colonnes</h3> --}}
-                                            <form>
+                                            <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
                                                 <div class="row">
                                                     <!-- Colonne gauche -->
                                                     <div class="col-md-6">
@@ -55,8 +55,8 @@
                                                                 name="prix" placeholder="Prix">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="prix" class="form-label">Photo</label>
-                                                            <input type="file" class="form-control" id="prix"
+                                                            <label for="photo" class="form-label">Photo</label>
+                                                            <input type="file" class="form-control" id="photo"
                                                                 name="photo" placeholder="">
                                                         </div>
                                                     </div>
@@ -64,7 +64,7 @@
 
                                                     <!-- Colonne 2 : Selects -->
                                                     <div class="col-md-6">
-                                                        <div class="mb-3" style="height: 42px ; " >
+                                                        {{-- <div class="mb-3" style="height: 42px ; " >
                                                             <label for="pays" class="form-label">Categories</label>
                                                             <select class="form-select form-control" id="defaultSelect"
                                                                 name="categories">
@@ -72,22 +72,19 @@
                                                                 <option>2</option>
 
                                                             </select>
-                                                        </div>
-                                                        <div class="mb-3" style="height: 42px ; padding-top:20px" >
-                                                            <label for="ville" class="form-label">Type article </label>
-                                                            <select class="form-select form-control"  id="defaultSelect"
-                                                                name="type">
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
-                                                                <option>6</option>
-
-
+                                                        </div> --}}
+                                                        <div class="mb-3" style="height: 42px ">
+                                                            <label for="type_article_id" class="form-label">Type article
+                                                            </label>
+                                                            <select class="form-select form-control" id="type_article_id"
+                                                                name="type_article_id">
+                                                                @foreach ($types as $type)
+                                                                    <option value="{{ $type->id }}">{{ $type->nom }}
+                                                                    </option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
-                                                        <div class="mb-3" style="height: 48px ;padding-top:42px">
+                                                        {{-- <div class="mb-3" style="height: 48px ;padding-top:42px">
                                                             <label for="civilite" class="form-label">Detail</label>
                                                             <select class="form-select form-control" id="defaultSelect"
                                                                 name="details">
@@ -97,11 +94,9 @@
                                                                 <option>4</option>
                                                                 <option>5</option>
                                                             </select>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
-
-
                                         </div>
                                     </div>
                                     <div class="boutton " style="margin-bottom: 15px">
@@ -109,8 +104,6 @@
                                             <button type="submit" class="btn btn-primary">Envoyer</button>
                                         </div>
                                     </div>
-
-
                                     </form>
                                 </div>
                             </div>

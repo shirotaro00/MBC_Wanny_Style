@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
+use App\Models\DetailArticle;
+use App\Models\Categorie;
+use App\Models\TypeArticle;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +32,9 @@ class AdminController extends Controller
     }
 //page ajout article
      public function addarticle() {
-      return view("pageadmin.dashbord.Addarticle");
+        $types = TypeArticle::all();
+        $articles = Article::all();
+      return view("pageadmin.dashbord.Addarticle",compact("types","articles"));
     }
 
 //inscription admin
@@ -76,6 +82,79 @@ class AdminController extends Controller
                 return redirect()->back()->with("error", "email ou mot de passe incorrect");
             }
      }
+    //ajout categorie
+    public function addcat(Request $request){
+
+         $request->validate([
+        'nom' => 'required|string',
+    ]);
+
+    Categorie::create([
+        'nom' => $request->nom,
+    ]);
+    toastify()->success('categorie ajouté ✔');
+
+    return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
+
+}
+//ajout type article
+    public function addType(Request $request){
+
+         $request->validate([
+        'nom' => 'required|string',
+    ]);
+
+    TypeArticle::create([
+        'nom' => $request->nom,
+    ]);
+    toastify()->success('Type article  ajouté ✔');
+
+    return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
+
+}
+//ajout article
+    public function ajoutArticle(Request $request){
+
+         $request->validate([
+        'nom' => 'required|string',
+        'prix' => 'required|integer|min:0',
+        'photo' => 'required|image|mimes:jpeg,png,jpg',
+        'type_article_id' => 'required|exists:type_articles,id'
+    ]);
+    $filename = time() . '.' . $request->photo->getClientOriginalExtension();
+    $request->photo->move(public_path("assets/upload"), $filename);
+
+    Article::create([
+        'nom' => $request->nom,
+        'prix' => $request->prix,
+        'photo'=> $filename,
+        'type_article_id' => $request->type_article_id
+    ]);
+    toastify()->success('article  ajouté ✔');
+
+    return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
+
+}
+//ajoute details article
+public function store(Request $request)
+{
+    $request->validate([
+        'taille' => 'required|string',
+        'couleur' => 'required|string',
+        'description' => 'required|string',
+        'article_id' => 'required|exists:articles,id',
+    ]);
+
+    DetailArticle::create([
+        'taille' => $request->taille,
+        'couleur' => $request->couleur,
+        'description' => $request->description,
+        'article_id' => $request->article_id,
+    ]);
+    toastify()->success('details article  ajouté ✔');
+
+    return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
+}
 //message d'erreur password
     public function messages(){
         return [

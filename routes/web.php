@@ -22,6 +22,14 @@ Route::get('/',[ClientController::class, 'accueil'])->name('page.accueil');
 Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
 Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.addarticle');
+//route ajout categorie
+Route::post('/categorie',[AdminController::class, 'addcat'])->name('create.categorie');
+//route ajout type article
+Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
+//route ajout  article
+Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
+//route ajout details article
+Route::post('/details', [AdminController::class, 'store'])->name('details.store');
 
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');

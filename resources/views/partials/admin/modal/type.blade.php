@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
 
-        <form  action="" method="POST">
+        <form  action="{{ route('create.type') }}" method="POST">
             @csrf
           <div class="mb-3">
             <label for="nom" class="form-label">Nom</label>
