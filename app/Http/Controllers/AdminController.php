@@ -32,7 +32,8 @@ class AdminController extends Controller
     }
 //page liste article
     public function listearticle() {
-      return view("pageadmin.dashbord.listearticle");
+    $articles = Article::with(['TypeArticle', 'DetailArticle'])->get();
+      return view("pageadmin.dashbord.listearticle", compact('articles'));
     }
 
 
