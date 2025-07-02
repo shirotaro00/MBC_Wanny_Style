@@ -33,6 +33,8 @@ Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
 //route ajout details article
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
+//route ajout article categorie
+Route::post('/articlecat', [AdminController::class, 'artCat'])->name('create.cat');
 
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');

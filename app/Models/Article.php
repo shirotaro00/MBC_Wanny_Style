@@ -14,16 +14,16 @@ class Article extends Model
         'photo',
         'type_article_id'
     ];
-    public function TypeArticle() {
-    return $this->belongsTo(TypeArticle::class, 'type_article_id');
-    }
 
-    public function ArticleCategorie() {
-    return $this->hasMany(ArticleCategorie::class, 'article_id');
-    }
-
-    public function DetailArticle() {
+public function detailArticle()
+{
     return $this->hasMany(DetailArticle::class, 'article_id');
-    }
+}
+
+public function DetailCommande()
+{
+    return $this->hasMany(DetailArticle::class, 'article_id');
+}
+
 
 }

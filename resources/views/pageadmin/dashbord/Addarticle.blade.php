@@ -4,6 +4,7 @@
     @include('partials.admin.modal.categorie')
     @include('partials.admin.modal.type')
     @include('partials.admin.modal.detail')
+    @include('partials.admin.modal.articleCat')
 
     <div class="wrapper">
         @include('partials.admin.sidebar')
@@ -32,6 +33,8 @@
                                             data-bs-target="#typeModal">Type article</button>
                                         <button class="btn btn-info" style="margin: 5px" data-bs-toggle="modal"
                                             data-bs-target="#detailsModal">Détails article</button>
+                                        <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
+                                            data-bs-target="#articleCatModal">Article Categorie</button>
                                     </div>
                                 </div>
 
@@ -39,7 +42,8 @@
                                 <div class="container mt-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
-                                            <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('articles.store') }}" method="POST"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <!-- Colonne gauche -->

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Article;
-use App\Models\DetailArticle;
 use App\Models\Categorie;
 use App\Models\TypeArticle;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\DetailArticle;
+use App\Models\ArticleCategorie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,8 +39,12 @@ class AdminController extends Controller
 
 //page liste article
     public function listearticle() {
-    $articles = Article::with(['TypeArticle', 'DetailArticle'])->get();
-      return view("pageadmin.dashbord.listearticle", compact('articles'));
+    $articleCategories = ArticleCategorie::with([
+        'article.detailArticle',
+        'typeArticle.categorie'
+    ])->get();
+
+      return view("pageadmin.dashbord.listearticle", compact('articleCategories'));
     }
 
 
@@ -47,7 +52,8 @@ class AdminController extends Controller
      public function addarticle() {
         $types = TypeArticle::all();
         $articles = Article::all();
-      return view("pageadmin.dashbord.Addarticle",compact("types","articles"));
+        $categories = Categorie::all();
+      return view("pageadmin.dashbord.Addarticle",compact("types","articles","categories"));
     }
 
 
@@ -117,12 +123,31 @@ class AdminController extends Controller
 
          $request->validate([
         'nom' => 'required|string',
+        'categorie_id' => 'required|exists:categories,id'
     ]);
 
     TypeArticle::create([
         'nom' => $request->nom,
+        'categorie_id' => $request->categorie_id
     ]);
     toastify()->success('Type article  ajouté ✔');
+
+    return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
+
+}
+//ajout type articleCategorie
+    public function artCat(Request $request){
+
+         $request->validate([
+        'article_id' => 'required|exists:articles,id',
+        'type_article_id' => 'required|exists:type_articles,id'
+    ]);
+
+    ArticleCategorie::create([
+        'article_id' => $request->article_id,
+        'type_article_id' => $request->type_article_id
+    ]);
+    toastify()->success('article categorie  ajouté ✔');
 
     return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
 
