@@ -1,8 +1,6 @@
 @extends('pageadmin.dashbord.admin')
 
 @section('body')
-
-
     <div class="wrapper">
         @include('partials.admin.sidebar')
 
@@ -25,53 +23,53 @@
                                         <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">liste article
                                         </h3>
 
+                                    </div>
+
+                                    <table class="table table-head-bg-primary mt-4">
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col">nom</th>
+                                                <th scope="col">prix</th>
+                                                <th scope="col">type</th>
+                                                <th scope="col">taille</th>
+                                                <th scope="col">couleur</th>
+                                                <th scope="col">description</th>
+                                                <th scope="col">photo</th>
+                                                <th scope="col">Action</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($articles as $article)
+                                                @foreach ($article->DetailArticle as $detail)
+                                                    <tr>
+                                                        <td>{{ $article->nom }}</td>
+                                                        <td>{{ $article->prix }}</td>
+                                                        <td>{{ $article->TypeArticle->nom }}</td>
+                                                        <td>{{ $detail->taille }}</td>
+                                                        <td>{{ $detail->couleur }}</td>
+                                                        <td>{{ $detail->description }}</td>
+                                                        <td>
+                                                             <img src="{{ asset('assets/upload/'.$article->photo) }}" alt="" width="50px" height="50px" class="rounded-circle">
+                                                        </td>
+                                                        <td>
+                                                              <a href="" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                                              <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
                                 </div>
-
-<table class="table table-head-bg-primary mt-4">
-                      <thead>
-                        <tr>
-
-                          <th scope="col">nom</th>
-                          <th scope="col">prix</th>
-                          <th scope="col">photo</th>
-                          <th scope="col">type</th>
-                           <th scope="col">taille</th>
-                          <th scope="col">couleur</th>
-                          <th scope="col">Action</th>
-
-
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colspan="2">Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
