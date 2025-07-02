@@ -54,7 +54,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="{{route('admin.listearticle')}}">
                         <span class="sub-item">Liste article </span>
                       </a>
                     </li>

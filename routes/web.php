@@ -22,6 +22,7 @@ Route::get('/',[ClientController::class, 'accueil'])->name('page.accueil');
 Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
 Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.addarticle');
+Route::get('/listearticle',[AdminController::class, 'listearticle'])->name('admin.listearticle');
 //route ajout categorie
 Route::post('/categorie',[AdminController::class, 'addcat'])->name('create.categorie');
 //route ajout type article

@@ -30,6 +30,12 @@ class AdminController extends Controller
     public function dashbordadmin() {
       return view("pageadmin.dashbord.dashboard");
     }
+//page liste article
+    public function listearticle() {
+      return view("pageadmin.dashbord.listearticle");
+    }
+
+
 //page ajout article
      public function addarticle() {
         $types = TypeArticle::all();
