@@ -37,6 +37,14 @@ class AdminController extends Controller
       return view("pageadmin.dashbord.nodificationarticle");
     }
 
+
+    //page stock
+    public function stockarticle(){
+      return view("pageadmin.dashbord.stock");
+    }
+
+
+
 //page liste article
     public function listearticle() {
     $articleCategories = ArticleCategorie::with([

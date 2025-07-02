@@ -25,7 +25,7 @@
                                 <div class="card-header">
 
                                     <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Ajout article
+                                        <h3 class="fw-bold mb-3" style="margin-right:250px;margin-top:10px">Ajout article
                                         </h3>
                                         <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
                                             data-bs-target="#categorieModal">Catégorie article</button>

@@ -83,7 +83,7 @@
                 </div>
               </li>
               <li class="nav-item active">
-            <a href="#">
+            <a href="{{route('admin.stockarticle')}}">
             <i class="fas fa-warehouse"></i>
             <p>Stocks</p>
             </a>
