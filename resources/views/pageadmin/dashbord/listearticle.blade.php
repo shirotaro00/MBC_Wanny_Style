@@ -22,7 +22,7 @@
                                 <div class="card-header">
 
                                     <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Ajout article
+                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">liste article
                                         </h3>
 
                                 </div>
@@ -45,6 +45,9 @@
                       <tbody>
                         <tr>
                           <td>1</td>
+                          <td>Mark</td>
+                          <td>Otto</td>
+                          <td>@mdo</td>
                           <td>Mark</td>
                           <td>Otto</td>
                           <td>@mdo</td>
