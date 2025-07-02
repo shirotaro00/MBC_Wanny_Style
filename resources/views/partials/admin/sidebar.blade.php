@@ -96,6 +96,13 @@
             </a>
             </li>
 
+                <li class="nav-item active">
+            <a href="#">
+          <i class="fas fa-credit-card"></i>
+            <p>Methode payement</p>
+            </a>
+            </li>
+
             </ul>
           </div>
         </div>

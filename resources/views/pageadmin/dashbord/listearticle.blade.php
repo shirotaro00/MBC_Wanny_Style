@@ -55,7 +55,7 @@
                                                              <img src="{{ asset('assets/upload/'.$article->photo) }}" alt="" width="50px" height="50px" class="rounded-circle">
                                                         </td>
                                                         <td>
-                                                              <a href="" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                                              <a href="{{route("admin.editarticle")}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                                               <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                                         </td>
                                                     </tr>

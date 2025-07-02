@@ -30,6 +30,12 @@ class AdminController extends Controller
     public function dashbordadmin() {
       return view("pageadmin.dashbord.dashboard");
     }
+
+    //page modification
+    public function editarticle(){
+      return view("pageadmin.dashbord.nodificationarticle");
+    }
+
 //page liste article
     public function listearticle() {
     $articles = Article::with(['TypeArticle', 'DetailArticle'])->get();
@@ -43,6 +49,8 @@ class AdminController extends Controller
         $articles = Article::all();
       return view("pageadmin.dashbord.Addarticle",compact("types","articles"));
     }
+
+
 
 //inscription admin
     public function registerAdmin(Request $request)
