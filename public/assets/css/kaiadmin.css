@@ -1611,10 +1611,10 @@ body[data-background-color="dark"] .border-top {
     border-top: 1px solid #ebecec;
     margin: 15px 0; }
   .card .separator-dashed, .card-light .separator-dashed {
-    border-top: 1px dashed #ebecec;
+    /* border-top: 1px dashed #ebecec; */
     margin: 15px 0; }
   .card .separator-dot, .card-light .separator-dot {
-    border-top: 1px dotted #ebecec;
+    /* border-top: 1px dotted #ebecec; */
     margin: 15px 0; }
   .card .full-width-separator, .card-light .full-width-separator {
     margin: 15px -20px 15px; }
@@ -1639,12 +1639,12 @@ body[data-background-color="dark"] .border-top {
     bottom: 0;
     width: calc(100% + 2px); }
   .card .card-action, .card-light .card-action {
-    padding: 30px;
+    padding: 10px;
     background-color: transparent;
-    line-height: 30px;
+
     border-top: 1px solid #ebecec !important;
     font-size: 1rem; }
-  .card .card-footer hr, .card-light .card-footer hr {
+  .card .card-footer , .card-light .card-footer hr {
     margin-top: 5px;
     margin-bottom: 5px; }
   .card .card-footer .legend, .card-light .card-footer .legend {
