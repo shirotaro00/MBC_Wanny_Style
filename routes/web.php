@@ -34,6 +34,8 @@ Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
 //route ajout details article
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
+Route::delete('/articles/{id}', [AdminController::class, 'destroy'])->name('articles.destroy');
+
 //ajout stock
 Route::post('/admin/stock/ajouter/{detail_article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
 

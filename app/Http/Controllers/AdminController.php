@@ -241,6 +241,15 @@ toastify()->success('Stock ajouté avec succès ✔');
 
     return back()->with('success', 'Stock ajouté avec succès.');
 }
+//suppresion
+public function destroy($id)
+{
+    $article = Article::findOrFail($id);
+    $article->delete();
+
+    return redirect()->back()->with('success', 'Article supprimé avec succès.');
+}
+
 //message d'erreur password
     public function messages(){
         return [
