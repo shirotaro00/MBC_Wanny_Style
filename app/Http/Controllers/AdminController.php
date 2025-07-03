@@ -56,7 +56,7 @@ class AdminController extends Controller
 
 //page liste article
     public function listearticle() {
-    $articleCategories = ArticleCategorie::with([
+    $articles = ArticleCategorie::with([
         'article.detailArticle',
         'typeArticle.categorie'
     ])->get();
@@ -68,9 +68,8 @@ class AdminController extends Controller
 //page ajout article
      public function addarticle() {
         $types = TypeArticle::all();
-        $articles = Article::all();
-        $categories = Categorie::all();
-      return view("pageadmin.dashbord.Addarticle",compact("types","articles","categories"));
+        $details = DetailArticle::all();
+      return view("pageadmin.dashbord.Addarticle",compact("types","details"));
     }
 
 
@@ -145,12 +144,10 @@ class AdminController extends Controller
 
          $request->validate([
         'nom' => 'required|string',
-        'categorie_id' => 'required|exists:categories,id'
     ]);
 
     TypeArticle::create([
         'nom' => $request->nom,
-        'categorie_id' => $request->categorie_id
     ]);
     toastify()->success('Type article  ajouté ✔');
 
@@ -179,18 +176,30 @@ class AdminController extends Controller
 
          $request->validate([
         'nom' => 'required|string',
+        'categorie' => 'required|in:homme,femme',
         'prix' => 'required|integer|min:0',
+        'quantite' => 'required|integer|min:0',
         'photo' => 'required|image|mimes:jpeg,png,jpg',
-        'type_article_id' => 'required|exists:type_articles,id'
+        'description' => 'required|string',
+        'taille'=> 'required|in:L,M,S,XL,XXL',
+        'date_ajout' => 'required|date',
+        'type_article_id' => 'required|exists:type_articles,id',
+        'detail_article_id' => 'required|exists:detail_articles,id'
     ]);
     $filename = time() . '.' . $request->photo->getClientOriginalExtension();
     $request->photo->move(public_path("assets/upload"), $filename);
 
     Article::create([
         'nom' => $request->nom,
+        'categorie' => $request->categorie,
         'prix' => $request->prix,
+        'quantite' => $request->quantite,
         'photo'=> $filename,
-        'type_article_id' => $request->type_article_id
+        'description' => $request->description,
+        'taille' => $request->taille,
+        'date_ajout' => $request->date_ajout,
+        'type_article_id' => $request->type_article_id,
+        'detail_article_id' => $request->detail_article_id
     ]);
     toastify()->success('article  ajouté ✔');
 
@@ -201,17 +210,11 @@ class AdminController extends Controller
 public function store(Request $request)
 {
     $request->validate([
-        'taille' => 'required|string',
-        'couleur' => 'required|string',
-        'description' => 'required|string',
-        'article_id' => 'required|exists:articles,id',
+        'couleur' => 'string',
     ]);
 
     DetailArticle::create([
-        'taille' => $request->taille,
         'couleur' => $request->couleur,
-        'description' => $request->description,
-        'article_id' => $request->article_id,
     ]);
     toastify()->success('details article  ajouté ✔');
 

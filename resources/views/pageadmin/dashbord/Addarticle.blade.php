@@ -61,11 +61,11 @@
                                                         </div>
 
                                                         <div class="mb-3" style="height: 42px ; ">
-                                                            <label for="" class="form-label">Categories</label>
-                                                            <select class="form-select form-control" id="defaultSelect"
-                                                                name="categories">
-                                                                <option>1</option>
-                                                                <option>2</option>
+                                                            <label for="categorie" class="form-label">Categories</label>
+                                                            <select class="form-select form-control" id="categorie"
+                                                                name="categorie">
+                                                                <option value="homme">Homme</option>
+                                                                <option value="femme">Femme</option>
 
                                                             </select>
                                                         </div>
@@ -93,26 +93,28 @@
                                                             </select>
                                                         </div>
                                                         <div class="mb-3" style="height:42px ;padding-top:20px;">
-                                                            <label for="civilite" class="form-label">Couleur</label>
-                                                            <select class="form-select form-control" id="defaultSelect"
-                                                                name="couleur">
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
+                                                            <label for="detail_article_id"
+                                                                class="form-label">Couleur</label>
+                                                            <select class="form-select form-control" id="detail_article_id"
+                                                                name="detail_article_id">
+                                                                @foreach ($details as $detail)
+                                                                    <option value="{{ $detail->id }}">
+                                                                        {{ $detail->couleur }}
+                                                                    </option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
 
                                                         <div class="mb-3" style="height:42px ;padding-top:46px;">
-                                                            <label for="" class="form-label">Taille</label>
-                                                            <select class="form-select form-control" id="defaultSelect"
-                                                                name="details">
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
+                                                            <label for="taille" class="form-label">Taille</label>
+                                                            <select class="form-select form-control" id="taille"
+                                                                name="taille">
+                                                                <option value="L">L</option>
+                                                                <option value="S">S</option>
+                                                                <option value="M">M</option>
+                                                                <option value="XL">XL</option>
+                                                                <option value="XXL">XXL</option>
+
                                                             </select>
                                                         </div>
 
@@ -122,9 +124,9 @@
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="prix" class="form-label">Date ajout</label>
-                                                            <input type="date" class="form-control" id="prix"
-                                                                name="date">
+                                                            <label for="date_ajout" class="form-label">Date ajout</label>
+                                                            <input type="date" class="form-control" id="date_ajout"
+                                                                name="date_ajout">
                                                         </div>
                                                     </div>
                                                 </div>

@@ -17,16 +17,6 @@
                         <label for="couleur" class="form-label">Couleur</label>
                         <input type="text" class="form-control" id="couleur" name="couleur" required>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="taille" class="form-label">Taille</label>
-                        <input type="text" class="form-control" id="taille" name="taille" required>
-                    </div>
-
-
-
-
-
                     <div class="modal-footer">
                         <button type="submit" id="sign_in" class="btn btn-success">Ajouter</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

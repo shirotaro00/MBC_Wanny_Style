@@ -12,9 +12,11 @@ class Article extends Model
         'nom',
         'categorie',
         'prix',
-        'stock',
+        'quantite',
         'description',
         'photo',
+        'taille',
+        'date_ajout',
         'type_article_id',
         'detail_article_id'
     ];

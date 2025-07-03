@@ -18,8 +18,6 @@
                         <input type="text" class="form-control" id="nom" name="nom" required>
                     </div>
 
-
-
                     <div class="modal-footer">
                         <button type="submit" id="sign_in" class="btn btn-success">Ajouter</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

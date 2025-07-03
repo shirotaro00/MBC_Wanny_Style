@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('detail_articles', function (Blueprint $table) {
             $table->id();
-            $table->string('taille');
             $table->string('couleur');
             $table->timestamps();
         });

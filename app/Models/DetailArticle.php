@@ -9,7 +9,6 @@ class DetailArticle extends Model
 {
     use HasFactory;
         protected $fillable = [
-        'taille',
         'couleur',
     ];
 

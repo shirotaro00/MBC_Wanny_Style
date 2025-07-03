@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('quantite');
             $table->string('photo');
             $table->longText('description');
+            $table->enum('taille',['L','M','S','XL','XXL']);
+            $table->date('date_ajout');
             $table->unsignedBigInteger('type_article_id');
             $table->foreign('type_article_id')->references('id')->on('type_articles')->onDelete('cascade');
             $table->unsignedBigInteger('detail_article_id');
