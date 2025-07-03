@@ -37,6 +37,8 @@ Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
 //route ajout article categorie
 Route::post('/articlecat', [AdminController::class, 'artCat'])->name('create.cat');
+//suppresion
+Route::delete('/articles/{id}', [AdminController::class, 'destroy'])->name('articles.destroy');
 //ajout stock
 Route::post('/admin/stock/ajouter/{detail_article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
 
