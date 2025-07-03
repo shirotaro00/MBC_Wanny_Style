@@ -34,38 +34,27 @@
                                     <table class="table table-head-bg-primary mt-4">
                                         <thead>
                                             <tr>
-
-                                                <th scope="col">Catégorie</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Article</th>
-                                                <th scope="col">Prix</th>
-                                                <th scope="col">Photo</th>
+                                                <th scope="col">Nom article</th>
                                                 <th scope="col">Taille</th>
                                                 <th scope="col">Couleur</th>
-                                                <th scope="col">Description</th>
+                                                <th scope="col">Quantite</th>
                                                 <th scope="col">Action</th>
 
 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($details as $detail)
+                                                <tr>
+                                                    <td>{{ $detail->article->nom ?? 'N/A' }}</td>
+                                                    <td>{{ $detail->taille }}</td>
+                                                    <td>{{ $detail->couleur }}</td>
+                                                    <td>{{ $detail->stock->quantite ?? 0 }}</td>
+                                                    <td>
 
-
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
                                         </tbody>
                                     </table>

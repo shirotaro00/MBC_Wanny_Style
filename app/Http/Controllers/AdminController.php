@@ -9,6 +9,7 @@ use App\Models\TypeArticle;
 use Illuminate\Http\Request;
 use App\Models\DetailArticle;
 use App\Models\ArticleCategorie;
+use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -40,9 +41,16 @@ class AdminController extends Controller
 
     //page stock
     public function stockarticle(){
-      return view("pageadmin.dashbord.stock");
+        $details = DetailArticle::all();
+        $details = DetailArticle::with('stock','article')->get();
+      return view("pageadmin.dashbord.stock",compact("details"));
     }
 
+    //page profil
+    public function profil(){
+      $admin = Auth::user();
+    return view('pageadmin.dashbord.profil', compact('admin'));
+    }
 
 
 //page liste article
@@ -78,7 +86,9 @@ class AdminController extends Controller
         'telephone' => 'required|string',
     ], $this->messages());
 
-    User::create([
+
+
+    $admin =User::create([
         'nom' => $request->nom,
         'prenom' => $request->prenom,
         'email' => $request->email,
@@ -87,6 +97,9 @@ class AdminController extends Controller
         'telephone' => $request->telephone,
         'role' => '0',
     ]);
+
+    Auth::login($admin);
+
     toastify()->success('Votre compte été créer avec succès ✔');
 
     return redirect()->route('admin.accueil')->with('success', 'Compte client créé');
@@ -202,6 +215,29 @@ public function store(Request $request)
     toastify()->success('details article  ajouté ✔');
 
     return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
+}
+//ajoute stock
+public function ajouterStock(Request $request, $detail_article_id)
+{
+    $request->validate([
+        'quantite' => 'required|integer|min:1',
+        'detail_article_id'=>'required|exists:detail_articles,id',
+    ]);
+
+    $stock = Stock::where('detail_article_id', $detail_article_id)->first();
+
+    if ($stock) {
+        $stock->quantite += $request->quantite;
+        $stock->save();
+    } else {
+        Stock::create([
+            'detail_article_id' => $detail_article_id,
+            'quantite' => $request->quantite,
+        ]);
+    }
+toastify()->success('Stock ajouté avec succès ✔');
+
+    return back()->with('success', 'Stock ajouté avec succès.');
 }
 //message d'erreur password
     public function messages(){

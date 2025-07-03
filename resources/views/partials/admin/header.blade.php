@@ -95,19 +95,13 @@
                             <i class="fas fa-user" style="font-size:30px"></i>
                           </div>
                           <div class="u-text">
-                            <h4>Admin</h4>
-                            <p class="text-muted">admin@gmail.com</p>
-                            <a
-                              href="profile.html"
-                              class="btn btn-xs btn-secondary btn-sm"
-                              >Profile</a
-                            >
+                            <p class="text-muted">Bienvenue</p>
                           </div>
                         </div>
                       </li>
                       <li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="{{ route('admin.profil') }}">Mon Profil</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('deconexion') }}">Deconnexion</a>
                       </li>

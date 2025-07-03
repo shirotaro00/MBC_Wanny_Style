@@ -25,6 +25,7 @@ Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.ad
 Route::get('/listearticle',[AdminController::class, 'listearticle'])->name('admin.listearticle');
 Route::get('/editarticle',[AdminController::class, 'editarticle'])->name('admin.editarticle');
 Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admin.stockarticle');
+Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 
 //route ajout categorie
 Route::post('/categorie',[AdminController::class, 'addcat'])->name('create.categorie');
@@ -36,6 +37,9 @@ Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
 //route ajout article categorie
 Route::post('/articlecat', [AdminController::class, 'artCat'])->name('create.cat');
+//ajout stock
+Route::post('/admin/stock/ajouter/{detail_article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
+
 
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');

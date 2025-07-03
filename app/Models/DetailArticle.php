@@ -14,7 +14,7 @@ class DetailArticle extends Model
         'description',
         'article_id'
     ];
-    public function Article() {
+    public function article() {
     return $this->belongsTo(Article::class, 'article_id');
     }
 
