@@ -151,23 +151,7 @@ class AdminController extends Controller
     return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
 
 }
-//ajout type articleCategorie
-    public function artCat(Request $request){
 
-         $request->validate([
-        'article_id' => 'required|exists:articles,id',
-        'type_article_id' => 'required|exists:type_articles,id'
-    ]);
-
-    ArticleCategorie::create([
-        'article_id' => $request->article_id,
-        'type_article_id' => $request->type_article_id
-    ]);
-    toastify()->success('article categorie  ajouté ✔');
-
-    return redirect()->route('admin.addarticle')->with('success', 'Compte client créé');
-
-}
 //ajout article
     public function ajoutArticle(Request $request){
 
