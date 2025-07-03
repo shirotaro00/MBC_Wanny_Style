@@ -34,11 +34,6 @@ Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
 //route ajout details article
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
-<<<<<<< HEAD
-
-//suppresion
-=======
->>>>>>> bbae3013373404735fd2243b3b6c6e01396bf519
 Route::delete('/articles/{id}', [AdminController::class, 'destroy'])->name('articles.destroy');
 
 //ajout stock
