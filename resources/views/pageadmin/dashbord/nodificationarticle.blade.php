@@ -1,7 +1,8 @@
 @extends('pageadmin.dashbord.admin')
 
 @section('body')
-
+    @include('partials.admin.modal.type')
+    @include('partials.admin.modal.detail')
 
     <div class="wrapper">
         @include('partials.admin.sidebar')
@@ -22,13 +23,14 @@
                                 <div class="card-header">
 
                                     <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:350px;margin-top:10px">Modification article</h3>
-                                        <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#categorieModal">Catégorie article</button>
+                                        <h3 class="fw-bold mb-3" style="margin-right:250px;margin-top:10px">Ajout article
+                                        </h3>
+
                                         <button class="btn btn-secondary" style="margin: 5px" data-bs-toggle="modal"
                                             data-bs-target="#typeModal">Type article</button>
                                         <button class="btn btn-info" style="margin: 5px" data-bs-toggle="modal"
                                             data-bs-target="#detailsModal">Détails article</button>
+
                                     </div>
                                 </div>
 
@@ -36,7 +38,8 @@
                                 <div class="container mt-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
-                                            <form action="" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('articles.store') }}" method="POST"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <!-- Colonne gauche -->
@@ -56,46 +59,82 @@
                                                             <input type="file" class="form-control" id="photo"
                                                                 name="photo" placeholder="">
                                                         </div>
+
+                                                        <div class="mb-3" style="height: 42px ; ">
+                                                            <label for="categorie" class="form-label">Categories</label>
+                                                            <select class="form-select form-control" id="categorie"
+                                                                name="categorie">
+                                                                <option value="homme">Homme</option>
+                                                                <option value="femme">Femme</option>
+
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3" style="padding-top:20px">
+                                                            <label for="prix" class="form-label">Quantité</label>
+                                                            <input type="text" class="form-control" id="prix"
+                                                                name="quantite" placeholder="quantite">
+                                                        </div>
                                                     </div>
 
 
                                                     <!-- Colonne 2 : Selects -->
                                                     <div class="col-md-6">
-                                                        {{-- <div class="mb-3" style="height: 42px ; " >
-                                                            <label for="pays" class="form-label">Categories</label>
-                                                            <select class="form-select form-control" id="defaultSelect"
-                                                                name="categories">
-                                                                <option>1</option>
-                                                                <option>2</option>
 
-                                                            </select>
-                                                        </div> --}}
                                                         <div class="mb-3" style="height: 42px ">
                                                             <label for="type_article_id" class="form-label">Type article
                                                             </label>
                                                             <select class="form-select form-control" id="type_article_id"
                                                                 name="type_article_id">
+                                                                @foreach ($types as $type)
+                                                                    <option value="{{ $type->id }}">{{ $type->nom }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3" style="height:42px ;padding-top:20px;">
+                                                            <label for="detail_article_id"
+                                                                class="form-label">Couleur</label>
+                                                            <select class="form-select form-control" id="detail_article_id"
+                                                                name="detail_article_id">
+                                                                @foreach ($details as $detail)
+                                                                    <option value="{{ $detail->id }}">
+                                                                        {{ $detail->couleur }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3" style="height:42px ;padding-top:46px;">
+                                                            <label for="taille" class="form-label">Taille</label>
+                                                            <select class="form-select form-control" id="taille"
+                                                                name="taille">
+                                                                <option value="L">L</option>
+                                                                <option value="S">S</option>
+                                                                <option value="M">M</option>
+                                                                <option value="XL">XL</option>
+                                                                <option value="XXL">XXL</option>
 
                                                             </select>
                                                         </div>
-                                                        {{-- <div class="mb-3" style="height: 48px ;padding-top:42px">
-                                                            <label for="civilite" class="form-label">Detail</label>
-                                                            <select class="form-select form-control" id="defaultSelect"
-                                                                name="details">
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
-                                                            </select>
-                                                        </div> --}}
+
+                                                        <div class="mb-3" style="padding-top:65px;">
+                                                            <label for="civilite" class="form-label">Description</label>
+                                                            <textarea class="form-control" name="description" rows="1"></textarea>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="date_ajout" class="form-label">Date ajout</label>
+                                                            <input type="date" class="form-control" id="date_ajout"
+                                                                name="date_ajout">
+                                                        </div>
                                                     </div>
                                                 </div>
                                         </div>
                                     </div>
                                     <div class="boutton " style="margin-bottom: 15px">
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary">modifier</button>
+                                            <button type="submit" class="btn btn-primary">Envoyer</button>
                                         </div>
                                     </div>
                                     </form>
