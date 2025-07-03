@@ -24,20 +24,8 @@
                     </div>
 
 
-                    <div class="mb-3">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="3"></textarea>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="article_id" class="form-label">article
-                        </label>
-                        <select class="form-select form-control" id="article_id" name="article_id">
-                            @foreach ($articles as $article)
-                                <option value="{{ $article->id }}">{{ $article->nom }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
 
                     <div class="modal-footer">
                         <button type="submit" id="sign_in" class="btn btn-success">Ajouter</button>

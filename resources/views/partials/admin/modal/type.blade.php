@@ -14,19 +14,11 @@
                 <form action="{{ route('create.type') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Nom</label>
+                        <label for="nom" class="form-label">Type article</label>
                         <input type="text" class="form-control" id="nom" name="nom" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="categorie_id" class="form-label">type
-                        </label>
-                        <select class="form-select form-control" id="categorie_id" name="categorie_id">
-                            @foreach ($categories as $ca)
-                                <option value="{{ $ca->id }}">{{ $ca->nom }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
 
                     <div class="modal-footer">
                         <button type="submit" id="sign_in" class="btn btn-success">Ajouter</button>
