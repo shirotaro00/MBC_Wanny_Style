@@ -234,7 +234,6 @@ public function ajouterStock(Request $request, $detail_article_id)
     } else {
         Stock::create([
             'detail_article_id' => $detail_article_id,
-            'article_id' => $article_id,
             'quantite' => $request->quantite,
         ]);
     }
