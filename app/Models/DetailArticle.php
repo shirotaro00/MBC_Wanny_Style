@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class DetailArticle extends Model
 {
     use HasFactory;
-        protected $fillable = [
+    protected $fillable = [
         'couleur',
     ];
 
-    public function Stock() {
+    public function Stock()
+    {
         return $this->hasOne(Stock::class, 'detail_article_id');
     }
 
+    public function article()
+    {
+        return $this->hasMany(Article::class,'article_id');
+    }
 }

@@ -21,14 +21,16 @@ class Article extends Model
         'detail_article_id'
     ];
 
-public function detailArticle()
-{
-    return $this->hasMany(DetailArticle::class, 'detail_article_id');
-}
 public function typeArticle()
 {
-    return $this->hasMany(TypeArticle::class, 'type_article_id');
+    return $this->belongsTo(TypeArticle::class,'type_article_id');
 }
+
+public function detailArticle()
+{
+    return $this->belongsTo(DetailArticle::class,'detail_article_id');
+}
+
 
 public function DetailCommande()
 {
