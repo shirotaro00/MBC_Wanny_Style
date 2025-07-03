@@ -14,10 +14,15 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->enum('categorie',['homme','femme']);
             $table->double('prix');
+            $table->integer('quantite');
             $table->string('photo');
-            $table->unsignedBigInteger("type_article_id")->nullable();
-            $table->foreign("type_article_id")->references("id")->on("type_articles")->onDelete("cascade")->onUpdate("cascade");
+            $table->longText('description');
+            $table->unsignedBigInteger('type_article_id');
+            $table->foreign('type_article_id')->references('id')->on('type_articles')->onDelete('cascade');
+            $table->unsignedBigInteger('detail_article_id');
+            $table->foreign('detail_article_id')->references('id')->on('type_articles')->onDelete('cascade');
             $table->timestamps();
         });
     }

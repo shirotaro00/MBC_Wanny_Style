@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('taille');
             $table->string('couleur');
-            $table->string('description');
-            $table->unsignedBigInteger("article_id")->nullable();
-            $table->foreign("article_id")->references("id")->on("articles")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

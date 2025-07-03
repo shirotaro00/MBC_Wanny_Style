@@ -42,6 +42,7 @@ class AdminController extends Controller
     //page stock
     public function stockarticle(){
         $details = DetailArticle::all();
+        $articles = Article::all();
         $details = DetailArticle::with('stock','article')->get();
       return view("pageadmin.dashbord.stock",compact("details"));
     }
@@ -222,6 +223,7 @@ public function ajouterStock(Request $request, $detail_article_id)
     $request->validate([
         'quantite' => 'required|integer|min:1',
         'detail_article_id'=>'required|exists:detail_articles,id',
+        'article_id' => 'required|exists:articles,id',
     ]);
 
     $stock = Stock::where('detail_article_id', $detail_article_id)->first();
@@ -232,6 +234,7 @@ public function ajouterStock(Request $request, $detail_article_id)
     } else {
         Stock::create([
             'detail_article_id' => $detail_article_id,
+            'article_id' => $article_id,
             'quantite' => $request->quantite,
         ]);
     }

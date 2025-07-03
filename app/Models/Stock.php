@@ -10,10 +10,12 @@ class Stock extends Model
     use HasFactory;
     protected $fillable = [
         'quantite',
-        'detail_article_id'
+        'article_id'
     ];
-    public function DetailArticle() {
-    return $this->belongsTo(DetailArticle::class, 'detail_article_id');
-    }
 
+
+    public function article()
+    {
+        return $this->belongsTo(Article::class, 'article_id');
+    }
 }

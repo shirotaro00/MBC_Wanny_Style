@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('type_articles', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->unsignedBigInteger("categorie_id")->nullable();
-            $table->foreign("categorie_id")->references("id")->on("categories")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
         });
     }

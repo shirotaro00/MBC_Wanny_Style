@@ -10,12 +10,7 @@ class TypeArticle extends Model
     use HasFactory;
       protected $fillable = [
         'nom',
-        'categorie_id',
     ];
-public function categorie()
-{
-    return $this->belongsTo(Categorie::class, 'categorie_id');
-}
 
 public function ArticleCategorie()
 {

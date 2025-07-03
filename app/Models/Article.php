@@ -10,14 +10,22 @@ class Article extends Model
     use HasFactory;
       protected $fillable = [
         'nom',
+        'categorie',
         'prix',
+        'stock',
+        'description',
         'photo',
-        'type_article_id'
+        'type_article_id',
+        'detail_article_id'
     ];
 
 public function detailArticle()
 {
-    return $this->hasMany(DetailArticle::class, 'article_id');
+    return $this->hasMany(DetailArticle::class, 'detail_article_id');
+}
+public function typeArticle()
+{
+    return $this->hasMany(TypeArticle::class, 'type_article_id');
 }
 
 public function DetailCommande()
