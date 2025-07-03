@@ -56,7 +56,7 @@
                                                     <td>{{ $article->detailArticle->couleur ?? 'N/A' }}</td>
                                                     <td>{{ $article->description }}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-warning btn-sm"> <i
+                                                        <a href="{{ route('admin.editarticle', $article->id) }}" class="btn btn-warning btn-sm"> <i
                                                                 class="fas fa-edit"></i> </a>
                                                         <!-- Bouton qui ouvre le modal -->
                                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
