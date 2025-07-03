@@ -56,12 +56,9 @@ class AdminController extends Controller
 
 //page liste article
     public function listearticle() {
-    $articles = ArticleCategorie::with([
-        'article.detailArticle',
-        'typeArticle.categorie'
-    ])->get();
+       $articles = Article::with(['typeArticle', 'detailArticle'])->get();
 
-      return view("pageadmin.dashbord.listearticle", compact('articleCategories'));
+      return view("pageadmin.dashbord.listearticle", compact('articles'));
     }
 
 

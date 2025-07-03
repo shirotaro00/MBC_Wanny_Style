@@ -44,25 +44,27 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($articleCategories as $ac)
-                                                @foreach ($ac->article->detailArticle as $detail)
-                                                    <tr>
-                                                        <td>{{ $ac->typeArticle->categorie->nom ?? 'N/A' }}</td>
-                                                        <td>{{ $ac->typeArticle->nom }}</td>
-                                                        <td>{{ $ac->article->nom }}</td>
-                                                        <td>{{ $ac->article->prix }}</td>
-                                                        <td>
-                                                            <img src="{{ asset('assets/upload/' . $ac->article->photo) }}"
-                                                                width="50" height="50">
-                                                        </td>
-                                                        <td>{{ $detail->taille }}</td>
-                                                        <td>{{ $detail->couleur }}</td>
-                                                        <td>{{ $detail->description }}</td>
-                                                        <td>
-
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach ($articles as $article)
+                                                <tr>
+                                                    <td>{{ $article->categorie }}</td>
+                                                    <td>{{ $article->typeArticle->nom ?? 'N/A' }}</td>
+                                                    <td>{{ $article->nom }}</td>
+                                                    <td>{{ number_format($article->prix, 0, ',', ' ') }} Ar</td>
+                                                    <td><img src="{{ asset('assets/upload/' . $article->photo) }}"
+                                                            width="50"></td>
+                                                    <td>{{ $article->taille}}</td>
+                                                    <td>{{ $article->detailArticle->couleur ?? 'N/A' }}</td>
+                                                    <td>{{ $article->description }}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-warning btn-sm">Modifier</a>
+                                                        <form action="#" method="POST" style="display:inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm">Supprimer</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
