@@ -27,16 +27,14 @@ Route::get('/editarticle',[AdminController::class, 'editarticle'])->name('admin.
 Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admin.stockarticle');
 Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 
-//route ajout categorie
-Route::post('/categorie',[AdminController::class, 'addcat'])->name('create.categorie');
+
 //route ajout type article
 Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 //route ajout  article
 Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
 //route ajout details article
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
-//route ajout article categorie
-Route::post('/articlecat', [AdminController::class, 'artCat'])->name('create.cat');
+
 //suppresion
 Route::delete('/articles/{id}', [AdminController::class, 'destroy'])->name('articles.destroy');
 //ajout stock
