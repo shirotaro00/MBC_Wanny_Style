@@ -7,6 +7,8 @@ use App\Models\Article;
 use App\Models\TypeArticle;
 use Illuminate\Http\Request;
 use App\Models\DetailArticle;
+use App\Models\MethodePaiement;
+use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -35,23 +37,25 @@ class AdminController extends Controller
     }
 
     // page sortant
-       public function Stocksortant()
+    public function Stocksortant()
     {
         return view("pageadmin.dashbord.stocksortant");
     }
 
     // liste clients
 
-       public function listeclients()
+    public function listeclients()
     {
-        return view("pageadmin.dashbord.listeclients");
+        $clients = User::where('role', '1')->get();
+        return view("pageadmin.dashbord.listeclients",compact("clients"));
     }
 
     // addpayement
 
-       public function ajoutpayement()
+    public function ajoutpayement()
     {
-        return view("pageadmin.dashbord.ajoutpayement");
+        $methodes = MethodePaiement::all();
+        return view("pageadmin.dashbord.ajoutpayement",compact('methodes'));
     }
 
 
@@ -66,7 +70,9 @@ class AdminController extends Controller
     //page stock
     public function stockarticle()
     {
-        return view("pageadmin.dashbord.stock");
+        $articles = Article::all();
+        $stocks = Stock::with(['article.detailArticle', 'article.typeArticle'])->get();
+        return view("pageadmin.dashbord.stock", compact('articles', 'stocks'));
     }
 
     //page profil
@@ -210,7 +216,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin.addarticle')->with('success', 'details article  ajouté');
     }
-       //modification
+    //modification
     public function updateArticle(Request $request, $id)
     {
         $request->validate([
@@ -273,7 +279,87 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Article supprimé avec succès.');
     }
+    //ajout stock
+    public function ajouterStock(Request $request, $article_id)
+    {
+        $request->validate([
+            'quantite' => 'required|integer|min:0',
+            'date_stock' => 'required|date',
+            'article_id' => 'required|exists:articles,id'
+        ]);
 
+        $stock = Stock::where('article_id', $article_id)->first();
+
+        if ($stock) {
+            $stock->quantite += $request->quantite;
+            $stock->date_stock = $request->date_stock;
+            $stock->save();
+        } else {
+            Stock::create([
+                'quantite' => $request->quantite,
+                'date_stock' => $request->date_stock,
+                'article_id' => $request->article_id
+            ]);
+        }
+
+        $article = Article::find($article_id);
+        if ($article) {
+            $article->quantite += $request->quantite;
+            $article->save();
+        }
+
+        toastify()->success('stock ajouté ✔');
+
+        return redirect()->route('admin.stockarticle')->with('success', 'stock ajouté ');
+    }
+    //methode paiement
+        public function methodePaiement(Request $request)
+    {
+        $request->validate([
+            'type' => 'required|string',
+            'telephone' =>'required|string',
+            'photo' =>'required|image|mimes:jpeg,png,jpg'
+        ]);
+        $filename = time() . '.' . $request->photo->getClientOriginalExtension();
+        $request->photo->move(public_path("assets/upload"), $filename);
+
+        MethodePaiement::create([
+            'type' => $request->type,
+            'telephone'=>$request->telephone,
+            'photo' => $filename,
+        ]);
+        toastify()->success('methode paiement ajouté ✔');
+
+        return redirect()->route('add.payement')->with('success', 'methode paiement ajouté');
+    }
+    //update profil
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'nom' => 'required|string',
+        'prenom' => 'required|string',
+        'adresse' => 'required|string',
+        'telephone' => 'required|string',
+        'email' => 'required|email',
+        'password' => 'nullable|string|min:6',
+    ]);
+
+    $utilisateur = User::findOrFail($id);
+
+    $utilisateur->nom = $request->nom;
+    $utilisateur->prenom = $request->prenom;
+    $utilisateur->adresse = $request->adresse;
+    $utilisateur->telephone = $request->telephone;
+    $utilisateur->email = $request->email;
+
+    if ($request->filled('password')) {
+        $utilisateur->password = Hash::make($request->password);
+    }
+
+    $utilisateur->save();
+
+    return redirect()->back()->with('success', 'Utilisateur mis à jour avec succès');
+}
     //message d'erreur password
     public function messages()
     {

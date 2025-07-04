@@ -24,12 +24,12 @@ class ClientController extends Controller
         'nom' => 'required|string',
         'prenom' => 'required|string',
         'email' => 'required|email|unique:users',
-        'password' => 'required|min:6|confirmed',
+        'password' => 'required|min:6',
         'adresse' => 'required|string',
         'telephone' => 'required|string',
     ]);
 
-    User::create([
+    $clients = User::create([
         'nom' => $request->nom,
         'prenom' => $request->prenom,
         'email' => $request->email,
@@ -38,9 +38,11 @@ class ClientController extends Controller
         'telephone' => $request->telephone,
         'role' => '1',
     ]);
+    Auth::login($clients);
+
     toastify()->success('Votre compte été créer avec succès ✔');
 
-    return redirect()->route('page.accueil')->with('showLoginModal', true);
+    return redirect()->route('page.accueil')->with('Votre compte été créer avec succès', true);
 }
 //connexion clients
     public function login(Request $request){

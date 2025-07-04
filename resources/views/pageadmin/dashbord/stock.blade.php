@@ -40,23 +40,25 @@
                                                 <th scope="col">Taille</th>
                                                 <th scope="col">Couleur</th>
                                                 <th scope="col">Quantite</th>
-                                                <th scope="col">Date ajout</th>
+                                                <th scope="col">Date stock</th>
 
 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($stocks as $stock)
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-
-                                                    </td>
+                                                    <td>{{ $stock->article->nom ?? '' }}</td>
+                                                    <td>{{ $stock->article->categorie ?? '' }}</td>
+                                                    <td>{{ $stock->article->typeArticle->nom ?? '' }}</td>
+                                                    <td>{{ $stock->article->taille ?? '' }}</td>
+                                                    <td>{{ $stock->article->detailArticle->couleur ?? '' }}</td>
+                                                    <td>{{ $stock->quantite }}</td>
+                                                    <td>{{ $stock->date_stock }}</td>
                                                 </tr>
-
+                                            @endforeach
                                         </tbody>
+
                                     </table>
 
                                 </div>

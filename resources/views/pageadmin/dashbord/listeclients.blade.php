@@ -39,15 +39,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
+                                                @foreach ($clients as $client)
+                                                    <tr>
+                                                    <td>{{ $client->nom }}</td>
+                                                    <td>{{ $client->prenom }}</td>
+                                                    <td>{{ $client->telephone }}</td>
+                                                    <td>{{ $client->adresse }}</td>
+                                                    <td>{{ $client->email }}</td>
                                                     <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>
-
-                                                    </td>
                                                 </tr>
+                                                @endforeach
 
                                         </tbody>
                                     </table>

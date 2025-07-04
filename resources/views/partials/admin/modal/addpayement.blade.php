@@ -11,16 +11,16 @@
 
             </div>
             <div class="modal-body">
-                <form action="" method="POST">
+                <form action="{{ route('store.methode') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
                         <label for="Type de payement" class="form-label">Type de payement</label>
-                        <input type="text" class="form-control" id="quantite" name="typepayement" required>
+                        <input type="text" class="form-control" id="quantite" name="type" required>
                     </div>
                     <div class="mb-3">
                         <label for="numero" class="form-label">Numero</label>
-                        <input type="text" class="form-control" id="date" name="numero" required>
+                        <input type="text" class="form-control" id="date" name="telephone" required>
                     </div>
 
                       <div class="mb-3">

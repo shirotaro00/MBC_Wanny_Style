@@ -27,6 +27,8 @@ Route::get('/editarticle/{id}',[AdminController::class, 'editarticle'])->name('a
 Route::post('/admin/articles/{id}', [AdminController::class, 'updateArticle'])->name('articles.update');
 Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admin.stockarticle');
 Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
+Route::post('/utilisateur/update/{id}', [AdminController::class, 'update'])->name('admin.utilisateur.update');
+
 
 
 //route ajout type article
@@ -43,8 +45,9 @@ Route::get('/stocksortant',[AdminController::class, 'Stocksortant'])->name('stoc
 Route::get('/listeclients',[AdminController::class, 'listeclients'])->name('liste.clients');
 //addpayement
 Route::get('/addpayement',[AdminController::class, 'ajoutpayement'])->name('add.payement');
+Route::post('/storeMethode',[AdminController::class, 'methodePaiement'])->name('store.methode');
 //ajout stock
-Route::post('/admin/stock/ajouter/{detail_article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
+Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
 
 
 // authentification admin

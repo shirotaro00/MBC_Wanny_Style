@@ -40,12 +40,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                               @foreach ($methodes as $m )
+                                                    <tr>
+                                                    <td>{{ $m->type }}</td>
+                                                    <td>{{ $m->telephone }}</td>
+                                                    <td><img src="{{ asset('assets/upload/' . $m->photo) }}"
+                                                                    width="50"</td>
 
                                                 </tr>
+                                               @endforeach
 
                                         </tbody>
                                     </table>

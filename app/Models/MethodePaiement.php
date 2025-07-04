@@ -9,9 +9,9 @@ class MethodePaiement extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'type',
         'telephone',
-        'efface',
-        'type_paiement_id'
+        'photo'
     ];
     public function TypePaiement() {
     return $this->belongsTo(TypePaiement::class, 'type_paiement_id');

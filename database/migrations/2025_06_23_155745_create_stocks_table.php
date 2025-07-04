@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->integer('quantite');
+            $table->date('date_stock');
             $table->unsignedBigInteger("article_id")->nullable();
             $table->foreign("article_id")->references("id")->on("articles")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();
