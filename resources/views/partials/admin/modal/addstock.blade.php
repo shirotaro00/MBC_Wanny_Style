@@ -1,5 +1,5 @@
 <!-- Le modal avec le formulaire -->
-@foreach ($details as $detail)
+
     <div class="modal fade" id="categorieModal" tabindex="-1" aria-labelledby="categorieModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -11,7 +11,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.ajouterStock', ['detail_article_id' => $detail->id]) }}"
+                    <form action=""
                         method="POST">
                         @csrf
                         <div class="mb-3">
@@ -28,9 +28,9 @@
                                 @endforeach --}}
                             </select>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <input type="hidden" name="detail_article_id" value="{{ $detail->id }}">
-                        </div>
+                        </div> --}}
 
                         <div class="modal-footer">
                             <button type="submit" id="sign_in" class="btn btn-success">Ajouter</button>
@@ -41,4 +41,3 @@
             </div>
         </div>
     </div>
-@endforeach

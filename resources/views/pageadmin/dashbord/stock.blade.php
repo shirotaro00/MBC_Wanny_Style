@@ -44,17 +44,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($details as $detail)
                                                 <tr>
-                                                    <td>{{ $detail->article->nom ?? 'N/A' }}</td>
-                                                    <td>{{ $detail->taille }}</td>
-                                                    <td>{{ $detail->couleur }}</td>
-                                                    <td>{{ $detail->stock->quantite ?? 0 }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td>
 
                                                     </td>
                                                 </tr>
-                                            @endforeach
 
                                         </tbody>
                                     </table>

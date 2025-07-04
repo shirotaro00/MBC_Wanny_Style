@@ -32,7 +32,7 @@
                                 <div class="container mt-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
-                                            <form action="" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <!-- Colonne gauche -->
@@ -47,13 +47,14 @@
                                                             <input type="text" class="form-control" id="prix"
                                                                 name="prix" value="{{ $article->prix }}">
                                                         </div>
+                                                        @if($article->photo)
                                                         <div class="mb-3">
                                                             <label for="photo" class="form-label">Photo</label>
-
+                                                             <p>Image actuelle:{{ $article->photo }}</p>
                                                             <input type="file" class="form-control" id="photo"
                                                                 name="photo">
                                                         </div>
-
+                                                        @endif
                                                         <div class="mb-3" style="height: 42px ; ">
                                                             <label for="categorie" class="form-label">Categories</label>
                                                             <select class="form-select form-control" id="categorie"
@@ -64,7 +65,7 @@
                                                                 <option value="femme"
                                                                     {{ $article->categorie == 'femme' ? 'selected' : '' }}>
                                                                     Femme</option>
-                                                                </select>
+                                                            </select>
                                                         </div>
 
                                                         <div class="mb-3" style="padding-top:20px">
@@ -82,14 +83,16 @@
                                                             <label for="type_article_id" class="form-label">Type article
                                                             </label>
                                                             <input type="text" class="form-control" id="prix"
-                                                                name="type_article" value="{{ $article->typeArticle->nom ?? '' }}">
+                                                                name="type_article"
+                                                                value="{{ $article->typeArticle->nom ?? '' }}">
 
                                                         </div>
                                                         <div class="mb-3" style="height:42px ;padding-top:20px;">
                                                             <label for="detail_article_id"
                                                                 class="form-label">Couleur</label>
                                                             <input type="text" class="form-control" id="prix"
-                                                                name="detail_article" value=" {{ $article->detailArticle->couleur ?? '' }}">
+                                                                name="detail_article"
+                                                                value=" {{ $article->detailArticle->couleur ?? '' }}">
 
                                                         </div>
 
@@ -97,11 +100,21 @@
                                                             <label for="taille" class="form-label">Taille</label>
                                                             <select class="form-select form-control" id="taille"
                                                                 name="taille">
-                                                                  <option value="S" {{ $article->detailArticle->taille == 'S' ? 'selected' : '' }}>S</option>
-    <option value="M" {{ $article->detailArticle->taille == 'M' ? 'selected' : '' }}>M</option>
-    <option value="L" {{ $article->detailArticle->taille == 'L' ? 'selected' : '' }}>L</option>
-    <option value="XL" {{ $article->detailArticle->taille == 'XL' ? 'selected' : '' }}>XL</option>
-    <option value="XXL" {{ $article->detailArticle->taille == 'XXL' ? 'selected' : '' }}>XXL</option>
+                                                                <option value="S"
+                                                                    {{ $article->taille == 'S' ? 'selected' : '' }}>
+                                                                    S</option>
+                                                                <option value="M"
+                                                                    {{ $article->taille == 'M' ? 'selected' : '' }}>
+                                                                    M</option>
+                                                                <option value="L"
+                                                                    {{ $article->taille == 'L' ? 'selected' : '' }}>
+                                                                    L</option>
+                                                                <option value="XL"
+                                                                    {{ $article->taille == 'XL' ? 'selected' : '' }}>
+                                                                    XL</option>
+                                                                <option value="XXL"
+                                                                    {{ $article->taille == 'XXL' ? 'selected' : '' }}>
+                                                                    XXL</option>
 
                                                             </select>
                                                         </div>
@@ -122,7 +135,7 @@
                                     </div>
                                     <div class="boutton " style="margin-bottom: 15px">
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                                            <button type="submit" class="btn btn-primary">Modifier</button>
                                         </div>
                                     </div>
                                     </form>
