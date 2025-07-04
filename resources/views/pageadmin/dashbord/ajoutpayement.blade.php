@@ -3,7 +3,7 @@
 @section('body')
     <div class="wrapper">
         @include('partials.admin.sidebar')
-        @include('partials.admin.modal.addstock')
+        @include('partials.admin.modal.addpayement')
 
         <div class="main-panel">
             @include('partials.admin.header')
@@ -21,28 +21,22 @@
                                 <div class="card-header">
 
                                     <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Stock Entrant
+                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Methode payement
                                         </h3>
 
                                     </div>
                                     <div class="d-flex justify-content-end gap-2">
 
                                         <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#categorieModal">Ajout stock</button>
+                                            data-bs-target="#payementModal">Ajout methode de payement</button>
 
                                     </div>
                                     <table class="table table-head-bg-primary mt-4">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Nom article</th>
-                                                <th scope="col">Categorie</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Taille</th>
-                                                <th scope="col">Couleur</th>
-                                                <th scope="col">Quantite</th>
-                                                <th scope="col">Date ajout</th>
-
-
+                                                <th scope="col">Type de payement</th>
+                                                <th scope="col">Numero</th>
+                                                <th scope="col">Photo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,10 +44,7 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
-                                                    <td>
 
-                                                    </td>
                                                 </tr>
 
                                         </tbody>

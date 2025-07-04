@@ -37,7 +37,12 @@ Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
 //suppresion
 Route::delete('/articles/{id}', [AdminController::class, 'destroy'])->name('articles.destroy');
-
+// stock sortant
+Route::get('/stocksortant',[AdminController::class, 'Stocksortant'])->name('stock.sortant');
+//liste clients
+Route::get('/listeclients',[AdminController::class, 'listeclients'])->name('liste.clients');
+//addpayement
+Route::get('/addpayement',[AdminController::class, 'ajoutpayement'])->name('add.payement');
 //ajout stock
 Route::post('/admin/stock/ajouter/{detail_article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
 

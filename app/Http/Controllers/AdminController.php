@@ -34,6 +34,27 @@ class AdminController extends Controller
         return view("pageadmin.dashbord.dashboard");
     }
 
+    // page sortant
+       public function Stocksortant()
+    {
+        return view("pageadmin.dashbord.stocksortant");
+    }
+
+    // liste clients
+
+       public function listeclients()
+    {
+        return view("pageadmin.dashbord.listeclients");
+    }
+
+    // addpayement
+
+       public function ajoutpayement()
+    {
+        return view("pageadmin.dashbord.ajoutpayement");
+    }
+
+
     //page modification
     public function editarticle($id)
     {
@@ -189,31 +210,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin.addarticle')->with('success', 'details article  ajouté');
     }
-    // //ajoute stock
-    // public function ajouterStock(Request $request, $detail_article_id)
-    // {
-    //     $request->validate([
-    //         'quantite' => 'required|integer|min:1',
-    //         'detail_article_id'=>'required|exists:detail_articles,id',
-    //         'article_id' => 'required|exists:articles,id',
-    //     ]);
-
-    //     $stock = Stock::where('detail_article_id', $detail_article_id)->first();
-
-    //     if ($stock) {
-    //         $stock->quantite += $request->quantite;
-    //         $stock->save();
-    //     } else {
-    //         Stock::create([
-    //             'detail_article_id' => $detail_article_id,
-    //             'quantite' => $request->quantite,
-    //         ]);
-    //     }
-    // toastify()->success('Stock ajouté avec succès ✔');
-
-    //     return back()->with('success', 'Stock ajouté avec succès.');
-    // }
-    //modification
+       //modification
     public function updateArticle(Request $request, $id)
     {
         $request->validate([

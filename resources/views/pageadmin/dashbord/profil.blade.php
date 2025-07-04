@@ -3,6 +3,7 @@
 @section('body')
     <div class="wrapper">
         @include('partials.admin.sidebar')
+        @include('partials.admin.modal.editprofil')
 
         <div class="main-panel">
             @include('partials.admin.header')
@@ -28,6 +29,8 @@
                                             <p><strong>Adresse :</strong> {{ $admin->adresse }}</p>
                                             <p><strong>Téléphone :</strong> {{ $admin->telephone }}</p>
                                         </div>
+                                         <center> <button class="btn btn-primary" style="margin-bottom: 15px" data-bs-toggle="modal"
+                                            data-bs-target="#editprofilModal">Modifier </button></center>
                                     </div>
 
 
