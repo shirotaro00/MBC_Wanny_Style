@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{{asset('assets/img/kaiadmin/favicon.ico')}}">
+    <!-- Exemple pour Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Fonts and icons -->
     <script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
     <script>
