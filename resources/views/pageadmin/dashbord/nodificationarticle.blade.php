@@ -23,14 +23,8 @@
                                 <div class="card-header">
 
                                     <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:250px;margin-top:10px">Ajout article
+                                        <h3 class="fw-bold mb-3">Modification article
                                         </h3>
-
-                                        <button class="btn btn-secondary" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#typeModal">Type article</button>
-                                        <button class="btn btn-info" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#detailsModal">Détails article</button>
-
                                     </div>
                                 </div>
 
@@ -38,8 +32,7 @@
                                 <div class="container mt-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
-                                            <form action="{{ route('articles.store') }}" method="POST"
-                                                enctype="multipart/form-data">
+                                            <form action="" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <!-- Colonne gauche -->
@@ -47,33 +40,37 @@
                                                         <div class="mb-3">
                                                             <label for="nom" class="form-label">Nom article</label>
                                                             <input type="text" class="form-control" id="nom"
-                                                                name="nom" placeholder="nom article">
+                                                                name="nom" value="{{ $article->nom }}">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="prix" class="form-label">Prix</label>
                                                             <input type="text" class="form-control" id="prix"
-                                                                name="prix" placeholder="Prix">
+                                                                name="prix" value="{{ $article->prix }}">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="photo" class="form-label">Photo</label>
+
                                                             <input type="file" class="form-control" id="photo"
-                                                                name="photo" placeholder="">
+                                                                name="photo">
                                                         </div>
 
                                                         <div class="mb-3" style="height: 42px ; ">
                                                             <label for="categorie" class="form-label">Categories</label>
                                                             <select class="form-select form-control" id="categorie"
                                                                 name="categorie">
-                                                                <option value="homme">Homme</option>
-                                                                <option value="femme">Femme</option>
-
-                                                            </select>
+                                                                <option value="homme"
+                                                                    {{ $article->categorie == 'homme' ? 'selected' : '' }}>
+                                                                    Homme</option>
+                                                                <option value="femme"
+                                                                    {{ $article->categorie == 'femme' ? 'selected' : '' }}>
+                                                                    Femme</option>
+                                                                </select>
                                                         </div>
 
                                                         <div class="mb-3" style="padding-top:20px">
                                                             <label for="prix" class="form-label">Quantité</label>
                                                             <input type="text" class="form-control" id="prix"
-                                                                name="quantite" placeholder="quantite">
+                                                                name="quantite" value="{{ $article->quantite }}">
                                                         </div>
                                                     </div>
 
@@ -84,49 +81,40 @@
                                                         <div class="mb-3" style="height: 42px ">
                                                             <label for="type_article_id" class="form-label">Type article
                                                             </label>
-                                                            <select class="form-select form-control" id="type_article_id"
-                                                                name="type_article_id">
-                                                                @foreach ($types as $type)
-                                                                    <option value="{{ $type->id }}">{{ $type->nom }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                            <input type="text" class="form-control" id="prix"
+                                                                name="type_article" value="{{ $article->typeArticle->nom ?? '' }}">
+
                                                         </div>
                                                         <div class="mb-3" style="height:42px ;padding-top:20px;">
                                                             <label for="detail_article_id"
                                                                 class="form-label">Couleur</label>
-                                                            <select class="form-select form-control" id="detail_article_id"
-                                                                name="detail_article_id">
-                                                                @foreach ($details as $detail)
-                                                                    <option value="{{ $detail->id }}">
-                                                                        {{ $detail->couleur }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                            <input type="text" class="form-control" id="prix"
+                                                                name="detail_article" value=" {{ $article->detailArticle->couleur ?? '' }}">
+
                                                         </div>
 
                                                         <div class="mb-3" style="height:42px ;padding-top:46px;">
                                                             <label for="taille" class="form-label">Taille</label>
                                                             <select class="form-select form-control" id="taille"
                                                                 name="taille">
-                                                                <option value="L">L</option>
-                                                                <option value="S">S</option>
-                                                                <option value="M">M</option>
-                                                                <option value="XL">XL</option>
-                                                                <option value="XXL">XXL</option>
+                                                                  <option value="S" {{ $article->detailArticle->taille == 'S' ? 'selected' : '' }}>S</option>
+    <option value="M" {{ $article->detailArticle->taille == 'M' ? 'selected' : '' }}>M</option>
+    <option value="L" {{ $article->detailArticle->taille == 'L' ? 'selected' : '' }}>L</option>
+    <option value="XL" {{ $article->detailArticle->taille == 'XL' ? 'selected' : '' }}>XL</option>
+    <option value="XXL" {{ $article->detailArticle->taille == 'XXL' ? 'selected' : '' }}>XXL</option>
 
                                                             </select>
                                                         </div>
 
                                                         <div class="mb-3" style="padding-top:65px;">
                                                             <label for="civilite" class="form-label">Description</label>
-                                                            <textarea class="form-control" name="description" rows="1"></textarea>
+                                                            <textarea class="form-control" name="description" rows="1">{{ $article->description }}</textarea>
                                                         </div>
 
                                                         <div class="mb-3">
                                                             <label for="date_ajout" class="form-label">Date ajout</label>
                                                             <input type="date" class="form-control" id="date_ajout"
-                                                                name="date_ajout">
+                                                                name="date_ajout" value="{{ $article->date_ajout }}">
                                                         </div>
                                                     </div>
                                                 </div>

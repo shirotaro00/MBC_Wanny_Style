@@ -34,8 +34,9 @@ class AdminController extends Controller
     }
 
     //page modification
-    public function editarticle(){
-      return view("pageadmin.dashbord.nodificationarticle");
+    public function editarticle($id){
+         $article = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
+      return view("pageadmin.dashbord.nodificationarticle",compact("article"));
     }
 
 

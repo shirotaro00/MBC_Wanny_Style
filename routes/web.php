@@ -23,7 +23,7 @@ Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
 Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.addarticle');
 Route::get('/listearticle',[AdminController::class, 'listearticle'])->name('admin.listearticle');
-Route::get('/editarticle',[AdminController::class, 'editarticle'])->name('admin.editarticle');
+Route::get('/editarticle/{id}',[AdminController::class, 'editarticle'])->name('admin.editarticle');
 Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admin.stockarticle');
 Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 
@@ -34,6 +34,7 @@ Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
 //route ajout details article
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
+//suppresion
 Route::delete('/articles/{id}', [AdminController::class, 'destroy'])->name('articles.destroy');
 
 //ajout stock
