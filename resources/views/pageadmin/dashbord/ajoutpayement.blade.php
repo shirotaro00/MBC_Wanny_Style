@@ -118,6 +118,7 @@
                                 <table class="table table-head-bg-primary mt-4">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Nom du compte</th>
                                             <th scope="col">Type</th>
                                             <th scope="col">Numero</th>
                                             <th scope="col">Photo</th>
@@ -129,6 +130,7 @@
 
                                         @foreach ($methodes as $methode)
                                             <tr>
+                                                <td>{{ $methode->nom }}</td>
                                                 <td>{{ $methode->typePaiement->type }}</td>
                                                 <td>{{ $methode->telephone }}</td>
                                                 <td>

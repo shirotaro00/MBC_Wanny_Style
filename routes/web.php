@@ -29,6 +29,7 @@ Route::get('/gestionutilisateur', [AdminController::class, 'Gestionutilisateur']
 Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admin.stockarticle');
 Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 Route::post('/utilisateur/update/{id}', [AdminController::class, 'update'])->name('admin.utilisateur.update');
+Route::post('/admin/pay/update/{id}',[AdminController::class, 'updatePay'])->name('pay.update');
 Route::post('/admin/users/gestionrole/{id}/role',[AdminController::class, 'updaterole'])->name('admin.utilisateurG.update');
 
 

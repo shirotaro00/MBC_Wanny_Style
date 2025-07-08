@@ -398,11 +398,13 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
         } else {
             $request->validate([
+                'nom'=> 'required|string',
                 'telephone' => 'required|string',
                 'type_paiement_id' => 'required|exists:type_paiements,id',
             ]);
 
             MethodePaiement::create([
+                'nom' => $request->nom,
                 'telephone' => $request->telephone,
                 'type_paiement_id' => $request->type_paiement_id,
             ]);
@@ -410,6 +412,27 @@ class AdminController extends Controller
 
             return redirect()->route('add.payement')->with('success', 'methode paiement ajouté');
         }
+    }
+      //modification pay
+    public function updatePay(Request $request, $id)
+    {
+        if (auth()->user()->role === '3') {
+            toastify()->error('Action non autorisée pour les lecteurs.');
+            return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
+        }
+
+        $request->validate([
+            'nom' => 'required|string',
+            'telephone' => 'required|string',
+        ]);
+
+        $methode = MethodePaiement::findOrFail($id);
+        $methode->nom = $request->nom;
+        $methode->telephone = $request->telephone;
+        $methode->save();
+
+        toastify()->success('Méthode de paiement mise à jour avec succès ✔');
+        return redirect()->route('add.payement')->with('success', 'Méthode de paiement mise à jour avec succès');
     }
     //update profil
     public function update(Request $request, $id)
