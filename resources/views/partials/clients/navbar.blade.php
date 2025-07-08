@@ -1,3 +1,4 @@
+
    @include("partials.clients.modal.connexion")
    <!-- Page Preloder -->
     <div id="preloder">
@@ -72,7 +73,7 @@
                         </div>
                         <ul class="header__right__widget">
 
-                            <li><a href="#"><span class="icon_bag_alt"></span>
+                            <li><a href="#"><i class="fa-solid fa-cart-shopping"></i>
                                     <div class="tip">2</div>
                                 </a></li>
                         </ul>
