@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="boutton " style="margin-bottom: 15px">
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary">Envoyer <i class="fa-solid fa-square-arrow-up-right"></i></button>
+                                            <button type="submit"  onclick="verifierAcces('{{ auth()->user()->role }}')" class="btn btn-primary">Envoyer <i class="fa-solid fa-square-arrow-up-right"></i></button>
                                         </div>
                                     </div>
                                     </form>

@@ -17,7 +17,7 @@
                     <form action="{{ route('articles.destroy', $article->id) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Oui</button>
+                        <button type="submit"  onclick="verifierAcces('{{ auth()->user()->role }}')" class="btn btn-danger btn-sm">Oui</button>
                     </form>
 
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Non</button>

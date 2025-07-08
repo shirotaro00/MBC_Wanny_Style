@@ -66,12 +66,12 @@
                                                             <td>
                                                                 <div class="d-flex gap-2">
                                                                     <a href="{{ route('admin.editarticle', $article->id) }}"
-                                                                        class="btn btn-warning btn-sm">
+                                                                        class="btn btn-warning btn-sm"  onclick="verifierAcces('{{ auth()->user()->role }}')">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
 
                                                                     <!-- Bouton qui ouvre le modal -->
-                                                                    <button type="button" style="margin-left: 10px"
+                                                                    <button type="button"style="margin-left: 10px"
                                                                         class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                                         data-bs-target="#modalDelete{{ $article->id }}">
                                                                         <i class="fas fa-trash"></i>
