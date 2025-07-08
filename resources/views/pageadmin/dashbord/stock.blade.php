@@ -28,7 +28,7 @@
                                     <div class="d-flex justify-content-end gap-2">
 
                                         <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#categorieModal">Ajout stock</button>
+                                            data-bs-target="#categorieModal"><i  class="fa-solid fa-circle-plus" style=" font-size:18px;margin-right:5px" ></i>Ajout stock</button>
 
                                     </div>
                                     <table class="table table-head-bg-primary mt-4">

@@ -24,10 +24,12 @@ Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
 Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.addarticle');
 Route::get('/listearticle',[AdminController::class, 'listearticle'])->name('admin.listearticle');
 Route::get('/editarticle/{id}',[AdminController::class, 'editarticle'])->name('admin.editarticle');
-Route::post('/admin/articles/{id}', [AdminController::class, 'updateArticle'])->name('articles.update');
+Route::get('/editarticle/{id}',[AdminController::class, 'editarticle'])->name('admin.editarticle');
+Route::get('/gestionutilisateur', [AdminController::class, 'Gestionutilisateur'])->name('admin.gutilisateur');
 Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admin.stockarticle');
 Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 Route::post('/utilisateur/update/{id}', [AdminController::class, 'update'])->name('admin.utilisateur.update');
+Route::post('/admin/users/gestionrole/{id}/role',[AdminController::class, 'updaterole'])->name('admin.utilisateurG.update');
 
 
 

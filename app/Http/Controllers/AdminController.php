@@ -42,6 +42,14 @@ class AdminController extends Controller
         return view("pageadmin.dashbord.stocksortant");
     }
 
+     // page gestion utilisateur
+    public function Gestionutilisateur()
+    {
+    $utilisateurs = User::where('role','!=','0')->get();
+
+        return view("pageadmin.dashbord.Gestionutilisateur",compact('utilisateurs'));
+    }
+
     // liste clients
 
     public function listeclients()
@@ -78,8 +86,8 @@ class AdminController extends Controller
     //page profil
     public function profil()
     {
-        $admin = Auth::user();
-        return view('pageadmin.dashbord.profil', compact('admin'));
+        $user = Auth::user();
+        return view('pageadmin.dashbord.profil', compact('user'));
     }
 
 
@@ -116,17 +124,17 @@ class AdminController extends Controller
 
 
 
-        $admin = User::create([
+        $user = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'adresse' => $request->adresse,
             'telephone' => $request->telephone,
-            'role' => '0',
+            'role' => '3',
         ]);
 
-        Auth::login($admin);
+        Auth::login($user);
 
         toastify()->success('Votre compte été créer avec succès ✔');
 
@@ -145,6 +153,10 @@ class AdminController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 0) {
+                return redirect()->route('admin.accueil');
+            }else if(Auth::user()->role == 3){
+                return redirect()->route('admin.accueil');
+            } else if(Auth::user()->role == 6){
                 return redirect()->route('admin.accueil');
             }
         } else {
@@ -368,6 +380,18 @@ class AdminController extends Controller
             'password.min' => 'le mot de passe doit contenir au moins 6 caracteres',
             'password.confirmed' => 'le mot de passe ne correspondent pas',
         ];
+    }
+    // modification role
+    public function updaterole(Request $request ,$id){
+        $request->validate(
+            [
+                'role'=>'required|in:0,3,6',
+            ]);
+            $users= User::findOrFail($id);
+            $users-> role=$request->role;
+            $users->save();
+            return redirect()->route('admin.gutilisateur')->with('success','rôle mis a jours');
+
     }
     //deconnexion
     public function logout(Request $request)

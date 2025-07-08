@@ -6,7 +6,7 @@
 
             <div class="modal-header">
                 <center>
-                    <h5 class="modal-title" id="payementModalLabel" style="color: black">Methode de payement</h5>
+                    <h5 class="modal-title" id="payementModalLabel" style="color: black">Type de paiement</h5>
                 </center>
 
             </div>
@@ -15,13 +15,10 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="Type de payement" class="form-label">Type de payement</label>
+                        <label for="Type de payement" class="form-label">Type de paiement</label>
                         <input type="text" class="form-control" id="quantite" name="type" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="numero" class="form-label">Numero</label>
-                        <input type="text" class="form-control" id="date" name="telephone" required>
-                    </div>
+
 
                       <div class="mb-3">
                         <label for="numero" class="form-label">Photo</label>
@@ -31,7 +28,7 @@
 
                     <div class="modal-footer">
                         <button type="submit" id="sign_in" class="btn btn-success">Ajouter</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                     </div>
                 </form>
             </div>

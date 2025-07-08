@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('adresse');
             $table->string('telephone');
-            $table->enum('role',['0','1']);
+            $table->enum('role',['0','1','3','6'])->default('3');
             $table->timestamps();
         });
     }

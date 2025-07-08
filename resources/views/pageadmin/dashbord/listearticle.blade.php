@@ -21,7 +21,7 @@
                                 <div class="card-header">
 
                                     <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">liste article
+                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Listes articles
                                         </h3>
 
                                     </div>

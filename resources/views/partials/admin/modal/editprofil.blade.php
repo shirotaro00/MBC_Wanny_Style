@@ -11,32 +11,32 @@
 
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.utilisateur.update', $admin->id) }}" method="POST">
+                <form action="{{ route('admin.utilisateur.update', $user->id) }}" method="POST">
                     @csrf
 
                     <div class="mb-3">
                         <label class="form-label">Nom</label>
-                        <input type="text" class="form-control" name="nom" value="{{ $admin->nom }}"
+                        <input type="text" class="form-control" name="nom" value="{{ $user->nom }}"
                             required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Prenom</label>
-                        <input type="text" class="form-control" name="prenom" value="{{ $admin->prenom }}"
+                        <input type="text" class="form-control" name="prenom" value="{{ $user->prenom }}"
                             required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Adresse</label>
-                        <input type="text" class="form-control" name="adresse" value="{{$admin->adresse }}"
+                        <input type="text" class="form-control" name="adresse" value="{{$user->adresse }}"
                             required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Téléphone</label>
                         <input type="text" class="form-control" name="telephone"
-                            value="{{ $admin->telephone }}" required>
+                            value="{{ $user->telephone }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" value="{{ $admin->email }}"
+                        <input type="email" class="form-control" name="email" value="{{ $user->email }}"
                             required>
                     </div>
                     <div class="mb-3">
@@ -46,7 +46,7 @@
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">Mettre à jour</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                     </div>
                 </form>
 

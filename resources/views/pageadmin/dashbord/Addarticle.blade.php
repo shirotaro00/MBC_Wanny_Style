@@ -26,10 +26,10 @@
                                         <h3 class="fw-bold mb-3" style="margin-right:250px;margin-top:10px">Ajout article
                                         </h3>
 
-                                        <button class="btn btn-secondary" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#typeModal">Type article</button>
-                                        <button class="btn btn-info" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#detailsModal">Détails article</button>
+                                        <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
+                                            data-bs-target="#typeModal"><i  class="fa-solid fa-circle-plus" style=" font-size:18px;margin-right:5px" ></i> Type article</button>
+                                        <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
+                                            data-bs-target="#detailsModal"><i  class="fa-solid fa-circle-plus" style=" font-size:18px;margin-right:5px" ></i>Détails article</button>
 
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="boutton " style="margin-bottom: 15px">
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                                            <button type="submit" class="btn btn-primary">Envoyer <i class="fa-solid fa-square-arrow-up-right"></i></button>
                                         </div>
                                     </div>
                                     </form>

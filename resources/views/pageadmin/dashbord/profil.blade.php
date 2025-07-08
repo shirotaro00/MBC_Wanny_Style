@@ -23,11 +23,11 @@
                                             Profil Administrateur
                                         </div>
                                         <div class="card-body">
-                                            <p><strong>Nom :</strong> {{ $admin->nom }}</p>
-                                            <p><strong>Prénom :</strong> {{ $admin->prenom }}</p>
-                                            <p><strong>Email :</strong> {{ $admin->email }}</p>
-                                            <p><strong>Adresse :</strong> {{ $admin->adresse }}</p>
-                                            <p><strong>Téléphone :</strong> {{ $admin->telephone }}</p>
+                                            <p><strong>Nom :</strong> {{ $user->nom }}</p>
+                                            <p><strong>Prénom :</strong> {{ $user->prenom }}</p>
+                                            <p><strong>Email :</strong> {{ $user->email }}</p>
+                                            <p><strong>Adresse :</strong> {{ $user->adresse }}</p>
+                                            <p><strong>Téléphone :</strong> {{ $user->telephone }}</p>
                                         </div>
                                          <center> <button class="btn btn-primary" style="margin-bottom: 15px" data-bs-toggle="modal"
                                             data-bs-target="#editprofilModal">Modifier </button></center>

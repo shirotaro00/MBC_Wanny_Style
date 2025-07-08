@@ -25,9 +25,12 @@
 			<button type="submit">Créer le compte</button>
 		</form>
 	</div>
+
 	<div class="form-container sign-in-container">
+
 		<form action="{{ route('admin.auth') }}" method="POST">
             @csrf
+
 			<h1>Connexion</h1>
 
 			<input type="email" name="email" id="email" placeholder="Email" required/>
@@ -49,6 +52,7 @@
             </script> --}}
 			</div>
 			<div class="overlay-panel overlay-right">
+
 				<h1>Bonjour !</h1>
 				<p>Saisissez vos informations personnelles et commencez votre aventure avec nous.</p>
 				<button class="ghost" id="signUp">Créer compte</button>
