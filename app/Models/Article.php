@@ -16,7 +16,6 @@ class Article extends Model
         'description',
         'photo',
         'taille',
-        'date_ajout',
         'type_article_id',
         'detail_article_id'
     ];

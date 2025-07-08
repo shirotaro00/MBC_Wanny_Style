@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Stock;
 use App\Models\Article;
 use App\Models\TypeArticle;
+use App\Models\TypePaiement;
 use Illuminate\Http\Request;
 use App\Models\DetailArticle;
 use App\Models\MethodePaiement;
-use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -62,8 +63,9 @@ class AdminController extends Controller
 
     public function ajoutpayement()
     {
-        $methodes = MethodePaiement::all();
-        return view("pageadmin.dashbord.ajoutpayement",compact('methodes'));
+        $types = TypePaiement::all();
+        $methodes = MethodePaiement::with(['typePaiement'])->get();
+        return view("pageadmin.dashbord.ajoutpayement",compact('types','methodes'));
     }
 
 
@@ -191,7 +193,6 @@ class AdminController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg',
             'description' => 'required|string',
             'taille' => 'required|in:L,M,S,XL,XXL',
-            'date_ajout' => 'required|date',
             'type_article_id' => 'required|exists:type_articles,id',
             'detail_article_id' => 'required|exists:detail_articles,id'
         ]);
@@ -206,7 +207,6 @@ class AdminController extends Controller
             'photo' => $filename,
             'description' => $request->description,
             'taille' => $request->taille,
-            'date_ajout' => $request->date_ajout,
             'type_article_id' => $request->type_article_id,
             'detail_article_id' => $request->detail_article_id
         ]);
@@ -266,8 +266,7 @@ class AdminController extends Controller
             'categorie' => $request->categorie,
             'prix' => $request->prix,
             'quantite' => $request->quantite,
-            'description' => $request->description,
-            'date_ajout' => $request->date_ajout,
+            'description' => $request->description
         ]);
 
         // Mettre à jour le type d'article
@@ -324,21 +323,35 @@ class AdminController extends Controller
 
         return redirect()->route('admin.stockarticle')->with('success', 'stock ajouté ');
     }
-    //methode paiement
-        public function methodePaiement(Request $request)
+    //type paiement
+        public function TypePaiement(Request $request)
     {
         $request->validate([
             'type' => 'required|string',
-            'telephone' =>'required|string',
             'photo' =>'required|image|mimes:jpeg,png,jpg'
         ]);
         $filename = time() . '.' . $request->photo->getClientOriginalExtension();
         $request->photo->move(public_path("assets/upload"), $filename);
 
-        MethodePaiement::create([
+        TypePaiement::create([
             'type' => $request->type,
-            'telephone'=>$request->telephone,
             'photo' => $filename,
+        ]);
+        toastify()->success('type paiement ajouté ✔');
+
+        return redirect()->route('add.payement')->with('success', 'type paiement ajouté');
+    }
+    //methode paiement
+        public function methodePaiement(Request $request)
+    {
+        $request->validate([
+            'telephone' => 'required|string',
+            'type_paiement_id' => 'required|exists:type_paiements,id',
+        ]);
+
+        MethodePaiement::create([
+            'telephone' => $request->telephone,
+            'type_paiement_id'=>$request->type_paiement_id,
         ]);
         toastify()->success('methode paiement ajouté ✔');
 

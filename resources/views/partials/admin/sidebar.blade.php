@@ -49,7 +49,7 @@
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('admin.addarticle') ? 'active' : '' }}">
                                 <a href="{{ route('admin.addarticle') }}">
-                                    <span class="sub-item">Ajoute article </span>
+                                    <span class="sub-item">Ajout article </span>
                                 </a>
                             </li>
                             <li class="{{ request()->routeIs('admin.listearticle') ? 'active' : '' }}">
@@ -129,7 +129,7 @@
                     <a data-bs-toggle="collapse" href="#payement"
                         aria-expanded="{{ request()->routeIs('add.payement') ? 'true' : 'false' }}">
                         <i class="fa-solid fa-credit-card"></i>
-                        <p>Payement</p>
+                        <p>Paiement</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse {{ request()->routeIs('add.payement') ? 'show' : '' }}" id="payement">

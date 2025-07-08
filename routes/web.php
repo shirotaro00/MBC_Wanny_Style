@@ -47,6 +47,7 @@ Route::get('/stocksortant',[AdminController::class, 'Stocksortant'])->name('stoc
 Route::get('/listeclients',[AdminController::class, 'listeclients'])->name('liste.clients');
 //addpayement
 Route::get('/addpayement',[AdminController::class, 'ajoutpayement'])->name('add.payement');
+Route::post('/storeType',[AdminController::class, 'TypePaiement'])->name('store.type');
 Route::post('/storeMethode',[AdminController::class, 'methodePaiement'])->name('store.methode');
 //ajout stock
 Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');

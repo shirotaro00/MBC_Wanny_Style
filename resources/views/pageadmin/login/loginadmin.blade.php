@@ -33,9 +33,15 @@
 
 			<h1>Connexion</h1>
 
+
 			<input type="email" name="email" id="email" placeholder="Email" required/>
 			<input type="password" name="password" id="password" placeholder="Mot de passe" required />
 
+             @if (session("error"))
+            <div class="alert alert-danger w-50" style="color: red">
+              {{ session("error") }}
+            </div>
+            @endif
 			<button type="submit">Se connecter</button>
 		</form>
 	</div>

@@ -122,12 +122,6 @@
                                                             <label for="civilite" class="form-label">Description</label>
                                                             <textarea class="form-control" name="description" rows="1"></textarea>
                                                         </div>
-
-                                                        <div class="mb-3">
-                                                            <label for="date_ajout" class="form-label">Date ajout</label>
-                                                            <input type="date" class="form-control" id="date_ajout"
-                                                                name="date_ajout">
-                                                        </div>
                                                     </div>
                                                 </div>
                                         </div>
