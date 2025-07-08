@@ -39,8 +39,10 @@ Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
 //route ajout details article
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
-//suppresion
+//suppresionarticle
 Route::delete('/articles/{id}', [AdminController::class, 'destroy'])->name('articles.destroy');
+//suppresionpay
+Route::delete('/pay/{id}', [AdminController::class, 'destroypay'])->name('pay.destroy');
 // stock sortant
 Route::get('/stocksortant',[AdminController::class, 'Stocksortant'])->name('stock.sortant');
 //liste clients

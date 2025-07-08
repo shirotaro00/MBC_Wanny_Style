@@ -311,8 +311,22 @@ class AdminController extends Controller
         } else {
             $article = Article::findOrFail($id);
             $article->delete();
-
+            toastify()->success('Article supprimé avec succès ✔');
             return redirect()->back()->with('success', 'Article supprimé avec succès.');
+        }
+    }
+
+     //suppresion pay
+    public function destroypay($id)
+    {
+        if (auth()->user()->role === '3') {
+            toastify()->error('Action non autorisée pour les lecteurs.');
+            return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
+        } else {
+            $methodes = MethodePaiement::findOrFail($id);
+            $methodes->delete();
+            toastify()->success('methode paiement supprimée ✔');
+            return redirect()->back()->with('success', 'Methode de paiement supprimée avec succès.');
         }
     }
     //ajout stock

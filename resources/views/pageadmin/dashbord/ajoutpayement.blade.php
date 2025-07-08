@@ -4,6 +4,8 @@
     <div class="wrapper">
         @include('partials.admin.sidebar')
         @include('partials.admin.modal.addpayement')
+        @include('partials.admin.modal.modifipaiement')
+        @include('partials.admin.modal.suppressionpay')
 
         <div class="main-panel">
             @include('partials.admin.header')
@@ -40,10 +42,16 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="mb-3">
+                                                                <label for="nom" class="form-label">Nom</label>
+                                                                <input type="text" class="form-control" id="numero"
+                                                                    name="nom" placeholder="Nom du compte">
+                                                            </div>
+                                                            <div class="mb-3">
                                                                 <label for="numero" class="form-label">Numero</label>
                                                                 <input type="text" class="form-control" id="numero"
                                                                     name="telephone" placeholder="numero">
                                                             </div>
+
                                                             <div class="mb-3" style="height: 42px ; ">
                                                                 <label for="categorie" class="form-label">Type de
                                                                     paiement</label>
@@ -84,7 +92,8 @@
                                         </div>
                                         <div class="boutton " style="margin-bottom: 20px">
                                             <div class="d-flex justify-content-end">
-                                                <button type="submit"  onclick="verifierAcces('{{ auth()->user()->role }}')" class="btn btn-primary">Envoyer <i
+                                                <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')"
+                                                    class="btn btn-primary">Envoyer <i
                                                         class="fa-solid fa-square-arrow-up-right"></i></button>
                                             </div>
                                         </div>
@@ -114,7 +123,6 @@
                                             <th scope="col">Photo</th>
                                             <th scope="col">Action</th>
 
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,9 +132,25 @@
                                                 <td>{{ $methode->typePaiement->type }}</td>
                                                 <td>{{ $methode->telephone }}</td>
                                                 <td>
-                                                    <img src="{{ asset('assets/upload/' . $methode->typePaiement->photo) }}" width="50">
+                                                    <img src="{{ asset('assets/upload/' . $methode->typePaiement->photo) }}"
+                                                        width="50">
                                                 </td>
-                                                <td></td>
+                                                <td>
+                                                    <div class="d-flex gap-2">
+                                                        <button type="button"style="margin-left: 10px"
+                                                            class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#editpayModal">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+
+                                                        <!-- Bouton qui ouvre le modal -->
+                                                        <button type="button"style="margin-left: 10px"
+                                                            class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#payDelete{{ $methode->id }}">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
 
                                             </tr>
                                         @endforeach
