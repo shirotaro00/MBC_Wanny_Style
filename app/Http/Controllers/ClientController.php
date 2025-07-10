@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,9 @@ class ClientController extends Controller
 {
     //page d'accueil clients
     public function accueil(){
-        return view('pageclients.Acceuil');
+
+        $articles = Article::with(['typeArticle', 'detailArticle'])->get();
+        return view('pageclients.Acceuil',compact('articles'));
     }
 //page clients deja connecte
     public function connecter(){
