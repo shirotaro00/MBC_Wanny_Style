@@ -424,12 +424,12 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
         } else {
             $request->validate([
-                'type' => 'required|string',
+                'type' => 'required|string|regex:/^[A-Za-z]+$/',
                 'photo' => 'required|image|mimes:jpeg,png,jpg'
             ],$this->messages());
             $filename = time() . '.' . $request->photo->getClientOriginalExtension();
             $request->photo->move(public_path("assets/upload"), $filename);
-   $type = collect(explode(' ', strtolower($request->input('nom'))))
+   $type = collect(explode(' ', strtolower($request->input('type'))))
                 ->map(fn($mot) => ucfirst($mot))
                 ->implode(' ');
             TypePaiement::create([
@@ -449,7 +449,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
         } else {
             $request->validate([
-                'nom' => 'required|string',
+                'nom' => 'required|string|regex:/^[A-Za-z]+$/',
                 'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
                 'type_paiement_id' => 'required|exists:type_paiements,id',
           ],$this->messages());
@@ -477,9 +477,9 @@ class AdminController extends Controller
         }
 
         $request->validate([
-            'nom' => 'required|string',
+            'nom' => 'required|string|regex:/^[A-Za-z]+$/',
             'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
-        ]);
+         ],$this->messages());
 
         $methode = MethodePaiement::findOrFail($id);
         $methode->nom = $request->nom;
@@ -499,7 +499,7 @@ class AdminController extends Controller
             'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
             'email' => 'required|email',
             'password' => 'nullable|string|min:6',
-        ]);
+          ],$this->messages());
 
         $utilisateur = User::findOrFail($id);
 
@@ -542,7 +542,19 @@ class AdminController extends Controller
 
             'type.regex' => 'Entrez un type valide',
             'type.required' => 'Le type est obligatoire',
+            //pay
+            'nom.required' => 'Le nom est obligatoire',
+            'nom.regex' => 'Entrez un nom valide',
+            'telephone.required' => 'Le téléphone est obligatoire',
 
+            //
+            'photo.required' => 'La photo est obligatoire',
+            'photo.image' => 'La photo doit être une image',
+            'photo.mimes' => 'La photo doit être au format jpeg, png ou jpg',
+            'photo.max' => 'La photo ne doit pas dépasser 2 Mo',
+
+            'prenom.required' => 'Le prénom est obligatoire',
+            'prenom.string' => 'Le prénom doit être une chaîne de caractères',
 
 
         ];

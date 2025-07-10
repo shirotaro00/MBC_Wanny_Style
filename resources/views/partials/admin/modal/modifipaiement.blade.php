@@ -13,11 +13,23 @@
                         @csrf
                         <div class="mb-3">
                             <label for="nom{{ $methode->id }}" class="form-label">Nom du compte</label>
-                            <input type="text" class="form-control" id="nom{{ $methode->id }}" name="nom" value="{{ $methode->nom }}" placeholder="Nom du compte" required>
+                            <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom{{ $methode->id }}" name="nom" value="{{ $methode->nom }}" placeholder="Nom du compte" required>
+
+                            @error('nom')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="telephone{{ $methode->id }}" class="form-label">Numéro</label>
-                            <input type="text" class="form-control" id="telephone{{ $methode->id }}" name="telephone" value="{{ $methode->telephone }}" placeholder="Numéro du compte" required>
+                            <input type="text" class="form-control @error('telephone') is-invalid @enderror" id="telephone{{ $methode->id }}" name="telephone" value="{{ $methode->telephone }}" placeholder="Numéro du compte" required>
+
+                            @error('telephone')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="modal-footer">
                             <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')" id="sign_in" class="btn btn-success">Modifier</button>

@@ -35,7 +35,7 @@
                                             <form action="{{ route('admin.editarticle1', $article->id) }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
-@method('PUT')
+                                                @method('PUT')
                                                 <div class="row">
                                                     <!-- Colonne gauche -->
                                                     <div class="col-md-6">
@@ -60,8 +60,14 @@
                                                             <div class="mb-3">
                                                                 <label for="photo" class="form-label">Photo</label>
                                                                 <p>Image actuelle:{{ $article->photo }}</p>
-                                                                <input type="file" class="form-control" id="photo"
-                                                                    name="photo">
+                                                                <input type="file"
+                                                                    class="form-control @error('photo') is-invalid @enderror"
+                                                                    id="photo" name="photo">
+                                                                @error('photo')
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
                                                         @endif
                                                         <div class="mb-3" style="height: 42px ; ">
@@ -106,10 +112,15 @@
                                                         <div class="mb-3" style="height:42px ;padding-top:20px;">
                                                             <label for="detail_article_id"
                                                                 class="form-label">Couleur</label>
-                                                            <input type="text" class="form-control" id="prix"
-                                                                name="detail_article"
+                                                            <input type="text"
+                                                                class="form-control @error('couleur') is-invalid @enderror"
+                                                                id="couleur" name="detail_article"
                                                                 value=" {{ $article->detailArticle->couleur ?? '' }}">
-
+                                                            @error('couleur')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                         </div>
 
                                                         <div class="mb-3" style="height:42px ;padding-top:46px;">

@@ -43,13 +43,23 @@
                                                         <div class="col-md-6">
                                                             <div class="mb-3">
                                                                 <label for="nom" class="form-label">Nom</label>
-                                                                <input type="text" class="form-control" id="numero"
+                                                                <input type="text"  class="form-control @error('nom') is-invalid @enderror" id="nom"
                                                                     name="nom" placeholder="Nom du compte">
+                                                                            @error('nom')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="numero" class="form-label">Numero</label>
-                                                                <input type="text" class="form-control" id="numero"
+                                                                <input type="text" class="form-control @error('telephone') is-invalid @enderror" id="numero"
                                                                     name="telephone" placeholder="numero">
+                                                                            @error('telephone')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                             </div>
 
                                                             <div class="mb-3" style="height: 42px ; ">
@@ -167,3 +177,24 @@
         </div>
     </div>
 @endsection
+
+@if ($errors->any())
+    <script>
+        // Quand la page est chargée, si erreurs => afficher le modal
+        document.addEventListener('DOMContentLoaded', function () {
+            let myModal = new bootstrap.Modal(document.getElementById('payementModal'));
+            myModal.show();
+        });
+    </script>
+@endif
+
+@if ($errors->any())
+    <script>
+        // Quand la page est chargée, si erreurs => afficher le modal
+        document.addEventListener('DOMContentLoaded', function () {
+            let myModal = new bootstrap.Modal(document.getElementById('editpayModal'));
+            myModal.show();
+        });
+    </script>
+@endif
+

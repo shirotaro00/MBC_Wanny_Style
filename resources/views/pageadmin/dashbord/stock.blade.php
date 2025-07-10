@@ -70,3 +70,17 @@
             </div>
         </div>
     @endsection
+
+    @if ($errors->any())
+    <script>
+        // Quand la page est chargée, si erreurs => afficher le modal
+        document.addEventListener('DOMContentLoaded', function () {
+            let myModal = new bootstrap.Modal(document.getElementById('categorieModal'), {
+                keyboard: false
+            });
+            myModal.show();
+        });
+    </script>
+@endif
+
+

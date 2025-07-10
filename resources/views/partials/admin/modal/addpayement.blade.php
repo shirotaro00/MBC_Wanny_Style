@@ -16,16 +16,29 @@
 
                     <div class="mb-3">
                         <label for="Type de payement" class="form-label">Type de paiement</label>
-                        <input type="text" class="form-control" id="quantite" name="type" required>
+                        <input type="text" class="form-control @error('type') is-invalid @enderror" id="type"
+                            name="type" required>
+                        @error('type')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                      <div class="mb-3">
+                    <div class="mb-3">
                         <label for="numero" class="form-label">Photo</label>
-                        <input type="file" class="form-control" id="photo" name="photo" required>
+                        <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
+                            name="photo" required>
+                        @error('photo')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
 
                     <div class="modal-footer">
-                        <button type="submit"  onclick="verifierAcces('{{ auth()->user()->role }}')" id="sign_in" class="btn btn-success">Ajouter</button>
+                        <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')" id="sign_in"
+                            class="btn btn-success">Ajouter</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
                     </div>
                 </form>

@@ -71,8 +71,14 @@
                                                         {{-- photo --}}
                                                         <div class="mb-3">
                                                             <label for="photo" class="form-label">Photo</label>
-                                                            <input type="file" class="form-control" id="photo"
+                                                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
                                                                 name="photo" placeholder="">
+
+                                                            @error('photo')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                         </div>
                                                            {{-- Categories --}}
                                                         <div class="mb-3" style="height: 42px ; ">
@@ -168,4 +174,38 @@
         </div>
     </div>
     </div>
+@endsection
+@if ($errors->any())
+    <script>
+        // Quand la page est chargée, si erreurs => afficher le modal
+        document.addEventListener('DOMContentLoaded', function () {
+            let myModal = new bootstrap.Modal(document.getElementById('typeModal'), {
+                keyboard: false
+            });
+            myModal.show();
+        });
+    </script>
+@endif
+@if ($errors->any())
+    <script>
+        // Quand la page est chargée, si erreurs => afficher le modal
+        document.addEventListener('DOMContentLoaded', function () {
+            let myModal = new bootstrap.Modal(document.getElementById('detailsModal'), {
+                keyboard: false
+            });
+            myModal.show();
+        });
+    </script>
+@endif
+
+@section('scripts')
+    <script>
+        // Fonction pour vérifier le rôle de l'utilisateur
+        function verifierAcces(role) {
+            if (role !== '0') {
+                alert('Action non autorisée pour les lecteurs.');
+                event.preventDefault(); // Empêche l'envoi du formulaire
+            }
+        }
+    </script>
 @endsection
