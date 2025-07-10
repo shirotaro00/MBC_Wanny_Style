@@ -121,26 +121,36 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
             'adresse' => 'required|string',
-            'telephone' => 'required|string',
+            'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
         ], $this->messages());
 
+        // Corriger automatiquement la casse si besoin
+        $nom = collect(explode(' ', strtolower($request->input('nom'))))
+            ->map(fn($mot) => ucfirst($mot))
+            ->implode(' ');
+        $prenom = collect(explode(' ', strtolower($request->input('prenom'))))
+            ->map(fn($mot) => ucfirst($mot))
+            ->implode(' ');
+        $adresse = collect(explode(' ', strtolower($request->input('adresse'))))
+            ->map(fn($mot) => ucfirst($mot))
+            ->implode(' ');
 
 
         $user = User::create([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
+            'nom' => $nom,
+            'prenom' => $prenom,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'adresse' => $request->adresse,
+            'adresse' => $adresse,
             'telephone' => $request->telephone,
             'role' => '3',
         ]);
 
         Auth::login($user);
 
-        toastify()->success('Votre compte été créer avec succès ✔');
+        toastify()->success('Votre compte a été créé avec succès ✔');
 
-        return redirect()->route('admin.accueil')->with('success', 'Votre compte été créer avec succès');
+        return redirect()->route('admin.accueil')->with('success', 'Votre compte a été créé avec succès');
     }
     //connexion admin
     public function login(Request $request)
@@ -174,11 +184,19 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
         } else {
             $request->validate([
-                'nom' => 'required|string',
-            ]);
+                'type' => [
+                    'required',
+                    'string',
+                    'regex:/^[\pL\s\-\'’]+$/u',
+                ],
+            ], $this->messages());
 
+            // Corriger automatiquement la casse si besoin
+            $type = collect(explode(' ', strtolower($request->input('type'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
             TypeArticle::create([
-                'nom' => $request->nom,
+                'type' => $type,
             ]);
             toastify()->success('Type article  ajouté ✔');
 
@@ -196,7 +214,7 @@ class AdminController extends Controller
         } else {
             $request->validate([
                 'nom' => 'required|string',
-                'categorie' => 'required|in:homme,femme',
+                'categorie' => 'required|string',
                 'prix' => 'required|integer|min:0',
                 'quantite' => 'required|integer|min:0',
                 'photo' => 'required|image|mimes:jpeg,png,jpg',
@@ -204,21 +222,33 @@ class AdminController extends Controller
                 'taille' => 'required|in:L,M,S,XL,XXL',
                 'type_article_id' => 'required|exists:type_articles,id',
                 'detail_article_id' => 'required|exists:detail_articles,id'
-            ]);
+            ], $this->messages());
+
             $filename = time() . '.' . $request->photo->getClientOriginalExtension();
             $request->photo->move(public_path("assets/upload"), $filename);
 
+            $nom = collect(explode(' ', strtolower($request->input('nom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+            $categorie = collect(explode(' ', strtolower($request->input('categorie'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+            $description = collect(explode(' ', strtolower($request->input('description'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+
             Article::create([
-                'nom' => $request->nom,
-                'categorie' => $request->categorie,
+                'nom' => $nom,
+                'categorie' => $categorie,
                 'prix' => $request->prix,
                 'quantite' => $request->quantite,
                 'photo' => $filename,
-                'description' => $request->description,
+                'description' => $description,
                 'taille' => $request->taille,
                 'type_article_id' => $request->type_article_id,
                 'detail_article_id' => $request->detail_article_id
             ]);
+
             toastify()->success('article  ajouté ✔');
 
             return redirect()->route('admin.addarticle')->with('success', 'article  ajouté');
@@ -232,12 +262,19 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
         } else {
             $request->validate([
-                'couleur' => 'string',
-            ]);
-
+                'couleur' => [
+                    'required',
+                    'string',
+                    'regex:/^(rouge|bleu|vert|noir|blanc|gris|grenat|jaune|orange|marron|violet|rose)$/i',
+                ]
+            ], $this->messages());
+            $couleur = collect(explode(' ', strtolower($request->input('couleur'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
             DetailArticle::create([
-                'couleur' => $request->couleur,
-            ]);
+                'couleur' => $couleur,
+            ])->save();
+
             toastify()->success('details article  ajouté ✔');
 
             return redirect()->route('admin.addarticle')->with('success', 'details article  ajouté');
@@ -252,16 +289,15 @@ class AdminController extends Controller
         } else {
             $request->validate([
                 'nom' => 'required|string',
-                'categorie' => 'required|in:homme,femme',
+                'categorie' => 'required|string',
                 'prix' => 'required|integer|min:0',
-                'quantite' => 'required|integer|min:0',
+                'quantite' => 'required|integer',
                 'description' => 'required|string',
-                'date_ajout' => 'required|date',
                 'photo' => 'nullable|image|mimes:jpg,png,jpeg',
                 'taille' => 'required|string',
                 'type_article' => 'required|string',
                 'detail_article' => 'required|string',
-            ]);
+            ],$this->messages());
 
             $article = Article::findOrFail($id);
 
@@ -279,17 +315,29 @@ class AdminController extends Controller
                 $article->photo = $filename;
             }
 
+
+            // Corriger automatiquement la casse si besoin
+            $nom = collect(explode(' ', strtolower($request->input('nom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+            $categorie = collect(explode(' ', strtolower($request->input('categorie'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+            $description = collect(explode(' ', strtolower($request->input('description'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
             // Mise à jour des champs
             $article->update([
-                'nom' => $request->nom,
-                'categorie' => $request->categorie,
+                'nom' => $nom,
+                'categorie' => $categorie,
                 'prix' => $request->prix,
                 'quantite' => $request->quantite,
-                'description' => $request->description
+                'description' => $description,
+                'taille' => $request->taille,
             ]);
 
             // Mettre à jour le type d'article
-            $type = TypeArticle::firstOrCreate(['nom' => $request->type_article]);
+            $type = TypeArticle::firstOrCreate(['type' => $request->type_article]);
             $article->type_article_id = $type->id;
 
             // Mettre à jour le détail de l'article
@@ -316,7 +364,7 @@ class AdminController extends Controller
         }
     }
 
-     //suppresion pay
+    //suppresion pay
     public function destroypay($id)
     {
         if (auth()->user()->role === '3') {
@@ -338,9 +386,10 @@ class AdminController extends Controller
         } else {
             $request->validate([
                 'quantite' => 'required|integer|min:0',
-                'date_stock' => 'required|date',
+                'date_stock' => 'required',
+                'date_format:Y-m-d',
                 'article_id' => 'required|exists:articles,id'
-            ]);
+           ],$this->messages());
 
             $stock = Stock::where('article_id', $article_id)->first();
 
@@ -377,12 +426,14 @@ class AdminController extends Controller
             $request->validate([
                 'type' => 'required|string',
                 'photo' => 'required|image|mimes:jpeg,png,jpg'
-            ]);
+            ],$this->messages());
             $filename = time() . '.' . $request->photo->getClientOriginalExtension();
             $request->photo->move(public_path("assets/upload"), $filename);
-
+   $type = collect(explode(' ', strtolower($request->input('nom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
             TypePaiement::create([
-                'type' => $request->type,
+                'type' => $type,
                 'photo' => $filename,
             ]);
             toastify()->success('type paiement ajouté ✔');
@@ -398,13 +449,17 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
         } else {
             $request->validate([
-                'nom'=> 'required|string',
-                'telephone' => 'required|string',
+                'nom' => 'required|string',
+                'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
                 'type_paiement_id' => 'required|exists:type_paiements,id',
-            ]);
+          ],$this->messages());
+
+           $nom = collect(explode(' ', strtolower($request->input('nom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
 
             MethodePaiement::create([
-                'nom' => $request->nom,
+                'nom' => $nom,
                 'telephone' => $request->telephone,
                 'type_paiement_id' => $request->type_paiement_id,
             ]);
@@ -413,7 +468,7 @@ class AdminController extends Controller
             return redirect()->route('add.payement')->with('success', 'methode paiement ajouté');
         }
     }
-      //modification pay
+    //modification pay
     public function updatePay(Request $request, $id)
     {
         if (auth()->user()->role === '3') {
@@ -423,7 +478,7 @@ class AdminController extends Controller
 
         $request->validate([
             'nom' => 'required|string',
-            'telephone' => 'required|string',
+            'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
         ]);
 
         $methode = MethodePaiement::findOrFail($id);
@@ -441,7 +496,7 @@ class AdminController extends Controller
             'nom' => 'required|string',
             'prenom' => 'required|string',
             'adresse' => 'required|string',
-            'telephone' => 'required|string',
+            'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
             'email' => 'required|email',
             'password' => 'nullable|string|min:6',
         ]);
@@ -466,9 +521,30 @@ class AdminController extends Controller
     public function messages()
     {
         return [
-            'password.required' => 'le mot de passe est obligatoire',
-            'password.min' => 'le mot de passe doit contenir au moins 6 caracteres',
-            'password.confirmed' => 'le mot de passe ne correspondent pas',
+            //Inscription login lecteur
+            'password.required' => 'Le mot de passe est obligatoire',
+            'password.min' => 'Le mot de passe doit contenir au moins 6 caracteres',
+            'password.confirmed' => 'Le mot de passe ne correspondent pas',
+            'telephone.regex' => 'Utilise numero valide',
+            'email' => 'Entrez une email valide',
+            'adresse.regex' => 'Entrez un adresse valide',
+
+            //Article ajout
+            'prix.required' => 'Le prix est obligatoire.',
+            'prix.integer' => 'Le prix doit être un nombre entier.',
+            'prix.min' => 'Le prix ne peut pas être négatif.',
+            'couleur.regex' => 'Entrez un couleur valide',
+            'couleur.required' => 'La couleur est obligatoire',
+
+            'quantite.required' => 'La quantité est obligatoire.',
+            'quantite.integer' => 'La quantité doit être un nombre entier.',
+            'quantite.min' => 'La quantité ne peut pas être négative.',
+
+            'type.regex' => 'Entrez un type valide',
+            'type.required' => 'Le type est obligatoire',
+
+
+
         ];
     }
     // modification role

@@ -9,7 +9,7 @@ class TypeArticle extends Model
 {
     use HasFactory;
       protected $fillable = [
-        'nom',
+        'type',
     ];
 
 public function ArticleCategorie()

@@ -22,8 +22,8 @@
                             <div class="card">
                                 <div class="card-header">
 
-                              <div class="d-flex justify-content-end gap-2">
-                                  <h3 class="fw-bold mb-3" style="margin-right:400px;"> Modification article
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <h3 class="fw-bold mb-3" style="margin-right:400px;"> Modification article
                                         </h3>
                                     </div>
                                 </div>
@@ -32,8 +32,10 @@
                                 <div class="container mt-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
-                                            <form action="{{ route('articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('admin.editarticle1', $article->id) }}" method="POST"
+                                                enctype="multipart/form-data">
                                                 @csrf
+@method('PUT')
                                                 <div class="row">
                                                     <!-- Colonne gauche -->
                                                     <div class="col-md-6">
@@ -44,16 +46,23 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="prix" class="form-label">Prix</label>
-                                                            <input type="text" class="form-control" id="prix"
-                                                                name="prix" value="{{ $article->prix }}">
+                                                            <input
+                                                                type="text"class="form-control @error('prix') is-invalid @enderror"
+                                                                id="prix" name="prix" value="{{ $article->prix }}">
+                                                            @error('prix')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+
                                                         </div>
-                                                        @if($article->photo)
-                                                        <div class="mb-3">
-                                                            <label for="photo" class="form-label">Photo</label>
-                                                             <p>Image actuelle:{{ $article->photo }}</p>
-                                                            <input type="file" class="form-control" id="photo"
-                                                                name="photo">
-                                                        </div>
+                                                        @if ($article->photo)
+                                                            <div class="mb-3">
+                                                                <label for="photo" class="form-label">Photo</label>
+                                                                <p>Image actuelle:{{ $article->photo }}</p>
+                                                                <input type="file" class="form-control" id="photo"
+                                                                    name="photo">
+                                                            </div>
                                                         @endif
                                                         <div class="mb-3" style="height: 42px ; ">
                                                             <label for="categorie" class="form-label">Categories</label>
@@ -69,9 +78,16 @@
                                                         </div>
 
                                                         <div class="mb-3" style="padding-top:20px">
-                                                            <label for="prix" class="form-label">Quantité</label>
-                                                            <input type="text" class="form-control" id="prix"
-                                                                name="quantite" value="{{ $article->quantite }}">
+                                                            <label for="quantite" class="form-label">Quantité</label>
+                                                            <input type="text"
+                                                                class="form-control @error('quantite') is-invalid @enderror"
+                                                                id="quantite" name="quantite"
+                                                                value="{{ $article->quantite }}">
+                                                            @error('quantite')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
                                                         </div>
                                                     </div>
 
@@ -82,9 +98,9 @@
                                                         <div class="mb-3" style="height: 42px ">
                                                             <label for="type_article_id" class="form-label">Type article
                                                             </label>
-                                                            <input type="text" class="form-control" id="prix"
+                                                            <input type="text" class="form-control" id="type_article_id"
                                                                 name="type_article"
-                                                                value="{{ $article->typeArticle->nom ?? '' }}">
+                                                                value="{{ $article->typeArticle->type ?? '' }}">
 
                                                         </div>
                                                         <div class="mb-3" style="height:42px ;padding-top:20px;">
@@ -124,11 +140,6 @@
                                                             <textarea class="form-control" name="description" rows="1">{{ $article->description }}</textarea>
                                                         </div>
 
-                                                        <div class="mb-3">
-                                                            <label for="date_ajout" class="form-label">Date ajout</label>
-                                                            <input type="date" class="form-control" id="date_ajout"
-                                                                name="date_ajout" value="{{ $article->date_ajout }}">
-                                                        </div>
                                                     </div>
                                                 </div>
                                         </div>

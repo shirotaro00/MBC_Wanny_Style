@@ -23,7 +23,7 @@ Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
 Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.addarticle');
 Route::get('/listearticle',[AdminController::class, 'listearticle'])->name('admin.listearticle');
-Route::get('/editarticle/{id}',[AdminController::class, 'editarticle'])->name('admin.editarticle');
+Route::put('/editarticle/{id}',[AdminController::class, 'updateArticle'])->name('admin.editarticle1');
 Route::get('/editarticle/{id}',[AdminController::class, 'editarticle'])->name('admin.editarticle');
 Route::get('/gestionutilisateur', [AdminController::class, 'Gestionutilisateur'])->name('admin.gutilisateur');
 Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admin.stockarticle');

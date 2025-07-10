@@ -15,7 +15,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="couleur" class="form-label">Couleur</label>
-                        <input type="text" class="form-control" id="couleur" name="couleur" required>
+                        <input type="text" class="form-control @error('couleur') is-invalid @enderror" id="couleur" name="couleur" placeholder="@error('couleur'){{ $message }}@else Couleur @enderror" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')"  id="sign_in" class="btn btn-success">Ajouter</button>

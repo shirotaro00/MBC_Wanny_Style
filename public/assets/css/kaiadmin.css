@@ -132,6 +132,11 @@ p {
   margin-bottom: 1rem;
   word-break: break-word; }
 
+  .is-invalid::placeholder {
+  color: #dc3545;  /* rouge Bootstrap danger */
+  opacity: 1;      /* certains navigateurs mettent un placeholder plus clair par défaut */
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   line-height: 1.5; }
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, .h1 a, .h2 a, .h3 a, .h4 a, .h5 a, .h6 a {

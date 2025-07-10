@@ -51,7 +51,7 @@
                                                     @foreach ($articles as $article)
                                                         <tr>
                                                             <td>{{ $article->nom }}</td>
-                                                            <td>{{ $article->typeArticle->nom ?? 'N/A' }}</td>
+                                                            <td>{{ $article->typeArticle->type ?? 'N/A' }}</td>
                                                             <td>{{ $article->categorie }}</td>
                                                             <td>{{ $article->taille }}</td>
                                                             <td>{{ $article->detailArticle->couleur ?? 'N/A' }}</td>

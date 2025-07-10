@@ -14,8 +14,9 @@
                 <form action="{{ route('create.type') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="nom" class="form-label">Type article</label>
-                        <input type="text" class="form-control" id="nom" name="nom" required>
+                        <label for="Type" class="form-label">Type article</label>
+                        <input type="text" class="form-control @error('type') is-invalid @enderror"
+                         id="type" name="type" placeholder="@error('type'){{ $message }}@else Type article @enderror" required>
                     </div>
 
                     <div class="modal-footer">
