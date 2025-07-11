@@ -16,6 +16,13 @@ class ClientController extends Controller
         $articles = Article::with(['typeArticle', 'detailArticle'])->get();
         return view('pageclients.Acceuil',compact('articles'));
     }
+    //page article clients
+    public function article(){
+
+        $articles = Article::with(['typeArticle', 'detailArticle'])->get();
+        return view('pageclients.Article',compact('articles'));
+    }
+
 //page clients deja connecte
     public function connecter(){
         return view('pageclients.Acceuil');
