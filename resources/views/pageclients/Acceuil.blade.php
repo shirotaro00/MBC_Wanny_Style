@@ -407,3 +407,40 @@
 @endsection
 @section("script")
 @endsection
+
+
+{{-- Modal d’inscription (forminscription) --}}
+@if (
+    $errors->has('nom') ||
+    $errors->has('prenom') ||
+    $errors->has('telephone') ||
+    $errors->has('adresse') ||
+    $errors->has('password')
+)
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let forminscription = new bootstrap.Modal(document.getElementById('forminscription'), {
+                keyboard: false
+            });
+            forminscription.show();
+        });
+    </script>
+@endif
+
+{{-- Modal de connexion (formModal) --}}
+@if (
+    $errors->has('email') ||
+    ($errors->has('password') && old('form_type') === 'login')
+)
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let formModal = new bootstrap.Modal(document.getElementById('formModal'), {
+                keyboard: false
+            });
+            formModal.show();
+        });
+    </script>
+@endif
+
+
+

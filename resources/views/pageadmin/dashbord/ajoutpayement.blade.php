@@ -178,7 +178,7 @@
     </div>
 @endsection
 
-@if ($errors->any())
+@if ($errors->has('type') || $errors->has('photo') )
     <script>
         // Quand la page est chargée, si erreurs => afficher le modal
         document.addEventListener('DOMContentLoaded', function () {
@@ -188,7 +188,7 @@
     </script>
 @endif
 
-@if ($errors->any())
+@if ($errors->has('nom') || $errors->has('telephone'))
     <script>
         // Quand la page est chargée, si erreurs => afficher le modal
         document.addEventListener('DOMContentLoaded', function () {

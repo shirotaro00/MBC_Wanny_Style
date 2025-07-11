@@ -175,37 +175,28 @@
     </div>
     </div>
 @endsection
-@if ($errors->any())
+
+@if ($errors->has('type'))
     <script>
-        // Quand la page est chargée, si erreurs => afficher le modal
         document.addEventListener('DOMContentLoaded', function () {
-            let myModal = new bootstrap.Modal(document.getElementById('typeModal'), {
+            let typeModal = new bootstrap.Modal(document.getElementById('typeModal'), {
                 keyboard: false
             });
-            myModal.show();
-        });
-    </script>
-@endif
-@if ($errors->any())
-    <script>
-        // Quand la page est chargée, si erreurs => afficher le modal
-        document.addEventListener('DOMContentLoaded', function () {
-            let myModal = new bootstrap.Modal(document.getElementById('detailsModal'), {
-                keyboard: false
-            });
-            myModal.show();
+            typeModal.show();
         });
     </script>
 @endif
 
-@section('scripts')
+@if ($errors->has('couleur'))
     <script>
-        // Fonction pour vérifier le rôle de l'utilisateur
-        function verifierAcces(role) {
-            if (role !== '0') {
-                alert('Action non autorisée pour les lecteurs.');
-                event.preventDefault(); // Empêche l'envoi du formulaire
-            }
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            let detailsModal = new bootstrap.Modal(document.getElementById('detailsModal'), {
+                keyboard: false
+            });
+            detailsModal.show();
+        });
     </script>
-@endsection
+@endif
+
+
+

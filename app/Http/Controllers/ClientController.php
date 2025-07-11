@@ -29,7 +29,7 @@ class ClientController extends Controller
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6|confirmed',
         'adresse' => 'required|string',
-        'telephone' => 'required|string',
+        'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
     ] ,$this->messages());
 
     $clients = User::create([
@@ -54,7 +54,7 @@ class ClientController extends Controller
             "email"=>["required","email"],
             "password"=>["required"]
 
-        ]);
+      ], $this->messages());
 
             if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -72,6 +72,18 @@ class ClientController extends Controller
             'password.required' => 'le mot de passe est obligatoire',
             'password.min' => 'le mot de passe doit contenir au moins 6 caracteres',
             'password.confirmed' => 'le mot de passe ne correspondent pas',
+            'telephone.regex' => 'le numéro de téléphone valide',
+            'email.unique' => 'l\'email est déjà utilisé',
+            'email.required' => 'l\'email est obligatoire',
+            'email.email' => 'l\'email doit être une adresse email valide',
+            'nom.required' => 'le nom est obligatoire',
+            'prenom.required' => 'le prénom est obligatoire',
+            'adresse.required' => 'l\'adresse est obligatoire',
+            'telephone.required' => 'le numéro de téléphone est obligatoire',
+            'nom.string' => 'le nom doit être une chaîne de caractères',
+            'prenom.string' => 'le prénom doit être une chaîne de caractères',
+            'adresse.string' => 'l\'adresse doit être une chaîne de caractères',
+
         ];
     }
 
