@@ -1,4 +1,4 @@
-
+@include('partials.clients.modal.inscription')
    @include("partials.clients.modal.connexion")
    <!-- Page Preloder -->
     <div id="preloder">

@@ -70,7 +70,12 @@ class ClientController extends Controller
             }
             }
             else {
-                return redirect()->back()->with("error", "email ou mot de passe incorrect");
+                    return redirect()->back()
+        ->withInput()
+        ->with([
+            'login_error' => 'Email ou mot de passe incorrect.',
+            'form_type' => 'login'
+        ]);
             }
      }
          public function messages()

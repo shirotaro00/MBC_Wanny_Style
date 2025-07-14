@@ -15,6 +15,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
+
                 <form id="contactForm" action="{{ route('client.auth') }}" method="POST">
                     @csrf
                     <div class="mb-3">
@@ -49,5 +50,15 @@
 </div>
 
 
-
+@if ( $errors->any())
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modalElement = document.getElementById('formModal');
+            if (modalElement) {
+                var myModal = bootstrap.Modal.getOrCreateInstance(modalElement);
+                myModal.show();
+            }
+        });
+    </script>
+@endif
 
