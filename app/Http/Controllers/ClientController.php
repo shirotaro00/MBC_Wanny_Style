@@ -51,13 +51,24 @@ class ClientController extends Controller
         'adresse' => 'required|string|regex:/^(?!\d+$).+$/',
         'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
     ] ,$this->message());
+    // Corriger automatiquement la casse si besoin
+            $nom = collect(explode(' ', strtolower($request->input('nom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+ $prenom = collect(explode(' ', strtolower($request->input('prenom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+                 $adresse = collect(explode(' ', strtolower($request->input('adresse'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+
 
     $clients = User::create([
-        'nom' => $request->nom,
-        'prenom' => $request->prenom,
+        'nom' => $nom,
+        'prenom' => $prenom,
         'email' => $request->email,
         'password' => Hash::make($request->password),
-        'adresse' => $request->adresse,
+        'adresse' => $adresse,
         'telephone' => $request->telephone,
         'role' => '1',
     ]);

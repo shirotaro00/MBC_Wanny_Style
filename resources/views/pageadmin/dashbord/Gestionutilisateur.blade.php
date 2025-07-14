@@ -42,6 +42,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($utilisateurs as $user)
+                                            @if ($user->role == 3)
                                                 <tr>
                                                     <td> {{ $user->nom }} </td>
                                                     <td>{{ $user->prenom }}</td>
@@ -82,6 +83,7 @@
                                                     </td>
                                                 </tr>
                                                 </form>
+                                                @endif
                                             @endforeach
 
 

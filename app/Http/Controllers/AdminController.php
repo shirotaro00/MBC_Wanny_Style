@@ -46,6 +46,7 @@ class AdminController extends Controller
     // page gestion utilisateur
     public function Gestionutilisateur()
     {
+        $utilisateurs = User::where('role', 3)->get();
         $utilisateurs = User::where('role', '!=', '0')->get();
 
         return view("pageadmin.dashbord.Gestionutilisateur", compact('utilisateurs'));
