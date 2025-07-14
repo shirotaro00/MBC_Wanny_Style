@@ -65,34 +65,42 @@
                         </div>
                         <div class="product__details__widget">
                             <ul>
+
                                 <li>
-                                    <span>Stock disponible: {{ $articles->quantite }}</span>
-                                </li> <br>
+                                    <span>Stock disponible :</span>
+                                    <div class="stock">
+
+                                        @if ($articles->quantite > 0)
+                                            <span class="text-success">{{ $articles->quantite }} en stock</span>
+                                        @else
+                                            <span class="text-danger">Rupture de stock</span>
+                                        @endif
+                                    </div>
+                                </li>
 
                                 <li>
                                     <span>Couleur disponible :</span>
-                                    <div class="color__checkbox">
-                                        @foreach ($couleursDispo as $nomCouleur)
-                                            @php
-                                                $isWhite = in_array($nomCouleur, ['white', 'blanc', '#fff', '#ffffff']);
-                                            @endphp
-                                            <label title="{{ ucfirst($nomCouleur) }}">
-                                                <input type="radio" name="color__radio" value="{{ $nomCouleur }}">
-                                                <span class="checkmark"
-                                                    style="
-                        background-color: {{ $nomCouleur }};
-                        border: 1px solid {{ $isWhite ? '#000' : '#ccc' }};
-                        width: 20px;
-                        height: 20px;
-                        display: inline-block;
-                        border-radius: 50%;
-                        cursor: pointer;
-                    ">
-                                                </span>
-                                            </label>
-                                        @endforeach
+                                    <div class="stock__checkbox">
+                                        <label for="stockin">
+                                            {{ $articles->detailArticle->couleur }}
+                                            <input type="checkbox" id="stockin">
+                                            <span class="checkmark"></span>
+                                        </label>
                                     </div>
                                 </li>
+
+                                {{-- <li>
+                                    <span>Couleur disponible :</span>
+                                    <div class="color__checkbox">
+                                        {{ $articles->detailArticle->couleur }}
+                                    </div>
+
+
+                                </li> --}}
+
+
+
+
 
                                 @php
                                     $tailles = explode(',', $articles->taille);
