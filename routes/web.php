@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[ClientController::class, 'accueil'])->name('page.accueil');
 Route::get('/article',[ClientController::class, 'article'])->name('page.article');
+Route::get('/details/{id}',[ClientController::class, 'details'])->name('page.details');
 
 // route pour admin
 Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');

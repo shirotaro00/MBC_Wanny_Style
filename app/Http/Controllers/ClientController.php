@@ -23,6 +23,19 @@ class ClientController extends Controller
         return view('pageclients.Article',compact('articles'));
     }
 
+    //page details articles
+
+    public function details($id){
+
+        $articles = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
+        $couleursDispo = $articles->detailArticle
+        ->pluck('couleur') // récupère les couleurs
+        ->map(fn($c) => strtolower(trim($c))) // nettoie (blanc => blanc, " Rouge " => rouge)
+        ->unique() // retire les doublons
+        ->values();
+        return view('pageclients.DetailArticle',compact('articles', 'couleursDispo'));
+    }
+
 //page clients deja connecte
     public function connecter(){
         return view('pageclients.Acceuil');
