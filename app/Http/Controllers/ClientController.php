@@ -37,7 +37,7 @@ class ClientController extends Controller
         'password' => 'required|min:6|confirmed',
         'adresse' => 'required|string',
         'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
-    ] ,$this->messages());
+    ] ,$this->message());
 
     $clients = User::create([
         'nom' => $request->nom,
@@ -52,7 +52,7 @@ class ClientController extends Controller
 
     toastify()->success('Votre compte été créer avec succès ✔');
 
-    return redirect()->back()->with('Votre compte été créer avec succès', true);
+    return redirect()->back()->with('Votre compte été créer avec succès');
 }
 //connexion clients
     public function login(Request $request){
@@ -61,7 +61,7 @@ class ClientController extends Controller
             "email"=>["required","email"],
             "password"=>["required"]
 
-      ], $this->messages());
+      ]);
 
             if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -73,7 +73,7 @@ class ClientController extends Controller
                 return redirect()->back()->with("error", "email ou mot de passe incorrect");
             }
      }
-         public function messages()
+         public function message()
     {
         return [
             'password.required' => 'le mot de passe est obligatoire',

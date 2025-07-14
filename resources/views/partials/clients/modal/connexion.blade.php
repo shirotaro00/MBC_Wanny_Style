@@ -19,23 +19,13 @@
                     @csrf
                     <div class="mb-3">
                         <label for="Email" class="form-label">Email</label>
-                        <input type="email"class="form-control @error('email') is-invalid @enderror" id="email"
+                        <input type="email"class="form-control" id="email"
                             name="email" required>
-                        @error('email')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror"
+                        <input type="password" class="form-control"
                             id="password" name="password" required>
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="sign_in" class="btn btn-primary" form="contactForm">Se

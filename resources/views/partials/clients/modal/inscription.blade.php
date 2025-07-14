@@ -83,11 +83,11 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="telephone" class="form-label">Confirme mots de passe</label>
+                                <label for="password_confirmation" class="form-label">Confirme mots de passe</label>
                                 <input type="password" name="password_confirmation"
-                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                    class="form-control @error('password') is-invalid @enderror"
                                     id="password_confirmation" required />
-                                @error('password_confirmation')
+                                @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -106,11 +106,6 @@
         </form>
     </div>
 
-
-
 </div>
 </div>
 </div>
-
-
-
