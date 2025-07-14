@@ -1,21 +1,9 @@
 @include('partials.clients.modal.inscription')
-<<<<<<< HEAD
    @include("partials.clients.modal.connexion")
    <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
-=======
-
-@include('partials.clients.modal.connexion')
->>>>>>> 087b509aaceda02baa1d6fbfd327e6687801110f
-
-
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
 
 <!-- Offcanvas Menu Begin -->
 <div class="offcanvas-menu-overlay"></div>
