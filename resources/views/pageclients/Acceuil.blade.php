@@ -71,7 +71,7 @@
                                     <li><a href=" {{ asset('assets/upload/' . $article->photo) }} "
                                             class="image-popup"><span><i
                                                     class="fas fa-up-right-and-down-left-from-center"></i></span></a></li>
-                                    <li><a href="#"><span><i class="fas fa-info-circle"></i></span></i>
+                                    <li><a href="{{ route('page.details', $article->id) }}"><span><i class="fas fa-info-circle"></i></span></i>
                                         </a></li>
                                     <li><a href="#"><span><i class="fas fa-cart-plus"></i></span></a></li>
                                 </ul>
