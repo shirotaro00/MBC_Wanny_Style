@@ -265,7 +265,7 @@ footer a {
 /* ajoute un padding à droite pour que le texte ne chevauche pas l’icône */
 .password-wrapper .form-control {
   padding-left: 2.5rem;   /* espace pour l'icône lock à gauche */
-    padding-right: 6.5rem;
+   padding-right: 50px;
 }
 
 /* icône positionnée à l’intérieur du champ */
@@ -358,6 +358,30 @@ position: absolute;
     font-size: 1rem;
     pointer-events: none;  /* empêche la sélection du texte si double‑clic */
 }
+#email::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#adresse::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#prenom::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#nom::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#telephone::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#password::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#password_confirmation::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#passwords::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
 
 
 /* 1 */
@@ -370,7 +394,7 @@ position: absolute;
 
 /* ajoute un padding à droite pour que le texte ne chevauche pas l’icône */
 .password-wrapper1 .form-control {
-  padding-right: 6.5rem;
+ padding-right: 50px;
    padding-left: 2.5rem;
 }
 
@@ -404,7 +428,8 @@ position: absolute;
 /* ajoute un padding à droite pour que le texte ne chevauche pas l’icône */
 .password-wrapper2 .form-control {
      padding-left: 2.5rem;   /* espace pour l'icône lock à gauche */
-    padding-right: 6.5rem;
+    padding-right: 50px;
+
 }
 
 

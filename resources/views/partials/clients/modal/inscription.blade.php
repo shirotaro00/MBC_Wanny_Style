@@ -1,5 +1,5 @@
 <!-- Le modal avec le formulaire -->
-<div class="modal fade" id="forminscription" tabindex="-1" aria-labelledby="#forminscription" aria-hidden="true">
+<div class="modal fade" id="forminscription" tabindex="-1" aria-labelledby="forminscription" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -109,3 +109,6 @@
 </div>
 </div>
 </div>
+
+
+

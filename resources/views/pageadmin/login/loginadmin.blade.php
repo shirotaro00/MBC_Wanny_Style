@@ -16,13 +16,13 @@
             <form action="{{ route('create.log') }}" method="post">
                 @csrf
                 <div class="password-wrapper">
-                    <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom"
+                    <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" id="nom" placeholder="@error('nom'){{ $message }}@else Nom @enderror"
                         required />
                     <i class="fa fa-user toggle-user"></i>
                 </div>
 
                 <div class="password-wrapper">
-                    <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prenom"
+                    <input type="text" class="form-control  @error('prenom') is-invalid @enderror" name="prenom" id="prenom" placeholder="@error('prenom'){{ $message }}@else Prenom @enderror"
                         required />
                     <i class="fa fa-user  toggle-user"></i>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="password-wrapper">
                     <input type="password" class="form-control @error('password') is-invalid @enderror "
                         placeholder="@error('password'){{ $message }}@else Mot de passe @enderror" name="password"
-                        id="password" required />
+                        id="password"   required />
 
                     <i class="fas fa-lock  toggle-lock"></i>
 
@@ -67,7 +67,7 @@
                 </div>
 
 
-                <button type="submit">Créer le compte</button>
+                <button type="submit" style="margin-top:20px">Créer le compte</button>
             </form>
         </div>
 
@@ -79,7 +79,7 @@
                 <h1 style="margin-bottom:20px"  >Connexion</h1>
 
                 <div class="password-wrapper2">
-                    <input type="email" class="form-control"name="email" id="email" placeholder="Email"
+                    <input type="email" class="form-control"  style="width: 100%;"   name="email" id="email" placeholder="Email"
                         required />
                     <i class="fas fa-envelope toggle-envelope"></i>
                 </div>
@@ -106,11 +106,11 @@
                     <button class="ghost" id="signIn">Se connecter</button>
 
                 </div>
-                <div class="overlay-panel overlay-right">
+                <div class="overlay-panel overlay-right" >
 
                     <h1>Bonjour !</h1>
                     <p>Saisissez vos informations personnelles et commencez votre aventure avec nous.</p>
-                    <button class="ghost" id="signUp">Créer compte</button>
+                    <button class="ghost"  id="signUp">Créer compte</button>
                 </div>
             </div>
         </div>

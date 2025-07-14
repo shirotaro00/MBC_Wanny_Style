@@ -116,11 +116,11 @@ class AdminController extends Controller
     public function registerAdmin(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string',
-            'prenom' => 'required|string',
+            'nom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
+            'prenom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
-            'adresse' => 'required|string',
+            'adresse' => 'required|regex:/^(?!\d+$).+$/',
             'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
         ], $this->messages());
 
@@ -493,9 +493,9 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nom' => 'required|string',
-            'prenom' => 'required|string',
-            'adresse' => 'required|string',
+            'nom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
+            'prenom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
+            'adresse' => 'required|string|regex:/^(?!\d+$).+$/',
             'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
             'email' => 'required|email',
             'password' => 'nullable|string|min:6',
@@ -522,11 +522,11 @@ class AdminController extends Controller
     {
         return [
             //Inscription login lecteur
-            'password.required' => 'Le mot de passe est obligatoire',
-            'password.min' => 'Le mot de passe doit contenir au moins 6 caracteres',
-            'password.confirmed' => 'Le mot de passe ne correspondent pas',
+            'password.required' => 'Mot de passe est obligatoire',
+            'password.min' => 'Mot de passe doit contenir au moins 6 caracteres',
+            'password.confirmed' => 'Mot de passe non identique',
             'telephone.regex' => 'Utilise numero valide',
-            'email' => 'Entrez une email valide',
+            'email.required' => 'Entrez une email valide',
             'adresse.regex' => 'Entrez un adresse valide',
 
             //Article ajout
@@ -554,7 +554,8 @@ class AdminController extends Controller
             'photo.max' => 'La photo ne doit pas dépasser 2 Mo',
 
             'prenom.required' => 'Le prénom est obligatoire',
-            'prenom.string' => 'Le prénom doit être une chaîne de caractères',
+            'prenom.regex' => 'Entrez un prenom valide ',
+            'nom.regex'=>"Entrez nom valide"
 
 
         ];

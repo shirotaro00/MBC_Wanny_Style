@@ -31,11 +31,11 @@ class ClientController extends Controller
     public function registerClients(Request $request)
     {
     $request->validate([
-        'nom' => 'required|string',
-        'prenom' => 'required|string',
+        'nom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
+        'prenom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6|confirmed',
-        'adresse' => 'required|string',
+        'adresse' => 'required|string|regex:/^(?!\d+$).+$/',
         'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
     ] ,$this->message());
 
@@ -76,10 +76,12 @@ class ClientController extends Controller
          public function message()
     {
         return [
-            'password.required' => 'le mot de passe est obligatoire',
-            'password.min' => 'le mot de passe doit contenir au moins 6 caracteres',
-            'password.confirmed' => 'le mot de passe ne correspondent pas',
-            'telephone.regex' => 'le numéro de téléphone valide',
+             'password.required' => 'Mot de passe est obligatoire',
+            'password.min' => 'Mot de passe doit contenir au moins 6 caracteres',
+            'password.confirmed' => 'Mot de passe non identique',
+            'telephone.regex' => 'Utilise numero valide',
+            'email.required' => 'Entrez une email valide',
+            'adresse.regex' => 'Entrez un adresse valide',
             'email.unique' => 'l\'email est déjà utilisé',
             'email.required' => 'l\'email est obligatoire',
             'email.email' => 'l\'email doit être une adresse email valide',
@@ -87,9 +89,10 @@ class ClientController extends Controller
             'prenom.required' => 'le prénom est obligatoire',
             'adresse.required' => 'l\'adresse est obligatoire',
             'telephone.required' => 'le numéro de téléphone est obligatoire',
-            'nom.string' => 'le nom doit être une chaîne de caractères',
-            'prenom.string' => 'le prénom doit être une chaîne de caractères',
-            'adresse.string' => 'l\'adresse doit être une chaîne de caractères',
+          'prenom.required' => 'Le prénom est obligatoire',
+            'prenom.regex' => 'Entrez un prenom valide ',
+            'nom.regex'=>"Entrez nom valide",
+            'adresse.regex' => 'Entrez un adresse valide',
 
         ];
     }

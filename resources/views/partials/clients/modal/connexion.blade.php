@@ -37,7 +37,17 @@
         </div>
     </div>
 </div>
-
+@if (session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modalElement = document.getElementById('formModal');
+            if (modalElement) {
+                const modalInstance = new bootstrap.Modal(modalElement);
+                modalInstance.show();
+            }
+        });
+    </script>
+@endif
 
 
 
