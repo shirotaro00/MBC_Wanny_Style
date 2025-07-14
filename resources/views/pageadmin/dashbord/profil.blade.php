@@ -43,3 +43,18 @@
             </div>
         </div>
     @endsection
+
+    @if ( $errors->has('nom') ||
+        $errors->has('prenom') ||
+        $errors->has('telephone') ||
+        $errors->has('adresse') ||
+        $errors->has('password'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let editprofilModal = new bootstrap.Modal(document.getElementById('editprofilModal'), {
+                keyboard: false
+            });
+            editprofilModal.show();
+        });
+    </script>
+@endif
