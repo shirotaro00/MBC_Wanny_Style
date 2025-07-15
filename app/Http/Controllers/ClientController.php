@@ -31,6 +31,13 @@ class ClientController extends Controller
         return view('pageclients.DetailArticle',compact('articles'));
     }
 
+    //page panier clients
+    public function panier(){
+
+
+        return view('pageclients.Panier');
+    }
+
 //page clients deja connecte
     public function connecter(){
         return view('pageclients.Acceuil');

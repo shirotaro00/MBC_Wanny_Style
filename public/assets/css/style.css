@@ -2196,8 +2196,13 @@ ol {
 	cursor: pointer;
 }
 
+.shop__cart__table tbody tr .cart__close span i {
+    margin-top:12px;
+}
+
+
 .cart__btn {
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 .cart__btn.update__btn {
@@ -2274,6 +2279,7 @@ ol {
 .cart__total__procced {
 	background: #f5f5f5;
 	padding: 40px;
+    margin-left: 30px;
 }
 
 .cart__total__procced h6 {

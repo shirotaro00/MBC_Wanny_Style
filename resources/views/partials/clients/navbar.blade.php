@@ -60,7 +60,7 @@
                     </div>
                     <ul class="header__right__widget">
 
-                        <li><a href="#"><i class="fa-solid fa-cart-shopping"></i>
+                        <li><a href="{{ route('client.panier') }}"><i class="fa-solid fa-cart-shopping"></i>
                                 <div class="tip">2</div>
                             </a></li>
                     </ul>
