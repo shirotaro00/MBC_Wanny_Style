@@ -22,6 +22,9 @@
     <!-- Breadcrumb End -->
 
     <!-- Product Details Section Begin -->
+    <form action="" method="post">
+        @csrf
+        <input type="hidden" name="id_article" value="{{ $articles->id }}">
     <section class="product-details spad">
         <div class="container">
             <div class="row">
@@ -42,16 +45,36 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>{{ $articles->nom }} <span>Categorie : {{ $articles->categorie }} </span>
-                            <span>Type: {{ $articles->typeArticle->type }}</span>
-                        </h3>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                        <div class="row">
+                            <!-- Colonne gauche -->
+                            <div class="col-md-6">
+                                <h3>{{ $articles->nom }}
+                                    <br>
+
+                                    <span>Categorie : {{ $articles->categorie }}</span>
+                                    <span>Type : {{ $articles->typeArticle->type }}</span>
+                                </h3>
+
+                                <div class="rating mt-2">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+
+                            <!-- Colonne droite -->
+                            <div class="col-md-6">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                        <h3>Description</h3>
+                                        <p>{{ $articles->description }}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="product__details__price">{{ number_format($articles->prix, 0, ',', ' ') }} MGA</div>
 
                         <div class="product__details__widget">
@@ -79,18 +102,6 @@
                                         </label>
                                     </div>
                                 </li>
-
-                                {{-- <li>
-                                    <span>Couleur disponible :</span>
-                                    <div class="color__checkbox">
-                                        {{ $articles->detailArticle->couleur }}
-                                    </div>
-
-
-                                </li> --}}
-
-
-
 
 
                                 @php
@@ -123,24 +134,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 gap-0">
-                    <div class="product__details__tab">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <h6>Description</h6>
-                                <p>{{ $articles->description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
+    </form>
     <!-- Product Details Section End -->
 
 
