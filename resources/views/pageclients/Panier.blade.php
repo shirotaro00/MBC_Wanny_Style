@@ -27,6 +27,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shop__cart__table">
+                        <form action="{{ route('panier.modifier.global') }}" method="POST">
+                        @csrf
                         <table>
                             <thead>
                                 <tr>
@@ -66,7 +68,7 @@
                                     <td class="cart__price">{{ number_format($item['prix'], 0, ',', ' ') }} Ar</td>
                                     <td class="cart__quantity">
                                         <div class="pro-qty">
-                                            <input type="text"  value="{{ $item['quantite'] }}">
+                                            <input type="number" name="quantites[{{ $id }}]"  value="{{ $item['quantite'] }}" min="1">
                                         </div>
                                     </td>
                                     <td class="cart__total">{{ number_format($sous_total, 0, ',', ' ') }} MGA</td>
@@ -89,10 +91,14 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn update__btn">
-                        <a href="#"><span ></span> Modifier le panier</a>
+                         <button type="submit" class="btn btn-warning">
+                    <i class="fa fa-refresh"></i> Modifier le panier
+                         </button>
                     </div>
                 </div>
             </div>
+        </form>
+
             <div class="row">
 
                 <div class="col-lg-4 offset-lg-2">
