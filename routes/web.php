@@ -58,6 +58,8 @@ Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajout
 //clientpanier
 Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
 
+//ajout panier
+Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
 
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
