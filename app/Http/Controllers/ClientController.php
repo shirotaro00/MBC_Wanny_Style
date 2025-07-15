@@ -101,9 +101,14 @@ class ClientController extends Controller
             if (Auth::user()->role == 1) {
                 return redirect()->route('page.accueil');
             }
-        } else {
-            return redirect()->back()->with("error", "email ou mot de passe incorrect");
-        }
+        } else if (!Auth::attempt($credentials)) {
+    return back()
+        ->withInput()
+        ->with([
+            'login_error' => 'Email ou mot de passe incorrect.',
+            'form_type' => 'login',
+        ]);
+}
     }
     // ajout panier
     public function ajouter(Request $request, $id)

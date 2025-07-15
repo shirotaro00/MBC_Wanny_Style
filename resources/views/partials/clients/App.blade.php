@@ -142,6 +142,19 @@
     @endif
 
     @yield('script')
+    <!-- Place ce script juste avant </body> -->
+@if (session('login_error') || (old('form_type') === 'login' && $errors->any()))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let modalElement = document.getElementById('formModal');
+            if (modalElement) {
+                let formModal = bootstrap.Modal.getOrCreateInstance(modalElement);
+                formModal.show();
+            }
+        });
+    </script>
+@endif
+
 </body>
 
 </html>

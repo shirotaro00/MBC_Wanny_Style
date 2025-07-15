@@ -14,11 +14,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <div class="modal-body">
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
+              @if (session('login_error'))
+    <div class="alert alert-danger">
+        {{ session('login_error') }}
+    </div>
+@endif
                 <form id="contactForm" action="{{ route('client.auth') }}" method="POST">
                     @csrf
                     <div class="password-wrapper2">
@@ -68,16 +68,5 @@
     });
 </script>
 
-{{-- @if (session('error'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modalElement = document.getElementById('formModal');
-            if (modalElement) {
-                const modalInstance = new bootstrap.Modal(modalElement);
-                modalInstance.show();
-            }
-        });
-    </script>
-@endif --}}
 
 
