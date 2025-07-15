@@ -111,11 +111,20 @@ class ClientController extends Controller
         $articles = Article::findOrFail($id);
         $quantite = (int) $request->input('quantite', 1);
 
-
         $panier = session()->get('panier', []);
-
-        // Récupère la photo du produit depuis la base
         $photo = $articles->photo ?? null;
+
+        // Calculer la quantité totale demandée (si déjà dans le panier)
+        $quantiteTotale = $quantite;
+        if (isset($panier[$id])) {
+            $quantiteTotale += $panier[$id]['quantite'];
+        }
+
+        // Vérifier le stock disponible
+        if ($quantiteTotale > $articles->quantite) {
+            toastify()->error('Quantité demandée supérieure au stock disponible !');
+            return redirect()->back()->with('error', 'Quantité demandée supérieure au stock disponible !');
+        }
 
         if (isset($panier[$id])) {
             $panier[$id]['quantite'] += $quantite;
@@ -129,9 +138,9 @@ class ClientController extends Controller
         }
 
         session()->put('panier', $panier);
-        toastify()->success('Produit ajouté au panier!');
+        toastify()->success('Article ajouté au panier!');
 
-        return redirect()->route('client.panier')->with('success', 'Produit ajouté au panier.');
+        return redirect()->route('client.panier')->with('success', 'Article ajouté au panier.');
     }
     //suppresion panier via lien
         public function supprimerViaLien($id)
@@ -142,9 +151,9 @@ class ClientController extends Controller
             session()->put('panier', $panier);
         }
 
-        toastify()->success('Produit supprimé au panier!');
+        toastify()->success('Article supprimé au panier!');
 
-        return redirect()->back()->with('success', 'Produit supprimé du panier.');
+        return redirect()->back()->with('success', 'Article supprimé du panier.');
     }
     public function message()
     {

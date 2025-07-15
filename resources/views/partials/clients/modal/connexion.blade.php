@@ -68,7 +68,7 @@
     });
 </script>
 
-@if (session('error'))
+{{-- @if (session('error'))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const modalElement = document.getElementById('formModal');
@@ -78,6 +78,6 @@
             }
         });
     </script>
-@endif
+@endif --}}
 
 
