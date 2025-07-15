@@ -111,7 +111,11 @@ class ClientController extends Controller
         $articles = Article::findOrFail($id);
         $quantite = (int) $request->input('quantite', 1);
 
+
         $panier = session()->get('panier', []);
+
+        // Récupère la photo du produit depuis la base
+        $photo = $articles->photo ?? null;
 
         if (isset($panier[$id])) {
             $panier[$id]['quantite'] += $quantite;
@@ -119,14 +123,28 @@ class ClientController extends Controller
             $panier[$id] = [
                 'nom' => $articles->nom,
                 'prix' => $articles->prix,
-                'quantite' => $quantite
+                'quantite' => $quantite,
+                'photo' => $photo
             ];
         }
 
         session()->put('panier', $panier);
         toastify()->success('Produit ajouté au panier!');
 
-        return redirect()->back()->with('success', 'Produit ajouté au panier.');
+        return redirect()->route('client.panier')->with('success', 'Produit ajouté au panier.');
+    }
+    //suppresion panier via lien
+        public function supprimerViaLien($id)
+    {
+        $panier = session()->get('panier', []);
+        if (isset($panier[$id])) {
+            unset($panier[$id]);
+            session()->put('panier', $panier);
+        }
+
+        toastify()->success('Produit supprimé au panier!');
+
+        return redirect()->back()->with('success', 'Produit supprimé du panier.');
     }
     public function message()
     {

@@ -60,6 +60,8 @@ Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier'
 
 //ajout panier
 Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
+//suppression panier
+Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien'])->name('panier.supprimer.lien');
 
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
