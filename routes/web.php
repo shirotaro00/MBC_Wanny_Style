@@ -60,6 +60,8 @@ Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier'
 
 //ajout panier
 Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
+//mise a jour panier
+Route::post('/panier/modifier', [ClientController::class, 'modifierGlobal'])->name('panier.modifier.global');
 //suppression panier
 Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien'])->name('panier.supprimer.lien');
 

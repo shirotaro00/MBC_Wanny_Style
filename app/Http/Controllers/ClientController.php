@@ -36,7 +36,8 @@ class ClientController extends Controller
 
 
     //page panier clients
-    public function panier(){
+    public function panier()
+    {
 
 
         return view('pageclients.Panier');
@@ -142,8 +143,53 @@ class ClientController extends Controller
 
         return redirect()->route('client.panier')->with('success', 'Article ajouté au panier.');
     }
+    //modification panier
+
+public function modifierGlobal(Request $request)
+{
+    $quantites = $request->input('quantites');
+    $panier = session()->get('panier', []);
+
+    $erreurs = [];
+
+    foreach ($quantites as $id => $quantite) {
+        // Vérifie si l'article existe dans le panier
+        if (isset($panier[$id])) {
+            // Recherche l'article en base de données
+            $article = Article::find($id);
+
+            if ($article) {
+                if ((int)$quantite > $article->quantite) {
+                    $erreurs[] = "La quantité demandée pour « {$article->nom} » dépasse le stock disponible ({$article->quantite}).";
+                } else {
+
+                    $panier[$id]['quantite'] = max(1, (int)$quantite);
+                }
+            } else {
+                $erreurs[] = "Article avec ID {$id} introuvable.";
+            }
+        }
+    }
+
+    // Si erreurs → ne pas mettre à jour le panier
+    if (!empty($erreurs)) {
+        toastify()->error('La quantité demandée dépasse le stock disponible .');
+        return redirect()->back()->withErrors($erreurs);
+    }
+
+    // Sinon → mettre à jour le panier
+    session()->put('panier', $panier);
+
+    toastify()->success('Panier a été mis à jour avec succès!');
+
+
+    return redirect()->back()->with('success', 'Panier mis à jour avec succès.');
+}
+
+
+
     //suppresion panier via lien
-        public function supprimerViaLien($id)
+    public function supprimerViaLien($id)
     {
         $panier = session()->get('panier', []);
         if (isset($panier[$id])) {
