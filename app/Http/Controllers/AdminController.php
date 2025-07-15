@@ -166,10 +166,13 @@ class AdminController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 0) {
+                     toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('admin.accueil');
             } else if (Auth::user()->role == 3) {
+                toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('admin.accueil');
             } else if (Auth::user()->role == 6) {
+                toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('admin.accueil');
             }
         } else {

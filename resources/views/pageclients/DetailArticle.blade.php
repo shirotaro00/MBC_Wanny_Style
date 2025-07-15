@@ -43,7 +43,7 @@
                 <div class="col-lg-6">
                     <div class="product__details__text">
                         <h3>{{ $articles->nom }} <span>Categorie : {{ $articles->categorie }} </span>
-                            <span>Type:{{ $articles->typeArticle->type }}</span>
+                            <span>Type: {{ $articles->typeArticle->type }}</span>
                         </h3>
                         <div class="rating">
                             <i class="fa fa-star"></i>
@@ -53,16 +53,7 @@
                             <i class="fa fa-star"></i>
                         </div>
                         <div class="product__details__price">{{ number_format($articles->prix, 0, ',', ' ') }} MGA</div>
-                        <div class="product__details__button">
-                            <div class="quantity">
-                                <span>Quantite:</span>
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
-                                </div>
-                            </div>
-                            <a href="#" class="cart-btn"><span><i class="fas fa-cart-plus"></i></span> Ajout au
-                                panier</a>
-                        </div>
+
                         <div class="product__details__widget">
                             <ul>
 
@@ -116,11 +107,23 @@
                                         @endforeach
                                     </div>
                                 </li>
+
                             </ul>
+                        </div>
+                        <div class="product__details__button" style="margin-top: 50px">
+                            <div class="quantity">
+                                <span>Quantite:</span>
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                            <a href="#" class="cart-btn"><span><i class="fas fa-cart-plus"></i></span> Ajout
+                                au
+                                panier</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12 gap-0">
                     <div class="product__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">

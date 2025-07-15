@@ -1,0 +1,215 @@
+
+    /* 2 */
+
+.password-wrapper2 {
+
+  position: relative;
+  display: inline-block; /* ou block à 100% si tu veux que ça prenne toute la largeur */
+}
+
+/* ajoute un padding à droite pour que le texte ne chevauche pas l’icône */
+.password-wrapper2 .form-control {
+
+     padding-left: 2.5rem;   /* espace pour l'icône lock à gauche */
+    padding-right: 50px;
+
+}
+
+
+
+/* icône positionnée à l’intérieur du champ */
+.password-wrapper2 .toggle-passwords {
+  position: absolute;
+  top: 60%;
+  right: 0.75rem;      /* ajustable selon la taille que tu veux */
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.1rem;   /* tu peux ajuster la taille */
+  user-select: none;   /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper2 .toggle-lock2 {
+position: absolute;
+    top: 60%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper2 .toggle-envelope {
+position: absolute;
+    top: 60%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+
+
+
+.password-wrapper {
+  position: relative;
+  display: inline-block; /* ou block à 100% si tu veux que ça prenne toute la largeur */
+}
+
+/* ajoute un padding à droite pour que le texte ne chevauche pas l’icône */
+.password-wrapper .form-control {
+  padding-left: 2.5rem;   /* espace pour l'icône lock à gauche */
+   padding-right: 50px;
+}
+
+/* icône positionnée à l’intérieur du champ */
+.password-wrapper .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;      /* ajustable selon la taille que tu veux */
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.1rem;   /* tu peux ajuster la taille */
+  user-select: none;   /* empêche la sélection du texte si double‑clic */
+}
+.password-wrapper .toggle-lock {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-lock {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-lock {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-user {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-user {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-phone {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-envelope {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-address {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+#email::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#adresse::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#prenom::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#nom::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#telephone::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#password::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#password_confirmation::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+#passwords::placeholder {
+    font-size: 11px; /* ou 10px selon ton besoin */
+}
+
+
+/* 1 */
+
+
+.password-wrapper1 {
+  position: relative;
+  display: inline-block; /* ou block à 100% si tu veux que ça prenne toute la largeur */
+}
+
+/* ajoute un padding à droite pour que le texte ne chevauche pas l’icône */
+.password-wrapper1 .form-control {
+ padding-right: 50px;
+   padding-left: 2.5rem;
+}
+
+/* icône positionnée à l’intérieur du champ */
+.password-wrapper1 .toggle-password_confirmation {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;      /* ajustable selon la taille que tu veux */
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.1rem;   /* tu peux ajuster la taille */
+  user-select: none;   /* empêche la sélection du texte si double‑clic */
+}
+.password-wrapper1 .toggle-check {
+position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
