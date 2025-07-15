@@ -55,6 +55,8 @@ Route::post('/storeType',[AdminController::class, 'TypePaiement'])->name('store.
 Route::post('/storeMethode',[AdminController::class, 'methodePaiement'])->name('store.methode');
 //ajout stock
 Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
+//ajout panier
+Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
 
 
 // authentification admin
