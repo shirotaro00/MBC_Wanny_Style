@@ -124,5 +124,7 @@
             </div>
         </div>
     </section>
+
+    @include('partials.clients.footer')
     <!-- Shop Cart Section End -->
 @endsection
