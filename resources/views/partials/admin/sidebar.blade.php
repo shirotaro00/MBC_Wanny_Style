@@ -70,7 +70,7 @@
                     <div class="collapse" id="tables">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="#">
+                                <a href="{{ route('admin.commande') }}">
                                     <span class="sub-item">Commande a valide</span>
                                 </a>
                             </li>

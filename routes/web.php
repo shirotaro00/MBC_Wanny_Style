@@ -57,6 +57,9 @@ Route::post('/storeMethode',[AdminController::class, 'methodePaiement'])->name('
 Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
 //clientpanier
 Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
+//commande valide
+Route::get('/commande', [AdminController::class, 'validationcommande'])->name('admin.commande');
+//commande valide
 
 //ajout panier
 Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');

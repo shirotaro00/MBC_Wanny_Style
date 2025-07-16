@@ -112,6 +112,13 @@ class AdminController extends Controller
     }
 
 
+    //page validation commande
+    public function validationcommande()
+    {
+
+        return view("pageadmin.dashbord.Commandeavalide");
+    }
+
 
     //inscription admin
     public function registerAdmin(Request $request)
