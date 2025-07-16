@@ -29,20 +29,22 @@
                     <div class="shop__cart__table">
                         <form action="{{ route('panier.modifier.global') }}" method="POST">
                             @csrf
-                            <table>
+                            <table style="width:100%; border-collapse:separate; border-spacing:0 10px;">
                                 <thead>
                                     <tr>
-                                        <th>Article</th>
-                                        <th>Prix unitaire</th>
-                                        <th>Quantité</th>
-                                        <th>Sous_Total</th>
-                                        <th></th>
+                                        <th style="padding:10px;">Article</th>
+                                        <th style="padding:10px;">Type</th>
+                                        <th style="padding:10px;">Taille</th>
+                                        <th style="padding:10px;">Couleur</th>
+                                        <th style="padding:10px;">Catégorie</th>
+                                        <th style="padding:10px;">Prix unitaire</th>
+                                        <th style="padding:10px;">Quantité</th>
+                                        <th style="padding:10px;">Sous_Total</th>
+                                        <th style="padding:10px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @php $total = 0; @endphp
-
                                     @if (session('panier') && count(session('panier')) > 0)
                                         @foreach (session('panier') as $id => $item)
                                             @php
@@ -50,7 +52,7 @@
                                                 $total += $sous_total;
                                             @endphp
                                             <tr>
-                                                <td class="cart__product__item">
+                                                <td style="padding:10px;" class="cart__product__item">
                                                     @if (isset($item['photo']) && $item['photo'])
                                                         <img src="{{ asset('assets/upload/' . $item['photo']) }}"
                                                             alt="{{ $item['nom'] }}" style="width: 100px">
@@ -66,29 +68,31 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="cart__price">{{ number_format($item['prix'], 0, ',', ' ') }} Ar
-                                                </td>
-                                                <td class="cart__quantity">
+                                                <td style="padding:10px;">{{ $item['type'] ?? '' }}</td>
+                                                <td style="padding:10px;">{{ $item['taille'] ?? '' }}</td>
+                                                <td style="padding:10px;">{{ $item['couleur'] ?? '' }}</td>
+                                                <td style="padding:10px;">{{ $item['categorie'] ?? '' }}</td>
+                                                <td style="padding:10px;" class="cart__price">
+                                                    {{ number_format($item['prix'], 0, ',', ' ') }} MGA</td>
+                                                <td style="padding:10px;" class="cart__quantity">
                                                     <div class="pro-qty">
                                                         <input type="number" name="quantites[{{ $id }}]"
                                                             value="{{ $item['quantite'] }}" min="1">
                                                     </div>
                                                 </td>
-                                                <td class="cart__total">{{ number_format($sous_total, 0, ',', ' ') }} MGA
-                                                </td>
-                                                <td class="cart__close">
+                                                <td style="padding:10px;" class="cart__total">
+                                                    {{ number_format($sous_total, 0, ',', ' ') }} MGA</td>
+                                                <td style="padding:10px;" class="cart__close">
                                                     <a href="{{ route('panier.supprimer.lien', $id) }}"><span><i
                                                                 class="fa fa-trash"></i></span></a>
-
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td colspan="4" class="text-center">Panier vide</td>
+                                            <td colspan="9" class="text-center">Panier vide</td>
                                         </tr>
                                     @endif
-
                                 </tbody>
                             </table>
                     </div>

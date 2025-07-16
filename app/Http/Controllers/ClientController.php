@@ -114,11 +114,15 @@ class ClientController extends Controller
     // ajout panier
     public function ajouter(Request $request, $id)
     {
-        $articles = Article::findOrFail($id);
+         $articles = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
         $quantite = (int) $request->input('quantite', 1);
 
         $panier = session()->get('panier', []);
         $photo = $articles->photo ?? null;
+        $categorie = $articles->categorie ?? '';
+        $taille = $articles->taille ?? '';
+        $type = $articles->typeArticle->type ?? '';
+        $couleur = $articles->detailArticle->couleur ?? '';
 
         // Calculer la quantité totale demandée (si déjà dans le panier)
         $quantiteTotale = $quantite;
@@ -139,6 +143,10 @@ class ClientController extends Controller
                 'nom' => $articles->nom,
                 'prix' => $articles->prix,
                 'quantite' => $quantite,
+                'categorie' => $categorie,
+                'type' => $type,
+                'couleur' => $couleur,
+                'taille' => $taille,
                 'photo' => $photo
             ];
         }
