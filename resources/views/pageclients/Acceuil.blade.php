@@ -406,7 +406,10 @@
         </div>
     </div>
     <!-- Instagram End -->
+    @include('partials/clients.footer')
+
 @endsection
+
 @section('script')
 @endsection
 {{-- Modal d’inscription (forminscription) --}}
@@ -418,6 +421,7 @@
         });
     </script>
 @endif
+
 
 
 

@@ -141,6 +141,7 @@
 
 
     <!-- Footer Section Begin -->
+      @include('partials/clients.footer')
 @endsection
 @section('script')
 @endsection
