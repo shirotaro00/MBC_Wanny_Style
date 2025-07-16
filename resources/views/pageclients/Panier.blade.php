@@ -122,7 +122,14 @@
                         <ul>
                             <li>Total <span>{{ number_format($total, 0, ',', ' ') }}MGA</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Procéder au commande</a>
+                        @if (session('panier') && count(session('panier')) > 0)
+                            <form action="{{ route('commande.enregistrer') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="primary-btn">Procéder à la commande</button>
+                            </form>
+                        @else
+                            <button class="primary-btn" disabled>Procéder à la commande</button>
+                        @endif
                     </div>
                 </div>
             </div>

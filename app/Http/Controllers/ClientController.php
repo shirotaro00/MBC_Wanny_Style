@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Commande;
+use App\Models\DetailCommande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -197,6 +199,42 @@ public function modifierGlobal(Request $request)
 
 
     return redirect()->back()->with('success', 'Panier mis à jour avec succès.');
+}
+
+
+//ajoute commande
+public function ajouterCommande(Request $request)
+{
+    $panier = session()->get('panier', []);
+    if (empty($panier)) {
+        toastify()->error('Votre panier est vide!');
+        return redirect()->back()->with('error', 'Votre panier est vide!');
+    }
+
+      // Création de la commande
+    $commande = Commande::create([
+        'user_id' => Auth::id(),
+        'date_commande' => now(),
+        'statut' => 'en attente',
+        'prix_total' => collect($panier)->sum(fn($item) => $item['prix'] * $item['quantite']),
+    ]);
+
+    // Ajout des lignes de commande
+    foreach ($panier as $article_id => $item) {
+        Detailcommande::create([
+            'commande_id' => $commande->id,
+            'article_id' => $article_id,
+            'quantite' => $item['quantite'],
+            'prix_unitaire' => $item['prix'],
+        ]);
+    }
+
+    // Vider le panier après la commande
+    session()->forget('panier');
+
+    toastify()->success('Commande ajoutée avec succès!');
+
+    return redirect()->route('page.accueil')->with('success', 'Commande ajoutée avec succès.');
 }
 
 
