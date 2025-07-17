@@ -42,8 +42,12 @@ class ClientController extends Controller
 
         return view('pageclients.Panier');
     }
+//profil client
+    public function profil()
+    {
+     return view('pageclients.Profil');
 
-
+    }
     //page clients deja connecte
     public function connecter()
     {

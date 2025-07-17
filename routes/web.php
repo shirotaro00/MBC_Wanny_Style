@@ -59,7 +59,9 @@ Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajout
 Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
 //commande valide
 Route::get('/commande', [AdminController::class, 'validationcommande'])->name('admin.commande');
-//commande valide
+//profil client
+Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
+//mise a jour profil client
 
 //ajout panier
 Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');

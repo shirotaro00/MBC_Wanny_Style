@@ -1,9 +1,10 @@
 @include('partials.clients.modal.inscription')
-   @include("partials.clients.modal.connexion")
-   <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+@include('partials.clients.modal.connexion')
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"><!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
 <!-- Offcanvas Menu Begin -->
 <div class="offcanvas-menu-overlay"></div>
@@ -48,20 +49,46 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-3">
-                <div class="header__right">
-                    <div class="header__right__auth">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
+            <div class="col-lg-3" >
+                <div class="header__right d-flex align-items-center justify-content-end" style="gap: 18px;">
+                    <div class="header__right__auth d-flex align-items-center" style="gap: 10px; margin-bottom:20px;">
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
                             Inscription
                         </a>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#formModal">
-                            connexion
+                            Connexion
                         </a>
                     </div>
-                    <ul class="header__right__widget">
-
-                        <li><a href="{{ route('client.panier') }}"><i class="fa-solid fa-cart-shopping"></i>
-                                <div class="tip">2</div>
+                    <ul class="header__right__widget d-flex align-items-center mb-0" style="gap: 30px; list-style: none;">
+                        <li class="d-flex align-items-center dropdown" style="gap: 6px;">
+                            <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
+                                <i class="fa-solid fa-user-circle"></i>
+                                <span style="margin-left: 10px;"> Prenom</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('client.profil') }}">
+                                        <i class="fa fa-user-circle"></i> Profil
+                                    </a>
+                                </li>
+                                    <li>
+                                    <a class="dropdown-item" href="">
+                                        <i class="fa-solid fa-clock-rotate-left"></i> Historique des commandes
+                                    </a>
+                                </li>
+                                <li>
+                                    <form action="" method="POST" style="margin:0;">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fa fa-sign-out-alt"></i> Déconnexion
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('client.panier') }}">
+                                <i class="fa-solid fa-cart-shopping"></i>
                             </a></li>
                     </ul>
                 </div>
@@ -72,18 +99,10 @@
         </div>
     </div>
 </header>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <!-- Header Section End -->
 
 
 
-{{-- Modal de connexion (formModal)
-@if ($errors->has('email') || ($errors->has('password') && old('form_type') === 'login'))
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let formModal = new bootstrap.Modal(document.getElementById('formModal'), {
-                keyboard: false
-            });
-            formModal.show();
-        });
-    </script>
-@endif --}}
+
