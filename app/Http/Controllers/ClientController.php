@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Commande;
+use App\Models\DetailCommande;
+use App\Models\MethodePaiement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,6 +33,7 @@ class ClientController extends Controller
     public function details($id)
     {
 
+
         $articles = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
         return view('pageclients.DetailArticle', compact('articles'));
     }
@@ -38,9 +42,8 @@ class ClientController extends Controller
     //page panier clients
     public function panier()
     {
-
-
-        return view('pageclients.Panier');
+        $methode = MethodePaiement::with(['TypePaiement'])->get();
+        return view('pageclients.Panier', compact('methode'));
     }
 //profil client
     public function profil()
@@ -107,18 +110,18 @@ class ClientController extends Controller
                 return redirect()->route('page.accueil');
             }
         } else if (!Auth::attempt($credentials)) {
-    return back()
-        ->withInput()
-        ->with([
-            'login_error' => 'Email ou mot de passe incorrect.',
-            'form_type' => 'login',
-        ]);
-}
+            return back()
+                ->withInput()
+                ->with([
+                    'login_error' => 'Email ou mot de passe incorrect.',
+                    'form_type' => 'login',
+                ]);
+        }
     }
     // ajout panier
     public function ajouter(Request $request, $id)
     {
-         $articles = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
+        $articles = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
         $quantite = (int) $request->input('quantite', 1);
 
         $panier = session()->get('panier', []);
@@ -162,46 +165,98 @@ class ClientController extends Controller
     }
     //modification panier
 
-public function modifierGlobal(Request $request)
-{
-    $quantites = $request->input('quantites');
-    $panier = session()->get('panier', []);
+    public function modifierGlobal(Request $request)
+    {
+        $quantites = $request->input('quantites');
+        $panier = session()->get('panier', []);
 
-    $erreurs = [];
+        $erreurs = [];
 
-    foreach ($quantites as $id => $quantite) {
-        // Vérifie si l'article existe dans le panier
-        if (isset($panier[$id])) {
-            // Recherche l'article en base de données
-            $article = Article::find($id);
+        foreach ($quantites as $id => $quantite) {
+            // Vérifie si l'article existe dans le panier
+            if (isset($panier[$id])) {
+                // Recherche l'article en base de données
+                $article = Article::find($id);
 
-            if ($article) {
-                if ((int)$quantite > $article->quantite) {
-                    $erreurs[] = "La quantité demandée pour « {$article->nom} » dépasse le stock disponible ({$article->quantite}).";
+                if ($article) {
+                    if ((int)$quantite > $article->quantite) {
+                        $erreurs[] = "La quantité demandée pour « {$article->nom} » dépasse le stock disponible ({$article->quantite}).";
+                    } else {
+
+                        $panier[$id]['quantite'] = max(1, (int)$quantite);
+                    }
                 } else {
-
-                    $panier[$id]['quantite'] = max(1, (int)$quantite);
+                    $erreurs[] = "Article avec ID {$id} introuvable.";
                 }
-            } else {
-                $erreurs[] = "Article avec ID {$id} introuvable.";
             }
         }
+
+        // Si erreurs → ne pas mettre à jour le panier
+        if (!empty($erreurs)) {
+            toastify()->error('La quantité demandée dépasse le stock disponible .');
+            return redirect()->back()->withErrors($erreurs);
+        }
+
+        // Sinon → mettre à jour le panier
+        session()->put('panier', $panier);
+
+        toastify()->success('Panier a été mis à jour avec succès!');
+
+
+        return redirect()->back()->with('success', 'Panier mis à jour avec succès.');
     }
 
-    // Si erreurs → ne pas mettre à jour le panier
-    if (!empty($erreurs)) {
-        toastify()->error('La quantité demandée dépasse le stock disponible .');
-        return redirect()->back()->withErrors($erreurs);
+    //ajoute commande
+    public function ajouterCommande(Request $request)
+    {
+        if (Auth::user()) {
+
+            $request->validate([
+                'Ref_paiement' => 'required|string|max:100',
+                'date_livraison' => [
+                    'required',
+                    'date',
+                    'after_or_equal:' . now()->addDays(3)->format('Y-m-d'),
+                ],
+            ], [
+                'date_livraison.after_or_equal' => 'La date de livraison doit être au moins 3 jours après la date de commande.',
+            ]);
+
+            $panier = session()->get('panier', []);
+            $total = collect($panier)->sum(fn($item) => $item['prix'] * $item['quantite']);
+
+            $commande = Commande::create([
+                'user_id' => Auth::id(),
+                'date_commande' => now(),
+                'Ref_paiement' => $request->input('Ref_paiement'),
+                'reference_commande' => $this->genererReferenceCommande(),
+                'date_livraison' => $request->input('date_livraison'),
+                'statut' => 'en attente',
+                'prix_total' => $total,
+            ]);
+
+            // Ajout des lignes de commande
+            foreach ($panier as $article_id => $item) {
+                Detailcommande::create([
+                    'commande_id' => $commande->id,
+                    'article_id' => $article_id,
+                    'quantite' => $item['quantite'],
+                    'prix_unitaire' => $item['prix'],
+                ]);
+            }
+
+            session()->forget('panier');
+
+            toastify()->success('Commande ajoutée avec succès!');
+
+            return redirect()->route('page.accueil')->with('success', 'Commande ajoutée avec succès.');
+        } else {
+
+            toastify()->error('Veuillez vous connecter!');
+
+            return redirect()->back()->with('error', 'Veuillez vous connecter.');
+        }
     }
-
-    // Sinon → mettre à jour le panier
-    session()->put('panier', $panier);
-
-    toastify()->success('Panier a été mis à jour avec succès!');
-
-
-    return redirect()->back()->with('success', 'Panier mis à jour avec succès.');
-}
 
 
 
@@ -240,5 +295,11 @@ public function modifierGlobal(Request $request)
             'adresse.regex' => 'Entrez un adresse valide',
 
         ];
+    }
+    public function genererReferenceCommande(): string
+    {
+        $date = now()->format('Ymd');
+        $dernierID = \App\Models\Commande::max('id') + 1;
+        return 'WANNY-ARTICLE-' . $date . '-' . str_pad($dernierID, 4, '0', STR_PAD_LEFT);
     }
 }
