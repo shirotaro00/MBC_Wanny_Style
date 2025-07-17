@@ -115,6 +115,15 @@
             </form>
 
             <div class="row">
+                <div class="col-lg-6">
+                    <div class="discount__content">
+                        <h6>Référence de paiement</h6>
+                        <form action="#">
+                            <input type="text" placeholder="Entrez votre référence">
+                            <button type="submit" class="site-btn">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="col-lg-4 offset-lg-2">
                     <div class="cart__total__procced">
@@ -125,7 +134,7 @@
                         @if (session('panier') && count(session('panier')) > 0)
                             <form action="{{ route('commande.enregistrer') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="primary-btn">Procéder à la commande</button>
+                                <button type="submit" class="primary-btn" style="width: 100%">Commandez</button>
                             </form>
                         @else
                             <button class="primary-btn" disabled>Procéder à la commande</button>
