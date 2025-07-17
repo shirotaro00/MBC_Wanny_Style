@@ -13,6 +13,8 @@ class Commande extends Model
         'prix_total',
         'statut',
         'Ref_paiement',
+        'reference_commande',
+        'date_livraison',
         'user_id'
     ];
     public function User() {

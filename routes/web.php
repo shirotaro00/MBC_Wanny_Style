@@ -58,7 +58,7 @@ Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajout
 //clientpanier
 Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
 // ajout commande
-  Route::post('/commande/enregistrer', [ClientController::class, 'enregistrer'])->name('commande.enregistrer');
+  Route::post('/commande/enregistrer', [ClientController::class, 'ajouterCommande'])->name('commande.enregistrer');
 //commande valide
 Route::get('/commande', [AdminController::class, 'validationcommande'])->name('admin.commande');
 //commande valide
