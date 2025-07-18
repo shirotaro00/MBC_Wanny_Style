@@ -49,35 +49,35 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="table-responsive ">
-                                                    <table class="table table-bordered">
+                                                <div class="table1-responsive ">
+                                                    <table class="table1 table-bordered">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col">Nom article</th>
-                                                                <th scope="col">Quantité</th>
-                                                                <th scope="col">Categorie</th>
-                                                                <th scope="col">Type</th>
-                                                                <th scope="col">taille</th>
-                                                                <th scope="col">Couleur</th>
-                                                                <th scope="col">Prix unitaire</th>
-                                                                <th scope="col">Total</th>
+                                                                <th >Nom article</th>
+                                                                <th >Quantité</th>
+                                                                <th >Categorie</th>
+                                                                <th >Type</th>
+                                                                <th >taille</th>
+                                                                <th >Couleur</th>
+                                                                <th >Prix unitaire</th>
+                                                                <th >Total</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="row">1</th>
+                                                                <th>1</th>
                                                                 <td>Mark</td>
                                                                 <td>Otto</td>
                                                                 <td>@mdo</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">2</th>
+                                                                <th >2</th>
                                                                 <td>Jacob</td>
                                                                 <td>Thornton</td>
                                                                 <td>@fat</td>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row">3</th>
+                                                                <th >3</th>
                                                                 <td>John</td>
                                                                 <td>Doe</td>
                                                                 <td>@social</td>

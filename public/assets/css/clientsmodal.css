@@ -66,8 +66,20 @@ position: absolute;
 /* icône positionnée à l’intérieur du champ */
 .password-wrapper .toggle-password {
   position: absolute;
-  top: 50%;
+  top: 70%;
   right: 0.75rem;      /* ajustable selon la taille que tu veux */
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #aaa;
+  font-size: 1.1rem;   /* tu peux ajuster la taille */
+  user-select: none;   /* empêche la sélection du texte si double‑clic */
+}
+
+/* icône positionnée à l’intérieur du champ */
+.password-wrapper .toggle-password1 {
+  position: absolute;
+  top: 70%;
+  right: -170px;      /* ajustable selon la taille que tu veux */
   transform: translateY(-50%);
   cursor: pointer;
   color: #aaa;
@@ -76,7 +88,7 @@ position: absolute;
 }
 .password-wrapper .toggle-lock {
 position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
     transform: translateY(-50%);
     color: #aaa;
@@ -86,7 +98,7 @@ position: absolute;
 
 .password-wrapper .toggle-lock {
 position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
     transform: translateY(-50%);
     color: #aaa;
@@ -96,8 +108,18 @@ position: absolute;
 
 .password-wrapper .toggle-lock {
 position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1rem;
+    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
+}
+
+.password-wrapper .toggle-user1 {
+position: absolute;
+    top: 70%;
+    left: 1.5rem;
     transform: translateY(-50%);
     color: #aaa;
     font-size: 1rem;
@@ -106,17 +128,7 @@ position: absolute;
 
 .password-wrapper .toggle-user {
 position: absolute;
-    top: 50%;
-    left: 0.75rem;
-    transform: translateY(-50%);
-    color: #aaa;
-    font-size: 1rem;
-    pointer-events: none;  /* empêche la sélection du texte si double‑clic */
-}
-
-.password-wrapper .toggle-user {
-position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
     transform: translateY(-50%);
     color: #aaa;
@@ -126,7 +138,7 @@ position: absolute;
 
 .password-wrapper .toggle-phone {
 position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
     transform: translateY(-50%);
     color: #aaa;
@@ -136,7 +148,7 @@ position: absolute;
 
 .password-wrapper .toggle-envelope {
 position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
     transform: translateY(-50%);
     color: #aaa;
@@ -146,7 +158,7 @@ position: absolute;
 
 .password-wrapper .toggle-address {
 position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
     transform: translateY(-50%);
     color: #aaa;
@@ -196,7 +208,7 @@ position: absolute;
 /* icône positionnée à l’intérieur du champ */
 .password-wrapper1 .toggle-password_confirmation {
   position: absolute;
-  top: 50%;
+  top: 70%;
   right: 0.75rem;      /* ajustable selon la taille que tu veux */
   transform: translateY(-50%);
   cursor: pointer;
@@ -206,7 +218,7 @@ position: absolute;
 }
 .password-wrapper1 .toggle-check {
 position: absolute;
-    top: 50%;
+    top: 70%;
     left: 0.75rem;
     transform: translateY(-50%);
     color: #aaa;
