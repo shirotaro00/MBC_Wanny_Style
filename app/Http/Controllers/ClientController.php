@@ -130,6 +130,7 @@ class ClientController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 1) {
+                 toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('page.accueil');
             }
         } else if (!Auth::attempt($credentials)) {
