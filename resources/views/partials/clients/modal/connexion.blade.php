@@ -35,7 +35,7 @@
 
                     </div>
                     <div class="modal-footer mt-2">
-                        <button type="submit" id="sign_in" class="btn btn-primary" form="form-control">Se connecter</button>
+                        <button type="submit" id="sign_in" class="btn btn-primary" >Se connecter</button>
 
                     </div>
                 </form>
