@@ -40,10 +40,11 @@
                                                         <p>Nom :</p>
                                                         <p>Prenom :</p>
                                                         <p>Adresse :</p>
+                                                        <p>Telephone :</p>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <p>Telephone :</p>
                                                         <p>Date de livraison :</p>
+                                                        <p>Ref-article :</p>
                                                         <p>Ref-paiement :</p>
                                                     </div>
                                                 </div>

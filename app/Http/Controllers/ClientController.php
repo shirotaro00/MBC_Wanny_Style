@@ -51,6 +51,13 @@ class ClientController extends Controller
      return view('pageclients.Profil');
 
     }
+
+// historique client achats
+    public function historique()
+    {
+       return view('pageclients.Historique');
+    }
+
     //page clients deja connecte
     public function connecter()
     {

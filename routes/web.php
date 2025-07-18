@@ -63,7 +63,9 @@ Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier'
 Route::get('/commande', [AdminController::class, 'validationcommande'])->name('admin.commande');
 //profil client
 Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
-//mise a jour profil client
+//historique client achats
+Route::get('/historique', [ClientController::class, 'historique'])->name('client.historique');
+
 
 //ajout panier
 Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');

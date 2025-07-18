@@ -45,6 +45,9 @@
                     <ul>
                         <li class="active"><a href="{{ route('page.accueil') }}">Accueil</a></li>
                         <li><a href="{{ route('page.article') }}">Article</a></li>
+                         @if (Auth::check() && Auth::user()->role === '1')
+                        <li><a href="{{ route('client.historique') }}">Historique d'achats</a></li>
+                        @endif
                         <li><a href="./contact.html">Contact</a></li>
                     </ul>
                 </nav>
@@ -61,21 +64,19 @@
                     </div>
                     <ul class="header__right__widget d-flex align-items-center mb-0" style="gap: 30px; list-style: none;">
                         <li class="d-flex align-items-center dropdown" style="gap: 6px;">
+                             @if (Auth::check() && Auth::user()->role === '1')
                             <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
                                 <i class="fa-solid fa-user-circle"></i>
                                 <span style="margin-left: 10px;"> Prenom</span>
                             </a>
+                            @endif
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('client.profil') }}">
                                         <i class="fa fa-user-circle"></i> Profil
                                     </a>
                                 </li>
-                                    <li>
-                                    <a class="dropdown-item" href="">
-                                        <i class="fa-solid fa-clock-rotate-left"></i> Historique des commandes
-                                    </a>
-                                </li>
+
                                 <li>
                                     <form action="" method="POST" style="margin:0;">
                                         @csrf
