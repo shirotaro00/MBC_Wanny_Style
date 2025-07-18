@@ -18,8 +18,10 @@
                 <div class="tip">4</div>
             </a></li>
     </ul>
-    <div class="offcanvas__logo">
-        <a href="{{ route('page.accueil') }}"><img src="img/logo.png" alt=""></a>
+    <div class="offcanvas__logo" style="text-align: center; padding: 20px 0;">
+        <a href="{{ route('page.accueil') }}">
+            <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo" style="max-width: 120px; height: auto; display: inline-block;">
+        </a>
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth custom-auth-links">
@@ -54,14 +56,18 @@
             </div>
             <div class="col-lg-3" >
                 <div class="header__right d-flex align-items-center justify-content-end" style="gap: 18px;">
+
                     <div class="header__right__auth d-flex align-items-center" style="gap: 10px; margin-bottom:20px;">
+
                       <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
                             Inscription
                         </a>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#formModal">
                             Connexion
                         </a>
+
                     </div>
+
                     <ul class="header__right__widget d-flex align-items-center mb-0" style="gap: 30px; list-style: none;">
                         <li class="d-flex align-items-center dropdown" style="gap: 6px;">
                              @if (Auth::check() && Auth::user()->role === '1')

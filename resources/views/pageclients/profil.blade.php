@@ -13,40 +13,35 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Nom </p>
-                                    <input type="text">
+                                    <p>Nom :</p>
+
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Prenom </p>
-                                    <input type="text">
+                                    <p>Prenom :</p>
+
                                 </div>
                             </div>
                               <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Adresse </p>
-                                    <input type="text">
+                                    <p>Adresse : </p>
+
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Telephone </p>
-                                    <input type="text">
+                                    <p>Telephone: </p>
+
                                 </div>
                             </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Email </p>
-                                    <input type="text">
+                                    <p>Email :</p>
+
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Mot de passe </p>
-                                    <input type="text">
-                                </div>
-                            </div>
+
 
                         </div>
 
