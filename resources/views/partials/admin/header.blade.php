@@ -103,7 +103,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('admin.profil') }}">Mon Profil</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('deconexion') }}">Deconnexion</a>
+                        <a class="dropdown-item" href="{{ route('deconnexion') }}">Deconnexion</a>
                       </li>
                     </div>
                   </ul>

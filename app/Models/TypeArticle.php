@@ -20,5 +20,10 @@ public function article()
 {
     return $this->hasMany(Article::class,'article_id');
 }
+public function DetailCommande()
+{
+    return $this->hasMany(DetailCommande::class, 'type_article_id');
+
+}
 
 }

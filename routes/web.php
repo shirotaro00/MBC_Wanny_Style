@@ -19,6 +19,7 @@ Route::get('/',[ClientController::class, 'accueil'])->name('page.accueil');
 Route::get('/article',[ClientController::class, 'article'])->name('page.article');
 Route::get('/details/{id}',[ClientController::class, 'details'])->name('page.details');
 
+
 // route pour admin
 Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
@@ -32,6 +33,8 @@ Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 Route::post('/utilisateur/update/{id}', [AdminController::class, 'update'])->name('admin.utilisateur.update');
 Route::post('/admin/pay/update/{id}',[AdminController::class, 'updatePay'])->name('pay.update');
 Route::post('/admin/users/gestionrole/{id}/role',[AdminController::class, 'updaterole'])->name('admin.utilisateurG.update');
+
+
 
 
 
@@ -78,8 +81,10 @@ Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
 Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
 Route::post('/administration',[AdminController::class, 'login'])->name('admin.auth');
-Route::get('/deconnexion',[AdminController::class, 'logout'])->name("deconexion");
+// route deconnexion admin
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('deconnexion');
 // authentification clients
 Route::post('/inscription', [ClientController::class, 'registerClients'])->name('client.register');
 Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');
 Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
+Route::get('/deconnexion', [ClientController::class, 'logout'])->name('client.logout');

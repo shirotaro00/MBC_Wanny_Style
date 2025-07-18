@@ -67,7 +67,7 @@
                              @if (Auth::check() && Auth::user()->role === '1')
                             <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
                                 <i class="fa-solid fa-user-circle"></i>
-                                <span style="margin-left: 10px;"> Prenom</span>
+                                <span style="margin-left: 10px;">{{ Auth::user()->prenom }}</span>
                             </a>
                             @endif
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -80,9 +80,9 @@
                                 <li>
                                     <form action="" method="POST" style="margin:0;">
                                         @csrf
-                                        <button type="submit" class="dropdown-item">
+                                        <a href="{{ route('client.logout') }}" class="dropdown-item">
                                             <i class="fa fa-sign-out-alt"></i> Déconnexion
-                                        </button>
+                                        </a>
                                     </form>
                                 </li>
                             </ul>

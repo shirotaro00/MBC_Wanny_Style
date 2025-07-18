@@ -17,14 +17,14 @@ class ClientController extends Controller
     public function accueil()
     {
 
-        $articles = Article::with(['typeArticle', 'detailArticle'])->get();
+        $articles = Article::with(['TypeArticle', 'detailArticle'])->get();
         return view('pageclients.Acceuil', compact('articles'));
     }
     //page article clients
     public function article()
     {
 
-        $articles = Article::with(['typeArticle', 'detailArticle'])->get();
+        $articles = Article::with(['TypeArticle', 'detailArticle'])->get();
         return view('pageclients.Article', compact('articles'));
     }
 
@@ -34,7 +34,7 @@ class ClientController extends Controller
     {
 
 
-        $articles = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
+        $articles = Article::with(['TypeArticle', 'detailArticle'])->findOrFail($id);
         return view('pageclients.DetailArticle', compact('articles'));
     }
 
@@ -48,15 +48,30 @@ class ClientController extends Controller
 //profil client
     public function profil()
     {
-     return view('pageclients.Profil');
+    $clients = User::where('role', '1')->get();
+     return view('pageclients.Profil',compact('clients'));
 
     }
 
 // historique client achats
     public function historique()
     {
-       return view('pageclients.Historique');
+
+        $commandes = Commande::with([
+            'user',
+            'DetailCommande.article',
+            'DetailCommande.article.TypeArticle',
+            'DetailCommande.article.detailArticle',
+            'DetailCommande.TypeArticle',
+            'DetailCommande.detailArticle',
+        ])
+        ->where('user_id', Auth::id())
+        ->latest()
+        ->get();
+
+        return view('pageclients.Historique', compact('commandes'));
     }
+
 
     //page clients deja connecte
     public function connecter()
@@ -95,6 +110,7 @@ class ClientController extends Controller
             'telephone' => $request->telephone,
             'role' => '1',
         ]);
+
         Auth::login($clients);
 
         toastify()->success('Votre compte été créer avec succès ✔');
@@ -256,7 +272,7 @@ class ClientController extends Controller
 
             toastify()->success('Commande ajoutée avec succès!');
 
-            return redirect()->route('page.accueil')->with('success', 'Commande ajoutée avec succès.');
+            return redirect()->route('client.historique')->with('success', 'Commande ajoutée avec succès.');
         } else {
 
             toastify()->error('Veuillez vous connecter!');
@@ -302,6 +318,14 @@ class ClientController extends Controller
             'adresse.regex' => 'Entrez un adresse valide',
 
         ];
+    }
+      public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        toastify()->success('Vous êtes déconnecté avec succès!');
+        return redirect()->route('page.accueil');
     }
     public function genererReferenceCommande(): string
     {

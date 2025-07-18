@@ -21,4 +21,9 @@ class DetailArticle extends Model
     {
         return $this->hasMany(Article::class,'article_id');
     }
+    public function DetailCommande()
+    {
+        return $this->hasMany(DetailCommande::class, 'detail_article_id');
+    }
+
 }

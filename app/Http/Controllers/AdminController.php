@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Stock;
 use App\Models\Article;
+use App\Models\Commande;
 use App\Models\TypeArticle;
 use App\Models\TypePaiement;
 use Illuminate\Http\Request;
@@ -116,7 +117,18 @@ class AdminController extends Controller
     public function validationcommande()
     {
 
-        return view("pageadmin.dashbord.Commandeavalide");
+        $commandes = Commande::with([
+            'user',
+            'DetailCommande.article',
+            'DetailCommande.article.TypeArticle',
+            'DetailCommande.article.detailArticle',
+            'DetailCommande.TypeArticle',
+            'DetailCommande.detailArticle',
+        ])
+        ->latest()
+        ->get();
+
+        return view("pageadmin.dashbord.Commandeavalide",compact('commandes'));
     }
 
 

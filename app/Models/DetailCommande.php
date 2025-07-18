@@ -23,4 +23,26 @@ class DetailCommande extends Model
     {
         return $this->belongsTo(Article::class, 'article_id');
     }
+    public function TypeArticle()
+    {
+        return $this->hasOneThrough(
+            TypeArticle::class,
+            Article::class,
+            'id',
+            'id',
+            'article_id',
+            'type_article_id'
+        );
+    }
+    public function detailArticle()
+    {
+        return $this->hasOneThrough(
+            DetailArticle::class,
+            Article::class,
+            'id',
+            'id',
+            'article_id',
+            'detail_article_id'
+        );
+    }
 }
