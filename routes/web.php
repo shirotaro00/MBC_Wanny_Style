@@ -96,12 +96,3 @@ Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.c
 Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
 Route::get('/deconnexion', [ClientController::class, 'logout'])->name('client.logout');
 
-
-Route::get('/test-mail', function () {
-    Mail::raw('Test d’envoi de mail simple avec Laravel', function ($message) {
-        $message->to('rabearisonainasafidy@gmail.com')
-                ->subject('Test Laravel Email');
-    });
-
-    return 'E-mail envoyé (ou tenté) !';
-});
