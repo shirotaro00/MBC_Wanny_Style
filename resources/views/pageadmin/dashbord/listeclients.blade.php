@@ -46,7 +46,7 @@
                                                     <td>{{ $client->telephone }}</td>
                                                     <td>{{ $client->adresse }}</td>
                                                     <td>{{ $client->email }}</td>
-                                                    <td></td>
+                                                    <td>{{ $client->point }}</td>
                                                 </tr>
                                                 @endforeach
 

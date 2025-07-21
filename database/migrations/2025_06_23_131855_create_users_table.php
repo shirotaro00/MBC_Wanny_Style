@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('telephone');
             $table->enum('role',['0','1','3','6'])->default('3');
+            $table->integer('point')->default(0);
             $table->timestamps();
         });
     }

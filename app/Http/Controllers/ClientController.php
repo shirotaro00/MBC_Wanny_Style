@@ -45,15 +45,14 @@ class ClientController extends Controller
         $methode = MethodePaiement::with(['TypePaiement'])->get();
         return view('pageclients.Panier', compact('methode'));
     }
-//profil client
+    //profil client
     public function profil()
     {
-    $clients = Auth::user();
-     return view('pageclients.Profil',compact('clients'));
-
+        $clients = Auth::user();
+        return view('pageclients.Profil', compact('clients'));
     }
 
-// historique client achats
+    // historique client achats
     public function historique()
     {
 
@@ -65,9 +64,9 @@ class ClientController extends Controller
             'DetailCommande.TypeArticle',
             'DetailCommande.detailArticle',
         ])
-        ->where('user_id', Auth::id())
-        ->latest()
-        ->get();
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
 
         return view('pageclients.Historique', compact('commandes'));
     }
@@ -130,7 +129,7 @@ class ClientController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 1) {
-                 toastify()->success('Vous êtes connecté ✔');
+                toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('page.accueil');
             }
         } else if (!Auth::attempt($credentials)) {
@@ -259,6 +258,7 @@ class ClientController extends Controller
                 'prix_total' => $total,
             ]);
 
+
             // Ajout des lignes de commande
             foreach ($panier as $article_id => $item) {
                 Detailcommande::create([
@@ -268,6 +268,15 @@ class ClientController extends Controller
                     'prix_unitaire' => $item['prix'],
                 ]);
             }
+
+            // Ajout des points de fidélité (1 point par article commandé, selon la quantité)
+            $user = User::find(Auth::id());
+            $totalPoints = 0;
+            foreach ($panier as $item) {
+                $totalPoints += $item['quantite'];
+            }
+            $user->point = ($user->point ?? 0) + $totalPoints;
+            $user->save();
 
             session()->forget('panier');
 
@@ -320,7 +329,7 @@ class ClientController extends Controller
 
         ];
     }
-      public function logout(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();

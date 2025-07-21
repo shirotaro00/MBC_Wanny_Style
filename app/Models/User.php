@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password',
         'adresse',
         'telephone',
-        'role'
+        'role',
+        'point'
     ];
     public function Commande() {
     return $this->hasMany(Commande::class, 'user_id');
