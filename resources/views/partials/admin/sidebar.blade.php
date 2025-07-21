@@ -75,7 +75,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ route('commande.validation') }}">
                                     <span class="sub-item">Commande valide</span>
                                 </a>
                             </li>

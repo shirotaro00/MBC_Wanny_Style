@@ -11,6 +11,7 @@ use App\Models\TypePaiement;
 use Illuminate\Http\Request;
 use App\Models\DetailArticle;
 use App\Models\MethodePaiement;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -125,12 +126,54 @@ class AdminController extends Controller
             'DetailCommande.TypeArticle',
             'DetailCommande.detailArticle',
         ])
-        ->latest()
-        ->get();
+          ->where('statut', 'en attente')
+            ->latest()
+            ->get();
 
-        return view("pageadmin.dashbord.Commandeavalide",compact('commandes'));
+        return view("pageadmin.dashbord.Commandeavalide", compact('commandes'));
     }
+    //Validation de la commande
+    public function valider($id)
+    {
+        $commande = Commande::findOrFail($id);
+        $commande->statut = 'validée';
+        $commande->save();
+        toastify()->success('Commande validé!');
 
+        return redirect()->route('commande.validation')->with('success', 'Commande validée avec succès.');
+    }
+    //page des commandes deja valide
+    public function commandesValide()
+    {
+        $commandes = Commande::where('statut', 'validée')
+            ->with([
+                'user',
+                'DetailCommande.article',
+                'DetailCommande.article.TypeArticle',
+                'DetailCommande.article.detailArticle',
+                'DetailCommande.TypeArticle',
+                'DetailCommande.detailArticle',
+            ])
+            ->latest()
+            ->get();
+
+        return view("pageadmin.dashbord.commandevalide", compact('commandes'));
+    }
+    // export pdf
+    public function genererFacture($id)
+    {
+        $commande = Commande::with([
+            'user',
+            'Detailcommande.article',
+            'DetailCommande.article.TypeArticle',
+            'DetailCommande.article.detailArticle',
+            'DetailCommande.TypeArticle',
+            'DetailCommande.detailArticle'
+        ])->findOrFail($id);
+
+        $pdf = Pdf::loadView('facture', compact('commande'));
+        return $pdf->download('facture_' . $commande->id . '.pdf');
+    }
 
     //inscription admin
     public function registerAdmin(Request $request)
@@ -185,7 +228,7 @@ class AdminController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 0) {
-                     toastify()->success('Vous êtes connecté ✔');
+                toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('admin.accueil');
             } else if (Auth::user()->role == 3) {
                 toastify()->success('Vous êtes connecté ✔');
@@ -320,7 +363,7 @@ class AdminController extends Controller
                 'taille' => 'required|string',
                 'type_article' => 'required|string',
                 'detail_article' => 'required|string',
-            ],$this->messages());
+            ], $this->messages());
 
             $article = Article::findOrFail($id);
 
@@ -412,7 +455,7 @@ class AdminController extends Controller
                 'date_stock' => 'required',
                 'date_format:Y-m-d',
                 'article_id' => 'required|exists:articles,id'
-           ],$this->messages());
+            ], $this->messages());
 
             $stock = Stock::where('article_id', $article_id)->first();
 
@@ -449,10 +492,10 @@ class AdminController extends Controller
             $request->validate([
                 'type' => 'required|string|regex:/^[A-Za-z]+$/',
                 'photo' => 'required|image|mimes:jpeg,png,jpg'
-            ],$this->messages());
+            ], $this->messages());
             $filename = time() . '.' . $request->photo->getClientOriginalExtension();
             $request->photo->move(public_path("assets/upload"), $filename);
-   $type = collect(explode(' ', strtolower($request->input('type'))))
+            $type = collect(explode(' ', strtolower($request->input('type'))))
                 ->map(fn($mot) => ucfirst($mot))
                 ->implode(' ');
             TypePaiement::create([
@@ -475,9 +518,9 @@ class AdminController extends Controller
                 'nom' => 'required|string|regex:/^[A-Za-z]+$/',
                 'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
                 'type_paiement_id' => 'required|exists:type_paiements,id',
-          ],$this->messages());
+            ], $this->messages());
 
-           $nom = collect(explode(' ', strtolower($request->input('nom'))))
+            $nom = collect(explode(' ', strtolower($request->input('nom'))))
                 ->map(fn($mot) => ucfirst($mot))
                 ->implode(' ');
 
@@ -502,7 +545,7 @@ class AdminController extends Controller
         $request->validate([
             'nom' => 'required|string|regex:/^[A-Za-z]+$/',
             'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
-         ],$this->messages());
+        ], $this->messages());
 
         $methode = MethodePaiement::findOrFail($id);
         $methode->nom = $request->nom;
@@ -522,7 +565,7 @@ class AdminController extends Controller
             'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
             'email' => 'required|email',
             'password' => 'nullable|string|min:6',
-          ],$this->messages());
+        ], $this->messages());
 
         $utilisateur = User::findOrFail($id);
 
@@ -578,7 +621,7 @@ class AdminController extends Controller
 
             'prenom.required' => 'Le prénom est obligatoire',
             'prenom.regex' => 'Entrez un prenom valide ',
-            'nom.regex'=>"Entrez nom valide"
+            'nom.regex' => "Entrez nom valide"
 
 
         ];
@@ -602,6 +645,7 @@ class AdminController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        toastify()->success('Vous êtes déconnecté ✔');
         return redirect()->route('page.admin');
     }
 }

@@ -64,6 +64,12 @@ Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier'
   Route::post('/commande/enregistrer', [ClientController::class, 'ajouterCommande'])->name('commande.enregistrer');
 //commande valide
 Route::get('/commande', [AdminController::class, 'validationcommande'])->name('admin.commande');
+//commande valide
+ Route::post('/commande/{id}/valider', [AdminController::class, 'valider'])->name('commande.valider');
+//commande deja valide
+Route::get('/commande/validation', [AdminController::class, 'commandesValide'])->name('commande.validation');
+//export en pdf
+Route::get('/facture/{id}', [AdminController::class, 'genererFacture'])->name('facture.generer');
 //profil client
 Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
 //historique client achats

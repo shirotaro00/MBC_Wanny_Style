@@ -22,7 +22,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <center>
-                                        <h3>Commande à valider</h3>
+                                        <h3>Commande valider</h3>
                                     </center>
 
                                 </div>
@@ -95,9 +95,9 @@
                                                                                 </td>
                                                                                 <td>{{ $detail->detailArticle?->couleur ?? '-' }}
                                                                                 </td>
-                                                                                <td>{{ $detail->prix_unitaire }}</td>
+                                                                                <td>{{ $detail->prix_unitaire }} MGA </td>
                                                                                 <td>{{ number_format($sousTotal, 0, ',', ' ') }}
-                                                                                    MGA</td>
+                                                                                    MGA </td>
                                                                             </tr>
                                                                             @php $total += $sousTotal; @endphp
                                                                         @endforeach
@@ -105,10 +105,11 @@
                                                                 </table>
                                                             </div>
                                                             <div class="d-flex justify-content-end mt-5">
-                                                                <form action="{{ route('commande.valider' , $commande->id) }}" method="POST">
+                                                                <form action="{{ route('facture.generer', $commande->id) }}"
+                                                                    method="GET" target="_blank">
                                                                     @csrf
                                                                     <button type="submit" class="btn btn-primary"><i
-                                                                        class="fa fa-check"></i> Valider</button>
+                                                                            class="fa fa-download"></i> Facture </button>
                                                                 </form>
 
                                                             </div>
