@@ -48,7 +48,7 @@ class ClientController extends Controller
 //profil client
     public function profil()
     {
-    $clients = User::where('role', '1')->get();
+    $clients = Auth::user();
      return view('pageclients.Profil',compact('clients'));
 
     }

@@ -13,31 +13,31 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Nom :</p>
+                                    <p>Nom : {{ $clients->nom }} </p>
 
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Prenom :</p>
+                                    <p>Prenom : {{ $clients->prenom }} </p>
 
                                 </div>
                             </div>
                               <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Adresse : </p>
+                                    <p>Adresse : {{ $clients->adresse}} </p>
 
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Telephone: </p>
+                                    <p>Telephone : {{ $clients->telephone }} </p>
 
                                 </div>
                             </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="checkout__form__input">
-                                    <p>Email :</p>
+                                    <p>Email : {{ $clients->email }} </p>
 
                                 </div>
                             </div>

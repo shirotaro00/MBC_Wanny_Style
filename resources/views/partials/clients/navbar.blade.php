@@ -59,12 +59,14 @@
 
                     <div class="header__right__auth d-flex align-items-center" style="gap: 10px; margin-bottom:20px;">
 
-                      <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
+                    @if (!(Auth::check() && Auth::user()->role === '1'))
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
                             Inscription
                         </a>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#formModal">
                             Connexion
                         </a>
+                    @endif
 
                     </div>
 
