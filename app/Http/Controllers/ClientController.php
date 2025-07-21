@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Commande;
+use Illuminate\Http\Request;
 use App\Models\DetailCommande;
 use App\Models\MethodePaiement;
-use Illuminate\Http\Request;
+use App\Notifications\CommandeRecue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -276,7 +277,15 @@ class ClientController extends Controller
                 $totalPoints += $item['quantite'];
             }
             $user->point = ($user->point ?? 0) + $totalPoints;
+
             $user->save();
+
+                $gerants = User::where('role', '0')->get();
+
+    // Notify each manager
+foreach ($gerants as $gerant) {
+    $gerant->notify(new CommandeRecue($commande));
+}
 
             session()->forget('panier');
 
@@ -284,7 +293,6 @@ class ClientController extends Controller
 
             return redirect()->route('client.historique')->with('success', 'Commande ajoutée avec succès.');
         } else {
-
             toastify()->error('Veuillez vous connecter!');
 
             return redirect()->back()->with('error', 'Veuillez vous connecter.');

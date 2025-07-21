@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,3 +95,13 @@ Route::post('/inscription', [ClientController::class, 'registerClients'])->name(
 Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');
 Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
 Route::get('/deconnexion', [ClientController::class, 'logout'])->name('client.logout');
+
+
+Route::get('/test-mail', function () {
+    Mail::raw('Test d’envoi de mail simple avec Laravel', function ($message) {
+        $message->to('rabearisonainasafidy@gmail.com')
+                ->subject('Test Laravel Email');
+    });
+
+    return 'E-mail envoyé (ou tenté) !';
+});
