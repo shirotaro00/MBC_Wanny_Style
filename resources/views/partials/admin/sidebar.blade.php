@@ -61,20 +61,20 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#tables">
+                <li class="nav-item  {{ request()->routeIs('admin.commande', 'commande.validation') ? 'active' : '' }}  ">
+                    <a data-bs-toggle="collapse" href="#tables" aria-expanded="{{ request()->routeIs('admin.commande', 'commande.validation') ? 'true' : 'false' }}">
                         <i class="fas fa-receipt"></i>
                         <p>Commande</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="tables">
+                    <div class="collapse {{ request()->routeIs('admin.commande', 'commande.validation') ? 'show' : '' }}" id="tables">
                         <ul class="nav nav-collapse">
-                            <li>
+                            <li class="{{ request()->routeIs('admin.commande') ? 'active' : '' }}">
                                 <a href="{{ route('admin.commande') }}">
                                     <span class="sub-item">Commande a valide</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="{{ request()->routeIs('commande.validation') ? 'active' : '' }}">
                                 <a href="{{ route('commande.validation') }}">
                                     <span class="sub-item">Commande valide</span>
                                 </a>
