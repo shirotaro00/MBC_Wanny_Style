@@ -16,26 +16,18 @@
                 <p>Nous avons le plaisir de vous informer qu'une commande a été effectuée <br>
                 <h4>Nom client : {{ $commande->user->nom }} </h4>
 
+                <h4><strong>Date de commande :</strong> {{ $commande->created_at->format('d/m/Y ') }}</h4>
+
                 <h4>Date livraison :  {{ $commande->date_livraison }}</h4>
 
                 <h4>Ref-article :  {{ $commande->reference_commande }}</h4>
 
             </td>
         </tr>
-        <tr>
-            <td>
-                <h4>Détails de la commande :</h4>
-                <ul>
-                    <li><strong>Date commande :</strong> {{ $commande->created_at->format('d/m/Y à H:i') }}</li>
 
-                    <li><strong>Montant total :</strong> {{ number_format($commande->prix_total) }} MGA</li>
-                    <li><strong>Statut :</strong> {{ ucfirst($commande->statut) }}</li>
-                </ul>
-            </td>
-        </tr>
         <tr>
             <td>
-                <h4>Articles commandés :</h4>
+               <h4>Détails de la commande :</h4>
                 <ul>
                     @foreach ($commande->DetailCommande as $detail)
                         <li>
@@ -47,6 +39,8 @@
                         <li>Couleur: {{ $detail->detailArticle->couleur }}</li>
                         <li>Prix unitaire: {{ number_format($detail->article->prix) }} MGA</li>
                     @endforeach
+                    <li><strong>Montant total :</strong> {{ number_format($commande->prix_total) }} MGA</li>
+                    <li><strong>Statut :</strong> {{ ucfirst($commande->statut) }}</li>
                 </ul>
             </td>
 

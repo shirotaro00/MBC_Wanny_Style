@@ -97,8 +97,7 @@
                                         <div class="stock__checkbox">
                                             <label for="stockin">
                                                 {{ $articles->detailArticle->couleur }}
-                                                <input type="checkbox" id="stockin">
-                                                <span class="checkmark"></span>
+
                                             </label>
                                         </div>
                                     </li>
