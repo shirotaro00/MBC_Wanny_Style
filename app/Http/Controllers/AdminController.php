@@ -14,6 +14,7 @@ use App\Models\MethodePaiement;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\CommandeValideeClient;
 
 
 class AdminController extends Controller
@@ -138,6 +139,9 @@ class AdminController extends Controller
         $commande = Commande::findOrFail($id);
         $commande->statut = 'validée';
         $commande->save();
+            $client = $commande->user;
+
+    $client->notify(new CommandeValideeClient($commande));
         toastify()->success('Commande validé!');
 
         return redirect()->route('commande.validation')->with('success', 'Commande validée avec succès.');

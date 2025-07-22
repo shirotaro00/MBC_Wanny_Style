@@ -30,9 +30,7 @@
                                 <div class="row row-cols-1 row-cols-md-1 g-4 justify-content-center"
                                     style="margin-top: 20px; padding-left: 30px; padding-right: 30px; ">
 
-                                    {{-- <div class="col mb-4">
-                                        <div class="card h-100 "
-                                            style="margin-left: 10px; margin-right: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);"> --}}
+
 
                                             @foreach ($commandes as $commande)
                                                 <div class="col mb-4">
@@ -115,13 +113,12 @@
 
                                                         </div>
                                                     </div>
-                                                </d iv>
+                                                </div>
                                             @endforeach
 
 
                                         </div>
-                                    {{-- </div> --}}
-
+                                    </div>
                                 </div>
 
 

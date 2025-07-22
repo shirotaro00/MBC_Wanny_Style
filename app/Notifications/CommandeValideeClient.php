@@ -8,38 +8,31 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CommandeRecue extends Notification
+class CommandeValideeClient extends Notification
 {
     use Queueable;
 
-       protected $commande;
+    public $commande;
+
     public function __construct(Commande $commande)
     {
-          $this->commande = $commande;
+        $this->commande = $commande;
     }
 
-
-
-    public function via(object $notifiable): array
+    public function via($notifiable)
     {
         return ['mail'];
     }
 
+    public function toMail($notifiable)
 
-public function toMail(object $notifiable): MailMessage
-{
+    {
 
-
-     return (new MailMessage)
+        return (new MailMessage)
         ->subject('Votre commande a été validée !')
-        ->view('email.Emailadmin', [
-
-            'gerant' => $notifiable,
+        ->view('email.Emailclients', [
             'client' => $notifiable,
             'commande' => $this->commande
         ]);
-}
-
-
-
+    }
 }
