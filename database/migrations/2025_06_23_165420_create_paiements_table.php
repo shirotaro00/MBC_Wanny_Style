@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
             $table->double('montant');
-            $table->string('Ref_paiement');
+            $table->string('Ref_paiement')->unique();
             $table->date('date_paiement');
-             $table->unsignedBigInteger("user_id")->nullable();
+            $table->unsignedBigInteger("user_id")->nullable();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+            $table->unsignedBigInteger("commande_id")->nullable();
+            $table->foreign("commande_id")->references("id")->on("commandes")->onDelete("cascade")->onUpdate("cascade");
             $table->unsignedBigInteger("methode_paiement_id")->nullable();
             $table->foreign("methode_paiement_id")->references("id")->on("methode_paiements")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();

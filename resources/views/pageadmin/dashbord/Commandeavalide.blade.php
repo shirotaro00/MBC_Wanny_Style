@@ -58,7 +58,7 @@
                                                                     </p>
                                                                     <p>Ref-article : {{ $commande->reference_commande }}
                                                                     </p>
-                                                                    <p>Ref-paiement : {{ $commande->Ref_paiement }} </p>
+                                                                    <p>Statut : {{ ucfirst($commande->statut) }}</p>
                                                                 </div>
                                                             </div>
 

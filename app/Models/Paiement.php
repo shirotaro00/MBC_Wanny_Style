@@ -13,10 +13,15 @@ class Paiement extends Model
         'Ref_paiement',
         'date_paiement',
         'user_id',
+        'commande_id',
         'methode_paiement_id'
     ];
-    public function User() {
+    public function user() {
     return $this->belongsTo(User::class, 'user_id');
+    }
+
+     public function commande() {
+    return $this->belongsTo(Commande::class, 'commande_id');
     }
 
     public function MethodePaiement() {

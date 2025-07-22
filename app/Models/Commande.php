@@ -12,7 +12,6 @@ class Commande extends Model
         'date_commande',
         'prix_total',
         'statut',
-        'Ref_paiement',
         'reference_commande',
         'date_livraison',
         'user_id'
@@ -23,6 +22,10 @@ class Commande extends Model
 
     public function DetailCommande() {
         return $this->hasMany(DetailCommande::class, 'commande_id');
+    }
+
+     public function Paiement() {
+    return $this->belongsTo(Paiement::class, 'commande_id');
     }
 
 }

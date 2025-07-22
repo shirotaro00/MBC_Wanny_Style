@@ -16,9 +16,9 @@ return new class extends Migration
             $table->date('date_commande');
             $table->double('prix_total');
             $table->string('statut');
-            $table->string('Ref_paiement');
             $table->date('date_livraison');
             $table->string('reference_commande')->unique();
+            $table->enum('statut_paiement', ['non payé', 'acompte', 'payé'])->default('non payé');
             $table->unsignedBigInteger("user_id")->nullable();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->timestamps();

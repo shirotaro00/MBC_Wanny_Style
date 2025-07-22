@@ -20,8 +20,6 @@
 
                 <h4>Date livraison :  {{ $commande->date_livraison }}</h4>
 
-                <h4>Ref-article :  {{ $commande->reference_commande }}</h4>
-
             </td>
         </tr>
 

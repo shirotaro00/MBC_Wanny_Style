@@ -95,5 +95,6 @@ Route::post('/inscription', [ClientController::class, 'registerClients'])->name(
 Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');
 Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
 Route::get('/paiement', [ClientController::class,'paiement'])->name('client.paiement');
+Route::post('/pay/store', [ClientController::class,'paiementStore'])->name('paiement.store');
 Route::get('/deconnexion', [ClientController::class, 'logout'])->name('client.logout');
 

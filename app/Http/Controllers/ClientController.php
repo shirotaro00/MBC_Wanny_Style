@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Commande;
+use App\Models\Paiement;
 use Illuminate\Http\Request;
 use App\Models\DetailCommande;
 use App\Models\MethodePaiement;
@@ -58,7 +59,19 @@ class ClientController extends Controller
        public function paiement()
     {
 
-        return view('pageclients.Paiement');
+        $commandes = Commande::with([
+            'user',
+            'DetailCommande.article',
+            'DetailCommande.article.TypeArticle',
+            'DetailCommande.article.detailArticle',
+            'DetailCommande.TypeArticle',
+            'DetailCommande.detailArticle',
+        ])
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
+        $methode = MethodePaiement::with(['TypePaiement'])->get();
+        return view('pageclients.Paiement',compact('commandes', 'methode'));
     }
 
     // historique client achats
@@ -244,7 +257,6 @@ class ClientController extends Controller
         if (Auth::user()) {
 
             $request->validate([
-                'Ref_paiement' => 'required|string|max:100',
                 'date_livraison' => [
                     'required',
                     'date',
@@ -260,7 +272,6 @@ class ClientController extends Controller
             $commande = Commande::create([
                 'user_id' => Auth::id(),
                 'date_commande' => now(),
-                'Ref_paiement' => $request->input('Ref_paiement'),
                 'reference_commande' => $this->genererReferenceCommande(),
                 'date_livraison' => $request->input('date_livraison'),
                 'statut' => 'en attente',
@@ -322,6 +333,75 @@ foreach ($gerants as $gerant) {
 
         return redirect()->back()->with('success', 'Article supprimé du panier.');
     }
+
+// ajout paiement
+public function paiementStore(Request $request)
+{
+    $request->validate([
+        'montant' => 'required|numeric|min:0',
+        'Ref_paiement' => 'required|string|max:255',
+        'methode_paiement_id' => 'required|exists:methode_paiements,id',
+    ]);
+
+    $commande = Commande::where('user_id', Auth::id())
+        ->where('statut', 'validée')
+        ->latest()
+        ->first();
+
+    if (!$commande) {
+        toastify()->error('Aucune commande à payer trouvée.');
+        return redirect()->back()->with('error', 'Aucune commande à payer trouvée.');
+    }
+
+    // Calcul du total de la commande
+    $total = $commande->detailCommande->sum(function ($detail) {
+        return $detail->prix_unitaire * $detail->quantite;
+    });
+
+    $montantPaye = $request->input('montant');
+
+    // Vérifie si l'utilisateur veut faire un acompte ou payer tout
+    if ($montantPaye < $total * 0.5) {
+        toastify()->error("Vous devez payer au moins 50% du total.");
+        return redirect()->back()->with('error', "Montant insuffisant pour le paiement partiel.");
+    }
+
+    // Vérifie s'il a déjà payé l'acompte
+    $paiementExistant = Paiement::where('commande_id', $commande->id)->sum('montant');
+
+    if ($paiementExistant >= $total) {
+        toastify()->info("Commande déjà totalement payée.");
+        return redirect()->back();
+    }
+
+    $reste = $total - $paiementExistant;
+
+    if ($montantPaye > $reste) {
+        $montantPaye = $reste; // Empêche de payer plus que le total
+    }
+
+    // Enregistrer le paiement
+    Paiement::create([
+        'montant' => $montantPaye,
+        'Ref_paiement' => $request->input('Ref_paiement'),
+        'date_paiement' => now(),
+        'user_id' => Auth::id(),
+        'commande_id' => $commande->id,
+        'methode_paiement_id' => $request->input('methode_paiement_id'),
+    ]);
+
+    // Mise à jour du statut_paiement
+    if ($montantPaye + $paiementExistant >= $total) {
+        $commande->update(['statut_paiement' => 'payé']);
+    } else {
+        $commande->update(['statut_paiement' => 'acompte']);
+    }
+
+    toastify()->success('Paiement enregistré avec succès.');
+    return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
+}
+
+
     public function message()
     {
         return [

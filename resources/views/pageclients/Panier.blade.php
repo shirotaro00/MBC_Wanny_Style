@@ -124,9 +124,6 @@
                                 <ul>
                                     <li>Total <span>{{ number_format($total, 0, ',', ' ') }}MGA</span></li>
                                 </ul>
-                                <h6>Référence de paiement</h6>
-                                <input type="text" class="form-control" name="Ref_paiement"
-                                    placeholder="Entrez votre référence" required>
                                 <h6 style="margin-top: 20px">Date livraison</h6>
                                <input type="date" class="form-control" name="date_livraison" id="dateLivraison" required>
 

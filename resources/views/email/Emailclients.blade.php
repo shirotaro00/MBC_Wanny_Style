@@ -10,8 +10,7 @@
             <td style="text-align: center;">
                 <h2 style="color: #4CAF50;"> Commande validée !</h2>
                 <p>Bonjour {{ $client->nom }},</p>
-                <p>Nous avons le plaisir de vous informer que votre commande </p><br>
-                  <h4>Ref-article :  {{ $commande->reference_commande }}  a été validée par notre gérant.</h4>
+                <p>Nous avons le plaisir de vous informer que votre commande </p><br> a été validée par notre gérant.</h4>
 
             </td>
         </tr>
