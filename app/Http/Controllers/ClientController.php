@@ -53,6 +53,14 @@ class ClientController extends Controller
         return view('pageclients.Profil', compact('clients'));
     }
 
+   // page paiement
+
+       public function paiement()
+    {
+
+        return view('pageclients.Paiement');
+    }
+
     // historique client achats
     public function historique()
     {
