@@ -10,8 +10,9 @@
             <td style="text-align: center;">
                 <h2 style="color: #4CAF50;"> Commande validée !</h2>
                 <p>Bonjour {{ $client->nom }},</p>
-                <p>Nous avons le plaisir de vous informer que votre commande </p><br> a été validée par notre gérant.</h4>
-
+                <p>Nous avons le plaisir de vous informer que votre commande  a été validée par notre gérant.</p><br>
+                <p>Mais vous devait paye 50% du totalite du paiement</p> <br>
+                <p>Voici les détails de votre commande :</p>
             </td>
         </tr>
         <tr>
@@ -20,28 +21,43 @@
                 <ul>
                     <li><strong>Date commande :</strong> {{ $commande->created_at->format('d/m/Y ') }}</li>
                      <li><strong>Date livraison :</strong> {{ $commande->date_livraison}}</li>
-                    <li><strong>Montant :</strong> {{ number_format($commande->prix_total) }} MGA</li>
+
                     <li><strong>Statut :</strong> {{ ucfirst($commande->statut) }}</li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td>
-                <h4>Articles commandés :</h4>
-                <ul>
-                    @foreach($commande->DetailCommande as $detail)
-                        <li>
-                            {{ $detail->article->nom ?? 'Article supprimé' }}
-                        </li>
-                        <li>Qté: {{ $detail->quantite }}</li>
-                        <li>Type: {{ $detail->TypeArticle->type }}</li>
-                        <li>Taille: {{ $detail->article->taille }}</li>
-                        <li>Couleur: {{ $detail->detailArticle->couleur }}</li>
-                        <li>Prix unitaire: {{ number_format($detail->article->prix ) }} MGA</li>
-                    @endforeach
-                </ul>
-            </td>
+          <td>
+    <h4>Articles commandés :</h4>
+    <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; font-size: 15px;">
+        <thead style="background: #f8f9fa;">
+            <tr>
+                <th>Nom article</th>
+                <th>Qté</th>
+                <th>Type</th>
+                <th>Taille</th>
+                <th>Couleur</th>
+                <th>Prix unitaire</th>
 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($commande->DetailCommande as $detail)
+                <tr>
+                    <td>{{ $detail->article->nom ?? 'Article supprimé' }}</td>
+                    <td>{{ $detail->quantite }}</td>
+                    <td>{{ $detail->TypeArticle->type ?? '-' }}</td>
+                    <td>{{ $detail->article->taille ?? '-' }}</td>
+                    <td>{{ $detail->detailArticle->couleur ?? '-' }}</td>
+                    <td>{{ number_format($detail->article->prix) }} MGA</td>
+
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</td>
+<br>
+<p style="text-align: right;">  Montant total a paye: {{ number_format($commande->prix_total ) }} MGA</p>
         </tr>
         <tr>
             <td style="padding-top: 30px;">
