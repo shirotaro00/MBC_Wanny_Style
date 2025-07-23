@@ -61,13 +61,11 @@ class ClientController extends Controller
 
         $commandes = Commande::with([
             'user',
-            'DetailCommande.article',
-            'DetailCommande.article.TypeArticle',
-            'DetailCommande.article.detailArticle',
-            'DetailCommande.TypeArticle',
-            'DetailCommande.detailArticle',
+            'DetailCommande.article'
         ])
             ->where('user_id', Auth::id())
+            ->where('statut', 'validée')
+            ->whereNull('statut_paiement')
             ->latest()
             ->get();
         $methode = MethodePaiement::with(['TypePaiement'])->get();
@@ -353,20 +351,17 @@ public function paiementStore(Request $request)
         return redirect()->back()->with('error', 'Aucune commande à payer trouvée.');
     }
 
-    // Calcul du total de la commande
-    $total = $commande->detailCommande->sum(function ($detail) {
-        return $detail->prix_unitaire * $detail->quantite;
-    });
+    $total = $commande->detailCommande->sum(fn($detail) =>
+        $detail->prix_unitaire * $detail->quantite
+    );
 
     $montantPaye = $request->input('montant');
 
-    // Vérifie si l'utilisateur veut faire un acompte ou payer tout
     if ($montantPaye < $total * 0.5) {
         toastify()->error("Vous devez payer au moins 50% du total.");
         return redirect()->back()->with('error', "Montant insuffisant pour le paiement partiel.");
     }
 
-    // Vérifie s'il a déjà payé l'acompte
     $paiementExistant = Paiement::where('commande_id', $commande->id)->sum('montant');
 
     if ($paiementExistant >= $total) {
@@ -375,12 +370,10 @@ public function paiementStore(Request $request)
     }
 
     $reste = $total - $paiementExistant;
-
     if ($montantPaye > $reste) {
-        $montantPaye = $reste; // Empêche de payer plus que le total
+        $montantPaye = $reste;
     }
 
-    // Enregistrer le paiement
     Paiement::create([
         'montant' => $montantPaye,
         'Ref_paiement' => $request->input('Ref_paiement'),
@@ -390,16 +383,16 @@ public function paiementStore(Request $request)
         'methode_paiement_id' => $request->input('methode_paiement_id'),
     ]);
 
-    // Mise à jour du statut_paiement
-    if ($montantPaye + $paiementExistant >= $total) {
-        $commande->update(['statut_paiement' => 'payé']);
-    } else {
-        $commande->update(['statut_paiement' => 'acompte']);
-    }
+    $totalPaye = Paiement::where('commande_id', $commande->id)->sum('montant');
+
+    $nouveauStatut = $totalPaye >= $total ? 'payé' : 'acompte';
+    $commande->statut_paiement = $nouveauStatut;
+    $commande->save();
 
     toastify()->success('Paiement enregistré avec succès.');
     return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
 }
+
 
 
     public function message()

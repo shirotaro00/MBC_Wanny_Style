@@ -11,8 +11,13 @@
             </div>
             <div class="modal-body">
 
-                <form action="" method="POST">
+                <form action="{{ route('paiement.store') }}" method="POST">
                     @csrf
+
+                    @foreach ($commandes as $commande)
+                          <input type="hidden" name="commande_id" value="{{ $commande->id }}">
+                    @endforeach
+                    <input type="text" name="user_id" value="{{ Auth::id() }}" hidden>
                     <div class="mb-3">
                         <label for="Type" class="form-label">Montant</label>
                         <input type="text" class="form-control @error('type') is-invalid @enderror"
@@ -29,8 +34,10 @@
                             <label for="methode_paiement_id" class="form-label"> Methode de paiement
                             </label>
                             <select class="form-select form-control" id="methode_paiement_id" name="methode_paiement_id">
-                                <option value="">
-                                </option>
+                                @foreach ($methode as $m)
+                                    <option value="{{ $m->id }}">{{ $m->TypePaiement->type }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 

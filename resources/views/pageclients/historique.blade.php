@@ -51,6 +51,7 @@
                                                                       <p>Date de livraison : {{ $commande->date_livraison }}
                                                                       </p>
                                                                       <p>Ref-article : {{ $commande->reference_commande }}
+                                                                        <p>Statut : {{ $commande->statut}} </p>
                                                                       </p>
                                                                   </div>
                                                               </div>

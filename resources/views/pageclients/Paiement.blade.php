@@ -4,6 +4,7 @@
   @section('body')
       @include('partials/clients.navbar')
       @include('partials.clients.modal.Pay')
+
       <section class="checkout spad">
           <div class="container">
 
@@ -53,6 +54,8 @@
                                                                       </p>
                                                                       <p>Ref-article : {{ $commande->reference_commande }}
                                                                       </p>
+                                                                       <p>Statut : {{ $commande->statut }}
+                                                                      </p>
                                                                   </div>
                                                               </div>
 
@@ -97,8 +100,6 @@
                                                                   </table>
                                                               </div>
                                                               <div class="d-flex justify-content-end mt-5">
-
-
                                                                   <button class="btn btn-primary" data-bs-toggle="modal"
                                                                       data-bs-target="#payModal">
                                                                       Payé</button>
