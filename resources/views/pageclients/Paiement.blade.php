@@ -1,163 +1,134 @@
-@extends('partials/clients.App');
-@section('style')
-@endsection
-@section('body')
-    @include('partials/clients.navbar')
+  @extends('partials/clients.App');
+  @section('style')
+  @endsection
+  @section('body')
+      @include('partials/clients.navbar')
+      @include('partials.clients.modal.Pay')
+      <section class="checkout spad">
+          <div class="container">
 
-    <!-- Checkout Section Begin -->
-    <section class="checkout spad">
-        <div class="container">
-
-            <form action="{{ route('paiement.store') }}" class="checkout__form" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h5>Paiement</h5>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Nom : {{ Auth::user()->nom }} </p>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Prenom : {{ Auth::user()->prenom }} </p>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Telephone : {{ Auth::user()->telephone }} </p>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Adresse : {{ Auth::user()->adresse }} </p>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Email : {{ Auth::user()->email }} </p>
-
-                                </div>
-                            </div>
+              <form action="#" class="checkout__form">
+                  <div class="row">
+                      <div class="container ">
+                          <div class="page-inner">
+                              <div class="page-header">
 
 
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="checkout__order">
-                            <h5>Vos commandes</h5>
-                            @php $total = 0; @endphp
-                            @foreach ($commandes as $commande)
-                                <div class="checkout__order__product">
-                                    <ul>
-                                        <li>
-                                            <span class="top__text">Référence commande</span>
-                                            <span class="top__text__right">Prix</span>
-                                        </li>
-                                        @foreach ($commande->detailCommande as $detail)
-                                            <li>
-                                                {{ $commande->reference_commande ?? '' }}
-                                                 <span>{{ number_format($detail->article->prix, 0, ',', ' ') }} MGA</span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endforeach
-                            <div class="checkout__order__total">
-                                <ul>
-                                    <li>Total  <span>{{ number_format($detail->prix_unitaire * $detail->quantite, 0, ',', ' ') }} MGA</span></li>
-                                </ul>
-                            <label for="">Montant
-                                    <input type="text"  class="form-control" id="" name="montant">
-                                </label>
-                                <br>
-                                <label for="">Reference paiement
-                                    <input type="text" class="form-control" id="" name="Ref_paiement">
-                                </label>
-                                <br>
-                                <label for="">
-                                    <select name="methode_paiement_id" class="form-select" id="">
-                                        <option value="">Choisir une méthode de paiement</option>
-                                        @foreach ($methode as $item)
-                                            <option value="{{ $item->id }}">{{ $item->TypePaiement->type }}</option>
-                                        @endforeach
-                                    </select>
-                                </label>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="card">
+                                          <div class="card-header">
+                                              <center>
+                                                  <h3>Commande valide </h3>
+                                              </center>
 
-                            </div>
+                                          </div>
 
-                            <button type="submit" class="site-btn">payé</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
-    <!-- Checkout Section End -->
+                                          <div class="row row-cols-1 row-cols-md-1 g-4 justify-content-center"
+                                              style="margin-top: 20px; padding-left: 30px; padding-right: 30px; ">
+                                              @foreach ($commandes as $commande)
+                                                  <div class="col mb-4">
+                                                      <div class="card h-100 "
+                                                          style="margin-left: 10px; margin-right: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
+                                                          <div class="card-body">
+                                                              <h5 class="card-title">Commande le:
+                                                                  {{ \Carbon\Carbon::parse($commande->date_commande)->format('d/m/Y') }}
+                                                              </h5>
 
-    <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Instagram End -->
-    @include('partials/clients.footer')
-@endsection
 
-@section('script')
-@endsection
+                                                              <div class="row">
+                                                                  <div class="col-md-6">
+                                                                      <p>Nom : {{ $commande->user?->nom ?? 'Inconnu' }} </p>
+                                                                      <p>Prenom :
+                                                                          {{ $commande->user?->prenom ?? 'Inconnu' }} </p>
+                                                                      <p>Adresse :
+                                                                          {{ $commande->user?->adresse ?? 'Inconnu' }} </p>
+                                                                      <p>Telephone :
+                                                                          {{ $commande->user?->telephone ?? 'Inconnu' }}
+                                                                      </p>
+                                                                  </div>
+                                                                  <div class="col-md-6">
+                                                                      <p>Date de livraison : {{ $commande->date_livraison }}
+                                                                      </p>
+                                                                      <p>Ref-article : {{ $commande->reference_commande }}
+                                                                      </p>
+                                                                  </div>
+                                                              </div>
+
+                                                              <div class="table-responsive ">
+                                                                  <table class="table  ">
+                                                                      <thead>
+                                                                          <tr>
+                                                                              <th scope="col">Nom article</th>
+                                                                              <th scope="col">Quantité</th>
+                                                                              <th scope="col">Categorie</th>
+                                                                              <th scope="col">Type</th>
+                                                                              <th scope="col">Taille</th>
+                                                                              <th scope="col">Couleur</th>
+                                                                              <th scope="col">Prix unitaire</th>
+                                                                              <th scope="col">Total</th>
+                                                                          </tr>
+                                                                      </thead>
+                                                                      <tbody>
+
+                                                                          @php $total = 0; @endphp
+                                                                          @foreach ($commande->DetailCommande as $detail)
+                                                                              @php $sousTotal = $detail->prix_unitaire * $detail->quantite; @endphp
+                                                                              <tr>
+                                                                                  <td>{{ $detail->article->nom ?? 'Article supprimé' }}
+                                                                                  </td>
+                                                                                  <td>{{ $detail->quantite }}</td>
+                                                                                  <td>{{ $detail->article->categorie ?? '-' }}
+                                                                                  </td>
+                                                                                  <td>{{ $detail->TypeArticle?->type ?? '-' }}
+                                                                                  </td>
+                                                                                  <td>{{ $detail->article->taille ?? '-' }}
+                                                                                  </td>
+                                                                                  <td>{{ $detail->detailArticle?->couleur ?? '-' }}
+                                                                                  </td>
+                                                                                  <td>{{ $detail->prix_unitaire }}</td>
+                                                                                  <td>{{ number_format($sousTotal, 0, ',', ' ') }}
+                                                                                      MGA</td>
+                                                                              </tr>
+                                                                              @php $total += $sousTotal; @endphp
+                                                                          @endforeach
+                                                                      </tbody>
+                                                                  </table>
+                                                              </div>
+                                                              <div class="d-flex justify-content-end mt-5">
+
+
+                                                                  <button class="btn btn-primary" data-bs-toggle="modal"
+                                                                      data-bs-target="#payModal">
+                                                                      Payé</button>
+
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              @endforeach
+
+
+                                          </div>
+
+
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+
+
+          </div>
+          </form>
+          </div>
+      </section>
+      @include('partials/clients.footer')
+
+  @endsection
+
+  @section('script')

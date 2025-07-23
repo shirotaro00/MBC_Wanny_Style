@@ -51,7 +51,7 @@
                         <li><a href="{{ route('client.historique') }}">Historique d'achats</a></li>
                         @endif
                           @if (Auth::check() && Auth::user()->role === '1')
-                        <li><a href="{{ route('client.paiement') }}">Paiement</a></li>
+                        <li><a href="{{ route('client.paiement') }}">Commande valide</a></li>
                         @endif
                         <li><a href="./contact.html">Contact</a></li>
                     </ul>
