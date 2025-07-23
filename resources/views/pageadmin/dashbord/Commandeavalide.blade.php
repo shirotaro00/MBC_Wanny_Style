@@ -73,7 +73,7 @@
                                                                     <th scope="col">Taille</th>
                                                                     <th scope="col">Couleur</th>
                                                                     <th scope="col">Prix unitaire</th>
-                                                                    <th scope="col">Total</th>
+
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
