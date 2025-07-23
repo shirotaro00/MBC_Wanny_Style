@@ -24,8 +24,20 @@ class Paiement extends Model
     return $this->belongsTo(Commande::class, 'commande_id');
     }
 
-    public function MethodePaiement() {
+    public function methodePaiement() {
         return $this->belongsTo(MethodePaiement::class, 'methode_paiement_id');
     }
+    public function typePaiement()
+{
+    return $this->hasOneThrough(
+        TypePaiement::class,        // Le modèle final
+        MethodePaiement::class,     // Le modèle intermédiaire
+        'id',                       // Clé dans methode_paiements (vers type_paiement_id)
+        'id',                       // Clé dans type_paiements
+        'methode_paiement_id',      // Clé dans paiements
+        'type_paiement_id'          // Clé dans methode_paiements
+    );
+}
+
 
 }

@@ -21,7 +21,8 @@
                                 <div class="card-header">
 
                                     <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Historique des paiements
+                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Historique des
+                                            paiements
                                         </h3>
 
                                     </div>
@@ -41,17 +42,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            @foreach ($paiements as $paiement)
+                                                @php
+                                                    $commande = $paiement->commande;
+                                                    $total = $commande->detailCommande->sum(
+                                                        fn($d) => $d->prix_unitaire * $d->quantite,
+                                                    );
+                                                    $dejaPaye = $commande->paiements->sum('montant');
+                                                    $reste = max($total - $dejaPaye, 0);
+                                                @endphp
 
+                                                <tr>
+                                                    <td>{{ $paiement->user->nom }} {{ $paiement->user->prenom }}</td>
+                                                    <td>{{ $commande->reference_commande ?? 'N/A' }}</td>
+                                                    <td>{{ $paiement->Ref_paiement }}</td>
+                                                    <td>{{ number_format($paiement->montant, 0, ',', ' ') }} MGA</td>
+                                                    <td>{{ number_format($reste, 0, ',', ' ') }} MGA</td>
+                                                    <td>{{ \Carbon\Carbon::parse($paiement->date_paiement)->format('d/m/Y') }}
+                                                    </td>
+                                                    <td>{{ $paiement->typePaiement->type ?? 'Inconnue' }}</td>
+
+
+                                                </tr>
+                                            @endforeach
                                         </tbody>
+
 
                                     </table>
 
@@ -64,7 +79,3 @@
             </div>
         </div>
     @endsection
-
-
-
-

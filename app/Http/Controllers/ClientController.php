@@ -54,9 +54,9 @@ class ClientController extends Controller
         return view('pageclients.Profil', compact('clients'));
     }
 
-   // page paiement
+    // page paiement
 
-       public function paiement()
+    public function paiement()
     {
 
         $commandes = Commande::with([
@@ -69,7 +69,7 @@ class ClientController extends Controller
             ->latest()
             ->get();
         $methode = MethodePaiement::with(['TypePaiement'])->get();
-        return view('pageclients.Paiement',compact('commandes', 'methode'));
+        return view('pageclients.Paiement', compact('commandes', 'methode'));
     }
 
     // historique client achats
@@ -297,12 +297,12 @@ class ClientController extends Controller
 
             $user->save();
 
-                $gerants = User::where('role', '0')->get();
+            $gerants = User::where('role', '0')->get();
 
-    // Notify each manager
-foreach ($gerants as $gerant) {
-    $gerant->notify(new CommandeRecue($commande));
-}
+            // Notify each manager
+            foreach ($gerants as $gerant) {
+                $gerant->notify(new CommandeRecue($commande));
+            }
 
             session()->forget('panier');
 
@@ -332,66 +332,67 @@ foreach ($gerants as $gerant) {
         return redirect()->back()->with('success', 'Article supprimé du panier.');
     }
 
-// ajout paiement
-public function paiementStore(Request $request)
-{
-    $request->validate([
-        'montant' => 'required|numeric|min:0',
-        'Ref_paiement' => 'required|string|max:255',
-        'methode_paiement_id' => 'required|exists:methode_paiements,id',
-    ]);
+    // ajout paiement
+    public function paiementStore(Request $request)
+    {
+        $request->validate([
+            'montant' => 'required|numeric|min:0',
+            'Ref_paiement' => 'required|string|max:255',
+            'methode_paiement_id' => 'required|exists:methode_paiements,id',
+        ]);
 
-    $commande = Commande::where('user_id', Auth::id())
-        ->where('statut', 'validée')
-        ->latest()
-        ->first();
+        $commande = Commande::where('user_id', Auth::id())
+            ->where('statut', 'validée')
+            ->latest()
+            ->first();
 
-    if (!$commande) {
-        toastify()->error('Aucune commande à payer trouvée.');
-        return redirect()->back()->with('error', 'Aucune commande à payer trouvée.');
+        if (!$commande) {
+            toastify()->error('Aucune commande à payer trouvée.');
+            return redirect()->back()->with('error', 'Aucune commande à payer trouvée.');
+        }
+
+        $total = $commande->detailCommande->sum(
+            fn($detail) =>
+            $detail->prix_unitaire * $detail->quantite
+        );
+
+        $montantPaye = $request->input('montant');
+
+        if ($montantPaye < $total * 0.5) {
+            toastify()->error("Vous devez payer au moins 50% du total.");
+            return redirect()->back()->with('error', "Montant insuffisant pour le paiement partiel.");
+        }
+
+        $paiementExistant = Paiement::where('commande_id', $commande->id)->sum('montant');
+
+        if ($paiementExistant >= $total) {
+            toastify()->info("Commande déjà totalement payée.");
+            return redirect()->back();
+        }
+
+        $reste = $total - $paiementExistant;
+        if ($montantPaye > $reste) {
+            $montantPaye = $reste;
+        }
+
+        Paiement::create([
+            'montant' => $montantPaye,
+            'Ref_paiement' => $request->input('Ref_paiement'),
+            'date_paiement' => now(),
+            'user_id' => Auth::id(),
+            'commande_id' => $commande->id,
+            'methode_paiement_id' => $request->input('methode_paiement_id'),
+        ]);
+
+        $totalPaye = Paiement::where('commande_id', $commande->id)->sum('montant');
+
+        $nouveauStatut = $totalPaye >= $total ? 'payé' : 'acompte';
+        $commande->statut_paiement = $nouveauStatut;
+        $commande->save();
+
+        toastify()->success('Paiement enregistré avec succès.');
+        return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
     }
-
-    $total = $commande->detailCommande->sum(fn($detail) =>
-        $detail->prix_unitaire * $detail->quantite
-    );
-
-    $montantPaye = $request->input('montant');
-
-    if ($montantPaye < $total * 0.5) {
-        toastify()->error("Vous devez payer au moins 50% du total.");
-        return redirect()->back()->with('error', "Montant insuffisant pour le paiement partiel.");
-    }
-
-    $paiementExistant = Paiement::where('commande_id', $commande->id)->sum('montant');
-
-    if ($paiementExistant >= $total) {
-        toastify()->info("Commande déjà totalement payée.");
-        return redirect()->back();
-    }
-
-    $reste = $total - $paiementExistant;
-    if ($montantPaye > $reste) {
-        $montantPaye = $reste;
-    }
-
-    Paiement::create([
-        'montant' => $montantPaye,
-        'Ref_paiement' => $request->input('Ref_paiement'),
-        'date_paiement' => now(),
-        'user_id' => Auth::id(),
-        'commande_id' => $commande->id,
-        'methode_paiement_id' => $request->input('methode_paiement_id'),
-    ]);
-
-    $totalPaye = Paiement::where('commande_id', $commande->id)->sum('montant');
-
-    $nouveauStatut = $totalPaye >= $total ? 'payé' : 'acompte';
-    $commande->statut_paiement = $nouveauStatut;
-    $commande->save();
-
-    toastify()->success('Paiement enregistré avec succès.');
-    return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
-}
 
 
 

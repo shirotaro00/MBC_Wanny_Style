@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Stock;
 use App\Models\Article;
 use App\Models\Commande;
+use App\Models\Paiement;
 use App\Models\TypeArticle;
 use App\Models\TypePaiement;
 use Illuminate\Http\Request;
@@ -116,10 +117,11 @@ class AdminController extends Controller
 
     //historique paiement
 
-   public function historique_paiement()
+    public function historique_paiement()
     {
+        $paiements = Paiement::with(['user', 'commande.detailCommande', 'commande.paiements', 'methodePaiement'])->latest()->get();
 
-        return view("pageadmin.dashbord.historiquepayement" );
+        return view("pageadmin.dashbord.historiquepayement", compact('paiements'));
     }
 
     //page validation commande
@@ -134,7 +136,7 @@ class AdminController extends Controller
             'DetailCommande.TypeArticle',
             'DetailCommande.detailArticle',
         ])
-          ->where('statut', 'en attente')
+            ->where('statut', 'en attente')
             ->latest()
             ->get();
 
@@ -146,9 +148,9 @@ class AdminController extends Controller
         $commande = Commande::findOrFail($id);
         $commande->statut = 'validée';
         $commande->save();
-            $client = $commande->user;
+        $client = $commande->user;
 
-    $client->notify(new CommandeValideeClient($commande));
+        $client->notify(new CommandeValideeClient($commande));
         toastify()->success('Commande validé!');
 
         return redirect()->route('commande.validation')->with('success', 'Commande validée avec succès.');
