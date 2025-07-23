@@ -168,6 +168,7 @@ class AdminController extends Controller
     {
         $commande = Commande::with([
             'user',
+            'paiements',
             'Detailcommande.article',
             'DetailCommande.article.TypeArticle',
             'DetailCommande.article.detailArticle',

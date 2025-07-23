@@ -24,8 +24,8 @@ class Commande extends Model
         return $this->hasMany(DetailCommande::class, 'commande_id');
     }
 
-     public function Paiement() {
-    return $this->belongsTo(Paiement::class, 'commande_id');
+     public function paiements() {
+    return $this->hasMany(Paiement::class, 'commande_id');
     }
 
 }
