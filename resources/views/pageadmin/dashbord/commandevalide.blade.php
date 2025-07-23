@@ -60,7 +60,7 @@
                                                             </p>
                                                             <p>Ref-article : {{ $commande->reference_commande }}
                                                             </p>
-                                                            <p>Ref-paiement : {{ $commande->Ref_paiement }} </p>
+                                                            <p>Statut : {{ $commande->statut }} </p>
                                                         </div>
                                                     </div>
 
