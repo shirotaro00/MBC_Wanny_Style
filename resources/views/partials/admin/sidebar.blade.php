@@ -125,17 +125,17 @@
 
 
 
-                <li class="nav-item {{ request()->routeIs('add.payement') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->routeIs('add.payement','historique.paiement') ? 'active' : '' }}">
                     <a data-bs-toggle="collapse" href="#payement"
                         aria-expanded="{{ request()->routeIs('add.payement') ? 'true' : 'false' }}">
                         <i class="fa-solid fa-credit-card"></i>
                         <p>Paiement</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse {{ request()->routeIs('add.payement') ? 'show' : '' }}" id="payement">
+                    <div class="collapse {{ request()->routeIs('historique.paiement','add.payement') ? 'show' : '' }}" id="payement">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="">
+                            <li class="{{ request()->routeIs('historique.paiement') ? 'active' : '' }}">
+                                <a href="{{route('historique.paiement')}}">
                                     <span class="sub-item">Historique</span>
                                 </a>
                             </li>

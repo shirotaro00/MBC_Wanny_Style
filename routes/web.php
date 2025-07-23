@@ -71,6 +71,8 @@ Route::get('/commande', [AdminController::class, 'validationcommande'])->name('a
 Route::get('/commande/validation', [AdminController::class, 'commandesValide'])->name('commande.validation');
 //export en pdf
 Route::get('/facture/{id}', [AdminController::class, 'genererFacture'])->name('facture.generer');
+//Historique des paiements
+Route::get('/historique-paiement', [AdminController::class, 'historique_paiement'])->name('historique.paiement');
 //profil client
 Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
 //historique client achats

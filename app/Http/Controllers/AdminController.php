@@ -114,6 +114,13 @@ class AdminController extends Controller
         return view("pageadmin.dashbord.Addarticle", compact("types", "details"));
     }
 
+    //historique paiement
+
+   public function historique_paiement()
+    {
+
+        return view("pageadmin.dashbord.historiquepayement" );
+    }
 
     //page validation commande
     public function validationcommande()
