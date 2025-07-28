@@ -401,23 +401,33 @@ public function articles(Request $request)
     $tailles = (array) $request->input('taille');
     $couleurs = (array) $request->input('couleur');
 
+    // Filtre catégorie (champ sur Article)
     if (!empty($categories)) {
         $query->whereIn('categorie', $categories);
     }
 
+    // Filtre taille (champ sur Article)
     if (!empty($tailles)) {
         $query->whereIn('taille', $tailles);
     }
 
+    // Filtre couleur (champ sur detailArticle, relation)
     if (!empty($couleurs)) {
         $query->whereHas('detailArticle', function ($q) use ($couleurs) {
             $q->whereIn('couleur', $couleurs);
-        });
+        }, '>=', 1);
     }
 
     $articles = $query->get();
 
-    return view('pageclients.Article', compact('articles', 'categories', 'tailles', 'couleurs'));
+    // On affiche le message dans la vue si aucun article ne correspond et au moins un filtre est appliqué
+    $message = null;
+    $hasFilter = !empty($categories) || !empty($tailles) || !empty($couleurs);
+    if ($articles->isEmpty() && $hasFilter) {
+        $message = 'Aucun article ne correspond à votre recherche.';
+    }
+
+    return view('pageclients.Article', compact('articles', 'categories', 'tailles', 'couleurs', 'message'));
 }
 
 

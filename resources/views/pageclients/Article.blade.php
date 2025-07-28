@@ -88,10 +88,11 @@
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="row">
-                        @if ($articles->isEmpty())
+                        @php $message = $message ?? null; @endphp
+                        @if ($message)
                             <div class="col-12 text-center">
                                 <div class="alert alert-warning mt-4 mb-4">
-                                    Aucun article ne correspond à votre recherche.
+                                    {{ $message }}
                                 </div>
                             </div>
                         @else
