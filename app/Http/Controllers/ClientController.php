@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -393,6 +392,37 @@ class ClientController extends Controller
         toastify()->success('Paiement enregistré avec succès.');
         return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
     }
+
+   // Filtrage des articles selon les paramètres GET
+public function articles(Request $request)
+{
+    $query = Article::query()->with('detailArticle');
+
+    $categories = (array) $request->input('categorie');
+    $tailles = (array) $request->input('taille');
+    $couleurs = (array) $request->input('couleur');
+
+    if (!empty($categories)) {
+        $query->whereIn('categorie', $categories);
+    }
+
+    if (!empty($tailles)) {
+        $query->whereIn('taille', $tailles);
+    }
+
+    if (!empty($couleurs)) {
+        $query->whereHas('detailArticle', function ($q) use ($couleurs) {
+            $q->whereIn('couleur', $couleurs);
+        });
+    }
+
+    $articles = $query->get();
+
+    return view('pageclients.Article', compact('articles', 'categories', 'tailles', 'couleurs'));
+}
+
+
+
 
 
 

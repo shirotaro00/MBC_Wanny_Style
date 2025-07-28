@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -16,16 +17,57 @@ use App\Http\Controllers\ClientController;
 |
 */
 
+//Route clients
 Route::get('/',[ClientController::class, 'accueil'])->name('page.accueil');
+Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');
 Route::get('/article',[ClientController::class, 'article'])->name('page.article');
 Route::get('/details/{id}',[ClientController::class, 'details'])->name('page.details');
+Route::get('/articles', [ClientController::class, 'articles'])->name('page.articles');
+
+// authentification clients (publiques)
+Route::post('/inscription', [ClientController::class, 'registerClients'])->name('client.register');
+Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
+
+// Routes protégées client
+Route::middleware(['auth', 'client'])->group(function () {
+    //clientpanier
+    Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
+    // ajout commande
+    Route::post('/commande/enregistrer', [ClientController::class, 'ajouterCommande'])->name('commande.enregistrer');
+    //profil client
+    Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
+    //historique client achats
+    Route::get('/historique', [ClientController::class, 'historique'])->name('client.historique');
+    //ajout panier
+    Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
+    //mise a jour panier
+    Route::post('/panier/modifier', [ClientController::class, 'modifierGlobal'])->name('panier.modifier.global');
+    //suppression panier
+    Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien'])->name('panier.supprimer.lien');
+    //clients paiements
+    Route::get('/paiement', [ClientController::class,'paiement'])->name('client.paiement');
+    Route::post('/pay/store', [ClientController::class,'paiementStore'])->name('paiement.store');
+    //deconnexion client
+    Route::get('/deconnexion', [ClientController::class, 'logout'])->name('client.logout');
+});
 
 
 // route pour admin
 Route::get('/connexion',[AdminController::class, 'admin'])->name('page.admin');
+Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
+// authentification admin
+Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
+Route::post('/administration',[AdminController::class, 'login'])->name('admin.auth');
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+//page accueil admin
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
+//page article
 Route::get('/addarticle',[AdminController::class, 'addarticle'])->name('admin.addarticle');
+//liste article
 Route::get('/listearticle',[AdminController::class, 'listearticle'])->name('admin.listearticle');
+//edit article
 Route::put('/editarticle/{id}',[AdminController::class, 'updateArticle'])->name('admin.editarticle1');
 Route::get('/editarticle/{id}',[AdminController::class, 'editarticle'])->name('admin.editarticle');
 Route::get('/gestionutilisateur', [AdminController::class, 'Gestionutilisateur'])->name('admin.gutilisateur');
@@ -34,11 +76,6 @@ Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 Route::post('/utilisateur/update/{id}', [AdminController::class, 'update'])->name('admin.utilisateur.update');
 Route::post('/admin/pay/update/{id}',[AdminController::class, 'updatePay'])->name('pay.update');
 Route::post('/admin/users/gestionrole/{id}/role',[AdminController::class, 'updaterole'])->name('admin.utilisateurG.update');
-
-
-
-
-
 //route ajout type article
 Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 //route ajout  article
@@ -59,10 +96,6 @@ Route::post('/storeType',[AdminController::class, 'TypePaiement'])->name('store.
 Route::post('/storeMethode',[AdminController::class, 'methodePaiement'])->name('store.methode');
 //ajout stock
 Route::post('/admin/stock/ajouter/{article_id}', [AdminController::class, 'ajouterStock'])->name('admin.ajouterStock');
-//clientpanier
-Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
-// ajout commande
-  Route::post('/commande/enregistrer', [ClientController::class, 'ajouterCommande'])->name('commande.enregistrer');
 //commande valide
 Route::get('/commande', [AdminController::class, 'validationcommande'])->name('admin.commande');
 //commande valide
@@ -73,30 +106,11 @@ Route::get('/commande/validation', [AdminController::class, 'commandesValide'])-
 Route::get('/facture/{id}', [AdminController::class, 'genererFacture'])->name('facture.generer');
 //Historique des paiements
 Route::get('/historique-paiement', [AdminController::class, 'historique_paiement'])->name('historique.paiement');
-//profil client
-Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
-//historique client achats
-Route::get('/historique', [ClientController::class, 'historique'])->name('client.historique');
-
-
-//ajout panier
-Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
-//mise a jour panier
-Route::post('/panier/modifier', [ClientController::class, 'modifierGlobal'])->name('panier.modifier.global');
-//suppression panier
-Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien'])->name('panier.supprimer.lien');
-
-// authentification admin
-Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
-Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
-Route::post('/administration',[AdminController::class, 'login'])->name('admin.auth');
 // route deconnexion admin
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('deconnexion');
-// authentification clients
-Route::post('/inscription', [ClientController::class, 'registerClients'])->name('client.register');
-Route::get('/connecter', [ClientController::class, 'connecter'])->name('client.connecte');
-Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
-Route::get('/paiement', [ClientController::class,'paiement'])->name('client.paiement');
-Route::post('/pay/store', [ClientController::class,'paiementStore'])->name('paiement.store');
-Route::get('/deconnexion', [ClientController::class, 'logout'])->name('client.logout');
+});
+
+
+
+
 
