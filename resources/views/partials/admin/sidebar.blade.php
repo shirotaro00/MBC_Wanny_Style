@@ -24,8 +24,8 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
-                <li class="nav-item {{ request()->routeIs('admin.accueil') ? 'active' : '' }}">
-                    <a href="{{ route('admin.accueil') }}">
+                <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}">
                         <i class="far fa-chart-bar"></i>
                         <p>Tableau de bord</p>
                     </a>
