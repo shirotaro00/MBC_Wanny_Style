@@ -13,10 +13,11 @@ use Illuminate\Http\Request;
 use App\Models\DetailArticle;
 use App\Models\MethodePaiement;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\CommandeValideeClient;
-
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -243,7 +244,7 @@ class AdminController extends Controller
             $request->session()->regenerate();
             if (Auth::user()->role == 0) {
                 toastify()->success('Vous êtes connecté ✔');
-                return redirect()->route('admin.accueil');
+                return redirect()->route('admin.dashboard');
             } else if (Auth::user()->role == 3) {
                 toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('admin.accueil');
@@ -662,4 +663,55 @@ class AdminController extends Controller
         toastify()->success('Vous êtes déconnecté ✔');
         return redirect()->route('page.admin');
     }
+
+
+
+public function commandesValideParJour()
+{
+    // Début et fin de la semaine actuelle (lundi à dimanche)
+    $debutSemaine = Carbon::now()->startOfWeek(); // Lundi
+    $finSemaine = Carbon::now()->endOfWeek();     // Dimanche
+
+    // Récupérer les commandes validées de cette semaine, groupées par jour de la semaine
+    $commandesParJour = DB::table('commandes')
+        ->where('statut', 'validée')
+        ->whereBetween('created_at', [$debutSemaine, $finSemaine])
+        ->select(
+            DB::raw('DAYOFWEEK(created_at) as jour'),
+            DB::raw('COUNT(*) as total_commandes')
+        )
+        ->groupBy('jour')
+        ->get();
+
+    // Ordre souhaité : Lundi → Samedi → Dimanche
+    $joursFr = [
+        2 => 'Lundi',
+        3 => 'Mardi',
+        4 => 'Mercredi',
+        5 => 'Jeudi',
+        6 => 'Vendredi',
+        7 => 'Samedi',
+        1 => 'Dimanche',
+    ];
+
+    $labels = [];
+    $data = [];
+
+    foreach ($joursFr as $index => $nomJour) {
+        $labels[] = $nomJour;
+
+        $commandeDuJour = $commandesParJour->firstWhere('jour', $index);
+        $data[] = $commandeDuJour ? $commandeDuJour->total_commandes : 0;
+    }
+
+    return view('pageadmin.dashbord.dashboard', compact('labels', 'data'));
 }
+
+
+
+
+
+}
+
+
+

@@ -34,7 +34,7 @@ Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 Route::post('/utilisateur/update/{id}', [AdminController::class, 'update'])->name('admin.utilisateur.update');
 Route::post('/admin/pay/update/{id}',[AdminController::class, 'updatePay'])->name('pay.update');
 Route::post('/admin/users/gestionrole/{id}/role',[AdminController::class, 'updaterole'])->name('admin.utilisateurG.update');
-
+Route::get('/admin/dashboard', [AdminController::class, 'commandesValideParJour'])->name('admin.dashboard');
 
 
 

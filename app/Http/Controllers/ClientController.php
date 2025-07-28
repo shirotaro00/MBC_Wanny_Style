@@ -65,7 +65,6 @@ class ClientController extends Controller
         ])
             ->where('user_id', Auth::id())
             ->where('statut', 'validée')
-            ->whereNull('statut_paiement')
             ->latest()
             ->get();
         $methode = MethodePaiement::with(['TypePaiement'])->get();
