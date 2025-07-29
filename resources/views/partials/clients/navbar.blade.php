@@ -101,6 +101,11 @@
                         <li>
                             <a href="{{ route('client.panier') }}">
                                 <i class="fa-solid fa-cart-shopping"></i>
+                                    @if ($panierCount > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ $panierCount }}
+            </span>
+        @endif
                             </a></li>
                     </ul>
                 </div>

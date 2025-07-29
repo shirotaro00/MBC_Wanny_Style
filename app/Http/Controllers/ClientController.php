@@ -12,6 +12,8 @@ use App\Models\MethodePaiement;
 use App\Notifications\CommandeRecue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
@@ -201,11 +203,18 @@ class ClientController extends Controller
             ];
         }
 
+
         session()->put('panier', $panier);
+
+        $panierCount = array_sum(array_column($panier, 'quantite'));
+session()->put('panierCount', $panierCount);
         toastify()->success('Article ajouté au panier!');
 
         return redirect()->route('client.panier')->with('success', 'Article ajouté au panier.');
     }
+
+
+
     //modification panier
 
     public function modifierGlobal(Request $request)
