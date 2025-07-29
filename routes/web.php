@@ -29,7 +29,11 @@ Route::post('/inscription', [ClientController::class, 'registerClients'])->name(
 Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
 Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
  //ajout panier
-    Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
+Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
+//mise a jour panier
+Route::post('/panier/modifier', [ClientController::class, 'modifierGlobal'])->name('panier.modifier.global');
+//suppression panier
+Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien'])->name('panier.supprimer.lien');
 
 // Routes protégées client
 Route::middleware(['auth', 'client'])->group(function () {
@@ -40,10 +44,6 @@ Route::middleware(['auth', 'client'])->group(function () {
     Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
     //historique client achats
     Route::get('/historique', [ClientController::class, 'historique'])->name('client.historique');
-    //mise a jour panier
-    Route::post('/panier/modifier', [ClientController::class, 'modifierGlobal'])->name('panier.modifier.global');
-    //suppression panier
-    Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien'])->name('panier.supprimer.lien');
     //clients paiements
     Route::get('/paiement', [ClientController::class,'paiement'])->name('client.paiement');
     Route::post('/pay/store', [ClientController::class,'paiementStore'])->name('paiement.store');
