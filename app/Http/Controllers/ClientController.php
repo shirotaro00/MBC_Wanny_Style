@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -100,45 +101,44 @@ class ClientController extends Controller
     {
         try {
             $request->validate([
-            'nom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
-            'prenom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'adresse' => 'required|string|regex:/^(?!\d+$).+$/',
-            'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
-        ], $this->message());
-        // Corriger automatiquement la casse si besoin
-        $nom = collect(explode(' ', strtolower($request->input('nom'))))
-            ->map(fn($mot) => ucfirst($mot))
-            ->implode(' ');
-        $prenom = collect(explode(' ', strtolower($request->input('prenom'))))
-            ->map(fn($mot) => ucfirst($mot))
-            ->implode(' ');
-        $adresse = collect(explode(' ', strtolower($request->input('adresse'))))
-            ->map(fn($mot) => ucfirst($mot))
-            ->implode(' ');
+                'nom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
+                'prenom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6|confirmed',
+                'adresse' => 'required|string|regex:/^(?!\d+$).+$/',
+                'telephone' => 'required|string|regex:/^\+?[0-9]{1,10}$/',
+            ], $this->message());
+            // Corriger automatiquement la casse si besoin
+            $nom = collect(explode(' ', strtolower($request->input('nom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+            $prenom = collect(explode(' ', strtolower($request->input('prenom'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
+            $adresse = collect(explode(' ', strtolower($request->input('adresse'))))
+                ->map(fn($mot) => ucfirst($mot))
+                ->implode(' ');
 
 
-        $clients = User::create([
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'adresse' => $adresse,
-            'telephone' => $request->telephone,
-            'role' => '1',
-        ]);
+            $clients = User::create([
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'adresse' => $adresse,
+                'telephone' => $request->telephone,
+                'role' => '1',
+            ]);
 
-        Auth::login($clients);
+            Auth::login($clients);
 
-        toastify()->success('Votre compte été créer avec succès ✔');
+            toastify()->success('Votre compte été créer avec succès ✔');
 
-        return redirect()->back()->with('Votre compte été créer avec succès');
-        } catch (\Exception $e ) {
+            return redirect()->back()->with('Votre compte été créer avec succès');
+        } catch (\Exception $e) {
             toastify()->error('Une erreur est survenue lors de la création du compte. Veuillez réessayer.');
-           return redirect()->back()->withInput();
+            return redirect()->back()->withInput();
         }
-
     }
     //connexion clients
     public function login(Request $request)
@@ -156,13 +156,9 @@ class ClientController extends Controller
                 toastify()->success('Vous êtes connecté ✔');
                 return redirect()->route('page.accueil');
             }
-        } else if (!Auth::attempt($credentials)) {
-            return back()
-                ->withInput()
-                ->with([
-                    'login_error' => 'Email ou mot de passe incorrect.',
-                    'form_type' => 'login',
-                ]);
+        } else {
+            toastify()->error('Email ou mot de passe incorrect.');
+            return redirect()->back()->with('error', 'Email ou mot de passe incorrect.');
         }
     }
     // ajout panier
@@ -320,8 +316,6 @@ class ClientController extends Controller
         }
     }
 
-
-
     //suppresion panier via lien
     public function supprimerViaLien($id)
     {
@@ -398,48 +392,43 @@ class ClientController extends Controller
         return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
     }
 
-   // Filtrage des articles selon les paramètres GET
-public function articles(Request $request)
-{
-    $query = Article::query()->with('detailArticle');
+    // Filtrage des articles selon les paramètres GET
+    public function articles(Request $request)
+    {
+        $query = Article::query()->with('detailArticle');
 
-    $categories = (array) $request->input('categorie');
-    $tailles = (array) $request->input('taille');
-    $couleurs = (array) $request->input('couleur');
+        $categories = (array) $request->input('categorie');
+        $tailles = (array) $request->input('taille');
+        $couleurs = (array) $request->input('couleur');
 
-    // Filtre catégorie (champ sur Article)
-    if (!empty($categories)) {
-        $query->whereIn('categorie', $categories);
+        // Filtre catégorie (champ sur Article)
+        if (!empty($categories)) {
+            $query->whereIn('categorie', $categories);
+        }
+
+        // Filtre taille (champ sur Article)
+        if (!empty($tailles)) {
+            $query->whereIn('taille', $tailles);
+        }
+
+        // Filtre couleur (champ sur detailArticle, relation)
+        if (!empty($couleurs)) {
+            $query->whereHas('detailArticle', function ($q) use ($couleurs) {
+                $q->whereIn('couleur', $couleurs);
+            }, '>=', 1);
+        }
+
+        $articles = $query->get();
+
+        // On affiche le message dans la vue si aucun article ne correspond et au moins un filtre est appliqué
+        $message = null;
+        $hasFilter = !empty($categories) || !empty($tailles) || !empty($couleurs);
+        if ($articles->isEmpty() && $hasFilter) {
+            $message = 'Aucun article ne correspond à votre recherche.';
+        }
+
+        return view('pageclients.Article', compact('articles', 'categories', 'tailles', 'couleurs', 'message'));
     }
-
-    // Filtre taille (champ sur Article)
-    if (!empty($tailles)) {
-        $query->whereIn('taille', $tailles);
-    }
-
-    // Filtre couleur (champ sur detailArticle, relation)
-    if (!empty($couleurs)) {
-        $query->whereHas('detailArticle', function ($q) use ($couleurs) {
-            $q->whereIn('couleur', $couleurs);
-        }, '>=', 1);
-    }
-
-    $articles = $query->get();
-
-    // On affiche le message dans la vue si aucun article ne correspond et au moins un filtre est appliqué
-    $message = null;
-    $hasFilter = !empty($categories) || !empty($tailles) || !empty($couleurs);
-    if ($articles->isEmpty() && $hasFilter) {
-        $message = 'Aucun article ne correspond à votre recherche.';
-    }
-
-    return view('pageclients.Article', compact('articles', 'categories', 'tailles', 'couleurs', 'message'));
-}
-
-
-
-
-
 
     public function message()
     {
