@@ -393,42 +393,48 @@ class ClientController extends Controller
     }
 
     // Filtrage des articles selon les paramètres GET
-    public function articles(Request $request)
-    {
-        $query = Article::query()->with('detailArticle');
+public function articles(Request $request)
+{
+    $query = Article::with('detailArticle');
 
-        $categories = (array) $request->input('categorie');
-        $tailles = (array) $request->input('taille');
-        $couleurs = (array) $request->input('couleur');
+    $categories = $request->input('categorie', []);
+    $tailles = $request->input('taille', []);
+    $couleurs = $request->input('couleur', []);
 
-        // Filtre catégorie (champ sur Article)
-        if (!empty($categories)) {
-            $query->whereIn('categorie', $categories);
-        }
-
-        // Filtre taille (champ sur Article)
-        if (!empty($tailles)) {
-            $query->whereIn('taille', $tailles);
-        }
-
-        // Filtre couleur (champ sur detailArticle, relation)
-        if (!empty($couleurs)) {
-            $query->whereHas('detailArticle', function ($q) use ($couleurs) {
-                $q->whereIn('couleur', $couleurs);
-            }, '>=', 1);
-        }
-
-        $articles = $query->get();
-
-        // On affiche le message dans la vue si aucun article ne correspond et au moins un filtre est appliqué
-        $message = null;
-        $hasFilter = !empty($categories) || !empty($tailles) || !empty($couleurs);
-        if ($articles->isEmpty() && $hasFilter) {
-            $message = 'Aucun article ne correspond à votre recherche.';
-        }
-
-        return view('pageclients.Article', compact('articles', 'categories', 'tailles', 'couleurs', 'message'));
+    // Filtre catégorie
+    if (!empty($categories)) {
+        $query->whereIn('categorie', $categories);
     }
+
+    // Filtre taille
+    if (!empty($tailles)) {
+        $query->whereIn('taille', $tailles);
+    }
+
+    // Filtre couleur (relation)
+    if (!empty($couleurs)) {
+        $query->whereHas('detailArticle', function ($q) use ($couleurs) {
+            $q->whereIn('couleur', $couleurs);
+        });
+    }
+
+    $articles = $query->get();
+
+    // Afficher un message si aucun article ne correspond
+    $message = null;
+    if ($articles->isEmpty() && ($categories || $tailles || $couleurs)) {
+        $message = 'Aucun article ne correspond à votre recherche.';
+    }
+
+    return view('pageclients.Article', [
+        'articles' => $articles,
+        'categories' => $categories,
+        'tailles' => $tailles,
+        'couleurs' => $couleurs,
+        'message' => $message,
+    ]);
+}
+
 
     public function message()
     {
