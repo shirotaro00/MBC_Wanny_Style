@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Stock;
 use App\Models\Article;
@@ -11,13 +12,13 @@ use App\Models\TypeArticle;
 use App\Models\TypePaiement;
 use Illuminate\Http\Request;
 use App\Models\DetailArticle;
+use App\Models\DetailCommande;
 use App\Models\MethodePaiement;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\CommandeValideeClient;
-use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -39,6 +40,7 @@ class AdminController extends Controller
 
     public function dashbordadmin()
     {
+
         return view("pageadmin.dashbord.dashboard");
     }
 
@@ -668,6 +670,11 @@ class AdminController extends Controller
 
 public function commandesValideParJour()
 {
+    $articlesVendusJour = DetailCommande::whereDate('created_at', today())->sum('quantite');
+    // Calcul du nombre d'articles vendus cette semaine (du lundi au dimanche)
+    $debutSemaine = Carbon::now()->startOfWeek();
+    $finSemaine = Carbon::now()->endOfWeek();
+    $articlesVendusSemaine = DetailCommande::whereBetween('created_at', [$debutSemaine, $finSemaine])->sum('quantite');
     // Début et fin de la semaine actuelle (lundi à dimanche)
     $debutSemaine = Carbon::now()->startOfWeek(); // Lundi
     $finSemaine = Carbon::now()->endOfWeek();     // Dimanche
@@ -704,11 +711,8 @@ public function commandesValideParJour()
         $data[] = $commandeDuJour ? $commandeDuJour->total_commandes : 0;
     }
 
-    return view('pageadmin.dashbord.dashboard', compact('labels', 'data'));
+    return view('pageadmin.dashbord.dashboard', compact('labels', 'data','articlesVendusJour','articlesVendusSemaine'));
 }
-
-
-
 
 
 }
