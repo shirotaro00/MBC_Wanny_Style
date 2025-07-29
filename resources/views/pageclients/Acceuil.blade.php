@@ -412,19 +412,7 @@
 
 @section('script')
 @endsection
-@if ($errors->any())
-    <script>
-        toastify({
-            text: "{{ $errors->first() }}",
-            backgroundColor: "red",
-            duration: 3000
-        }).showToast();
 
-        // Réouvrir la modale automatiquement
-        const modal = new bootstrap.Modal(document.getElementById('forminscription'));
-        modal.show();
-    </script>
-@endif
 
 
 
