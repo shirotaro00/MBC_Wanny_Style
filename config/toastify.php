@@ -70,6 +70,6 @@ return [
 
     'defaults' => [
         'gravity' => 'toastify-top',
-        'position' => 'right',
+        'position' => 'center',
     ],
 ];

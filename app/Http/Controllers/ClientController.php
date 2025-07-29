@@ -98,7 +98,8 @@ class ClientController extends Controller
     //inscription clients
     public function registerClients(Request $request)
     {
-        $request->validate([
+        try {
+            $request->validate([
             'nom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
             'prenom' => 'required|string|regex:/^[A-Za-zÀ-ÿ\s\-\'\.]+$/u',
             'email' => 'required|email|unique:users',
@@ -133,6 +134,11 @@ class ClientController extends Controller
         toastify()->success('Votre compte été créer avec succès ✔');
 
         return redirect()->back()->with('Votre compte été créer avec succès');
+        } catch (\Exception $e ) {
+            toastify()->error('Une erreur est survenue lors de la création du compte. Veuillez réessayer.');
+           return redirect()->back()->withInput();
+        }
+
     }
     //connexion clients
     public function login(Request $request)

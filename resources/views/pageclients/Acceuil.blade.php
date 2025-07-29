@@ -412,16 +412,19 @@
 
 @section('script')
 @endsection
-{{-- Modal d’inscription (forminscription) --}}
 @if ($errors->any())
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var modal = new bootstrap.Modal(document.getElementById('forminscription'));
-            modal.show();
-        });
+        toastify({
+            text: "{{ $errors->first() }}",
+            backgroundColor: "red",
+            duration: 3000
+        }).showToast();
+
+        // Réouvrir la modale automatiquement
+        const modal = new bootstrap.Modal(document.getElementById('forminscription'));
+        modal.show();
     </script>
 @endif
-
 
 
 
