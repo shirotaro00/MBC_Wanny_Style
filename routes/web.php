@@ -27,19 +27,19 @@ Route::get('/articles', [ClientController::class, 'articles'])->name('page.artic
 // authentification clients (publiques)
 Route::post('/inscription', [ClientController::class, 'registerClients'])->name('client.register');
 Route::post('/authentification', [ClientController::class,'login'])->name('client.auth');
+Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
+ //ajout panier
+    Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
 
 // Routes protégées client
 Route::middleware(['auth', 'client'])->group(function () {
     //clientpanier
-    Route::get('/panier', [ClientController::class, 'panier'])->name('client.panier');
     // ajout commande
     Route::post('/commande/enregistrer', [ClientController::class, 'ajouterCommande'])->name('commande.enregistrer');
     //profil client
     Route::get('/profilclient', [ClientController::class, 'profil'])->name('client.profil');
     //historique client achats
     Route::get('/historique', [ClientController::class, 'historique'])->name('client.historique');
-    //ajout panier
-    Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name('panier.ajouter');
     //mise a jour panier
     Route::post('/panier/modifier', [ClientController::class, 'modifierGlobal'])->name('panier.modifier.global');
     //suppression panier
