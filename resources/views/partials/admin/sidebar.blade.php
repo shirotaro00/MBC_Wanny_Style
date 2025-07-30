@@ -41,7 +41,7 @@
                     <a data-bs-toggle="collapse" href="#forms"
                         aria-expanded="{{ request()->routeIs('admin.addarticle', 'admin.listearticle') ? 'true' : 'false' }}">
                         <i class="fas fa-tags"></i>
-                        <p>Article</p>
+                        <p>Articles</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse {{ request()->routeIs('admin.addarticle', 'admin.listearticle') ? 'show' : '' }}"
@@ -49,12 +49,12 @@
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('admin.addarticle') ? 'active' : '' }}">
                                 <a href="{{ route('admin.addarticle') }}">
-                                    <span class="sub-item">Ajout article </span>
+                                    <span class="sub-item">Ajout d'article </span>
                                 </a>
                             </li>
                             <li class="{{ request()->routeIs('admin.listearticle') ? 'active' : '' }}">
                                 <a href="{{ route('admin.listearticle') }}">
-                                    <span class="sub-item">Liste article </span>
+                                    <span class="sub-item">Listes articles </span>
                                 </a>
                             </li>
                         </ul>
@@ -64,19 +64,19 @@
                 <li class="nav-item  {{ request()->routeIs('admin.commande', 'commande.validation') ? 'active' : '' }}  ">
                     <a data-bs-toggle="collapse" href="#tables" aria-expanded="{{ request()->routeIs('admin.commande', 'commande.validation') ? 'true' : 'false' }}">
                         <i class="fas fa-receipt"></i>
-                        <p>Commande</p>
+                        <p>Commandes</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse {{ request()->routeIs('admin.commande', 'commande.validation') ? 'show' : '' }}" id="tables">
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('admin.commande') ? 'active' : '' }}">
                                 <a href="{{ route('admin.commande') }}">
-                                    <span class="sub-item">Commande a valide</span>
+                                    <span class="sub-item">Commande à valider</span>
                                 </a>
                             </li>
                             <li class="{{ request()->routeIs('commande.validation') ? 'active' : '' }}">
                                 <a href="{{ route('commande.validation') }}">
-                                    <span class="sub-item">Commande valide</span>
+                                    <span class="sub-item">Commande valider</span>
                                 </a>
                             </li>
                         </ul>
@@ -86,7 +86,7 @@
                     <a data-bs-toggle="collapse" href="#stock"
                         aria-expanded="{{ request()->routeIs('admin.stockarticle', 'stock.sortant') ? 'true' : 'false' }}">
                         <i class="fa-solid fa-boxes-stacked"></i>
-                        <p>Stock</p>
+                        <p>Stocks</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse {{ request()->routeIs('admin.stockarticle', 'stock.sortant') ? 'show' : '' }}"
@@ -94,12 +94,12 @@
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('admin.stockarticle') ? 'active' : '' }}">
                                 <a href="{{ route('admin.stockarticle') }}">
-                                    <span class="sub-item">Stock Entrant</span>
+                                    <span class="sub-item">Stock entrant</span>
                                 </a>
                             </li>
                             <li class="{{ request()->routeIs('stock.sortant') ? 'active' : '' }}">
                                 <a href="{{ route('stock.sortant') }}">
-                                    <span class="sub-item">Stock Sortant</span>
+                                    <span class="sub-item">Stock sortant</span>
                                 </a>
                             </li>
                         </ul>
@@ -118,7 +118,7 @@
                     <li class="nav-item {{ request()->routeIs('admin.gutilisateur') ? 'active' : '' }}">
                         <a href="{{ route('admin.gutilisateur') }}">
                             <i class="fa-solid fa-users-gear"></i>
-                            <p>Gestion utilisateurs</p>
+                            <p>Gestions utilisateurs</p>
                         </a>
                     </li>
                 @endif
@@ -129,14 +129,14 @@
                     <a data-bs-toggle="collapse" href="#payement"
                         aria-expanded="{{ request()->routeIs('add.payement') ? 'true' : 'false' }}">
                         <i class="fa-solid fa-credit-card"></i>
-                        <p>Paiement</p>
+                        <p>Paiements</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse {{ request()->routeIs('historique.paiement','add.payement') ? 'show' : '' }}" id="payement">
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('historique.paiement') ? 'active' : '' }}">
                                 <a href="{{route('historique.paiement')}}">
-                                    <span class="sub-item">Historique</span>
+                                    <span class="sub-item">Historiques des piaements</span>
                                 </a>
                             </li>
                             <li class="{{ request()->routeIs('add.payement') ? 'active' : '' }}">
