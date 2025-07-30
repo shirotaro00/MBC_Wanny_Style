@@ -6,20 +6,7 @@
     @include('partials.clients.modal.inscription')
     @include('partials.clients.modal.connexion')
 
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="{{ route('page.accueil') }}"><i class="fa fa-home"></i> Accueil</a>
-                        <span>Article</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
+
 
     <!-- Shop Section Begin -->
     <section class="shop spad">

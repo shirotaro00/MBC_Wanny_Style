@@ -16,6 +16,7 @@ use App\Models\DetailCommande;
 use App\Models\MethodePaiement;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\CommandeValideeClient;
@@ -153,10 +154,25 @@ class AdminController extends Controller
         $commande->save();
         $client = $commande->user;
 
-        $client->notify(new CommandeValideeClient($commande));
-        toastify()->success('Commande validé!');
 
-        return redirect()->route('commande.validation')->with('success', 'Commande validée avec succès.');
+          try {
+
+         $client->notify(new CommandeValideeClient($commande));
+        toastify()->success('Commande validée!');
+
+         return redirect()->route('commande.validation')->with('success', 'Commande validée avec succès.');
+    } catch (\Exception $e) {
+        // Loguer l'erreur pour le développeur
+        Log::error('Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
+
+        // Stocker un message d'erreur pour la vue
+         toastify()->error('Impossible d\'envoyer l\'e-mail aux gérants. Vérifiez votre connexion.');
+  return redirect()->back();
+    }
+
+
+
+
     }
     //page des commandes deja valide
     public function commandesValide()
@@ -460,6 +476,7 @@ class AdminController extends Controller
             return redirect()->back()->with('success', 'Methode de paiement supprimée avec succès.');
         }
     }
+
     //ajout stock
     public function ajouterStock(Request $request, $article_id)
     {
@@ -499,6 +516,7 @@ class AdminController extends Controller
             return redirect()->route('admin.stockarticle')->with('success', 'stock ajouté ');
         }
     }
+
     //type paiement
     public function TypePaiement(Request $request)
     {
@@ -524,6 +542,7 @@ class AdminController extends Controller
             return redirect()->route('add.payement')->with('success', 'type paiement ajouté');
         }
     }
+
     //methode paiement
     public function methodePaiement(Request $request)
     {

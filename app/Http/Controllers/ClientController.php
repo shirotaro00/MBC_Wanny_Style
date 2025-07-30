@@ -9,6 +9,7 @@ use App\Models\Paiement;
 use Illuminate\Http\Request;
 use App\Models\DetailCommande;
 use App\Models\MethodePaiement;
+use Illuminate\Support\Facades\Log;
 use App\Notifications\CommandeRecue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -308,16 +309,27 @@ session()->put('panierCount', $panierCount);
 
             $gerants = User::where('role', '0')->get();
 
-            // Notify each manager
-            foreach ($gerants as $gerant) {
-                $gerant->notify(new CommandeRecue($commande));
-            }
 
-            session()->forget('panier');
+
+    try {
+        foreach ($gerants as $gerant) {
+            $gerant->notify(new CommandeRecue($commande));
+        }
+         session()->forget('panier');
 
             toastify()->success('Commande ajoutée avec succès!');
 
             return redirect()->route('client.historique')->with('success', 'Commande ajoutée avec succès.');
+    } catch (\Exception $e) {
+        // Loguer l'erreur pour le développeur
+        Log::error('Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
+
+        // Stocker un message d'erreur pour la vue
+         toastify()->error('Impossible d\'envoyer l\'e-mail aux gérants. Vérifiez votre connexion.');
+  return redirect()->back();
+    }
+
+
         } else {
             toastify()->error('Veuillez vous connecter!');
 

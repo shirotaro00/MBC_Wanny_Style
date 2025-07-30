@@ -1,7 +1,9 @@
 @include('partials.clients.modal.inscription')
 @include('partials.clients.modal.connexion')
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous"><!-- Page Preloder -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+<!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
@@ -20,7 +22,8 @@
     </ul>
     <div class="offcanvas__logo" style="text-align: center; padding: 20px 0;">
         <a href="{{ route('page.accueil') }}">
-            <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo" style="max-width: 120px; height: auto; display: inline-block;">
+            <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo"
+                style="max-width: 120px; height: auto; display: inline-block;">
         </a>
     </div>
     <div id="mobile-menu-wrap"></div>
@@ -44,42 +47,58 @@
             </div>
             <div class="col-xl-6 col-lg-7">
                 <nav class="header__menu">
+                    @php
+                        $routeName = Route::currentRouteName();
+                    @endphp
+
                     <ul>
-                        <li class="active"><a href="{{ route('page.accueil') }}">Accueil</a></li>
-                        <li><a href="{{ route('page.article') }}">Article</a></li>
-                         @if (Auth::check() && Auth::user()->role === '1')
-                        <li><a href="{{ route('client.historique') }}">Historique d'achats</a></li>
+                        <li class="{{ $routeName === 'page.accueil' ? 'active' : '' }}">
+                            <a href="{{ route('page.accueil') }}">Accueil</a>
+                        </li>
+
+                        <li class="{{ $routeName === 'page.article' ? 'active' : '' }}">
+                            <a href="{{ route('page.article') }}">Article</a>
+                        </li>
+
+                        @if (Auth::check() && Auth::user()->role === '1')
+                            <li class="{{ $routeName === 'client.historique' ? 'active' : '' }}">
+                                <a href="{{ route('client.historique') }}">Historique d'achats</a>
+                            </li>
+
+                            <li class="{{ $routeName === 'client.paiement' ? 'active' : '' }}">
+                                <a href="{{ route('client.paiement') }}">Commande validée</a>
+                            </li>
                         @endif
-                          @if (Auth::check() && Auth::user()->role === '1')
-                        <li><a href="{{ route('client.paiement') }}">Commande valide</a></li>
-                        @endif
-                        <li><a href="./contact.html">Contact</a></li>
+
+
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-3" >
+            <div class="col-lg-3">
                 <div class="header__right d-flex align-items-center justify-content-end" style="gap: 18px;">
 
                     <div class="header__right__auth d-flex align-items-center" style="gap: 10px; margin-bottom:20px;">
 
-                    @if (!(Auth::check() && Auth::user()->role === '1'))
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
-                            Inscription
-                        </a>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#formModal">
-                            Connexion
-                        </a>
-                    @endif
+                        @if (!(Auth::check() && Auth::user()->role === '1'))
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
+                                Inscription
+                            </a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#formModal">
+                                Connexion
+                            </a>
+                        @endif
 
                     </div>
 
-                    <ul class="header__right__widget d-flex align-items-center mb-0" style="gap: 30px; list-style: none;">
+                    <ul class="header__right__widget d-flex align-items-center mb-0"
+                        style="gap: 30px; list-style: none;">
                         <li class="d-flex align-items-center dropdown" style="gap: 6px;">
-                             @if (Auth::check() && Auth::user()->role === '1')
-                            <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
-                                <i class="fa-solid fa-user-circle"></i>
-                                <span style="margin-left: 10px;">{{ Auth::user()->prenom }}</span>
-                            </a>
+                            @if (Auth::check() && Auth::user()->role === '1')
+                                <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown"
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
+                                    <i class="fa-solid fa-user-circle"></i>
+                                    <span style="margin-left: 10px;">{{ Auth::user()->prenom }}</span>
+                                </a>
                             @endif
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li>
@@ -101,12 +120,14 @@
                         <li>
                             <a href="{{ route('client.panier') }}">
                                 <i class="fa-solid fa-cart-shopping"></i>
-                                    @if ($panierCount > 0)
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{ $panierCount }}
-            </span>
-        @endif
-                            </a></li>
+                                @if ($panierCount > 0)
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ $panierCount }}
+                                    </span>
+                                @endif
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -117,10 +138,7 @@
     </div>
 </header>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+</script>
 <!-- Header Section End -->
-
-
-
-
-
