@@ -668,50 +668,63 @@ class AdminController extends Controller
 
 
 
-public function commandesValideParJour()
+public function commandesValideParJour(Request $request)
 {
-    $articlesVendusJour = DetailCommande::whereDate('created_at', today())->sum('quantite');
-    // Calcul du nombre d'articles vendus cette semaine (du lundi au dimanche)
-    $debutSemaine = Carbon::now()->startOfWeek();
-    $finSemaine = Carbon::now()->endOfWeek();
-    $articlesVendusSemaine = DetailCommande::whereBetween('created_at', [$debutSemaine, $finSemaine])->sum('quantite');
-    // Début et fin de la semaine actuelle (lundi à dimanche)
-    $debutSemaine = Carbon::now()->startOfWeek(); // Lundi
-    $finSemaine = Carbon::now()->endOfWeek();     // Dimanche
 
-    // Récupérer les commandes validées de cette semaine, groupées par jour de la semaine
-    $commandesParJour = DB::table('commandes')
-        ->where('statut', 'validée')
-        ->whereBetween('created_at', [$debutSemaine, $finSemaine])
+    $articlesVendusJour = DetailCommande::whereDate('created_at', now())->sum('quantite');
+
+    $nombreClients = User::where('role',1)->count();
+
+    $inventaires = Article::with(['detailArticle'])
+        ->get()
+        ->map(function($article) {
+            $stock_initial = $article->quantite ?? 0;
+            $stock_sortant = DetailCommande::where('article_id', $article->id)->sum('quantite');
+            $stock_restant = $stock_initial - $stock_sortant;
+            return (object)[
+                'article' => $article,
+                'stock_initial' => $stock_initial,
+                'stock_sortant' => $stock_sortant,
+                'stock_restant' => $stock_restant,
+            ];
+        });
+
+    $mois = $request->input('mois', Carbon::now()->month);
+    $annee = $request->input('annee', Carbon::now()->year);
+
+    $debutMois = Carbon::create($annee, $mois, 1)->startOfMonth();
+    $finMois = Carbon::create($annee, $mois, 1)->endOfMonth();
+
+    $articlesParSemaine = DB::table('detail_commandes')
+        ->whereBetween('created_at', [$debutMois, $finMois])
         ->select(
-            DB::raw('DAYOFWEEK(created_at) as jour'),
-            DB::raw('COUNT(*) as total_commandes')
+            DB::raw('YEARWEEK(created_at, 1) as annee_semaine'),
+            DB::raw('WEEK(created_at, 1) as semaine'),
+            DB::raw('SUM(quantite) as total_articles')
         )
-        ->groupBy('jour')
+        ->groupBy('annee_semaine', 'semaine')
+        ->orderBy('annee_semaine')
         ->get();
-
-    // Ordre souhaité : Lundi → Samedi → Dimanche
-    $joursFr = [
-        2 => 'Lundi',
-        3 => 'Mardi',
-        4 => 'Mercredi',
-        5 => 'Jeudi',
-        6 => 'Vendredi',
-        7 => 'Samedi',
-        1 => 'Dimanche',
-    ];
 
     $labels = [];
     $data = [];
 
-    foreach ($joursFr as $index => $nomJour) {
-        $labels[] = $nomJour;
-
-        $commandeDuJour = $commandesParJour->firstWhere('jour', $index);
-        $data[] = $commandeDuJour ? $commandeDuJour->total_commandes : 0;
+    $semaineDebut = $debutMois->copy()->startOfWeek();
+    $semaineFin = $finMois->copy()->endOfWeek();
+    $semaines = [];
+    $current = $semaineDebut->copy();
+    while ($current->lte($semaineFin)) {
+        $labels[] = 'Semaine ' . $current->weekOfYear;
+        $semaines[] = $current->weekOfYear;
+        $current->addWeek();
     }
 
-    return view('pageadmin.dashbord.dashboard', compact('labels', 'data','articlesVendusJour','articlesVendusSemaine'));
+    foreach ($semaines as $index => $numSemaine) {
+        $val = $articlesParSemaine->firstWhere('semaine', $numSemaine);
+        $data[] = $val ? $val->total_articles : 0;
+    }
+
+    return view('pageadmin.dashbord.dashboard', compact('labels', 'data', 'mois', 'annee','articlesVendusJour','nombreClients','inventaires'));
 }
 
 
