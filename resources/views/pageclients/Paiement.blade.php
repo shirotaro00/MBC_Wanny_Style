@@ -8,7 +8,7 @@
       <section class="checkout spad">
           <div class="container">
 
-              <form action="#" class="checkout__form">
+
                   <div class="row">
                       <div class="container ">
                           <div class="page-inner">
@@ -101,7 +101,7 @@
                                                               </div>
                                                               <div class="d-flex justify-content-end mt-5">
                                                                   <button class="btn btn-primary" data-bs-toggle="modal"
-                                                                      data-bs-target="#payModal">
+                                                                      data-bs-target="#payModal"><i class="fa-solid fa-money-bill-1"></i>
                                                                       Payé</button>
 
                                                               </div>
@@ -125,7 +125,7 @@
 
 
           </div>
-          </form>
+
           </div>
       </section>
       @include('partials/clients.footer')

@@ -101,7 +101,7 @@
                                     data-setbg="{{ asset('assets/upload/' . $article->photo) }}">
                                     <ul class="product__hover">
                                         <li>
-                                            <a href="{{ asset('assets/upload/' . $article->photo) }}" class="image-popup">
+                                             <a href="{{ asset('assets/upload/' . $article->photo) }}" class="image-popup">
                                                 <span><i class="fas fa-up-right-and-down-left-from-center"></i></span>
                                             </a>
                                         </li>
@@ -111,7 +111,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="{{ route('panier.ajouter', $article->id) }}">
                                                 <span><i class="fas fa-cart-plus"></i></span>
                                             </a>
                                         </li>

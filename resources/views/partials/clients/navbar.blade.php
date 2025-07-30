@@ -36,13 +36,13 @@
 <!-- Offcanvas Menu End -->
 
 <!-- Header Section Begin -->
-<header class="header">
+<header class="header " >
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-3 col-lg-2">
-                <div class="header__logo">
-                    <a href="./index.html"><img class="photo" src=" {{ asset('assets/img/logo.jpg') }}"
-                            alt=""></a>
+            <div class="col-xl-3 col-lg-2" >
+                <div class="header__logo" style="margin-bottom: 7px">
+                    <a href="{{ route('page.accueil') }}"><img class="photo" src=" {{ asset('assets/img/logo.jpg') }}"
+                       style="width:140px;height:50px"    alt=""></a>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-7">
@@ -75,9 +75,9 @@
                 </nav>
             </div>
             <div class="col-lg-3">
-                <div class="header__right d-flex align-items-center justify-content-end" style="gap: 18px;">
+                <div class="header__right d-flex align-items-center justify-content-end" style="gap: 18px; margin-top: 4px;">
 
-                    <div class="header__right__auth d-flex align-items-center" style="gap: 10px; margin-bottom:20px;">
+                    <div class="header__right__auth d-flex align-items-center" style="gap: 10px; margin-bottom:15px;">
 
                         @if (!(Auth::check() && Auth::user()->role === '1'))
                             <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
@@ -91,7 +91,7 @@
                     </div>
 
                     <ul class="header__right__widget d-flex align-items-center mb-0"
-                        style="gap: 30px; list-style: none;">
+                        style="gap: 30px; list-style: none; margin-top:11px">
                         <li class="d-flex align-items-center dropdown" style="gap: 6px;">
                             @if (Auth::check() && Auth::user()->role === '1')
                                 <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown"
@@ -108,12 +108,11 @@
                                 </li>
 
                                 <li>
-                                    <form action="" method="POST" style="margin:0;">
-                                        @csrf
+
                                         <a href="{{ route('client.logout') }}" class="dropdown-item">
                                             <i class="fa fa-sign-out-alt"></i> Déconnexion
                                         </a>
-                                    </form>
+
                                 </li>
                             </ul>
                         </li>
