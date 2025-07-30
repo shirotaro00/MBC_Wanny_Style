@@ -692,7 +692,7 @@ public function commandesValideParJour(Request $request)
 
     $articlesVendusJour = DetailCommande::whereDate('created_at', now())->sum('quantite');
 
-    $nombreClients = User::where('role',1)->count();
+    $nombreClients = User::where('role',"1")->count();
 
     $inventaires = Article::with(['detailArticle'])
         ->get()
