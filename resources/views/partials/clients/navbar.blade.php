@@ -13,12 +13,7 @@
 <div class="offcanvas-menu-wrapper">
     <div class="offcanvas__close">+</div>
     <ul class="offcanvas__widget">
-        <li><span class="icon_search search-switch"></span></li>
 
-        </a></li>
-        <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">4</div>
-            </a></li>
     </ul>
     <div class="offcanvas__logo" style="text-align: center; padding: 20px 0;">
         <a href="{{ route('page.accueil') }}">
@@ -94,7 +89,7 @@
                         style="gap: 30px; list-style: none; margin-top:11px">
                         <li class="d-flex align-items-center dropdown" style="gap: 6px;">
                             @if (Auth::check() && Auth::user()->role === '1')
-                                <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown"
+                                <a href="{{ route('client.profil') }}" class="d-flex align-items-center dropdown-toggle" id="userDropdown"
                                     data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
                                     <i class="fa-solid fa-user-circle"></i>
                                     <span style="margin-left: 10px;">{{ Auth::user()->prenom }}</span>
