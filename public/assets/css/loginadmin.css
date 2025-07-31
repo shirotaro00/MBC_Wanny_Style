@@ -6,7 +6,6 @@
 }
 
 body {
-	background: #f6f5f7;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -14,6 +13,10 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
 	margin: -20px 0 50px;
+    background-image: url('../img/fondadmin.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 h1 {

@@ -37,6 +37,9 @@ body {
 	height: 100%;
 	font-family: "Montserrat", sans-serif;
 	-webkit-font-smoothing: antialiased;
+     background-image: url('../img/font.png');
+    background-repeat: no-repeat;
+    background-origin: content-box;
 }
 
 h1,
