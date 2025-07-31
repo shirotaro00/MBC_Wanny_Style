@@ -5,7 +5,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                            <a href="{{ route('page.accueil') }}"><img src="{{ asset('assets/img/logo.jpg') }}" alt="" style="max-width: 120px; height: auto; display: inline-block;"></a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             cilisis.</p>
@@ -23,9 +23,8 @@
                         <h6>Liens utiles</h6>
                         <ul>
                             <li><a href="#">Accueil</a></li>
-                            <li><a href="#">Blogs</a></li>
+                            <li><a href="#">Articles</a></li>
                             <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
                         </ul>
                     </div>
                 </div>

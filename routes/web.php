@@ -34,6 +34,8 @@ Route::post('/panier/ajouter/{id}', [ClientController::class, 'ajouter'])->name(
 Route::post('/panier/modifier', [ClientController::class, 'modifierGlobal'])->name('panier.modifier.global');
 //suppression panier
 Route::get('/panier/supprimer/{id}', [ClientController::class, 'supprimerViaLien'])->name('panier.supprimer.lien');
+//Mon panier
+Route::get('/monpanier/{id}', [ClientController::class, 'MonPanier'])->name('client.monpanier');
 
 // Routes protégées client
 Route::middleware(['auth', 'client'])->group(function () {

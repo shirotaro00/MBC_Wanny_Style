@@ -44,14 +44,14 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="section-title">
-                        <h4>New product</h4>
+                        <h4>Nouvelle Article</h4>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8">
                     <ul class="filter__controls">
-                        <li class="active" data-filter="*">All</li>
-                        <li data-filter=".women">Women’s</li>
-                        <li data-filter=".men">Men’s</li>
+                        <li class="active" data-filter="*">Tous</li>
+                        <li data-filter=".women">Femme</li>
+                        <li data-filter=".men">Homme</li>
                         <li data-filter=".kid">Kid’s</li>
                         <li data-filter=".accessories">Accessories</li>
                         <li data-filter=".cosmetic">Cosmetics</li>
@@ -66,14 +66,14 @@
                         <div class="product__item">
                             <div class="product__item__pic set-bg"
                                 data-setbg="{{ asset('assets/upload/' . $article->photo) }}">
-                                <div class="label new">New</div>
+                                <div class="label new">Nouveau</div>
                                 <ul class="product__hover">
                                     <li><a href=" {{ asset('assets/upload/' . $article->photo) }} "
                                             class="image-popup"><span><i
                                                     class="fas fa-up-right-and-down-left-from-center"></i></span></a></li>
                                     <li><a href="{{ route('page.details', $article->id) }}"><span><i class="fas fa-info-circle"></i></span></i>
                                         </a></li>
-                                    <li><a href="#"><span><i class="fas fa-cart-plus"></i></span></a></li>
+                                    <li><a href="{{ route('client.monpanier',$article->id) }}"><span><i class="fas fa-cart-plus"></i></span></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">

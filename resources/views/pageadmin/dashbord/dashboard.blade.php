@@ -99,7 +99,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Iventaires stocks d'articles</h4>
+                                    <h4 class="card-title">Inventaires stocks d'articles</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">

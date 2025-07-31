@@ -208,7 +208,7 @@ class ClientController extends Controller
         session()->put('panier', $panier);
 
         $panierCount = array_sum(array_column($panier, 'quantite'));
-session()->put('panierCount', $panierCount);
+        session()->put('panierCount', $panierCount);
         toastify()->success('Article ajouté au panier!');
 
         return redirect()->route('client.panier')->with('success', 'Article ajouté au panier.');
@@ -311,25 +311,23 @@ session()->put('panierCount', $panierCount);
 
 
 
-    try {
-        foreach ($gerants as $gerant) {
-            $gerant->notify(new CommandeRecue($commande));
-        }
-         session()->forget('panier');
+            try {
+                foreach ($gerants as $gerant) {
+                    $gerant->notify(new CommandeRecue($commande));
+                }
+                session()->forget('panier');
 
-            toastify()->success('Commande ajoutée avec succès!');
+                toastify()->success('Commande ajoutée avec succès!');
 
-            return redirect()->route('client.historique')->with('success', 'Commande ajoutée avec succès.');
-    } catch (\Exception $e) {
-        // Loguer l'erreur pour le développeur
-        Log::error('Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
+                return redirect()->route('client.historique')->with('success', 'Commande ajoutée avec succès.');
+            } catch (\Exception $e) {
+                // Loguer l'erreur pour le développeur
+                Log::error('Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
 
-        // Stocker un message d'erreur pour la vue
-         toastify()->error('Impossible d\'envoyer l\'e-mail aux gérants. Vérifiez votre connexion.');
-  return redirect()->back();
-    }
-
-
+                // Stocker un message d'erreur pour la vue
+                toastify()->error('Impossible d\'envoyer l\'e-mail aux gérants. Vérifiez votre connexion.');
+                return redirect()->back();
+            }
         } else {
             toastify()->error('Veuillez vous connecter!');
 
@@ -349,6 +347,42 @@ session()->put('panierCount', $panierCount);
         toastify()->success('Article supprimé au panier!');
 
         return redirect()->back()->with('success', 'Article supprimé du panier.');
+    }
+
+    // accueil vers panier
+    public function MonPanier($id)
+    {
+        $articles = Article::with(['typeArticle', 'detailArticle'])->findOrFail($id);
+
+        $panier = session()->get('panier', []);
+        $photo = $articles->photo ?? null;
+        $categorie = $articles->categorie ?? '';
+        $taille = $articles->taille ?? '';
+        $type = $articles->typeArticle->type ?? '';
+        $couleur = $articles->detailArticle->couleur ?? '';
+
+
+        if (isset($panier[$id])) {
+            $panier[$id]['quantite'] += 1;
+        } else {
+            $panier[$id] = [
+                'nom' => $articles->nom,
+                'prix' => $articles->prix,
+                'categorie' => $categorie,
+                'type' => $type,
+                'couleur' => $couleur,
+                'taille' => $taille,
+                'photo' => $photo,
+                'quantite' => 1,
+            ];
+        }
+
+        session()->put('panier', $panier);
+        $panierCount = array_sum(array_column($panier, 'quantite'));
+        session()->put('panierCount', $panierCount);
+        toastify()->success('Article ajouté au panier!');
+
+        return redirect()->route('client.panier')->with('success', 'Article ajouté au panier !');
     }
 
     // ajout paiement
@@ -414,47 +448,47 @@ session()->put('panierCount', $panierCount);
     }
 
     // Filtrage des articles selon les paramètres GET
-public function articles(Request $request)
-{
-    $query = Article::with('detailArticle');
+    public function articles(Request $request)
+    {
+        $query = Article::with('detailArticle');
 
-    $categories = $request->input('categorie', []);
-    $tailles = $request->input('taille', []);
-    $couleurs = $request->input('couleur', []);
+        $categories = $request->input('categorie', []);
+        $tailles = $request->input('taille', []);
+        $couleurs = $request->input('couleur', []);
 
-    // Filtre catégorie
-    if (!empty($categories)) {
-        $query->whereIn('categorie', $categories);
+        // Filtre catégorie
+        if (!empty($categories)) {
+            $query->whereIn('categorie', $categories);
+        }
+
+        // Filtre taille
+        if (!empty($tailles)) {
+            $query->whereIn('taille', $tailles);
+        }
+
+        // Filtre couleur (relation)
+        if (!empty($couleurs)) {
+            $query->whereHas('detailArticle', function ($q) use ($couleurs) {
+                $q->whereIn('couleur', $couleurs);
+            });
+        }
+
+        $articles = $query->get();
+
+        // Afficher un message si aucun article ne correspond
+        $message = null;
+        if ($articles->isEmpty() && ($categories || $tailles || $couleurs)) {
+            $message = 'Aucun article ne correspond à votre recherche.';
+        }
+
+        return view('pageclients.Article', [
+            'articles' => $articles,
+            'categories' => $categories,
+            'tailles' => $tailles,
+            'couleurs' => $couleurs,
+            'message' => $message,
+        ]);
     }
-
-    // Filtre taille
-    if (!empty($tailles)) {
-        $query->whereIn('taille', $tailles);
-    }
-
-    // Filtre couleur (relation)
-    if (!empty($couleurs)) {
-        $query->whereHas('detailArticle', function ($q) use ($couleurs) {
-            $q->whereIn('couleur', $couleurs);
-        });
-    }
-
-    $articles = $query->get();
-
-    // Afficher un message si aucun article ne correspond
-    $message = null;
-    if ($articles->isEmpty() && ($categories || $tailles || $couleurs)) {
-        $message = 'Aucun article ne correspond à votre recherche.';
-    }
-
-    return view('pageclients.Article', [
-        'articles' => $articles,
-        'categories' => $categories,
-        'tailles' => $tailles,
-        'couleurs' => $couleurs,
-        'message' => $message,
-    ]);
-}
 
 
     public function message()
