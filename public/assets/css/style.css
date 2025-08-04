@@ -31,15 +31,21 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, .btn-simple, .alert, a, .td-name, td, button.close {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Fira Sans', sans-serif; }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Lato', cursive !important;
+  font-weight: 400;
+}
 html,
 body {
 	margin-top: 70px;
 	height: 100%;
-	font-family: "Montserrat", sans-serif;
 	-webkit-font-smoothing: antialiased;
-     background-image: url('../img/font.png');
-    background-repeat: no-repeat;
-    background-origin: content-box;
 }
 
 h1,

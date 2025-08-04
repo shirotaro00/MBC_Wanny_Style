@@ -18,7 +18,7 @@
     <!-- Bootstrap CSS -->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href=" {{ asset('assets/css/bootstrap.min.css') }} " type="text/css">
     <link rel="stylesheet" href=" {{ asset('assets/css/font-awesome.min.css') }} " type="text/css">
     <link rel="stylesheet" href=" {{ asset('assets/css/elegant-icons.css') }} " type="text/css">
@@ -27,6 +27,11 @@
     <link rel="stylesheet" href=" {{ asset('assets/css/owl.carousel.min.css') }} " type="text/css">
     <link rel="stylesheet" href=" {{ asset('assets/css/slicknav.min.css') }} " type="text/css">
     <link rel="stylesheet" href=" {{ asset('assets/css/style.css') }} " type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('assets/fonts/Fira sans.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/Lato.css') }}">
     @toastifyCss
 </head>
 @yield('style')
@@ -71,17 +76,17 @@
 
     @yield('script')
     <!-- Place ce script juste avant </body> -->
-@if (session('login_error') || (old('form_type') === 'login' && $errors->any()))
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let modalElement = document.getElementById('formModal');
-            if (modalElement) {
-                let formModal = bootstrap.Modal.getOrCreateInstance(modalElement);
-                formModal.show();
-            }
-        });
-    </script>
-@endif
+    @if (session('login_error') || (old('form_type') === 'login' && $errors->any()))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let modalElement = document.getElementById('formModal');
+                if (modalElement) {
+                    let formModal = bootstrap.Modal.getOrCreateInstance(modalElement);
+                    formModal.show();
+                }
+            });
+        </script>
+    @endif
 
 </body>
 

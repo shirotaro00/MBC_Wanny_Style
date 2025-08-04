@@ -47,16 +47,6 @@
                         <h4>Nouvelle Article</h4>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8">
-                    <ul class="filter__controls">
-                        <li class="active" data-filter="*">Tous</li>
-                        <li data-filter=".women">Femme</li>
-                        <li data-filter=".men">Homme</li>
-                        <li data-filter=".kid">Kid’s</li>
-                        <li data-filter=".accessories">Accessories</li>
-                        <li data-filter=".cosmetic">Cosmetics</li>
-                    </ul>
-                </div>
             </div>
             {{-- produit forech --}}
 

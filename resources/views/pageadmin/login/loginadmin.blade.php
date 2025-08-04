@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('assets/fonts/Fira sans.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/Lato.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/loginadmin.css') }}">
     <title>Admin|Login</title>
 </head>
@@ -16,27 +21,28 @@
             <form action="{{ route('create.log') }}" method="post">
                 @csrf
                 <div class="password-wrapper">
-                    <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" id="nom" placeholder="@error('nom'){{ $message }}@else Nom @enderror"
-                        required />
+                    <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom"
+                        id="nom" placeholder="@error('nom'){{ $message }}@else Nom @enderror" required />
                     <i class="fa fa-user toggle-user"></i>
                 </div>
 
                 <div class="password-wrapper">
-                    <input type="text" class="form-control  @error('prenom') is-invalid @enderror" name="prenom" id="prenom" placeholder="@error('prenom'){{ $message }}@else Prenom @enderror"
+                    <input type="text" class="form-control  @error('prenom') is-invalid @enderror" name="prenom"
+                        id="prenom" placeholder="@error('prenom'){{ $message }}@else Prenom @enderror"
                         required />
                     <i class="fa fa-user  toggle-user"></i>
                 </div>
 
                 <div class="password-wrapper">
-                    <input type="text" name="telephone"
-                        class="form-control @error('telephone') is-invalid @enderror"
+                    <input type="text" name="telephone" class="form-control @error('telephone') is-invalid @enderror"
                         placeholder="@error('telephone'){{ $message }}@else Telephone @enderror" id="telephone"
                         required />
                     <i class="fa fa-phone toggle-phone"></i>
                 </div>
 
                 <div class="password-wrapper">
-                    <input type="text" class="form-control @error('adresse') is-invalid @enderror " name="adresse" id="adresse" placeholder="@error('adresse'){{ $message }}@else Adresse @enderror"
+                    <input type="text" class="form-control @error('adresse') is-invalid @enderror " name="adresse"
+                        id="adresse" placeholder="@error('adresse'){{ $message }}@else Adresse @enderror"
                         required />
                     <i class="fa fa-address-book toggle-address"></i>
                 </div>
@@ -90,12 +96,12 @@
                     <i class="fas fa-lock  toggle-lock2"></i>
                     <i class="fas fa-eye toggle-passwords" data-target="passwords" aria-hidden="true"></i>
                 </div>
-                @if (session('error'))
+                 @if (session('error'))
                     <div class="alert alert-danger w-50" style="color: red">
                         {{ session('error') }}
                     </div>
-                @endif
-                <button type="submit" style="margin-top:20px" >Se connecter</button>
+                    @endif
+                    <button type="submit" style="margin-top:20px">Se connecter</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -106,11 +112,11 @@
                     <button class="ghost" id="signIn">Se connecter</button>
 
                 </div>
-                <div class="overlay-panel overlay-right" >
+                <div class="overlay-panel overlay-right">
 
                     <h1>Bonjour !</h1>
                     <p>Saisissez vos informations personnelles et commencez votre aventure avec nous.</p>
-                    <button class="ghost"  id="signUp">Créer compte</button>
+                    <button class="ghost" id="signUp">Créer compte</button>
                 </div>
             </div>
         </div>

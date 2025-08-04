@@ -4,10 +4,10 @@
     <div class="wrapper">
         @include('partials.admin.sidebar')
 
-        <div class="main-panel">
+        <div class="main-panel" style="background-color: #ffff">
             @include('partials.admin.header')
 
-            <div class="container">
+            <div class="container" style="background-color: #ffff" >
                 <div class="page-inner">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                         <div>
@@ -16,39 +16,83 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p>Total article vendu /jours</p>
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span class="fw-bold">{{ $articlesVendusJour }}</span>
-                                </div>
-                            </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="fas fa-wallet text-success"></i>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p>Nombre de clients</p>
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span class="fw-bold">{{ $nombreClients }}</span>
-                                </div>
-                            </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">article vendu/j</p>
+                          <h4 class="card-title">{{ $articlesVendusJour }}</h4>
                         </div>
-                        {{-- <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p>Stock Entrant</p><i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p>Stock Sortant</p><i class="fa-solid fa-cart-shopping"></i>
-                                </div>
-                            </div>
-                        </div> --}}
+                      </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="fas fa-pie-chart text-warning"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">Nombre clients</p>
+                          <h4 class="card-title">{{ $nombreClients }}</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="fas fa-close text-danger"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">Stock</p>
+                          <h4 class="card-title">23</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center">
+                          <i class="fa-brands fa-twitter text-primary"></i>
+                        </div>
+                      </div>
+                      <div class="col-7 col-stats">
+                        <div class="numbers">
+                          <p class="card-category">Stock</p>
+                          <h4 class="card-title">+45K</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
                     <div class="row">
                         <div class="col-md-12">

@@ -2,9 +2,9 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header " data-background-color="white">
-            <a href="index.html" class="logo">
-                <img src="{{ asset('assets/img/Wanny Style_Logo_CMYK_Coloured wo-BG.png') }}" alt="navbar brand"
-                    class="navbar-brand" height="110" />
+            <a href="{{ route('page.accueil') }}">
+                <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo"
+                    style="max-width: 120px; height: auto; display: inline-block;">
             </a>
 
             <div class="nav-toggle">
@@ -61,13 +61,16 @@
                     </div>
                 </li>
 
-                <li class="nav-item  {{ request()->routeIs('admin.commande', 'commande.validation') ? 'active' : '' }}  ">
-                    <a data-bs-toggle="collapse" href="#tables" aria-expanded="{{ request()->routeIs('admin.commande', 'commande.validation') ? 'true' : 'false' }}">
+                <li
+                    class="nav-item  {{ request()->routeIs('admin.commande', 'commande.validation') ? 'active' : '' }}  ">
+                    <a data-bs-toggle="collapse" href="#tables"
+                        aria-expanded="{{ request()->routeIs('admin.commande', 'commande.validation') ? 'true' : 'false' }}">
                         <i class="fas fa-receipt"></i>
                         <p>Commandes</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse {{ request()->routeIs('admin.commande', 'commande.validation') ? 'show' : '' }}" id="tables">
+                    <div class="collapse {{ request()->routeIs('admin.commande', 'commande.validation') ? 'show' : '' }}"
+                        id="tables">
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('admin.commande') ? 'active' : '' }}">
                                 <a href="{{ route('admin.commande') }}">
@@ -113,8 +116,7 @@
                         <p>Listes clients</p>
                     </a>
                 </li>
-              @if (Auth::check() && Auth::user()->role === '0')
-
+                @if (Auth::check() && Auth::user()->role === '0')
                     <li class="nav-item {{ request()->routeIs('admin.gutilisateur') ? 'active' : '' }}">
                         <a href="{{ route('admin.gutilisateur') }}">
                             <i class="fa-solid fa-users-gear"></i>
@@ -125,17 +127,18 @@
 
 
 
-                <li class="nav-item {{ request()->routeIs('add.payement','historique.paiement') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->routeIs('add.payement', 'historique.paiement') ? 'active' : '' }}">
                     <a data-bs-toggle="collapse" href="#payement"
                         aria-expanded="{{ request()->routeIs('add.payement') ? 'true' : 'false' }}">
                         <i class="fa-solid fa-credit-card"></i>
                         <p>Paiements</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse {{ request()->routeIs('historique.paiement','add.payement') ? 'show' : '' }}" id="payement">
+                    <div class="collapse {{ request()->routeIs('historique.paiement', 'add.payement') ? 'show' : '' }}"
+                        id="payement">
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('historique.paiement') ? 'active' : '' }}">
-                                <a href="{{route('historique.paiement')}}">
+                                <a href="{{ route('historique.paiement') }}">
                                     <span class="sub-item">Historiques des piaements</span>
                                 </a>
                             </li>
