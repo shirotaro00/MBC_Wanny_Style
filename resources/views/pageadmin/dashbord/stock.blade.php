@@ -27,11 +27,11 @@
                                     </div>
                                     <div class="d-flex justify-content-end gap-2">
 
-                                        <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
-                                            data-bs-target="#categorieModal"><i  class="fa-solid fa-circle-plus" style=" font-size:18px;margin-right:5px" ></i>Ajout stock</button>
+                                        <button class="btn text-white" style="margin: 5px;background-color:#D77F27;" data-bs-toggle="modal"
+                                            data-bs-target="#categorieModal"><i  class="fa-solid fa-circle-plus" style=" font-size:18px;margin-right:5px;" ></i>Ajout stock</button>
 
                                     </div>
-                                    <table class="table table-head-bg-primary mt-4">
+                                    <table class="table table-head mt-4" style="background-color:#E6EAC9;">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nom article</th>

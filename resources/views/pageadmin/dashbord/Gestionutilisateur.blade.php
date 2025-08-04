@@ -27,8 +27,8 @@
 
                                     </div>
 
-                                    <table class="table table-head-bg-primary mt-4">
-                                        <thead>
+                                    <table class="table table-head mt-4">
+                                        <thead  style="background-color:#E6EAC9;">
                                             <tr>
                                                 <th scope="col">Nom </th>
                                                 <th scope="col">Prenom</th>

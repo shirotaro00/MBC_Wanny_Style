@@ -27,10 +27,10 @@
                                         <h3 class="fw-bold mb-3" style="margin-right:250px;margin-top:10px">Ajout article
                                         </h3>
 
-                                        <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
+                                        <button class="btn text-white" style="margin: 5px; background-color: #DDA233" data-bs-toggle="modal"
                                             data-bs-target="#typeModal"><i class="fa-solid fa-circle-plus"
                                                 style=" font-size:18px;margin-right:5px"></i> Type article</button>
-                                        <button class="btn btn-primary" style="margin: 5px" data-bs-toggle="modal"
+                                        <button class="btn text-white" style="margin: 5px; background-color: #DD3F26" data-bs-toggle="modal"
                                             data-bs-target="#detailsModal"><i class="fa-solid fa-circle-plus"
                                                 style=" font-size:18px;margin-right:5px"></i>Détails article</button>
 
@@ -160,8 +160,9 @@
                                 <div class="boutton " style="margin-bottom: 15px; margin-right:20px">
                                     <div class="d-flex justify-content-end ">
                                         <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')"
-                                            class="btn btn-primary">Envoyer <i
-                                                class="fa-solid fa-square-arrow-up-right"></i></button>
+                                            class="btn text-white" style="background-color: #0BA883">
+                                            <i class="fa-solid fa-bookmark" style="margin-right: 5px"></i>
+                                            Enregister </button>
                                     </div>
                                 </div>
                                 </form>

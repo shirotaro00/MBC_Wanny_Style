@@ -1,5 +1,14 @@
 @extends('pageadmin.dashbord.admin')
-
+@section('style')
+<style>
+ .scrollable-description {
+  max-height: 4.5em;          /* 3 lignes à line-height: 1.5 */
+  overflow-y: auto;           /* active scroll vertical */
+  line-height: 1.5em;         /* définit la hauteur d'une ligne */
+  display: block;             /* nécessaire pour que overflow fonctionne */
+}
+</style>
+@endsection
 @section('body')
     @include('partials.admin.modal.suppressionarticle')
     <div class="wrapper">
@@ -28,8 +37,8 @@
 
                                     <div class="table-responsive">
                                         <table class="table">
-                                            <table class="table table-head-bg-primary mt-4">
-                                                <thead>
+                                            <table class="table table-head mt-4">
+                                                <thead class="text-white"  style="background-color: #002012">
                                                     <tr>
 
                                                         <th scope="col">Nom article</th>
@@ -61,7 +70,8 @@
                                                                     width="50"></td>
                                                             <td>{{ $article->quantite }}</td>
 
-                                                            <td>{{ $article->description }}</td>
+                                                            <td class="">
+                                                                <div class="scrollable-description">{{ $article->description }}</div></td>
 
                                                             <td>
                                                                 <div class="d-flex gap-2">

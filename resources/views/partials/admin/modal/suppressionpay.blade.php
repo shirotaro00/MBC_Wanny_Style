@@ -17,10 +17,10 @@
                     <form action="{{ route('pay.destroy', $methode->id) }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="submit"  onclick="verifierAcces('{{ auth()->user()->role }}')" class="btn btn-danger btn-sm">Oui</button>
+                        <button type="submit"  onclick="verifierAcces('{{ auth()->user()->role }}')"  class="btn-sm text-white" style="background-color: #0BA883">Oui</button>
                     </form>
 
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Non</button>
+                    <button type="btn-sm text-white" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Non</button>
 
 
                 </div>

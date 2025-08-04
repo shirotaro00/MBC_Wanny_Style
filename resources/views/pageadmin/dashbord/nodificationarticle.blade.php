@@ -157,7 +157,9 @@
                                     </div>
                                     <div class="boutton " style="margin-bottom: 15px">
                                         <div class="d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary">Modifier</button>
+                                            <button type="submit" class="btn text-white" style="background-color: #DDA233">
+                                                <i class="fa-solid fa-pen-to-square"style="margin-right: 5px"></i>
+                                        Modifier</button>
                                         </div>
                                     </div>
                                     </form>

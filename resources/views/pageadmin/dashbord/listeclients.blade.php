@@ -19,26 +19,22 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-
-                                    <div class="d-flex justify-content-end gap-2">
-                                        <h3 class="fw-bold mb-3" style="margin-right:400px;margin-top:10px">Liste clients
-                                        </h3>
-
-                                    </div>
-
-                                    <table class="table table-head-bg-primary mt-4">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Nom </th>
-                                                <th scope="col">Prenom</th>
-                                                <th scope="col">Telephone</th>
-                                                <th scope="col">Adresse</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Point</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <h4 class="card-title">Liste des clients</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nom</th>
+                                                    <th>Prénom</th>
+                                                    <th>Téléphone</th>
+                                                    <th>Adresse</th>
+                                                    <th>Email</th>
+                                                    <th>Point</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                                 @foreach ($clients as $client)
                                                     <tr>
                                                     <td>{{ $client->nom }}</td>
@@ -50,9 +46,9 @@
                                                 </tr>
                                                 @endforeach
 
-                                        </tbody>
-                                    </table>
-
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
@@ -61,4 +57,4 @@
                 </div>
             </div>
         </div>
-    @endsection
+        @endsection

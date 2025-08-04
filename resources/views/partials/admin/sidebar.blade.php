@@ -2,7 +2,7 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header " data-background-color="white">
-            <a href="{{ route('page.accueil') }}">
+            <a href="{{ route('admin.dashboard') }}">
                 <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo"
                     style="max-width: 120px; height: auto; display: inline-block;">
             </a>

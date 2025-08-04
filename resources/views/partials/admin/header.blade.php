@@ -1,15 +1,11 @@
 <div class="main-header">
           <div class="main-header-logo">
             <!-- Logo Header -->
-            <div class="logo-header" data-background-color="dark">
-              <a href="index.html" class="logo">
-                <img
-                  src=""
-                  alt="navbar brand"
-                  class="navbar-brand"
-                  height="20"
-                />
-              </a>
+            <div class="logo-header" data-background-color="white">
+             <a href="{{ route('admin.dashboard') }}">
+                <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo"
+                    style="max-width: 120px; height: auto; display: inline-block;">
+            </a>
               <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
                   <i class="gg-menu-right"></i>
@@ -32,34 +28,14 @@
               <nav
                 class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
               >
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <button type="submit" class="btn btn-search pe-1">
-                      <i class="fa fa-search search-icon"></i>
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Recherche ..."
-                    class="form-control"
-                  />
-                </div>
+
               </nav>
 
               <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                 <li
                   class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
                 >
-                  <a
-                    class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i class="fa fa-search"></i>
-                  </a>
+                <img src="{{ asset('assets/img/WS-07.png') }}" alt="" srcset="" width="200px" style="color: white">
                   <ul class="dropdown-menu dropdown-search animated fadeIn">
                     <form class="navbar-left navbar-form nav-search">
                       <div class="input-group">
@@ -82,7 +58,7 @@
                     aria-expanded="false"
                   >
                     <div class="avatar-sm">
-                  <i class="fas fa-user" style="font-size:30px"></i>
+                  <i class="fas fa-user" style="font-size:30px;color:white;"></i>
 
                     </div>
 
@@ -92,7 +68,7 @@
                       <li>
                         <div class="user-box">
                           <div class="avatar-lg">
-                            <i class="fas fa-user" style="font-size:30px"></i>
+                            <i class="fas fa-user" style="font-size:30px "></i>
                           </div>
                           <div class="u-text">
                             <p class="text-muted">Bienvenue</p>

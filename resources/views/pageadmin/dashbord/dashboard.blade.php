@@ -7,7 +7,7 @@
         <div class="main-panel" style="background-color: #ffff">
             @include('partials.admin.header')
 
-            <div class="container" style="background-color: #ffff" >
+            <div class="container" style="background-color: #ffff">
                 <div class="page-inner">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                         <div>
@@ -16,83 +16,83 @@
                     </div>
 
                     <div class="row">
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="fas fa-wallet text-success"></i>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="icon-big text-center">
+                                                <i class="fas fa-wallet text-success"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-stats">
+                                            <div class="numbers">
+                                                <p class="card-category">article vendu/j</p>
+                                                <h4 class="card-title">{{ $articlesVendusJour }}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">article vendu/j</p>
-                          <h4 class="card-title">{{ $articlesVendusJour }}</h4>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="icon-big text-center">
+                                                <i class="fas fa-pie-chart text-warning"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-stats">
+                                            <div class="numbers">
+                                                <p class="card-category">Nombre clients</p>
+                                                <h4 class="card-title">{{ $nombreClients }}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="icon-big text-center">
+                                                <i class="fas fa-close text-danger"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-stats">
+                                            <div class="numbers">
+                                                <p class="card-category">Stock</p>
+                                                <h4 class="card-title">23</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="card card-stats card-round">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="icon-big text-center">
+                                                <i class="fa-brands fa-twitter text-primary"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 col-stats">
+                                            <div class="numbers">
+                                                <p class="card-category">Stock</p>
+                                                <h4 class="card-title">+45K</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="fas fa-pie-chart text-warning"></i>
-                        </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">Nombre clients</p>
-                          <h4 class="card-title">{{ $nombreClients }}</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="fas fa-close text-danger"></i>
-                        </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">Stock</p>
-                          <h4 class="card-title">23</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="card card-stats card-round">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-5">
-                        <div class="icon-big text-center">
-                          <i class="fa-brands fa-twitter text-primary"></i>
-                        </div>
-                      </div>
-                      <div class="col-7 col-stats">
-                        <div class="numbers">
-                          <p class="card-category">Stock</p>
-                          <h4 class="card-title">+45K</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -102,9 +102,11 @@
                                 </div>
                                 <div class="card-body">
                                     <form method="GET" action="{{ route('admin.dashboard') }}"
-                                        class="mb-4 d-flex align-items-center gap-2">
-                                        <label for="mois" class="me-2">Mois :</label>
-                                        <select name="mois" id="mois" class="form-select w-auto">
+                                        class="mb-4 d-flex align-items-center gap-2" style="margin-left: 27%">
+                                        <label for="mois" class="me-2"></label>
+                                        <select name="mois" id="mois"
+                                            class="w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <option value="">Sélectionner un mois</option>
                                             @php
                                                 $moisFr = [
                                                     1 => 'Janvier',
@@ -123,20 +125,24 @@
                                             @endphp
                                             @for ($m = 1; $m <= 12; $m++)
                                                 <option value="{{ $m }}"
-                                                    @if ($m == $mois) selected @endif>
+                                                    @if ($m == $mois)  @endif>
                                                     {{ $moisFr[$m] }}
                                                 </option>
                                             @endfor
                                         </select>
-                                        <label for="annee" class="ms-3 me-2">Année :</label>
-                                        <select name="annee" id="annee" class="form-select w-auto">
+                                        <label for="annee" class="ms-3 me-2"
+                                            style="margin-right: 5px;margin-left: 20px"></label>
+                                        <select name="annee" id="annee"
+                                            class="w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                            <option value="">Sélectionner une annee</option>
                                             @for ($a = date('Y') - 3; $a <= date('Y') + 1; $a++)
                                                 <option value="{{ $a }}"
-                                                    @if ($a == $annee) selected @endif>{{ $a }}
+                                                    @if ($a == $annee)  @endif>{{ $a }}
                                                 </option>
                                             @endfor
                                         </select>
-                                        <button type="submit" class="btn btn-primary ms-3">Filtrer</button>
+                                        <button type="submit" class="btn text-white"
+                                            style="margin-left: 12px; background-color:#D77F27; width: 110px;">Filtrer</button>
                                     </form>
                                     <canvas id="commandeChart" width="1000" height="400"></canvas>
                                 </div>
@@ -197,8 +203,8 @@
                     datasets: [{
                         label: 'Articles vendus par semaine',
                         data: {!! json_encode($data) !!},
-                        backgroundColor: 'rgba(75, 192, 192, 0.3)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: '#0BA883',
+                        borderColor: '#0BA883',
                         borderWidth: 2,
                         fill: true,
                         tension: 0.3

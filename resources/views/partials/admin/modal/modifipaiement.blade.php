@@ -32,8 +32,8 @@
                             @enderror
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')" id="sign_in" class="btn btn-success">Modifier</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')" id="sign_in"class="btn text-white" style="background-color: #0BA883">Modifier</button>
+                            <button type="button text-white" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Fermer</button>
                         </div>
                     </form>
                 </div>

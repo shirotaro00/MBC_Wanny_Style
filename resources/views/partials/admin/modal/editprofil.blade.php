@@ -74,8 +74,8 @@
 
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Mettre à jour</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn text-white" style="background-color: #0BA883">Mettre à jour</button>
+                        <button  type="button text-white" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Fermer</button>
                     </div>
                 </form>
 

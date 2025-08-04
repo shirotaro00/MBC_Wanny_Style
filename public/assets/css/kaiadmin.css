@@ -154,6 +154,11 @@ small, .small {
 b, .b, strong, .strong {
   font-weight: 600; }
 
+
+.main-header{
+    background:#002012 !important;
+}
+
 .page-pretitle {
   letter-spacing: .08em;
   text-transform: uppercase;
