@@ -139,7 +139,7 @@
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->routeIs('historique.paiement') ? 'active' : '' }}">
                                 <a href="{{ route('historique.paiement') }}">
-                                    <span class="sub-item">Historiques des piaements</span>
+                                    <span class="sub-item">Historiques des paiements</span>
                                 </a>
                             </li>
                             <li class="{{ request()->routeIs('add.payement') ? 'active' : '' }}">

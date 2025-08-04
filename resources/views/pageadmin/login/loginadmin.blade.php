@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('assets/fonts/Fira sans.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/Lato.css') }}">
@@ -81,7 +82,9 @@
 
             <form action="{{ route('admin.auth') }}" method="POST">
                 @csrf
-
+<div class="logo">
+    <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo" >
+</div>
                 <h1 style="margin-bottom:20px"  >Connexion</h1>
 
                 <div class="password-wrapper2">
@@ -101,7 +104,7 @@
                         {{ session('error') }}
                     </div>
                     @endif
-                    <button type="submit" style="margin-top:20px">Se connecter</button>
+                    <button type="submit" style="margin-top:20px" class="connexion"> <i class="fa-solid fa-right-to-bracket" style="font-size:15px"></i> Se connecter</button>
             </form>
         </div>
         <div class="overlay-container">
