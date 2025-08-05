@@ -41,11 +41,6 @@
 
                                 </div>
                             </div>
-                            <!-- Affichage des points de fidélité du client -->
-                            <div class="alert alert-info" style="max-width:400px;margin:20px auto 0;">
-                                <strong>Points de fidélité :</strong> {{ $clients->point ?? 0 }}
-                            </div>
-
 
                         </div>
 

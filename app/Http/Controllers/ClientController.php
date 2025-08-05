@@ -64,6 +64,7 @@ class ClientController extends Controller
 
         $commandes = Commande::with([
             'user',
+            'paiements',
             'DetailCommande.article'
         ])
             ->where('user_id', Auth::id())
@@ -390,7 +391,7 @@ class ClientController extends Controller
     {
         $request->validate([
             'montant' => 'required|numeric|min:0',
-            'Ref_paiement' => 'required|string|max:255',
+            'Ref_paiement' => 'required|string|min:10',
             'methode_paiement_id' => 'required|exists:methode_paiements,id',
         ]);
 

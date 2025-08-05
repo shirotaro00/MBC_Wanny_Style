@@ -6,6 +6,7 @@
             <div class="modal-header">
                 <center>
                     <h5 class="modal-title" id="payModalLabel" style="color: black">Paiement</h5>
+                    <p>Vous devez payer au moins 50% ou le total du montant </p>
                 </center>
 
             </div>

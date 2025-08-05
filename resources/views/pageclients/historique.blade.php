@@ -87,7 +87,7 @@
                                                                                   </td>
                                                                                   <td>{{ $detail->detailArticle?->couleur ?? '-' }}
                                                                                   </td>
-                                                                                  <td>{{ $detail->prix_unitaire }}</td>
+                                                                                  <td> {{ number_format($detail->prix_unitaire, 0, ',', ' ') }} MGA</td>
                                                                                   <td>{{ number_format($sousTotal, 0, ',', ' ') }}
                                                                                       MGA</td>
                                                                               </tr>
