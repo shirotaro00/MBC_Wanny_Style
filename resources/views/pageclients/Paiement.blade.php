@@ -56,6 +56,8 @@
                                                                   </p>
                                                                   <p>Statut : {{ $commande->statut }}
                                                                   </p>
+                                                                  <p>Statut de paiement : {{ $commande->statut_paiement }}
+                                                                  </p>
                                                               </div>
                                                           </div>
 
@@ -101,12 +103,19 @@
                                                               </table>
                                                           </div>
                                                           @php
-                                                              $totalPaye = $commande->paiements->sum('montant');
-                                                              $reste = max($total - $totalPaye, 0);
+                                                              $totalPaye = Paiement::where(
+                                                                  'commande_id',
+                                                                  $commande->id,
+                                                              )->sum('montant');
+                                                              $resteAPayer = $total - $totalPaye;
                                                           @endphp
-                                                          <p style="text-align:right;color:black;"><strong>Reste à payer :
-                                                                  {{ number_format($reste, 0, ',', ' ') }}</strong>MGA
-                                                          </p>
+
+                                                          @if ($resteAPayer > 0)
+                                                              <div class="alert alert-warning mt-4 text-end">
+                                                                  <strong>Reste à payer :</strong>
+                                                                  {{ number_format($resteAPayer, 0, ',', ' ') }} MGA
+                                                              </div>
+                                                          @endif
                                                           <div class="d-flex justify-content-end mt-5">
                                                               <button class="btn btn-primary" data-bs-toggle="modal"
                                                                   data-bs-target="#payModal"><i

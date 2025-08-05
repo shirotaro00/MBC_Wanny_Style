@@ -387,66 +387,68 @@ class ClientController extends Controller
     }
 
     // ajout paiement
-    public function paiementStore(Request $request)
-    {
-        $request->validate([
-            'montant' => 'required|numeric|min:0',
-            'Ref_paiement' => 'required|string|min:10',
-            'methode_paiement_id' => 'required|exists:methode_paiements,id',
-        ]);
+   public function paiementStore(Request $request)
+{
 
-        $commande = Commande::where('user_id', Auth::id())
-            ->where('statut', 'validée')
-            ->latest()
-            ->first();
+    $request->validate([
+        'montant' => 'required|numeric|min:0.01',
+        'Ref_paiement' => 'required|string|min:10',
+        'methode_paiement_id' => 'required|exists:methode_paiements,id',
+    ]);
 
-        if (!$commande) {
-            toastify()->error('Aucune commande à payer trouvée.');
-            return redirect()->back()->with('error', 'Aucune commande à payer trouvée.');
-        }
+    $commande = Commande::where('user_id', Auth::id())
+        ->where('statut', 'validée')
+        ->latest()
+        ->first();
 
-        $total = $commande->detailCommande->sum(
-            fn($detail) =>
-            $detail->prix_unitaire * $detail->quantite
-        );
-
-        $montantPaye = $request->input('montant');
-
-        if ($montantPaye < $total * 0.5) {
-            toastify()->error("Vous devez payer au moins 50% du total.");
-            return redirect()->back()->with('error', "Montant insuffisant pour le paiement partiel.");
-        }
-
-        $paiementExistant = Paiement::where('commande_id', $commande->id)->sum('montant');
-
-        if ($paiementExistant >= $total) {
-            toastify()->info("Commande déjà totalement payée.");
-            return redirect()->back();
-        }
-
-        $reste = $total - $paiementExistant;
-        if ($montantPaye > $reste) {
-            $montantPaye = $reste;
-        }
-
-        Paiement::create([
-            'montant' => $montantPaye,
-            'Ref_paiement' => $request->input('Ref_paiement'),
-            'date_paiement' => now(),
-            'user_id' => Auth::id(),
-            'commande_id' => $commande->id,
-            'methode_paiement_id' => $request->input('methode_paiement_id'),
-        ]);
-
-        $totalPaye = Paiement::where('commande_id', $commande->id)->sum('montant');
-
-        $nouveauStatut = $totalPaye >= $total ? 'payé' : 'acompte';
-        $commande->statut_paiement = $nouveauStatut;
-        $commande->save();
-
-        toastify()->success('Paiement enregistré avec succès.');
-        return redirect()->back()->with('success', 'Paiement enregistré avec succès.');
+    if (!$commande) {
+        toastify()->error('Aucune commande à payer trouvée.');
+        return redirect()->back();
     }
+
+    $total = $commande->detailCommande->sum(function ($detail) {
+        return $detail->prix_unitaire * $detail->quantite;
+    });
+
+
+    $totalDejaPaye = Paiement::where('commande_id', $commande->id)->sum('montant');
+
+    $resteAPayer = $total - $totalDejaPaye;
+
+    if ($resteAPayer <= 0) {
+        toastify()->info("Commande déjà totalement payée.");
+        return redirect()->back();
+    }
+
+    $montantPaye = $request->input('montant');
+
+    if ($totalDejaPaye == 0 && $montantPaye < $total * 0.5) {
+        toastify()->error("Vous devez payer au moins 50% du montant total.");
+        return redirect()->back();
+    }
+
+    if ($montantPaye > $resteAPayer) {
+        toastify()->error("Le montant payé dépasse le reste à payer ({$resteAPayer} MGA).");
+        return redirect()->back();
+    }
+
+    Paiement::create([
+        'montant' => $montantPaye,
+        'Ref_paiement' => $request->input('Ref_paiement'),
+        'date_paiement' => now(),
+        'user_id' => Auth::id(),
+        'commande_id' => $commande->id,
+        'methode_paiement_id' => $request->input('methode_paiement_id'),
+    ]);
+
+    $totalPayeApres = $totalDejaPaye + $montantPaye;
+    $commande->statut_paiement = $totalPayeApres >= $total ? 'payé' : 'acompte';
+    $commande->save();
+
+    toastify()->success("Paiement de {$montantPaye} MGA enregistré avec succès. Reste à payer : " . ($total - $totalPayeApres) . " MGA.");
+    return redirect()->back();
+}
+
 
     // Filtrage des articles selon les paramètres GET
     public function articles(Request $request)
