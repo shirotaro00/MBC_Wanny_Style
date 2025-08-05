@@ -106,7 +106,6 @@
                                         <label for="mois" class="me-2"></label>
                                         <select name="mois" id="mois"
                                             class="w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                            <option value="">Sélectionner un mois</option>
                                             @php
                                                 $moisFr = [
                                                     1 => 'Janvier',
@@ -125,7 +124,7 @@
                                             @endphp
                                             @for ($m = 1; $m <= 12; $m++)
                                                 <option value="{{ $m }}"
-                                                    @if ($m == $mois)  @endif>
+                                                    @if ($m == $mois) selected @endif>
                                                     {{ $moisFr[$m] }}
                                                 </option>
                                             @endfor
@@ -137,7 +136,7 @@
                                             <option value="">Sélectionner une annee</option>
                                             @for ($a = date('Y') - 3; $a <= date('Y') + 1; $a++)
                                                 <option value="{{ $a }}"
-                                                    @if ($a == $annee)  @endif>{{ $a }}
+                                                    @if ($a == $annee) selected @endif>{{ $a }}
                                                 </option>
                                             @endfor
                                         </select>

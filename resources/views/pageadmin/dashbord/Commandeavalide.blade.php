@@ -109,8 +109,8 @@
                                                         <form action="{{ route('commande.valider', $commande->id) }}"
                                                             method="POST">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-primary"><i
-                                                                    class="fa fa-check"></i> Valider</button>
+                                                            <button type="submit" class="btn text-white" style="background-color: #D77F27">
+                                                                <i class="fa-solid fa-check-to-slot mr-1"></i>Valider</button>
                                                         </form>
 
                                                     </div>

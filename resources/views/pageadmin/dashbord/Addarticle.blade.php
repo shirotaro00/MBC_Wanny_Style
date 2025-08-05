@@ -32,7 +32,7 @@
                                                 style=" font-size:18px;margin-right:5px"></i> Type article</button>
                                         <button class="btn text-white" style="margin: 5px; background-color: #DD3F26" data-bs-toggle="modal"
                                             data-bs-target="#detailsModal"><i class="fa-solid fa-circle-plus"
-                                                style=" font-size:18px;margin-right:5px"></i>Détails article</button>
+                                                style=" font-size:18px;margin-right:5px"></i>Ajout couleur</button>
 
                                     </div>
                                 </div>
