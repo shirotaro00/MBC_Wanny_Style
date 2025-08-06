@@ -11,7 +11,7 @@
             @include('partials.admin.header')
 
 
-            <div class="container ">
+            <div class="container " style="background-color: #ffff">
                 <div class="page-inner">
 
                     <div class="row">
@@ -118,7 +118,7 @@
             </div>
 
 
-            <div class="container mt--4">
+            <div class="container mt--4" style="background-color: #ffff">
                 <div class="page-inner">
                     <div class="row">
                         <div class="col-md-12">

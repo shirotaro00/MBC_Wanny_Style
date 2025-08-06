@@ -85,7 +85,7 @@
 <div class="logo">
     <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo" >
 </div>
-                <h1 style="margin-bottom:20px"  >Connexion</h1>
+                <h1 style="margin-bottom:20px;color:#002012"  >Connexion</h1>
 
                 <div class="password-wrapper2">
                     <input type="email" class="form-control"  style="width: 100%;"   name="email" id="email" placeholder="Email"

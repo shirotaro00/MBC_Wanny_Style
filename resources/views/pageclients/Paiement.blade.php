@@ -102,20 +102,20 @@
                                                                   </tbody>
                                                               </table>
                                                           </div>
-                                                          @php
+                                                          {{-- @php
                                                               $totalPaye = Paiement::where(
                                                                   'commande_id',
                                                                   $commande->id,
                                                               )->sum('montant');
                                                               $resteAPayer = $total - $totalPaye;
-                                                          @endphp
+                                                          @endphp --}}
 
-                                                          @if ($resteAPayer > 0)
+                                                          {{-- @if ($resteAPayer > 0)
                                                               <div class="alert alert-warning mt-4 text-end">
                                                                   <strong>Reste à payer :</strong>
                                                                   {{ number_format($resteAPayer, 0, ',', ' ') }} MGA
                                                               </div>
-                                                          @endif
+                                                          @endif --}}
                                                           <div class="d-flex justify-content-end mt-5">
                                                               <button class="btn btn-primary" data-bs-toggle="modal"
                                                                   data-bs-target="#payModal"><i
