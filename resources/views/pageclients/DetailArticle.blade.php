@@ -121,14 +121,18 @@
                                 </ul>
                             </div>
                             <div class="product__details__button" style="margin-top: 50px">
-                                <div class="quantity">
-                                    <span>Quantite:</span>
-                                    <div class="pro-qty">
-                                        <input type="number" name="quantite" value="1" min="1">
+                                @if ($articles->quantite > 0)
+                                    <div class="quantity">
+                                        <span>Quantite:</span>
+                                        <div class="pro-qty">
+                                            <input type="number" name="quantite" value="1" min="1" max="{{ $articles->quantite }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <button type="submit" class="cart-btn"><span><i class="fas fa-cart-plus"></i></span>Ajout
-                                    au panier</button>
+                                    <button type="submit" class="cart-btn"><span><i class="fas fa-cart-plus"></i></span>Ajout au panier</button>
+                                @else
+                                    <div class="alert alert-danger">Indisponible</div>
+                                    <button type="button" class="cart-btn" disabled style="background: #ccc; cursor: not-allowed;">Indisponible</button>
+                                @endif
                             </div>
                         </div>
                     </div>

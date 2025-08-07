@@ -296,6 +296,12 @@ class ClientController extends Controller
                     'quantite' => $item['quantite'],
                     'prix_unitaire' => $item['prix'],
                 ]);
+                // Mettre à jour le stock de l'article
+                $article = Article::find($article_id);
+                if ($article) {
+                    $article->quantite = max(0, $article->quantite - $item['quantite']);
+                    $article->save();
+                }
             }
 
             // Ajout des points de fidélité (1 point par article commandé, selon la quantité)

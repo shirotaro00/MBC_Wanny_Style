@@ -5,7 +5,7 @@
     @include('partials/clients.navbar')
 
     <!-- Banner Section Begin -->
-    <section class="banner set-bg" data-setbg="  ">
+    <section class="banner set-bg" data-setbg="{{ asset('assets/img/banner/banner-1.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-xl-7 col-lg-8 m-auto">
@@ -56,7 +56,11 @@
                         <div class="product__item">
                             <div class="product__item__pic set-bg"
                                 data-setbg="{{ asset('assets/upload/' . $article->photo) }}">
-                                <div class="label new">Nouveau</div>
+                                @if ($article->quantite == 0)
+                                    <div class="label" style="background:#dc3545;color:#fff">Indisponible</div>
+                                @elseif ($article->created_at >= now()->subDays(7))
+                                    <div class="label new">Nouveau</div>
+                                @endif
                                 <ul class="product__hover">
                                     <li><a href=" {{ asset('assets/upload/' . $article->photo) }} "
                                             class="image-popup"><span><i

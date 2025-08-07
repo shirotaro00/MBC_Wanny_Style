@@ -120,7 +120,7 @@
                                                               <button class="btn btn-primary" data-bs-toggle="modal"
                                                                   data-bs-target="#payModal"><i
                                                                       class="fa-solid fa-money-bill-1"></i>
-                                                                  Payé</button>
+                                                                  Paiement</button>
 
                                                           </div>
 

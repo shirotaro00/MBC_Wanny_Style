@@ -699,7 +699,7 @@ public function commandesValideParJour(Request $request)
         ->map(function($article) {
             $stock_initial = $article->quantite ?? 0;
             $stock_sortant = DetailCommande::where('article_id', $article->id)->sum('quantite');
-            $stock_restant = $stock_initial - $stock_sortant;
+            $stock_restant = max(0, $stock_initial - $stock_sortant);
             return (object)[
                 'article' => $article,
                 'stock_initial' => $stock_initial,

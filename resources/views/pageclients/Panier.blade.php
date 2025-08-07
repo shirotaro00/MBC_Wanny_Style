@@ -129,7 +129,7 @@
 
 
                                 <button type="submit" class="primary-btn"
-                                    style="width:100%; margin-top:15px">Commandez</button>
+                                    style="width:100%; margin-top:15px">Commander</button>
 
                 @endif
             </div>
