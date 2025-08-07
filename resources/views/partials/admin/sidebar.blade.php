@@ -79,7 +79,7 @@
                             </li>
                             <li class="{{ request()->routeIs('commande.validation') ? 'active' : '' }}">
                                 <a href="{{ route('commande.validation') }}">
-                                    <span class="sub-item">Commande valider</span>
+                                    <span class="sub-item">Commande validée</span>
                                 </a>
                             </li>
                         </ul>
@@ -89,7 +89,7 @@
                     <a data-bs-toggle="collapse" href="#stock"
                         aria-expanded="{{ request()->routeIs('admin.stockarticle', 'stock.sortant') ? 'true' : 'false' }}">
                         <i class="fa-solid fa-boxes-stacked"></i>
-                        <p>Stocks</p>
+                        <p>Stock</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse {{ request()->routeIs('admin.stockarticle', 'stock.sortant') ? 'show' : '' }}"
@@ -144,7 +144,7 @@
                             </li>
                             <li class="{{ request()->routeIs('add.payement') ? 'active' : '' }}">
                                 <a href="{{ route('add.payement') }}">
-                                    <span class="sub-item">Methode de paiement</span>
+                                    <span class="sub-item">Méthode de paiement</span>
                                 </a>
                             </li>
                         </ul>

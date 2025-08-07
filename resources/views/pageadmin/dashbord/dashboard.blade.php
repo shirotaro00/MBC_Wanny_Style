@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="col-7 col-stats">
                                             <div class="numbers">
-                                                <p class="card-category">Nombre clients</p>
+                                                <p class="card-category">Nombres clients</p>
                                                 <h4 class="card-title">{{ $nombreClients }}</h4>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Les articles vendues</h4>
+                                    <h4 class="card-title">Les articles vendus</h4>
                                 </div>
                                 <div class="card-body">
                                     <form method="GET" action="{{ route('admin.dashboard') }}"
@@ -133,7 +133,6 @@
                                             style="margin-right: 5px;margin-left: 20px"></label>
                                         <select name="annee" id="annee"
                                             class="w-auto px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                            <option value="">Sélectionner une annee</option>
                                             @for ($a = date('Y') - 3; $a <= date('Y') + 1; $a++)
                                                 <option value="{{ $a }}"
                                                     @if ($a == $annee) selected @endif>{{ $a }}
