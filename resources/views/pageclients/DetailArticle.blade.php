@@ -128,7 +128,8 @@
                                             <input type="number" name="quantite" value="1" min="1" max="{{ $articles->quantite }}">
                                         </div>
                                     </div>
-                                    <button type="submit" class="cart-btn"><span><i class="fas fa-cart-plus"></i></span>Ajout au panier</button>
+                                    <button type="submit" class="cart-btn" style="background-color: #DD3F26">
+                                    <span><i class="fas fa-cart-plus" style="margin-right:10px"></i></span>Ajout au panier</button>
                                 @else
                                     <div class="alert alert-danger">Indisponible</div>
                                     <button type="button" class="cart-btn" disabled style="background: #ccc; cursor: not-allowed;">Indisponible</button>

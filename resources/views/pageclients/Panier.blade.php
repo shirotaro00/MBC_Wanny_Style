@@ -101,12 +101,12 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="{{ route('page.article') }}">Continue l'achat</a>
+                        <a style="background-color:#D77F27;color:whitesmoke" href="{{ route('page.article') }}">Continue l'achat</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn update__btn">
-                        <button type="submit" class="btn btn-warning">
+                        <button type="submit" class="btn text-white" style="background-color: #DDA233">
                             <i class="fa fa-refresh"></i> Modifier le panier
                         </button>
                     </div>
@@ -129,7 +129,7 @@
 
 
                                 <button type="submit" class="primary-btn"
-                                    style="width:100%; margin-top:15px">Commander</button>
+                                    style="width:100%; margin-top:15px;background-color: #DD3F26">Commander</button>
 
                 @endif
             </div>

@@ -117,7 +117,7 @@
                                                               </div>
                                                           @endif --}}
                                                           <div class="d-flex justify-content-end mt-5">
-                                                              <button class="btn btn-primary" data-bs-toggle="modal"
+                                                              <button class="btn text-white" style="background-color: #DDA233" data-bs-toggle="modal"
                                                                   data-bs-target="#payModal"><i
                                                                       class="fa-solid fa-money-bill-1"></i>
                                                                   Paiement</button>

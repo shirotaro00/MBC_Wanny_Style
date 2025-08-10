@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="mt-2">
-                            <a href="{{ route('page.article') }}" class="btn btn-secondary w-100">Réinitialiser</a>
+                            <a href="{{ route('page.article') }}" class="btn text-white" style="background-color:#DDA233;width:100%">Réinitialiser</a>
                         </div>
                     </form>
                 </div>
@@ -111,7 +111,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('panier.ajouter', $article->id) }}">
+                                            <a href="{{ route('client.monpanier',$article->id) }}">
                                                 <span><i class="fas fa-cart-plus"></i></span>
                                             </a>
                                         </li>

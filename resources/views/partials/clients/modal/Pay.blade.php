@@ -5,8 +5,8 @@
 
             <div class="modal-header">
                 <center>
-                    <h5 class="modal-title" id="payModalLabel" style="color: black">Paiement</h5>
-                    <p>Vous devez payer au moins 50% ou le total du montant </p>
+                    <h5 class="modal-title" id="payModalLabel" style="color:#002012">Paiement</h5>
+                    <p style="color:#002012">Vous devez payer au moins 50% ou le total du montant </p>
                 </center>
 
             </div>
@@ -44,8 +44,8 @@
 
                     <div class="modal-footer">
                         <button type="submit"  id="sign_in"
-                            class="btn btn-success">Payé</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                            class="btn text-white" style="background-color: #0BA883">Payé</button>
+                        <button  type="button text-white" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Fermer</button>
                     </div>
 
                 </form>

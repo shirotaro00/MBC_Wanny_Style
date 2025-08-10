@@ -8,7 +8,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="formModalLabel" style="color: black">Connexion</h5>
+                <h5 class="modal-title w-100 text-center" id="formModalLabel" style="color: #002012">Connexion</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <div class="modal-body">
@@ -35,7 +35,7 @@
 
                     </div>
                     <div class="modal-footer mt-2">
-                        <button type="submit" id="sign_in" class="btn btn-primary" >Se connecter</button>
+                        <button type="submit" id="sign_in" class="btn text-white" style="background-color: #0BA883" >Se connecter</button>
 
                     </div>
                 </form>

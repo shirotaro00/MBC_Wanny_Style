@@ -6,7 +6,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title w-100 text-center" id="forminscriptionLabel" style="color: black">Inscription</h5>
+                <h5 class="modal-title w-100 text-center" id="forminscriptionLabel" style="color: #002012">Inscription</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
 
@@ -80,8 +80,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Créer compte</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn text-white" style="background-color: #0BA883">Créer compte</button>
+                    <button type="button" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Fermer</button>
                 </div>
             </form>
         </div>
