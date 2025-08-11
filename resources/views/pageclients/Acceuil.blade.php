@@ -12,22 +12,25 @@
                     <div class="banner__slider owl-carousel">
                         <div class="banner__item">
                             <div class="banner__text">
-                                <span>Wanny-style</span>
-                                <h1></h1>
+                                <span style="color: #DD3F26">Wanny-style collection</span>
+                                <h4>Wanny promeut sa nouvelle
+                                    collection Gasigasy</h4>
                                 <a href="#"></a>
                             </div>
                         </div>
                         <div class="banner__item">
                             <div class="banner__text">
-                                <span>Wanny-style</span>
-                                <h1></h1>
+                                <span style="color: #DD3F26">Wanny-style collection</span>
+                                <h4>Wanny promeut sa nouvelle
+                                    collection Gasigasy</h4>
                                 <a href="#"></a>
                             </div>
                         </div>
                         <div class="banner__item">
                             <div class="banner__text">
-                                <span>Wanny-style</span>
-                                <h1></h1>
+                                <span style="color: #DD3F26">Wanny-style collection</span>
+                                <h4>Wanny promeut sa nouvelle
+                                    collection Gasigasy</h4>
                                 <a href="#"></a>
                             </div>
                         </div>
@@ -44,7 +47,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="section-title">
-                        <h4>Nouvelle Article</h4>
+                        <h4 style="color:#002012">Nouvelle Article</h4>
                     </div>
                 </div>
             </div>
@@ -57,7 +60,7 @@
                             <div class="product__item__pic set-bg"
                                 data-setbg="{{ asset('assets/upload/' . $article->photo) }}">
                                 @if ($article->quantite == 0)
-                                    <div class="label" style="background:#dc3545;color:#fff">Indisponible</div>
+                                    <div class="label" style="background:#DD3F26;color:#fff">Indisponible</div>
                                 @elseif ($article->created_at >= now()->subDays(7))
                                     <div class="label new">Nouveau</div>
                                 @endif
@@ -65,9 +68,16 @@
                                     <li><a href=" {{ asset('assets/upload/' . $article->photo) }} "
                                             class="image-popup"><span><i
                                                     class="fas fa-up-right-and-down-left-from-center"></i></span></a></li>
-                                    <li><a href="{{ route('page.details', $article->id) }}"><span><i class="fas fa-info-circle"></i></span></i>
+                                    <li><a href="{{ route('page.details', $article->id) }}"><span><i
+                                                    class="fas fa-info-circle"></i></span></i>
                                         </a></li>
-                                    <li><a href="{{ route('client.monpanier',$article->id) }}"><span><i class="fas fa-cart-plus"></i></span></a></li>
+                                    @if ($article->quantite > 0)
+                                        <li><a href="{{ route('client.monpanier', $article->id) }}"><span><i
+                                                        class="fas fa-cart-plus"></i></span></a></li>
+                                    @else
+                                        <li><a href="#" style="pointer-events: none; opacity: 1;"><span><i
+                                                        class="fas fa-cart-plus"></i></span></a></li>
+                                    @endif
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -181,48 +191,48 @@
                 <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                     <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-1.jpg') }} ">
                         <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
+                            <i class="fa fa-facebook"></i>
+                            <a href="#">Wanny Style</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                     <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-2.jpg') }} ">
                         <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
+                            <i class="fa fa-facebook"></i>
+                            <a href="#">Wanny Style</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                     <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-3.jpg') }} ">
                         <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
+                            <i class="fa fa-facebook"></i>
+                            <a href="#">Wanny Style</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                     <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-4.jpg') }} ">
                         <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
+                            <i class="fa fa-facebook"></i>
+                            <a href="#">Wanny Style</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                     <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-5.jpg') }} ">
                         <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
+                            <i class="fa fa-facebook"></i>
+                            <a href="#">Wanny Style</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                     <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-6.jpg') }} ">
                         <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
+                            <i class="fa fa-facebook"></i>
+                            <a href="#">Wanny Style</a>
                         </div>
                     </div>
                 </div>
@@ -231,12 +241,7 @@
     </div>
     <!-- Instagram End -->
     @include('partials/clients.footer')
-
 @endsection
 
 @section('script')
 @endsection
-
-
-
-

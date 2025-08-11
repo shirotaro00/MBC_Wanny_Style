@@ -154,26 +154,34 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Détail de l'article</th>
-                                                    <th>Stock initial</th>
-                                                    <th>Stock sortant</th>
-                                                    <th>Stock restant</th>
+                                                    <th>Nom d'article</th>
+                                                    <th>Couleur</th>
+                                                    <th>Taille</th>
+                                                    <th>Stock disponible</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @forelse($inventaires as $inv)
                                                     <tr>
-                                                        <td>{{ $inv->article->nom ?? '-' }} /
+                                                        <td>{{ $inv->article->nom ?? '-' }}
+                                                        </td>
+                                                        <td>
                                                             @if (isset($inv->article->detailArticle))
                                                                 <small>{{ $inv->article->detailArticle->couleur ?? '' }}</small>
-                                                            @endif /
+                                                            @endif
+                                                        </td>
+                                                        <td>
                                                             @if (isset($inv->article))
                                                                 <small>{{ $inv->article->taille ?? '' }}</small>
                                                             @endif
                                                         </td>
-                                                        <td>{{ $inv->stock_initial ?? 0 }}</td>
-                                                        <td>{{ $inv->stock_sortant ?? 0 }}</td>
-                                                        <td>{{ $inv->stock_restant ?? 0 }}</td>
+                                                        <td>
+                                                            @php
+                                                                $stock = $inv->stock_restant ?? 0;
+                                                                $color = $stock == 0 ? 'danger' : ($stock <= 3 ? 'warning' : 'success');
+                                                            @endphp
+                                                            <span class="badge bg-{{ $color }}" style="font-size: 1em;">{{ $stock }}</span>
+                                                        </td>
                                                     </tr>
                                                 @empty
                                                     <tr>

@@ -50,7 +50,7 @@
                                                 <tr>
                                                     <td>{{ $stock->article->nom ?? '' }}</td>
                                                     <td>{{ $stock->article->categorie ?? '' }}</td>
-                                                    <td>{{ $stock->article->typeArticle->nom ?? '' }}</td>
+                                                    <td>{{ $stock->article->typeArticle->type ?? '' }}</td>
                                                     <td>{{ $stock->article->taille ?? '' }}</td>
                                                     <td>{{ $stock->article->detailArticle->couleur ?? '' }}</td>
                                                     <td>{{ $stock->quantite }}</td>

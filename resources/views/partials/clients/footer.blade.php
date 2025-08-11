@@ -10,11 +10,9 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             cilisis.</p>
                         <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                            <a href="#"><img src="{{ asset('assets/img/payment/MVOLA.png') }} " style="width: 50px" alt=""></a>
+                            <a href="#"><img src="{{ asset('assets/img/payment/airtel.jpg') }}" style="width: 50px"alt=""></a>
+                            <a href="#"><img src="{{ asset('assets/img/payment/orange-money (2).png') }}" style="width: 50px;height:30px" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -30,9 +28,9 @@
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-4">
                     <div class="footer__widget">
-                        <h6>Account</h6>
+                        <h6>Apropos de vous</h6>
                         <ul>
-                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Vos panier</a></li>
                             <li><a href="#">Orders Tracking</a></li>
                             <li><a href="#">Checkout</a></li>
                             <li><a href="#">Wishlist</a></li>
@@ -60,7 +58,7 @@
                 <div class="col-lg-12">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     <div class="footer__copyright__text">
-                        <p>Copyright &copy;
+                        <p style="color: #002012">Copyright &copy;
                             <script>
                                 document.write(new Date().getFullYear());
                             </script> Tous droits réserves | Wanny-Style

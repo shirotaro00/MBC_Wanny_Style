@@ -48,17 +48,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0;
-	color: #fffbfb;
-	font-weight: 400;
-	font-family: "Montserrat", sans-serif;
-}
 
 h1 {
 	font-size: 70px;
@@ -86,8 +75,7 @@ h6 {
 
 p {
 	font-size: 14px;
-	font-family: "Montserrat", sans-serif;
-	color: #666666;
+	color: #002012;
 	font-weight: 400;
 	line-height: 24px;
 	margin: 0 0 15px 0;
@@ -142,7 +130,7 @@ ol {
 	bottom: -4px;
 	height: 2px;
 	width: 70px;
-	background: #ca1515;
+	background: #DDA233;
 	content: "";
 }
 
@@ -426,7 +414,7 @@ height:100px;
 .header__menu ul li a {
 	font-size: 15px;
 	text-transform: uppercase;
-	color: #111111;
+	color: #002012;
 	font-weight: 500;
 	display: block;
 	padding: 2px 0;
@@ -439,7 +427,7 @@ height:100px;
 	bottom: 0;
 	width: 100%;
 	height: 2px;
-	background: #ca1515;
+	background: #DDA233;
 	content: "";
 	-webkit-transition: all, 0.5s;
 	-o-transition: all, 0.5s;
@@ -462,7 +450,7 @@ height:100px;
 
 .header__right__auth a {
 	font-size: 12px;
-	color: #666666;
+	color: #002012;
 	position: relative;
 	margin-right: 8px;
 }
@@ -539,20 +527,19 @@ height:100px;
 
 .banner__text span {
 	font-size: 18px;
-	color: #ca1515;
+	color: #DD3F26;
 	text-transform: uppercase;
 }
 
 .banner__text h1 {
 	font-size: 80px;
-	color: #111111;
-	font-family: "Cookie", cursive;
+	color: #002012;
 	margin-bottom: 15px;
 }
 
 .banner__text a {
 	font-size: 14px;
-	color: #111111;
+	color: #002012;
 	text-transform: uppercase;
 	font-weight: 700;
 	position: relative;
@@ -566,7 +553,7 @@ height:100px;
 	bottom: 0;
 	height: 2px;
 	width: 100%;
-	background: #ca1515;
+	background: #DD3F26;
 	content: "";
 }
 
@@ -592,7 +579,7 @@ height:100px;
 }
 
 .banner__slider.owl-carousel .owl-dots button.active {
-	background: #ca1515;
+	background: #D77F27;
 }
 
 .banner__slider.owl-carousel .owl-dots button:last-child {
@@ -652,7 +639,7 @@ height:100px;
 }
 
 .trend__item__text .product__price {
-	color: #111111;
+	color: #002012;
 	font-weight: 600;
 }
 
@@ -1038,7 +1025,7 @@ height:100px;
 	right: -14px;
 	top: 0;
 	content: "";
-	font-family: "FontAwesome";
+
 }
 
 .breadcrumb__links a i {
@@ -1092,7 +1079,6 @@ height:100px;
 }
 
 .categories__text h1 {
-	font-family: "Cookie", cursive;
 	color: #ffffff;
 	margin-bottom: 5px;
 }
@@ -1817,7 +1803,7 @@ height:100px;
 	display: inline-block;
 	font-size: 14px;
 	color: #ffffff;
-	background: #ca1515;
+	background: #DD3F26;
 	font-weight: 600;
 	text-transform: uppercase;
 	padding: 14px 30px 15px;

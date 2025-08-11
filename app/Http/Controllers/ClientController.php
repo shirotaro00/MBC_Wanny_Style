@@ -398,7 +398,7 @@ class ClientController extends Controller
 
     $request->validate([
         'montant' => 'required|numeric|min:0.01',
-        'Ref_paiement' => 'required|string|min:10',
+        'Ref_paiement' => 'required|string|min:10|max:10',
         'methode_paiement_id' => 'required|exists:methode_paiements,id',
     ]);
 

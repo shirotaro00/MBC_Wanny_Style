@@ -102,22 +102,19 @@
                                                                   </tbody>
                                                               </table>
                                                           </div>
-                                                          {{-- @php
-                                                              $totalPaye = Paiement::where(
-                                                                  'commande_id',
-                                                                  $commande->id,
-                                                              )->sum('montant');
-                                                              $resteAPayer = $total - $totalPaye;
-                                                          @endphp --}}
-
-                                                          {{-- @if ($resteAPayer > 0)
-                                                              <div class="alert alert-warning mt-4 text-end">
-                                                                  <strong>Reste à payer :</strong>
-                                                                  {{ number_format($resteAPayer, 0, ',', ' ') }} MGA
-                                                              </div>
-                                                          @endif --}}
+                                                          @php
+                                                              $totalPaye = $commande->paiements->sum('montant');
+                                                              $reste = max($total - $totalPaye, 0);
+                                                          @endphp
+                                                          <p style="text-align: right;"><strong>Montant déjà payé :
+                                                                  {{ number_format($totalPaye, 0, ',', ' ') }}</strong>MGA
+                                                          </p>
+                                                          <p style="text-align: right;"><strong>Reste à payer :
+                                                                  {{ number_format($reste, 0, ',', ' ') }}</strong>MGA
+                                                          </p>
                                                           <div class="d-flex justify-content-end mt-5">
-                                                              <button class="btn text-white" style="background-color: #DDA233" data-bs-toggle="modal"
+                                                              <button class="btn text-white"
+                                                                  style="background-color: #DDA233" data-bs-toggle="modal"
                                                                   data-bs-target="#payModal"><i
                                                                       class="fa-solid fa-money-bill-1"></i>
                                                                   Paiement</button>
