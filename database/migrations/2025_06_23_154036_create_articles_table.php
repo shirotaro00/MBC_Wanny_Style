@@ -17,12 +17,12 @@ return new class extends Migration
             $table->enum('categorie',['Homme','Femme']);
             $table->double('prix');
             $table->integer('quantite');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->longText('description');
-            $table->enum('taille',['L','M','S','XL','XXL']);
+            $table->enum('taille',['L','M','S','XL','XXL'])->nullable();
             $table->unsignedBigInteger('type_article_id');
             $table->foreign('type_article_id')->references('id')->on('type_articles')->onDelete('cascade');
-            $table->unsignedBigInteger('detail_article_id');
+            $table->unsignedBigInteger('detail_article_id')->nullable();
             $table->foreign('detail_article_id')->references('id')->on('detail_articles')->onDelete('cascade');
             $table->timestamps();
         });

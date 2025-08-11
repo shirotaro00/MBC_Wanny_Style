@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="section-title">
-                        <h4 style="color:#002012">Nouvelle Article</h4>
+                        <h4 style="color:#002012">Nouveautés</h4>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
     <!-- Trend Section End -->
 
     <!-- Discount Section Begin -->
-    <section class="discount">
+    {{-- <section class="discount">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 p-0">
@@ -238,7 +238,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Instagram End -->
     @include('partials/clients.footer')
 @endsection

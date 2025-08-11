@@ -54,7 +54,6 @@ class AdminController extends Controller
     // page gestion utilisateur
     public function Gestionutilisateur()
     {
-        $utilisateurs = User::where('role', 3)->get();
         $utilisateurs = User::where('role', '!=', '0')->get();
 
         return view("pageadmin.dashbord.Gestionutilisateur", compact('utilisateurs'));
@@ -106,8 +105,9 @@ class AdminController extends Controller
     public function listearticle()
     {
         $articles = Article::with(['typeArticle', 'detailArticle'])->get();
+        $details = DetailArticle::all();
 
-        return view("pageadmin.dashbord.listearticle", compact('articles'));
+        return view("pageadmin.dashbord.listearticle", compact('articles', 'details'));
     }
 
 
@@ -155,24 +155,20 @@ class AdminController extends Controller
         $client = $commande->user;
 
 
-          try {
+        try {
 
-         $client->notify(new CommandeValideeClient($commande));
-        toastify()->success('Commande validée!');
+            $client->notify(new CommandeValideeClient($commande));
+            toastify()->success('Commande validée!');
 
-         return redirect()->route('commande.validation')->with('success', 'Commande validée avec succès.');
-    } catch (\Exception $e) {
-        // Loguer l'erreur pour le développeur
-        Log::error('Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
+            return redirect()->route('commande.validation')->with('success', 'Commande validée avec succès.');
+        } catch (\Exception $e) {
+            // Loguer l'erreur pour le développeur
+            Log::error('Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
 
-        // Stocker un message d'erreur pour la vue
-         toastify()->error('Impossible d\'envoyer l\'e-mail aux gérants. Vérifiez votre connexion.');
-  return redirect()->back();
-    }
-
-
-
-
+            // Stocker un message d'erreur pour la vue
+            toastify()->error('Impossible d\'envoyer l\'e-mail aux gérants. Vérifiez votre connexion.');
+            return redirect()->back();
+        }
     }
     //page des commandes deja valide
     public function commandesValide()
@@ -246,7 +242,7 @@ class AdminController extends Controller
 
         toastify()->success('Votre compte a été créé avec succès ✔');
 
-        return redirect()->route('admin.accueil')->with('success', 'Votre compte a été créé avec succès');
+        return redirect()->route('admin.dashboard')->with('success', 'Votre compte a été créé avec succès');
     }
     //connexion admin
     public function login(Request $request)
@@ -265,10 +261,10 @@ class AdminController extends Controller
                 return redirect()->route('admin.dashboard');
             } else if (Auth::user()->role == 3) {
                 toastify()->success('Vous êtes connecté ✔');
-                return redirect()->route('admin.accueil');
+                return redirect()->route('admin.dashboard');
             } else if (Auth::user()->role == 6) {
                 toastify()->success('Vous êtes connecté ✔');
-                return redirect()->route('admin.accueil');
+                return redirect()->route('admin.dashboard');
             }
         } else {
             return redirect()->back()->with("error", "email ou mot de passe incorrect");
@@ -306,51 +302,73 @@ class AdminController extends Controller
     //ajout article
     public function ajoutArticle(Request $request)
     {
+        if (auth()->user()->role === '3') {
+            toastify()->error('Action non autorisée pour les lecteurs.');
+            return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
+        }
+
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'categorie' => 'required|in:Homme,Femme',
+            'prix' => 'required|numeric|min:0',
+            'quantite' => 'required|integer|min:0',
+            'description' => 'required|string',
+            'type_article_id' => 'required|exists:type_articles,id',
+        ], $this->messages());
+
+        $validated['nom'] = collect(explode(' ', strtolower($validated['nom'])))
+            ->map(fn($mot) => ucfirst($mot))
+            ->implode(' ');
+
+        $validated['categorie'] = ucfirst(strtolower($validated['categorie']));
+        $validated['description'] = ucfirst($validated['description']);
+
+        $article = Article::create($validated);
+
+
+        session(['article_id' => $article->id]);
+
+        toastify()->success('Article créé. Ajoutez maintenant la photo, taille et couleur.');
+
+        return redirect()->route('admin.addarticle');
+    }
+
+    public function storage(Request $request)
+    {
 
         if (auth()->user()->role === '3') {
             toastify()->error('Action non autorisée pour les lecteurs.');
             return redirect()->back()->with('error', 'Action non autorisée pour les lecteurs.');
         } else {
-            $request->validate([
-                'nom' => 'required|string',
-                'categorie' => 'required|string',
-                'prix' => 'required|integer|min:0',
-                'quantite' => 'required|integer|min:0',
+            $validated = $request->validate([
                 'photo' => 'required|image|mimes:jpeg,png,jpg',
-                'description' => 'required|string',
                 'taille' => 'required|in:L,M,S,XL,XXL',
-                'type_article_id' => 'required|exists:type_articles,id',
                 'detail_article_id' => 'required|exists:detail_articles,id'
             ], $this->messages());
 
-            $filename = time() . '.' . $request->photo->getClientOriginalExtension();
-            $request->photo->move(public_path("assets/upload"), $filename);
 
-            $nom = collect(explode(' ', strtolower($request->input('nom'))))
-                ->map(fn($mot) => ucfirst($mot))
-                ->implode(' ');
-            $categorie = collect(explode(' ', strtolower($request->input('categorie'))))
-                ->map(fn($mot) => ucfirst($mot))
-                ->implode(' ');
-            $description = collect(explode(' ', strtolower($request->input('description'))))
-                ->map(fn($mot) => ucfirst($mot))
-                ->implode(' ');
 
-            Article::create([
-                'nom' => $nom,
-                'categorie' => $categorie,
-                'prix' => $request->prix,
-                'quantite' => $request->quantite,
-                'photo' => $filename,
-                'description' => $description,
-                'taille' => $request->taille,
-                'type_article_id' => $request->type_article_id,
-                'detail_article_id' => $request->detail_article_id
-            ]);
+            $articleId = session('article_id');
+            if (!$articleId) {
+                return redirect()->route('articles.createStep1')->with('error', 'Aucun article en cours.');
+            }
 
-            toastify()->success('article  ajouté ✔');
+            $article = Article::findOrFail($articleId);
 
-            return redirect()->route('admin.addarticle')->with('success', 'article  ajouté');
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('assets/upload'), $filename);
+                $validated['photo'] = 'assets/upload/' . $filename;
+            }
+
+            $article->update($validated);
+
+            session()->forget('article_id');
+
+            toastify()->success('article  ajouté');
+
+            return redirect()->route('admin.listearticle')->with('success', 'article  ajouté');
         }
     }
     //ajoute details article
@@ -687,67 +705,62 @@ class AdminController extends Controller
 
 
 
-public function commandesValideParJour(Request $request)
-{
+    public function commandesValideParJour(Request $request)
+    {
 
-    $articlesVendusJour = DetailCommande::whereDate('created_at', now())->sum('quantite');
+        $articlesVendusJour = DetailCommande::whereDate('created_at', now())->sum('quantite');
 
-    $nombreClients = User::where('role',"1")->count();
+        $nombreClients = User::where('role', "1")->count();
 
-    $inventaires = Article::with(['detailArticle'])
-        ->get()
-        ->map(function($article) {
-            $stock_initial = $article->quantite ?? 0;
-            $stock_sortant = DetailCommande::where('article_id', $article->id)->sum('quantite');
-            $stock_restant = max(0, $stock_initial - $stock_sortant);
-            return (object)[
-                'article' => $article,
-                'stock_initial' => $stock_initial,
-                'stock_sortant' => $stock_sortant,
-                'stock_restant' => $stock_restant,
-            ];
-        });
+        $inventaires = Article::with(['detailArticle'])
+            ->get()
+            ->map(function ($article) {
+                $stock_initial = $article->quantite ?? 0;
+                $stock_sortant = DetailCommande::where('article_id', $article->id)->sum('quantite');
+                $stock_restant = max(0, $stock_initial - $stock_sortant);
+                return (object)[
+                    'article' => $article,
+                    'stock_initial' => $stock_initial,
+                    'stock_sortant' => $stock_sortant,
+                    'stock_restant' => $stock_restant,
+                ];
+            });
 
-    $mois = $request->input('mois', Carbon::now()->month);
-    $annee = $request->input('annee', Carbon::now()->year);
+        $mois = $request->input('mois', Carbon::now()->month);
+        $annee = $request->input('annee', Carbon::now()->year);
 
-    $debutMois = Carbon::create($annee, $mois, 1)->startOfMonth();
-    $finMois = Carbon::create($annee, $mois, 1)->endOfMonth();
+        $debutMois = Carbon::create($annee, $mois, 1)->startOfMonth();
+        $finMois = Carbon::create($annee, $mois, 1)->endOfMonth();
 
-    $articlesParSemaine = DB::table('detail_commandes')
-        ->whereBetween('created_at', [$debutMois, $finMois])
-        ->select(
-            DB::raw('YEARWEEK(created_at, 1) as annee_semaine'),
-            DB::raw('WEEK(created_at, 1) as semaine'),
-            DB::raw('SUM(quantite) as total_articles')
-        )
-        ->groupBy('annee_semaine', 'semaine')
-        ->orderBy('annee_semaine')
-        ->get();
+        $articlesParSemaine = DB::table('detail_commandes')
+            ->whereBetween('created_at', [$debutMois, $finMois])
+            ->select(
+                DB::raw('YEARWEEK(created_at, 1) as annee_semaine'),
+                DB::raw('WEEK(created_at, 1) as semaine'),
+                DB::raw('SUM(quantite) as total_articles')
+            )
+            ->groupBy('annee_semaine', 'semaine')
+            ->orderBy('annee_semaine')
+            ->get();
 
-    $labels = [];
-    $data = [];
+        $labels = [];
+        $data = [];
 
-    $semaineDebut = $debutMois->copy()->startOfWeek();
-    $semaineFin = $finMois->copy()->endOfWeek();
-    $semaines = [];
-    $current = $semaineDebut->copy();
-    while ($current->lte($semaineFin)) {
-        $labels[] = 'Semaine ' . $current->weekOfYear;
-        $semaines[] = $current->weekOfYear;
-        $current->addWeek();
+        $semaineDebut = $debutMois->copy()->startOfWeek();
+        $semaineFin = $finMois->copy()->endOfWeek();
+        $semaines = [];
+        $current = $semaineDebut->copy();
+        while ($current->lte($semaineFin)) {
+            $labels[] = 'Semaine ' . $current->weekOfYear;
+            $semaines[] = $current->weekOfYear;
+            $current->addWeek();
+        }
+
+        foreach ($semaines as $index => $numSemaine) {
+            $val = $articlesParSemaine->firstWhere('semaine', $numSemaine);
+            $data[] = $val ? $val->total_articles : 0;
+        }
+
+        return view('pageadmin.dashbord.dashboard', compact('labels', 'data', 'mois', 'annee', 'articlesVendusJour', 'nombreClients', 'inventaires'));
     }
-
-    foreach ($semaines as $index => $numSemaine) {
-        $val = $articlesParSemaine->firstWhere('semaine', $numSemaine);
-        $data[] = $val ? $val->total_articles : 0;
-    }
-
-    return view('pageadmin.dashbord.dashboard', compact('labels', 'data', 'mois', 'annee','articlesVendusJour','nombreClients','inventaires'));
 }
-
-
-}
-
-
-

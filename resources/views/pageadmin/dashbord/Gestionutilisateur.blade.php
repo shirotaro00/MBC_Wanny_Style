@@ -42,7 +42,6 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($utilisateurs as $user)
-                                            @if ($user->role == 3)
                                                 <tr>
                                                     <td> {{ $user->nom }} </td>
                                                     <td>{{ $user->prenom }}</td>
@@ -51,8 +50,9 @@
                                                     <td>{{ $user->email }}</td>
                                                     <td>
                                                         <form action="{{ route('admin.utilisateurG.update', $user->id) }}"
-                                                            method="post">
+                                                            method="POST">
                                                             @csrf
+                                                            @method('PUT')
                                                             <div class="mb-3" style="height: 42px ; ">
 
                                                                 <select class="form-select form-control" id="role"
@@ -72,18 +72,10 @@
                                                         <div class="d-flex gap-2">
                                                             <button type="submit" class="btn btn-secondary"> <i
                                                                     class="fas fa-edit"></i> Modifier</button>
-
-                                                            <!-- Bouton qui ouvre le modal -->
-                                                            <button type="button"style="margin-left: 10px"
-                                                                class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                                data-bs-target="#modalDelete{{ $user->id }}">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 </form>
-                                                @endif
                                             @endforeach
 
 

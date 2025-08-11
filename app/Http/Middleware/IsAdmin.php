@@ -14,13 +14,18 @@ class IsAdmin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next)
-{
+   public function handle($request, Closure $next, ...$roles)
+    {
+        if (Auth::check()) {
+            $userRole = Auth::user()->role;
 
-        if (Auth::check() && Auth::user()->role === '0') {
-            return $next($request);
+            if (in_array($userRole, $roles)) {
+                return $next($request);
+            }
         }
 
-        return redirect()->route('page.admin')->with('error', 'Accès réservé à l\'administrateur.');
-}
+        return redirect()->route('page.admin')
+            ->with('error', 'Accès réservé aux utilisateurs autorisés.');
+    }
+
 }

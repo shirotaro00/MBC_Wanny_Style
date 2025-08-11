@@ -11,6 +11,7 @@
 @endsection
 @section('body')
     @include('partials.admin.modal.suppressionarticle')
+@include('partials.admin.modal.ajoutphoto')
     <div class="wrapper">
         @include('partials.admin.sidebar')
 
@@ -75,20 +76,22 @@
 
                                                             <td>
                                                                 <div class="d-flex gap-2">
+                                                                     <!-- Bouton qui ouvre le modal d'ajout/modification photo/taille/couleur -->
+                                                                    <button type="button" class="btn  btn-sm text-white" style="background-color: #D77F27;margin-right:5px" data-bs-toggle="modal" data-bs-target="#modalEdit">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
                                                                     <a href="{{ route('admin.editarticle', $article->id) }}"
-                                                                        class="btn btn-warning btn-sm"  onclick="verifierAcces('{{ auth()->user()->role }}')">
+                                                                        class="btn btn-sm text-white" style="background-color: #DDA233"  onclick="verifierAcces('{{ auth()->user()->role }}')">
                                                                         <i class="fas fa-edit"></i>
                                                                     </a>
 
-                                                                    <!-- Bouton qui ouvre le modal -->
-                                                                    <button type="button"style="margin-left: 10px"
-                                                                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                                    <!-- Bouton qui ouvre le modal de suppression -->
+                                                                    <button type="button"style="margin-left:5px;background-color:#DD3F26"
+                                                                        class="btn btn-sm text-white"  data-bs-toggle="modal"
                                                                         data-bs-target="#modalDelete{{ $article->id }}">
                                                                         <i class="fas fa-trash"></i>
                                                                     </button>
                                                                 </div>
-
-
                                                             </td>
                                                         </tr>
                                                     @endforeach

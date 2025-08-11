@@ -15,71 +15,78 @@
                 {{-- Sidebar des filtres --}}
                 <div class="col-lg-3 col-md-3">
                     <div class="shop__sidebar">
-                        <form method="GET" action="{{ route('page.articles') }}">
-                            {{-- Catégories --}}
-                            <div class="sidebar__categories">
-                                <div class="section-title">
-                                    <h4>Catégories</h4>
-                                </div>
-                                <div class="categories__accordion">
-                                    <div class="accordion" id="accordionExample">
-                                        @foreach (['Homme', 'Femme'] as $cat)
-                                            <div class="card">
-                                                <div class="card-heading">
-                                                    <label>
-                                                        <input type="checkbox" name="categorie[]"
-                                                            value="{{ $cat }}"
-                                                            {{ in_array($cat, $categories ?? []) ? 'checked' : '' }}>
-                                                        {{ $cat }}
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
+    <form method="GET" action="{{ route('page.articles') }}">
+        {{-- Catégories --}}
+        <div class="sidebar__categories">
+            <div class="section-title">
+                <h4>Catégories</h4>
+            </div>
+            <div class="categories__accordion">
+                <div class="accordion" id="accordionExample">
+                    @foreach (['Homme', 'Femme'] as $cat)
+                        <div class="card">
+                            <div class="card-heading">
+                                <label>
+                                    <input type="checkbox" name="categorie[]"
+                                        value="{{ $cat }}"
+                                        {{ in_array($cat, $categories ?? []) ? 'checked' : '' }}>
+                                    {{ $cat }}
+                                </label>
                             </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
-                            {{-- Tailles --}}
-                            <div class="sidebar__sizes mt-3">
-                                <div class="section-title">
-                                    <h4>Taille</h4>
-                                </div>
-                                <div class="size__list">
-                                    @foreach (['l', 'm', 's', 'xl', 'xxl'] as $taille)
-                                        <label for="taille_{{ $taille }}">
-                                            {{ strtoupper($taille) }}
-                                            <input type="checkbox" id="taille_{{ $taille }}" name="taille[]"
-                                                value="{{ $taille }}"
-                                                {{ in_array($taille, $tailles ?? []) ? 'checked' : '' }}>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
+        {{-- Tailles --}}
+        <div class="sidebar__sizes mt-3">
+            <div class="section-title">
+                <h4>Taille</h4>
+            </div>
+            <div class="size__list">
+                @foreach (['l', 'm', 's', 'xl', 'xxl'] as $taille)
+                    <label for="taille_{{ $taille }}">
+                        {{ strtoupper($taille) }}
+                        <input type="checkbox" id="taille_{{ $taille }}" name="taille[]"
+                            value="{{ $taille }}"
+                            {{ in_array($taille, $tailles ?? []) ? 'checked' : '' }}>
+                        <span class="checkmark"></span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
 
-                            {{-- Couleurs --}}
-                            <div class="sidebar__color mt-3">
-                                <div class="section-title">
-                                    <h4>Couleur</h4>
-                                </div>
-                                <div class="size__list color__list">
-                                    @foreach (['Noir', 'Blanc', 'Rouge', 'Gris', 'Bleu', 'Vert', 'Jaune', 'Grenat', 'Orange', 'Marron', 'Rose', 'Violet'] as $color)
-                                        <label for="color_{{ strtolower($color) }}">
-                                            {{ $color }}
-                                            <input type="checkbox" id="color_{{ strtolower($color) }}" name="couleur[]"
-                                                value="{{ $color }}"
-                                                {{ in_array($color, $couleurs ?? []) ? 'checked' : '' }}>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <a href="{{ route('page.article') }}" class="btn text-white"
-                                    style="background-color:#DDA233;width:100%">Réinitialiser</a>
-                            </div>
-                        </form>
-                    </div>
+        {{-- Couleurs --}}
+        <div class="sidebar__color mt-3">
+            <div class="section-title">
+                <h4>Couleur</h4>
+            </div>
+            <div class="size__list color__list">
+                @foreach (['Noir', 'Blanc', 'Rouge', 'Gris', 'Bleu', 'Vert', 'Jaune', 'Grenat', 'Orange', 'Marron', 'Rose', 'Violet'] as $color)
+                    <label for="color_{{ strtolower($color) }}">
+                        {{ $color }}
+                        <input type="checkbox" id="color_{{ strtolower($color) }}" name="couleur[]"
+                            value="{{ $color }}"
+                            {{ in_array($color, $couleurs ?? []) ? 'checked' : '' }}>
+                        <span class="checkmark"></span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- Boutons --}}
+        <div class="mt-3 d-flex gap-2">
+            <button type="submit" class="btn text-white" style="background-color:#DDA233;flex:1">
+                Appliquer
+            </button>
+            <a href="{{ route('page.article') }}" class="btn text-white" style="flex:1;background-color:#DD3F26;">
+                Réinitialiser
+            </a>
+        </div>
+    </form>
+</div>
+
                 </div>
 
                 {{-- Zone des articles --}}
@@ -152,13 +159,13 @@
     </section>
 
     {{-- Script pour soumission automatique du formulaire --}}
-    <script>
+    {{-- <script>
         document.querySelectorAll('.shop__sidebar input[type="checkbox"]').forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
                 this.closest('form').submit();
             });
         });
-    </script>
+    </script> --}}
 
     <!-- Shop Section End -->
 

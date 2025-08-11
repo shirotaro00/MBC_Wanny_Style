@@ -41,8 +41,7 @@
                                 <div class="container mt-5">
                                     <div class="row justify-content-center">
                                         <div class="col-md-8">
-                                            <form action="{{ route('articles.store') }}" method="POST"
-                                                enctype="multipart/form-data">
+                                            <form action="{{ route('articles.store') }}" method="POST">
                                                 @csrf
                                                 <div class="row">
                                                     <!-- Colonne gauche -->
@@ -68,28 +67,9 @@
                                                                 </div>
                                                             @enderror
                                                         </div>
-                                                        {{-- photo --}}
-                                                        <div class="mb-3">
-                                                            <label for="photo" class="form-label">Photo</label>
-                                                            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo"
-                                                                name="photo" placeholder="">
 
-                                                            @error('photo')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
-                                                        </div>
                                                            {{-- Categories --}}
-                                                        <div class="mb-3" style="height: 42px ; ">
-                                                            <label for="categorie" class="form-label">Categories</label>
-                                                            <select class="form-select form-control" id="categorie"
-                                                                name="categorie">
-                                                                <option value="homme">Homme</option>
-                                                                <option value="femme">Femme</option>
 
-                                                            </select>
-                                                        </div>
                                                                     {{-- Quantité --}}
                                                         <div class="mb-3" style="height: 42px ; margin-top: 30px;">
                                                             <label for="quantite" class="form-label">Quantité</label>
@@ -121,35 +101,19 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    {{-- couleur --}}
-                                                    <div class="mb-3" style="height:42px ;padding-top:20px;">
-                                                        <label for="detail_article_id" class="form-label">Couleur</label>
-                                                        <select class="form-select form-control" id="detail_article_id"
-                                                            name="detail_article_id">
-                                                            @foreach ($details as $detail)
-                                                                <option value="{{ $detail->id }}">
-                                                                    {{ $detail->couleur }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                            {{-- taille --}}
-                                                    <div class="mb-3" style="height:42px ;padding-top:46px;">
-                                                        <label for="taille" class="form-label">Taille</label>
-                                                        <select class="form-select form-control" id="taille"
-                                                            name="taille">
-                                                            <option value="L">L</option>
-                                                            <option value="S">S</option>
-                                                            <option value="M">M</option>
-                                                            <option value="XL">XL</option>
-                                                            <option value="XXL">XXL</option>
+                                                    <div class="mb-3"style="height:42px ;padding-top:20px;">
+                                                            <label for="categorie" class="form-label">Categories</label>
+                                                            <select class="form-select form-control" id="categorie"
+                                                                name="categorie">
+                                                                <option value="Homme">Homme</option>
+                                                                <option value="Femme">Femme</option>
 
-                                                        </select>
-                                                    </div>
+                                                            </select>
+                                                        </div>
                                                               {{-- description --}}
                                                     <div class="mb-3" style="padding-top:65px;">
                                                         <label for="civilite" class="form-label">Description</label>
-                                                        <textarea class="form-control" name="description"{{ old('description') }}  rows="1"></textarea>
+                                                        <textarea class="form-control" name="description" rows="1">{{ old('description') }}</textarea>
                                                     </div>
                                                 </div>
                                                 </div>
@@ -196,6 +160,8 @@
             });
             detailsModal.show();
         });
+
+        onclick="verifierAcces('{{ auth()->user()->role }}')
     </script>
 @endif
 

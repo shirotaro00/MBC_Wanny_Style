@@ -60,9 +60,15 @@ Route::get('/register', [AdminController::class, 'LoginForm'])->name('login');
 // authentification admin
 Route::post('/login',[AdminController::class, 'registerAdmin'])->name('create.log');
 Route::post('/administration',[AdminController::class, 'login'])->name('admin.auth');
+// route deconnexion admin
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('deconnexion');
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'role:0'])->group(function () {
+    Route::put('/admin/users/gestionrole/{id}/role',[AdminController::class, 'updaterole'])->name('admin.utilisateurG.update');
+});
+
+Route::middleware(['auth', 'role:0,3,6'])->group(function () {
 //page accueil admin
 Route::get('/admin',[AdminController::class, 'accueil'])->name('admin.accueil');
 //page article
@@ -77,7 +83,6 @@ Route::get('/stockarticle',[AdminController::class, 'stockarticle'])->name('admi
 Route::get('/profil',[AdminController::class, 'profil'])->name('admin.profil');
 Route::post('/utilisateur/update/{id}', [AdminController::class, 'update'])->name('admin.utilisateur.update');
 Route::post('/admin/pay/update/{id}',[AdminController::class, 'updatePay'])->name('pay.update');
-Route::post('/admin/users/gestionrole/{id}/role',[AdminController::class, 'updaterole'])->name('admin.utilisateurG.update');
 Route::get('/admin/dashboard', [AdminController::class, 'commandesValideParJour'])->name('admin.dashboard');
 
 
@@ -87,6 +92,7 @@ Route::get('/admin/dashboard', [AdminController::class, 'commandesValideParJour'
 Route::post('/type',[AdminController::class, 'addType'])->name('create.type');
 //route ajout  article
 Route::post('/article',[AdminController::class, 'ajoutArticle'])->name('articles.store');
+Route::post('/articles',[AdminController::class, 'storage'])->name('article.storage');
 //route ajout details article
 Route::post('/details', [AdminController::class, 'store'])->name('details.store');
 //suppresionarticle
@@ -113,8 +119,6 @@ Route::get('/commande/validation', [AdminController::class, 'commandesValide'])-
 Route::get('/facture/{id}', [AdminController::class, 'genererFacture'])->name('facture.generer');
 //Historique des paiements
 Route::get('/historique-paiement', [AdminController::class, 'historique_paiement'])->name('historique.paiement');
-// route deconnexion admin
-Route::get('/admin/logout', [AdminController::class, 'logout'])->name('deconnexion');
 });
 
 
