@@ -124,7 +124,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h1>Liste paiement</h1>
+                                    <h1>Liste methode de paiement</h1>
                                 </div>
                                 <table class="table table-head mt-4">
                                     <thead style="background-color:#E6EAC9;">
@@ -150,15 +150,15 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex gap-2">
-                                                        <button type="button"style="margin-left: 10px"
-                                                            class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                        <button type="button"style="margin-left: 10px;background-color:#D77F27"
+                                                            class="btn  btn-sm text-white" data-bs-toggle="modal"
                                                             data-bs-target="#editpayModal">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
 
                                                         <!-- Bouton qui ouvre le modal -->
-                                                        <button type="button"style="margin-left: 10px"
-                                                            class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                        <button type="button"style="margin-left: 10px;background-color:#DD3F26"
+                                                            class="btn btn-sm text-white" data-bs-toggle="modal"
                                                             data-bs-target="#payDelete{{ $methode->id }}">
                                                             <i class="fas fa-trash"></i>
                                                         </button>

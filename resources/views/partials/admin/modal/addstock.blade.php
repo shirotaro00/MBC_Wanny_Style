@@ -14,13 +14,21 @@
                     <form action="{{ route('admin.ajouterStock', $article->id) }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="article_id" class="form-label"> Article
-                            </label>
+                            <label for="article_id" class="form-label">Article</label>
                             <select class="form-select form-control" id="article_id" name="article_id">
-                                <option value="{{ $article->id }}">{{ $article->nom }}
-                                </option>
+                                @foreach ($articles as $article)
+                                    <option value="{{ $article->id }}">
+                                        {{ $article->nom }}
+                                        @if ($article->detailArticle)
+                                            - Taille : {{ $article->taille ?? $article->detailArticle->taille }}
+                                            - Couleur : {{ $article->detailArticle->couleur }}
+                                        @endif
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
+
+
                         <div class="mb-3">
                             <label for="nom" class="form-label">Quantite</label>
                             <input type="text" class="form-control @error('quantite') is-invalid @enderror"
@@ -39,7 +47,9 @@
                         <div class="modal-footer">
                             <button type="submit" onclick="verifierAcces('{{ auth()->user()->role }}')" id="sign_in"
                                 class="btn text-white" style="background-color: #0BA883">Ajouter</button>
-                            <button type="button text-white" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button text-white" class="btn"
+                                style="background-color: #DD3F26; color:aliceblue"
+                                data-bs-dismiss="modal">Fermer</button>
                         </div>
                     </form>
                 </div>

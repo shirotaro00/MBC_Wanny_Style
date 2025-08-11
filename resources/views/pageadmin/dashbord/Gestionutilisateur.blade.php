@@ -53,7 +53,7 @@
                                                             method="POST">
                                                             @csrf
                                                             @method('PUT')
-                                                            <div class="mb-3" style="height: 42px ; ">
+                                                            <div class="mb-3" style="height: 42px ;padding-top:10px; ">
 
                                                                 <select class="form-select form-control" id="role"
                                                                     name="role">
@@ -70,7 +70,7 @@
 
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button type="submit" class="btn btn-secondary"> <i
+                                                            <button type="submit" class="btn text-white" style="background-color: #D77F27"> <i
                                                                     class="fas fa-edit"></i> Modifier</button>
                                                         </div>
                                                     </td>

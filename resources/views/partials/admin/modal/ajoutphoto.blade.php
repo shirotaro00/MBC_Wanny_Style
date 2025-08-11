@@ -34,8 +34,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="submit" class="btn text-white" style="background-color: #0BA883">Enregistrer</button>
+                    <button type="button" class="btn text-white" style="background-color: #DD3F26" data-bs-dismiss="modal">Annuler</button>
                 </div>
             </form>
         </div>

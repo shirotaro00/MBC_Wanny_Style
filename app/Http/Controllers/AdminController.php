@@ -88,7 +88,7 @@ class AdminController extends Controller
     //page stock
     public function stockarticle()
     {
-        $articles = Article::all();
+        $articles = Article::with('detailArticle')->get();
         $stocks = Stock::with(['article.detailArticle', 'article.typeArticle'])->get();
         return view("pageadmin.dashbord.stock", compact('articles', 'stocks'));
     }
@@ -350,7 +350,7 @@ class AdminController extends Controller
 
             $articleId = session('article_id');
             if (!$articleId) {
-                return redirect()->route('articles.createStep1')->with('error', 'Aucun article en cours.');
+                return redirect()->route('admin.listearticle')->with('error', 'Aucun article en cours.');
             }
 
             $article = Article::findOrFail($articleId);
@@ -359,7 +359,7 @@ class AdminController extends Controller
                 $file = $request->file('photo');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('assets/upload'), $filename);
-                $validated['photo'] = 'assets/upload/' . $filename;
+                $validated['photo'] = $filename;
             }
 
             $article->update($validated);

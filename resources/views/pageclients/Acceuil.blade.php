@@ -100,146 +100,34 @@
     <!-- Product Section End -->
 
 
-
-    <!-- Trend Section Begin -->
-
-    <!-- Trend Section End -->
-
-    <!-- Discount Section Begin -->
-    {{-- <section class="discount">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 p-0">
-                    <div class="discount__pic">
-                        <img src=" {{ asset('assets/img/discount.jpg') }} " alt="">
+    <!-- About Section Begin -->
+<section class="about spad" style="background: #f9f9f9; padding: 60px 0;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about__pic set-bg" data-setbg="{{ asset('assets/img/discount.jpg') }}" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(221,63,38,0.3); height: 400px; background-size: cover; background-position: center;"></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about__text">
+                    <div class="section-title">
+                        <h4 style="color: #DD3F26; font-weight: 700;">À propos de Wanny Style</h4>
                     </div>
-                </div>
-                <div class="col-lg-6 p-0">
-                    <div class="discount__text">
-                        <div class="discount__text__title">
-                            <span>Discount</span>
-                            <h2>Summer 2019</h2>
-                            <h5><span>Sale</span> 50%</h5>
-                        </div>
-                        <div class="discount__countdown" id="countdown-time">
-                            <div class="countdown__item">
-                                <span>22</span>
-                                <p>Days</p>
-                            </div>
-                            <div class="countdown__item">
-                                <span>18</span>
-                                <p>Hour</p>
-                            </div>
-                            <div class="countdown__item">
-                                <span>46</span>
-                                <p>Min</p>
-                            </div>
-                            <div class="countdown__item">
-                                <span>05</span>
-                                <p>Sec</p>
-                            </div>
-                        </div>
-                        <a href="#">Shop now</a>
-                    </div>
+                    <p style="font-size: 1.1rem; color: #333; margin-bottom: 25px;">
+                        Wanny Style est votre plateforme incontournable pour découvrir et acheter les dernières tendances de la mode Gasigasy. Nous mettons en avant la créativité locale avec des collections uniques, modernes et authentiques.
+                    </p>
+                    <p style="font-size: 1rem; color: #555; line-height: 1.6;">
+                        Notre mission est de promouvoir l'artisanat malgache et offrir une expérience shopping agréable, sécurisée et rapide. Rejoignez la communauté Wanny et faites partie du mouvement qui valorise la mode durable et responsable.
+                    </p>
+                    <a href="" class="btn" style="background: #DD3F26; color: #fff; padding: 10px 30px; border-radius: 30px; font-weight: 600; display: inline-block; margin-top: 20px; transition: background 0.3s;">
+                        En savoir plus
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Discount Section End -->
+    </div>
+</section>
+<!-- About Section End -->
 
-    <!-- Services Section Begin -->
-    <section class="services spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <i class="fa fa-car"></i>
-                        <h6>Free Shipping</h6>
-                        <p>For all oder over $99</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <i class="fa fa-money"></i>
-                        <h6>Money Back Guarantee</h6>
-                        <p>If good have Problems</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <i class="fa fa-support"></i>
-                        <h6>Online Support 24/7</h6>
-                        <p>Dedicated support</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="services__item">
-                        <i class="fa fa-headphones"></i>
-                        <h6>Payment Secure</h6>
-                        <p>100% secure payment</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Services Section End -->
-
-    <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-1.jpg') }} ">
-                        <div class="instagram__text">
-                            <i class="fa fa-facebook"></i>
-                            <a href="#">Wanny Style</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-2.jpg') }} ">
-                        <div class="instagram__text">
-                            <i class="fa fa-facebook"></i>
-                            <a href="#">Wanny Style</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-3.jpg') }} ">
-                        <div class="instagram__text">
-                            <i class="fa fa-facebook"></i>
-                            <a href="#">Wanny Style</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-4.jpg') }} ">
-                        <div class="instagram__text">
-                            <i class="fa fa-facebook"></i>
-                            <a href="#">Wanny Style</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-5.jpg') }} ">
-                        <div class="instagram__text">
-                            <i class="fa fa-facebook"></i>
-                            <a href="#">Wanny Style</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg=" {{ asset('assets/img/instagram/insta-6.jpg') }} ">
-                        <div class="instagram__text">
-                            <i class="fa fa-facebook"></i>
-                            <a href="#">Wanny Style</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Instagram End -->
     @include('partials/clients.footer')
 @endsection
 
