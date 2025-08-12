@@ -105,7 +105,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <div class="about__pic set-bg" data-setbg="{{ asset('assets/img/discount.jpg') }}" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(221,63,38,0.3); height: 400px; background-size: cover; background-position: center;"></div>
+                <div class="about__pic set-bg" data-setbg="{{ asset('assets/img/collage.png') }}" style="border-radius: 15px; box-shadow: 0 8px 20px rgba(221,63,38,0.3); height: 400px; background-size: cover; background-position: center;"></div>
             </div>
             <div class="col-lg-6">
                 <div class="about__text">
