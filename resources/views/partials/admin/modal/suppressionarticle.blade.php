@@ -7,7 +7,6 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLabel{{ $article->id }}">Confirmer la
                         suppression</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
                 </div>
                 <div class="modal-body">
                     Voulez-vous vraiment supprimer cet article ?
@@ -20,7 +19,7 @@
                         <button type="submit"  onclick="verifierAcces('{{ auth()->user()->role }}')" class="btn-sm text-white" style="background-color: #0BA883">Oui</button>
                     </form>
 
-                    <button type="btn-sm text-white" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Non</button>
+                    <button type="btn-sm text-white" class="btn-sm" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Non</button>
 
 
                 </div>

@@ -268,6 +268,7 @@ class ClientController extends Controller
                     'date',
                     'after_or_equal:' . now()->addDays(3)->format('Y-m-d'),
                 ],
+                 'date_commande' => ['nullable', 'date'],
             ], [
                 'date_livraison.after_or_equal' => 'La date de livraison doit être au moins 3 jours après la date de commande.',
             ]);
@@ -275,9 +276,11 @@ class ClientController extends Controller
             $panier = session()->get('panier', []);
             $total = collect($panier)->sum(fn($item) => $item['prix'] * $item['quantite']);
 
+            $dateCommande = $request->input('date_commande') ?? now();
+
             $commande = Commande::create([
                 'user_id' => Auth::id(),
-                'date_commande' => now(),
+                'date_commande' => $dateCommande,
                 'reference_commande' => $this->genererReferenceCommande(),
                 'date_livraison' => $request->input('date_livraison'),
                 'statut' => 'en attente',

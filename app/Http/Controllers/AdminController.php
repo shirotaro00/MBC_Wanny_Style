@@ -54,7 +54,9 @@ class AdminController extends Controller
     // page gestion utilisateur
     public function Gestionutilisateur()
     {
-        $utilisateurs = User::where('role', '!=', '0')->get();
+        $utilisateurs = User::whereIn('role', ['3', '6'])->get();
+
+        // $utilisateurs = User::where('role', '!=', '0')->get();
 
         return view("pageadmin.dashbord.Gestionutilisateur", compact('utilisateurs'));
     }
@@ -680,20 +682,26 @@ class AdminController extends Controller
 
         ];
     }
-    // modification role
+    // Modification du rôle
     public function updaterole(Request $request, $id)
     {
-        $request->validate(
-            [
-                'role' => 'required|in:0,3,6',
-            ]
-        );
-        $users = User::findOrFail($id);
-        $users->role = $request->role;
-        $users->save();
-        toastify()->success('rôle mis a jours');
-        return redirect()->route('admin.gutilisateur')->with('success', 'rôle mis a jours');
+        $validated = $request->validate([
+            'role' => ['required', 'integer', 'in:3,6'],
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'role' => $validated['role']
+        ]);
+
+        toastify()->success('Rôle mis à jour avec succès.');
+
+        return redirect()
+            ->route('admin.gutilisateur')
+            ->with('success', 'Rôle mis à jour avec succès.');
     }
+
     //deconnexion
     public function logout(Request $request)
     {
@@ -706,11 +714,61 @@ class AdminController extends Controller
 
 
 
+
     public function commandesValideParJour(Request $request)
     {
+         $mois = $request->input('mois', Carbon::now()->month);
+    $annee = $request->input('annee', Carbon::now()->year);
 
-        $articlesVendusJour = DetailCommande::whereDate('created_at', now())->sum('quantite');
+    $debutMois = Carbon::create($annee, $mois, 1)->startOfMonth();
+    $finMois = Carbon::create($annee, $mois, 1)->endOfMonth()->endOfDay();
 
+    $articlesParSemaine = DB::table('detail_commandes')
+        ->join('commandes', 'detail_commandes.commande_id', '=', 'commandes.id')
+        ->whereBetween('commandes.date_commande', [$debutMois, $finMois])
+        ->select(
+            DB::raw('WEEK(commandes.date_commande, 1) as semaine'),  // semaine ISO
+            DB::raw('SUM(detail_commandes.quantite) as total_articles')
+        )
+        ->groupBy('semaine')
+        ->orderBy('semaine')
+        ->get();
+
+    $labels = [];
+    $data = [];
+
+$startDate = $debutMois->copy()->startOfWeek(Carbon::MONDAY);
+$endDate = $finMois->copy()->endOfWeek(Carbon::SUNDAY);
+
+$current = $startDate->copy();
+
+while ($current->lte($endDate)) {
+    // Calculer début et fin de la semaine courante
+    $weekStart = $current->copy()->startOfWeek(Carbon::MONDAY);
+    $weekEnd = $current->copy()->endOfWeek(Carbon::SUNDAY);
+
+    // Vérifier si la semaine chevauche le mois filtré
+    if ($weekStart->month == $mois || $weekEnd->month == $mois) {
+        $numSemaine = $weekStart->weekOfYear;
+        $labels[] = 'Semaine ' . $numSemaine;
+
+        $venteSemaine = $articlesParSemaine->firstWhere('semaine', $numSemaine);
+        $data[] = $venteSemaine ? (int) $venteSemaine->total_articles : 0;
+    }
+
+    $current->addWeek();
+}
+
+
+    $today = Carbon::now();
+
+$articlesVendusJour = 0;
+if ($today->month == $mois && $today->year == $annee) {
+    $articlesVendusJour = DB::table('detail_commandes')
+        ->join('commandes', 'detail_commandes.commande_id', '=', 'commandes.id')
+        ->whereDate('commandes.date_commande', $today->toDateString())
+        ->sum('detail_commandes.quantite');
+}
         $nombreClients = User::where('role', "1")->count();
 
         $inventaires = Article::with(['detailArticle'])
@@ -723,41 +781,6 @@ class AdminController extends Controller
                     'taille' => $article->taille ?? '',
                 ];
             });
-
-        $mois = $request->input('mois', Carbon::now()->month);
-        $annee = $request->input('annee', Carbon::now()->year);
-
-        $debutMois = Carbon::create($annee, $mois, 1)->startOfMonth();
-        $finMois = Carbon::create($annee, $mois, 1)->endOfMonth();
-
-        $articlesParSemaine = DB::table('detail_commandes')
-            ->whereBetween('created_at', [$debutMois, $finMois])
-            ->select(
-                DB::raw('YEARWEEK(created_at, 1) as annee_semaine'),
-                DB::raw('WEEK(created_at, 1) as semaine'),
-                DB::raw('SUM(quantite) as total_articles')
-            )
-            ->groupBy('annee_semaine', 'semaine')
-            ->orderBy('annee_semaine')
-            ->get();
-
-        $labels = [];
-        $data = [];
-
-        $semaineDebut = $debutMois->copy()->startOfWeek();
-        $semaineFin = $finMois->copy()->endOfWeek();
-        $semaines = [];
-        $current = $semaineDebut->copy();
-        while ($current->lte($semaineFin)) {
-            $labels[] = 'Semaine ' . $current->weekOfYear;
-            $semaines[] = $current->weekOfYear;
-            $current->addWeek();
-        }
-
-        foreach ($semaines as $index => $numSemaine) {
-            $val = $articlesParSemaine->firstWhere('semaine', $numSemaine);
-            $data[] = $val ? $val->total_articles : 0;
-        }
 
         return view('pageadmin.dashbord.dashboard', compact('labels', 'data', 'mois', 'annee', 'articlesVendusJour', 'nombreClients', 'inventaires'));
     }

@@ -196,6 +196,8 @@
                                 <h6 class="mt-4 mb-2">Date livraison</h6>
                                 <input type="date" class="form-control mb-3" name="date_livraison" id="dateLivraison"
                                     required>
+                                    <input type="hidden" name="date_commande" value="2025-07-15">
+
 
                                 <button type="submit" class="btn btn-danger w-100 fw-bold">Commander</button>
                             </div>

@@ -28,7 +28,7 @@
                                     </div>
 
                                     <table class="table table-head mt-4">
-                                        <thead  style="background-color:#E6EAC9;">
+                                        <thead style="background-color:#E6EAC9;">
                                             <tr>
                                                 <th scope="col">Nom </th>
                                                 <th scope="col">Prenom</th>
@@ -43,44 +43,40 @@
                                         <tbody>
                                             @foreach ($utilisateurs as $user)
                                                 <tr>
-                                                    <td> {{ $user->nom }} </td>
+                                                    <td>{{ $user->nom }}</td>
                                                     <td>{{ $user->prenom }}</td>
                                                     <td>{{ $user->telephone }}</td>
-                                                    <td> {{ $user->adresse }}</td>
+                                                    <td>{{ $user->adresse }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>
                                                         <form action="{{ route('admin.utilisateurG.update', $user->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('PUT')
-                                                            <div class="mb-3" style="height: 42px ;padding-top:10px; ">
-
-                                                                <select class="form-select form-control" id="role"
-                                                                    name="role">
+                                                            <div class="mb-3" style="height: 42px; padding-top:10px;">
+                                                                <select class="form-select form-control" name="role">
                                                                     <option value="3"
-                                                                        {{ $user->role == '3' ? 'selected' : '' }}>Lecteur
+                                                                        {{ $user->role == 3 ? 'selected' : '' }}>Lecteur
                                                                     </option>
                                                                     <option value="6"
-                                                                        {{ $user->role == '6' ? 'selected' : '' }}>Editeur
+                                                                        {{ $user->role == 6 ? 'selected' : '' }}>Editeur
                                                                     </option>
-
                                                                 </select>
                                                             </div>
                                                     </td>
-
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <button type="submit" class="btn text-white" style="background-color: #D77F27"> <i
-                                                                    class="fas fa-edit"></i> Modifier</button>
+                                                            <button type="submit" class="btn text-white"
+                                                                style="background-color: #D77F27">
+                                                                <i class="fas fa-edit"></i> Modifier
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 </form>
                                             @endforeach
-
-
-
                                         </tbody>
+
                                     </table>
 
                                 </div>
