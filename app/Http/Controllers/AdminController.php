@@ -240,7 +240,7 @@ class AdminController extends Controller
 
         Auth::login($user);
 
-        toastify()->success('Votre compte a été créé avec succès ✔');
+        toastify()->success('Votre compte a été créé avec succès ');
 
         return redirect()->route('admin.dashboard')->with('success', 'Votre compte a été créé avec succès');
     }
@@ -257,13 +257,13 @@ class AdminController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 0) {
-                toastify()->success('Vous êtes connecté ✔');
+                toastify()->success('Vous êtes connecté ');
                 return redirect()->route('admin.dashboard');
             } else if (Auth::user()->role == 3) {
-                toastify()->success('Vous êtes connecté ✔');
+                toastify()->success('Vous êtes connecté ');
                 return redirect()->route('admin.dashboard');
             } else if (Auth::user()->role == 6) {
-                toastify()->success('Vous êtes connecté ✔');
+                toastify()->success('Vous êtes connecté ');
                 return redirect()->route('admin.dashboard');
             }
         } else {
@@ -293,7 +293,7 @@ class AdminController extends Controller
             TypeArticle::create([
                 'type' => $type,
             ]);
-            toastify()->success('Type article  ajouté ✔');
+            toastify()->success('Type article  ajouté ');
 
             return redirect()->route('admin.addarticle')->with('success', 'Type article  ajouté');
         }
@@ -691,6 +691,7 @@ class AdminController extends Controller
         $users = User::findOrFail($id);
         $users->role = $request->role;
         $users->save();
+        toastify()->success('rôle mis a jours');
         return redirect()->route('admin.gutilisateur')->with('success', 'rôle mis a jours');
     }
     //deconnexion
@@ -699,7 +700,7 @@ class AdminController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        toastify()->success('Vous êtes déconnecté ✔');
+        toastify()->success('Vous êtes déconnecté!');
         return redirect()->route('page.admin');
     }
 
@@ -715,14 +716,11 @@ class AdminController extends Controller
         $inventaires = Article::with(['detailArticle'])
             ->get()
             ->map(function ($article) {
-                $stock_initial = $article->quantite ?? 0;
-                $stock_sortant = DetailCommande::where('article_id', $article->id)->sum('quantite');
-                $stock_restant = max(0, $stock_initial - $stock_sortant);
                 return (object)[
                     'article' => $article,
-                    'stock_initial' => $stock_initial,
-                    'stock_sortant' => $stock_sortant,
-                    'stock_restant' => $stock_restant,
+                    'stock_disponible' => $article->quantite ?? 0,
+                    'couleur' => $article->detailArticle->couleur ?? '',
+                    'taille' => $article->taille ?? '',
                 ];
             });
 

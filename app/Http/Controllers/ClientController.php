@@ -136,9 +136,9 @@ class ClientController extends Controller
 
             Auth::login($clients);
 
-            toastify()->success('Votre compte été créer avec succès ✔');
+            toastify()->success('Votre compte été créer avec succès !');
 
-            return redirect()->back()->with('Votre compte été créer avec succès');
+            return redirect()->back()->with('Votre compte été créer avec succès !');
         } catch (\Exception $e) {
             toastify()->error('Une erreur est survenue lors de la création du compte. Veuillez réessayer.');
             return redirect()->back()->withInput();
@@ -157,7 +157,7 @@ class ClientController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (Auth::user()->role == 1) {
-                toastify()->success('Vous êtes connecté ✔');
+                toastify()->success('Vous êtes connecté !');
                 return redirect()->route('page.accueil');
             }
         } else {
@@ -178,7 +178,6 @@ class ClientController extends Controller
         $type = $articles->typeArticle->type ?? '';
         $couleur = $articles->detailArticle->couleur ?? '';
 
-        // Calculer la quantité totale demandée (si déjà dans le panier)
         $quantiteTotale = $quantite;
         if (isset($panier[$id])) {
             $quantiteTotale += $panier[$id]['quantite'];
@@ -221,43 +220,41 @@ class ClientController extends Controller
 
     public function modifierGlobal(Request $request)
     {
-        $quantites = $request->input('quantites');
-        $panier = session()->get('panier', []);
+      $id = $request->input('id');
+    $quantite = (int)$request->input('quantite');
 
-        $erreurs = [];
+    $panier = session()->get('panier', []);
 
-        foreach ($quantites as $id => $quantite) {
-            // Vérifie si l'article existe dans le panier
-            if (isset($panier[$id])) {
-                // Recherche l'article en base de données
-                $article = Article::find($id);
+    if (!isset($panier[$id])) {
+        return response()->json(['error' => 'Article introuvable dans le panier.'], 404);
+    }
 
-                if ($article) {
-                    if ((int)$quantite > $article->quantite) {
-                        $erreurs[] = "La quantité demandée pour « {$article->nom} » dépasse le stock disponible ({$article->quantite}).";
-                    } else {
+    $article = Article::find($id);
+    if (!$article) {
+        return response()->json(['error' => 'Article introuvable.'], 404);
+    }
 
-                        $panier[$id]['quantite'] = max(1, (int)$quantite);
-                    }
-                } else {
-                    $erreurs[] = "Article avec ID {$id} introuvable.";
-                }
-            }
-        }
+    if ($quantite > $article->quantite) {
+        return response()->json(['error' => "Quantité demandée dépasse le stock disponible ({$article->quantite})."], 400);
+    }
 
-        // Si erreurs → ne pas mettre à jour le panier
-        if (!empty($erreurs)) {
-            toastify()->error('La quantité demandée dépasse le stock disponible .');
-            return redirect()->back()->withErrors($erreurs);
-        }
+    $panier[$id]['quantite'] = max(1, $quantite);
+    session()->put('panier', $panier);
 
-        // Sinon → mettre à jour le panier
-        session()->put('panier', $panier);
+    $sous_total = $panier[$id]['prix'] * $panier[$id]['quantite'];
+    $total = 0;
+    foreach ($panier as $item) {
+        $total += $item['prix'] * $item['quantite'];
+    }
 
-        toastify()->success('Panier a été mis à jour avec succès!');
+    return response()->json([
+        'success' => true,
+        'sous_total' => $sous_total,
+        'sous_total_formate' => number_format($sous_total, 0, ',', ' '),
+        'total' => $total,
+        'total_formate' => number_format($total, 0, ',', ' '),
+    ]);
 
-
-        return redirect()->back()->with('success', 'Panier mis à jour avec succès.');
     }
 
     //ajoute commande
@@ -393,67 +390,67 @@ class ClientController extends Controller
     }
 
     // ajout paiement
-   public function paiementStore(Request $request)
-{
+    public function paiementStore(Request $request)
+    {
 
-    $request->validate([
-        'montant' => 'required|numeric|min:0.01',
-        'Ref_paiement' => 'required|string|min:10|max:10',
-        'methode_paiement_id' => 'required|exists:methode_paiements,id',
-    ]);
+        $request->validate([
+            'montant' => 'required|numeric|min:0.01',
+            'Ref_paiement' => 'required|string|min:10|max:10',
+            'methode_paiement_id' => 'required|exists:methode_paiements,id',
+        ]);
 
-    $commande = Commande::where('user_id', Auth::id())
-        ->where('statut', 'validée')
-        ->latest()
-        ->first();
+        $commande = Commande::where('user_id', Auth::id())
+            ->where('statut', 'validée')
+            ->latest()
+            ->first();
 
-    if (!$commande) {
-        toastify()->error('Aucune commande à payer trouvée.');
+        if (!$commande) {
+            toastify()->error('Aucune commande à payer trouvée.');
+            return redirect()->back();
+        }
+
+        $total = $commande->detailCommande->sum(function ($detail) {
+            return $detail->prix_unitaire * $detail->quantite;
+        });
+
+
+        $totalDejaPaye = Paiement::where('commande_id', $commande->id)->sum('montant');
+
+        $resteAPayer = $total - $totalDejaPaye;
+
+        if ($resteAPayer <= 0) {
+            toastify()->info("Commande déjà totalement payée.");
+            return redirect()->back();
+        }
+
+        $montantPaye = $request->input('montant');
+
+        if ($totalDejaPaye == 0 && $montantPaye < $total * 0.5) {
+            toastify()->error("Vous devez payer au moins 50% du montant total.");
+            return redirect()->back();
+        }
+
+        if ($montantPaye > $resteAPayer) {
+            toastify()->error("Le montant payé dépasse le reste à payer ({$resteAPayer} MGA).");
+            return redirect()->back();
+        }
+
+        Paiement::create([
+            'montant' => $montantPaye,
+            'Ref_paiement' => $request->input('Ref_paiement'),
+            'date_paiement' => now(),
+            'user_id' => Auth::id(),
+            'commande_id' => $commande->id,
+            'methode_paiement_id' => $request->input('methode_paiement_id'),
+        ]);
+
+        $totalPayeApres = $totalDejaPaye + $montantPaye;
+        $commande->statut_paiement = $totalPayeApres >= $total ? 'payé' : 'acompte';
+        $commande->save();
+
+        toastify()->success("Paiement de {$montantPaye} MGA enregistré avec succès. Reste à payer : " . ($total - $totalPayeApres) . " MGA.");
         return redirect()->back();
     }
-
-    $total = $commande->detailCommande->sum(function ($detail) {
-        return $detail->prix_unitaire * $detail->quantite;
-    });
-
-
-    $totalDejaPaye = Paiement::where('commande_id', $commande->id)->sum('montant');
-
-    $resteAPayer = $total - $totalDejaPaye;
-
-    if ($resteAPayer <= 0) {
-        toastify()->info("Commande déjà totalement payée.");
-        return redirect()->back();
-    }
-
-    $montantPaye = $request->input('montant');
-
-    if ($totalDejaPaye == 0 && $montantPaye < $total * 0.5) {
-        toastify()->error("Vous devez payer au moins 50% du montant total.");
-        return redirect()->back();
-    }
-
-    if ($montantPaye > $resteAPayer) {
-        toastify()->error("Le montant payé dépasse le reste à payer ({$resteAPayer} MGA).");
-        return redirect()->back();
-    }
-
-    Paiement::create([
-        'montant' => $montantPaye,
-        'Ref_paiement' => $request->input('Ref_paiement'),
-        'date_paiement' => now(),
-        'user_id' => Auth::id(),
-        'commande_id' => $commande->id,
-        'methode_paiement_id' => $request->input('methode_paiement_id'),
-    ]);
-
-    $totalPayeApres = $totalDejaPaye + $montantPaye;
-    $commande->statut_paiement = $totalPayeApres >= $total ? 'payé' : 'acompte';
-    $commande->save();
-
-    toastify()->success("Paiement de {$montantPaye} MGA enregistré avec succès. Reste à payer : " . ($total - $totalPayeApres) . " MGA.");
-    return redirect()->back();
-}
 
 
     // Filtrage des articles selon les paramètres GET
@@ -528,7 +525,7 @@ class ClientController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        toastify()->success('Vous êtes déconnecté avec succès!');
+        toastify()->success('Vous êtes déconnecté !');
         return redirect()->route('page.accueil');
     }
     public function genererReferenceCommande(): string

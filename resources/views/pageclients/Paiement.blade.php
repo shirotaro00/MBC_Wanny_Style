@@ -1,5 +1,128 @@
   @extends('partials/clients.App');
   @section('style')
+  <style>
+    /* Carte commande */
+.card {
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  border: none;
+  transition: box-shadow 0.3s ease;
+}
+.card:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* Titre */
+.card-title {
+  color: #DDA233;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Info client & commande */
+.card-body p {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #444;
+}
+
+/* Table des détails */
+.table {
+  border-collapse: separate !important;
+  border-spacing: 0 12px !important;
+  background-color: transparent;
+  margin-top: 20px;
+}
+.table thead tr {
+  background-color: #DDA233;
+  color: white;
+  border-radius: 12px;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table tbody tr {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: 10px;
+}
+.table th, .table td {
+  vertical-align: middle !important;
+  padding: 12px 15px !important;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* Badge statut */
+.badge-status {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 12px;
+  color: white;
+  text-transform: capitalize;
+}
+.badge-livre {
+  background-color: #28a745;
+}
+.badge-en-cours {
+  background-color: #ffc107;
+  color: #212529;
+}
+.badge-annule {
+  background-color: #dc3545;
+}
+.badge-default {
+  background-color: #6c757d;
+}
+
+/* Bouton paiement */
+.btn-payment {
+  background-color: #DDA233;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(221,162,51,0.5);
+  transition: background-color 0.3s ease;
+}
+.btn-payment:hover {
+  background-color: #c39322;
+  color: white;
+  box-shadow: 0 6px 18px rgba(221,162,51,0.7);
+}
+
+/* Texte montants */
+.text-right {
+  text-align: right;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .card-body .row > div {
+    margin-bottom: 1.5rem;
+  }
+  .table th, .table td {
+    font-size: 0.8rem;
+    padding: 8px 10px !important;
+  }
+  .card-title {
+    font-size: 1.3rem;
+  }
+}
+
+  </style>
   @endsection
   @section('body')
       @include('partials/clients.navbar')
@@ -52,12 +175,22 @@
                                                               <div class="col-md-6">
                                                                   <p>Date de livraison : {{ $commande->date_livraison }}
                                                                   </p>
-                                                                  <p>Ref-article : {{ $commande->reference_commande }}
+                                                                  <p>Ref-commande : {{ $commande->reference_commande }}
                                                                   </p>
-                                                                  <p>Statut : {{ $commande->statut }}
-                                                                  </p>
-                                                                  <p>Statut de paiement : {{ $commande->statut_paiement }}
-                                                                  </p>
+                                                                  @php
+    $statusClass = match(strtolower($commande->statut)) {
+        'validée' => 'badge-status badge-livre',
+        'en cours' => 'badge-status badge-en-cours',
+        default => 'badge-status badge-default',
+    };
+    $paymentClass = match(strtolower($commande->statut_paiement)) {
+        'payé' => 'badge-status badge-livre',
+        'acompte' => 'badge-status badge-en-cours',
+        default => 'badge-status badge-default',
+    };
+@endphp
+<p>Statut : <span class="{{ $statusClass }}">{{ ucfirst($commande->statut) }}</span></p>
+<p>Statut de paiement : <span class="{{ $paymentClass }}">{{ ucfirst($commande->statut_paiement) }}</span></p
                                                               </div>
                                                           </div>
 
@@ -114,9 +247,8 @@
                                                           </p>
                                                           <div class="d-flex justify-content-end mt-5">
                                                               <button class="btn text-white"
-                                                                  style="background-color: #DDA233" data-bs-toggle="modal"
-                                                                  data-bs-target="#payModal"><i
-                                                                      class="fa-solid fa-money-bill-1"></i>
+                                                                  style="background-color: #D77F27" data-bs-toggle="modal"
+                                                                  data-bs-target="#payModal"><i class="fa-solid fa-credit-card" style="margin-right: 5px"></i>
                                                                   Paiement</button>
 
                                                           </div>

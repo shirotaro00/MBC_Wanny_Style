@@ -77,26 +77,6 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-6">
-
-                                                            <div class="mb-3">
-                                                                @foreach ($types as $type)
-                                                                    <div
-                                                                        class="card"style="width:200px; height:120px ;margin-top:20px">
-
-                                                                        <div class="card-body">
-                                                                            <center>
-                                                                                <img src="{{ asset('assets/upload/' . $type->photo) }}"
-                                                                                    width="100">
-                                                                            </center>
-                                                                            <center>
-                                                                                <p class="card-text">Photo</p>
-                                                                            </center>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
                                                     </div>
                                             </div>
                                         </div>

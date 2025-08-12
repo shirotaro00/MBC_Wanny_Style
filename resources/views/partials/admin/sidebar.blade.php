@@ -100,11 +100,11 @@
                                     <span class="sub-item">Stock entrant</span>
                                 </a>
                             </li>
-                            <li class="{{ request()->routeIs('stock.sortant') ? 'active' : '' }}">
+                            {{-- <li class="{{ request()->routeIs('stock.sortant') ? 'active' : '' }}">
                                 <a href="{{ route('stock.sortant') }}">
                                     <span class="sub-item">Stock sortant</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>

@@ -54,44 +54,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <div class="icon-big text-center">
-                                                <i class="fas fa-close text-danger"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-stats">
-                                            <div class="numbers">
-                                                <p class="card-category">Stock</p>
-                                                <h4 class="card-title">23</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <div class="card card-stats card-round">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <div class="icon-big text-center">
-                                                <i class="fa-brands fa-twitter text-primary"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-stats">
-                                            <div class="numbers">
-                                                <p class="card-category">Stock</p>
-                                                <h4 class="card-title">+45K</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div class="row">
@@ -177,10 +139,16 @@
                                                         </td>
                                                         <td>
                                                             @php
-                                                                $stock = $inv->stock_restant ?? 0;
-                                                                $color = $stock == 0 ? 'danger' : ($stock <= 3 ? 'warning' : 'success');
+                                                                $stock = $inv->article->quantite ?? 0;
+                                                                $color =
+                                                                    $stock == 0
+                                                                        ? 'danger'
+                                                                        : ($stock <= 3
+                                                                            ? 'warning'
+                                                                            : 'success');
                                                             @endphp
-                                                            <span class="badge bg-{{ $color }}" style="font-size: 1em;">{{ $stock }}</span>
+                                                            <span class="badge bg-{{ $color }}"
+                                                                style="font-size: 1em;">{{ $stock }}</span>
                                                         </td>
                                                     </tr>
                                                 @empty

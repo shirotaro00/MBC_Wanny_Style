@@ -1,5 +1,108 @@
   @extends('partials/clients.App');
   @section('style')
+  <style>/* Style général des cartes */
+.card {
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 30px;
+  border: none;
+}
+
+.card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Titres des commandes */
+.card-title {
+  color: #DD3F26;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+/* Texte des infos client */
+.card-body p {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+/* Table des détails */
+.table {
+  border-collapse: separate !important;
+  border-spacing: 0 10px !important;
+  background-color: transparent;
+}
+
+.table thead tr {
+  background-color: #DD3F26;
+  color: white;
+  border-radius: 12px;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table tbody tr {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: 10px;
+}
+
+/* Style colonnes */
+.table th, .table td {
+  vertical-align: middle !important;
+  padding: 12px 15px !important;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Badge pour statut */
+.badge-status {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 12px;
+  color: white;
+  text-transform: capitalize;
+}
+
+/* Couleurs badges selon statut */
+.badge-livre {
+  background-color: #28a745;
+}
+
+.badge-en-cours {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.badge-annule {
+  background-color: #dc3545;
+}
+
+.badge-default {
+  background-color: #6c757d;
+}
+
+/* Responsive improvements */
+@media (max-width: 767px) {
+  .card-body .row > div {
+    margin-bottom: 1rem;
+  }
+  .table th, .table td {
+    font-size: 0.8rem;
+    padding: 8px 10px !important;
+  }
+}
+
+  </style>
   @endsection
   @section('body')
       @include('partials/clients.navbar')
@@ -51,7 +154,16 @@
                                                                       <p>Date de livraison : {{ $commande->date_livraison }}
                                                                       </p>
                                                                       <p>Ref-article : {{ $commande->reference_commande }}
-                                                                        <p>Statut : {{ $commande->statut}} </p>
+                                                                        @php
+    $statut = strtolower($commande->statut);
+    $badgeClass = match($statut) {
+        'livré' => 'badge-status badge-livre',
+        'en cours' => 'badge-status badge-en-cours',
+        'annulé' => 'badge-status badge-annule',
+        default => 'badge-status badge-default',
+    };
+@endphp
+<p>Statut : <span class="{{ $badgeClass }}">{{ ucfirst($commande->statut) }}</span></p>
                                                                       </p>
                                                                   </div>
                                                               </div>
