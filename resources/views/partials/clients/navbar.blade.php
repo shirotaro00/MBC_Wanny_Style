@@ -31,68 +31,62 @@
 <!-- Offcanvas Menu End -->
 
 <!-- Header Section Begin -->
-<header class="header " >
+<header class="header">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-3 col-lg-2" >
-                <div class="header__logo" style="margin-bottom: 7px">
-                    <a href="{{ route('page.accueil') }}"><img class="photo" src=" {{ asset('assets/img/logo.jpg') }}"
-                       style="width:140px;height:50px"    alt=""></a>
+        <div class="row align-items-center">
+
+            <!-- Logo -->
+            <div class="col-xl-3 col-lg-2 d-flex align-items-center">
+                <div class="header__logo">
+                    <a href="{{ route('page.accueil') }}">
+                        <img class="photo" src="{{ asset('assets/img/logo.jpg') }}" style="width:140px;height:50px" alt="">
+                    </a>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-7">
-                <nav class="header__menu">
-                    @php
-                        $routeName = Route::currentRouteName();
-                    @endphp
 
-                    <ul>
+            <!-- Menu (légèrement plus haut avec mt-n2) -->
+            <div class="col-xl-6 col-lg-7 mt-n4">
+                <nav class="header__menu">
+                    @php $routeName = Route::currentRouteName(); @endphp
+                    <ul class="d-flex list-unstyled mb-0 gap-4">
                         <li class="{{ $routeName === 'page.accueil' ? 'active' : '' }}">
                             <a href="{{ route('page.accueil') }}">Accueil</a>
                         </li>
-
                         <li class="{{ $routeName === 'page.article' ? 'active' : '' }}">
                             <a href="{{ route('page.article') }}">Article</a>
                         </li>
-
                         @if (Auth::check() && Auth::user()->role === '1')
                             <li class="{{ $routeName === 'client.historique' ? 'active' : '' }}">
                                 <a href="{{ route('client.historique') }}">Historique d'achats</a>
                             </li>
-
                             <li class="{{ $routeName === 'client.paiement' ? 'active' : '' }}">
                                 <a href="{{ route('client.paiement') }}">Commande validée</a>
                             </li>
                         @endif
-
-
                     </ul>
                 </nav>
             </div>
+
+            <!-- Partie droite (auth + panier) -->
             <div class="col-lg-3">
-                <div class="header__right d-flex align-items-center justify-content-end" style="gap: 18px; margin-top: 4px;">
+                <div class="header__right d-flex align-items-center justify-content-end gap-3">
 
-                    <div class="header__right__auth d-flex align-items-center" style="gap: 10px; margin-bottom:15px;">
-
+                    <!-- Auth -->
+                    <div class="header__right__auth d-flex align-items-center gap-2">
                         @if (!(Auth::check() && Auth::user()->role === '1'))
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">
-                                Inscription
-                            </a>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#formModal">
-                                Connexion
-                            </a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#forminscription">Inscription</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#formModal">Connexion</a>
                         @endif
-
                     </div>
 
-                    <ul class="header__right__widget d-flex align-items-center mb-0"
-                        style="gap: 30px; list-style: none; margin-top:11px">
-                        <li class="d-flex align-items-center dropdown" style="gap: 6px;">
+                    <!-- Profil + Panier -->
+                    <ul class="header__right__widget d-flex align-items-center mb-0 gap-3 list-unstyled">
+                        <li class="dropdown">
                             @if (Auth::check() && Auth::user()->role === '1')
-                                <a href="{{ route('client.profil') }}" class="d-flex align-items-center dropdown-toggle" id="userDropdown"
-                                    data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">
+                                <a href="{{ route('client.profil') }}" class="d-flex align-items-center dropdown-toggle"
+                                   id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-user-circle"></i>
-                                    <span style="margin-left: 10px;">{{ Auth::user()->prenom }}</span>
+                                    <span class="ms-2">{{ Auth::user()->prenom }}</span>
                                 </a>
                             @endif
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -101,36 +95,39 @@
                                         <i class="fa fa-user-circle"></i> Profil
                                     </a>
                                 </li>
-
                                 <li>
-
-                                        <a href="{{ route('client.logout') }}" class="dropdown-item">
-                                            <i class="fa fa-sign-out-alt"></i> Déconnexion
-                                        </a>
-
+                                    <a href="{{ route('client.logout') }}" class="dropdown-item">
+                                        <i class="fa fa-sign-out-alt"></i> Déconnexion
+                                    </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ route('client.panier') }}">
+                            <a href="{{ route('client.panier') }}" class="position-relative">
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 @if ($panierCount > 0)
-                                    <span
-                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         {{ $panierCount }}
                                     </span>
                                 @endif
                             </a>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </div>
-        <div class="canvas__open">
+
+        <!-- Bouton menu mobile -->
+        <div class="canvas__open d-lg-none">
             <i class="fa fa-bars"></i>
         </div>
     </div>
 </header>
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
