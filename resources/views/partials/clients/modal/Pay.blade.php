@@ -16,36 +16,52 @@
                     @csrf
 
                     @foreach ($commandes as $commande)
-                          <input type="hidden" name="commande_id" value="{{ $commande->id }}">
+                        <input type="hidden" name="commande_id" value="{{ $commande->id }}">
                     @endforeach
                     <input type="text" name="user_id" value="{{ Auth::id() }}" hidden>
                     <div class="mb-3">
-                        <label for="Type" class="form-label">Montant</label>
-                        <input type="text" class="form-control @error('type') is-invalid @enderror"
-                         id="type" name="montant" placeholder="@error('montant'){{ $message }}@else Montant @enderror" required>
+                        <label for="montant" class="form-label">Montant</label>
+                        <input type="text" class="form-control @error('montant') is-invalid @enderror" id="montant"
+                            name="montant" value="{{ old('montant') }}" placeholder="Montant" required>
+
+                        @error('montant')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
-                       <div class="mb-3">
-                        <label for="Type" class="form-label">Reference paiement</label>
+
+                    <div class="mb-3">
+                        <label for="Ref_paiement" class="form-label">Référence paiement</label>
                         <input type="text" class="form-control @error('Ref_paiement') is-invalid @enderror"
-                         id="type" name="Ref_paiement" placeholder="@error('montant'){{ $message }}@else Reference paiement @enderror" required>
+                            id="Ref_paiement" name="Ref_paiement" value="{{ old('Ref_paiement') }}"
+                            placeholder="Référence paiement" required>
+
+                        @error('Ref_paiement')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
-                       <div class="mb-3">
-                            <label for="methode_paiement_id" class="form-label"> Methode de paiement
-                            </label>
-                            <select class="form-select form-control" id="methode_paiement_id" name="methode_paiement_id">
-                                @foreach ($methode as $m)
-                                    <option value="{{ $m->id }}">{{ $m->TypePaiement->type }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+
+                    <div class="mb-3">
+                        <label for="methode_paiement_id" class="form-label"> Methode de paiement
+                        </label>
+                        <select class="form-select form-control" id="methode_paiement_id" name="methode_paiement_id">
+                            @foreach ($methode as $m)
+                                <option value="{{ $m->id }}">{{ $m->TypePaiement->type }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="modal-footer">
-                        <button type="submit"  id="sign_in"
-                            class="btn text-white" style="background-color: #0BA883">Payé</button>
-                        <button  type="button text-white" class="btn" style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" id="sign_in" class="btn text-white"
+                            style="background-color: #0BA883">Payé</button>
+                        <button type="button text-white" class="btn"
+                            style="background-color: #DD3F26; color:aliceblue" data-bs-dismiss="modal">Fermer</button>
                     </div>
 
                 </form>
@@ -53,6 +69,3 @@
         </div>
     </div>
 </div>
-
-
-

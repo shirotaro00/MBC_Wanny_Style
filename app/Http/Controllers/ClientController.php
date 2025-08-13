@@ -396,8 +396,12 @@ class ClientController extends Controller
 
         $request->validate([
             'montant' => 'required|numeric|min:0.01',
-            'Ref_paiement' => 'required|string|min:10|max:10',
+            'Ref_paiement' => 'required|string|min:10|max:10|unique:paiements,Ref_paiement',
             'methode_paiement_id' => 'required|exists:methode_paiements,id',
+        ], [
+             'montant.numeric' => 'Le montant doit être un nombre et ne peut pas contenir de lettres.',
+             'Ref_paiement.unique' => 'Cette référence de paiement est déjà utilisée.',
+             'Ref_paiement.required' => 'La référence de paiement est obligatoire.',
         ]);
 
         $commande = Commande::where('user_id', Auth::id())
